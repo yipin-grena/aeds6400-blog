@@ -11,14 +11,14 @@
     "href": "posts/p-values/index.html",
     "title": "What a p-value actually tells you",
     "section": "",
-    "text": "A study looks at a new treatment and reports p=0.03. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick."
+    "text": "A study looks at a new treatment and reports \\(p=0.03\\). Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick."
   },
   {
     "objectID": "posts/p-values/index.html#the-claim-that-sounds-right",
     "href": "posts/p-values/index.html#the-claim-that-sounds-right",
     "title": "What a p-value actually tells you",
     "section": "",
-    "text": "A study looks at a new treatment and reports p=0.03. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick."
+    "text": "A study looks at a new treatment and reports \\(p=0.03\\). Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick."
   },
   {
     "objectID": "posts/p-values/index.html#why-the-brain-flips-the-conditional",
@@ -32,7 +32,7 @@
     "href": "posts/p-values/index.html#what-the-math-actually-says",
     "title": "What a p-value actually tells you",
     "section": "What the Math Actually Says",
-    "text": "What the Math Actually Says\nA p-value is formally defined as: \\[p = P(T \\geq t_{\\text{obs}} \\mid H_0 \\text{ true})\\] What people mistakenly hear is the inverted posterior probability: \\[P(H_0 \\text{ true} \\mid \\text{data})\\] These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from \\(P(\\text{data} \\mid H_0)\\) to \\(P(H_0 \\mid \\text{data})\\) requires Bayes’ rule, which demands an explicit prior belief about the plausibility of \\(H_0\\) before the experiment began.\nThe p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:\nAssume the null hypothesis is completely true.\nGenerate the sampling distribution of your test statistic under that assumption.\nMeasure the probability of observing a test statistic at least as extreme as \\(t_{\\text{obs}}\\)"
+    "text": "What the Math Actually Says\nA p-value is formally defined as: \\[p = P(T \\geq t_{\\text{obs}} \\mid H_0 \\text{ true})\\] What people mistakenly hear is the inverted posterior probability: \\[P(H_0 \\text{ true} \\mid \\text{data})\\] These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from \\(P(\\text{data} \\mid H_0)\\) to \\(P(H_0 \\mid \\text{data})\\) requires Bayes’ rule, which demands an explicit prior belief about the plausibility of \\(H_0\\) before the experiment began.\nThe p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:\n-Assume the null hypothesis is completely true. -Generate the sampling distribution of your test statistic under that assumption. -Measure the probability of observing a test statistic at least as extreme as \\(t_{\\text{obs}}\\)"
   },
   {
     "objectID": "posts/p-values/index.html#visualizing-the-null-distribution",
@@ -46,14 +46,21 @@
     "href": "posts/p-values/index.html#a-brief-historical-accident",
     "title": "What a p-value actually tells you",
     "section": "A Brief Historical Accident",
-    "text": "A Brief Historical Accident\nWhen Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.\nA p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening."
+    "text": "A Brief Historical Accident\nWhen Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty."
   },
   {
-    "objectID": "posts/p-values/index.html#takeaway",
-    "href": "posts/p-values/index.html#takeaway",
+    "objectID": "posts/p-values/index.html#takeawayy",
+    "href": "posts/p-values/index.html#takeawayy",
     "title": "What a p-value actually tells you",
-    "section": "Takeaway",
-    "text": "Takeaway"
+    "section": "Takeawayy",
+    "text": "Takeawayy\nA p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening."
+  },
+  {
+    "objectID": "posts/p-values/index.html#references",
+    "href": "posts/p-values/index.html#references",
+    "title": "What a p-value actually tells you",
+    "section": "References",
+    "text": "References\nFisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd."
   },
   {
     "objectID": "index.html",

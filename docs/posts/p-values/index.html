@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
+<meta name="author" content="Yipin Zhang">
 <meta name="dcterms.date" content="2026-09-14">
 <meta name="description" content="The most common misreading in applied statistics, and why it’s so hard to resist">
 
@@ -203,7 +203,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Your Name </p>
+               <p>Yipin Zhang </p>
             </div>
     </div>
       
@@ -231,7 +231,7 @@ window.Quarto = {
 
 <section id="the-claim-that-sounds-right" class="level2">
 <h2 class="anchored" data-anchor-id="the-claim-that-sounds-right">The Claim That Sounds Right</h2>
-<p>A study looks at a new treatment and reports p=0.03. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick.</p>
+<p>A study looks at a new treatment and reports <span class="math inline">\(p=0.03\)</span>. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick.</p>
 </section>
 <section id="why-the-brain-flips-the-conditional" class="level2">
 <h2 class="anchored" data-anchor-id="why-the-brain-flips-the-conditional">Why the Brain Flips the Conditional</h2>
@@ -242,9 +242,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="what-the-math-actually-says">What the Math Actually Says</h2>
 <p>A p-value is formally defined as: <span class="math display">\[p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})\]</span> What people mistakenly hear is the inverted posterior probability: <span class="math display">\[P(H_0 \text{ true} \mid \text{data})\]</span> These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from <span class="math inline">\(P(\text{data} \mid H_0)\)</span> to <span class="math inline">\(P(H_0 \mid \text{data})\)</span> requires Bayes’ rule, which demands an explicit prior belief about the plausibility of <span class="math inline">\(H_0\)</span> before the experiment began.</p>
 <p>The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:</p>
-<p>Assume the null hypothesis is completely true.</p>
-<p>Generate the sampling distribution of your test statistic under that assumption.</p>
-<p>Measure the probability of observing a test statistic at least as extreme as <span class="math inline">\(t_{\text{obs}}\)</span></p>
+<p>-Assume the null hypothesis is completely true. -Generate the sampling distribution of your test statistic under that assumption. -Measure the probability of observing a test statistic at least as extreme as <span class="math inline">\(t_{\text{obs}}\)</span></p>
 </section>
 <section id="visualizing-the-null-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-null-distribution">Visualizing the Null Distribution</h2>
@@ -290,10 +288,14 @@ Figure&nbsp;1: 10,000 simulated experiments in a world where the null hypothesis
 <section id="a-brief-historical-accident" class="level2">
 <h2 class="anchored" data-anchor-id="a-brief-historical-accident">A Brief Historical Accident</h2>
 <p>When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.</p>
+</section>
+<section id="takeawayy" class="level2">
+<h2 class="anchored" data-anchor-id="takeawayy">Takeawayy</h2>
 <p>A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.</p>
 </section>
-<section id="takeaway" class="level2">
-<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Fisher, R. A. (1925). <em>Statistical Methods for Research Workers</em>. Oliver and Boyd.</p>
 
 
 </section>
