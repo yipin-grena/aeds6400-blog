@@ -21,13 +21,6 @@
     "text": "A study looks at a new treatment and reports p=0.03. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "aeds6400-blog",
-    "section": "",
-    "text": "What a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYour Name\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "posts/p-values/index.html#why-the-brain-flips-the-conditional",
     "href": "posts/p-values/index.html#why-the-brain-flips-the-conditional",
     "title": "What a p-value actually tells you",
@@ -61,5 +54,12 @@
     "title": "What a p-value actually tells you",
     "section": "Takeaway",
     "text": "Takeaway"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "aeds6400-blog",
+    "section": "",
+    "text": "What a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYipin Zhang\n\n\n\n\n\nNo matching items"
   }
 ]
