@@ -32,6 +32,7 @@ The p-value contains zero information about priors. Instead, it operates strictl
 
 ## Visualizing the Null Distribution
 The cleanest way to see this distinction is to simulate the null distribution directly in R:
+For simplicity the simulation below treats the test as one-sided, counting only results at least as large as the observed statistic.
 ```{r}
 #| label: fig-null-dist
 #| fig-cap: "10,000 simulated experiments in a world where the null hypothesis is true. The shaded tail is the p-value."
@@ -58,7 +59,7 @@ rect(h$breaks[tail_bins], 0,
 
 abline(v = obs_stat, col = "red3", lwd = 2, lty = 2)
 ```
-A $p$-value of `r round(p_value * 100, 1)`% means that in a universe where the effect is entirely zero, data as extreme as yours would occur that often purely by chance.
+A $p$-value of `r round(p_value * 100, 1)`% means that t if the effect were exactly zero, roughly 3 in every 100 studies like yours would produce data this extreme or more so. It says nothing about whether the effect is zero.
 
 The histogram visualizes 10,000 experiments conducted in a world where $H_0$ is true. The red shaded tail represents the proportion of simulated trials that produced a statistic at or beyond our observed value $t_{\text{obs}}$. The area of that tail is the p-value: a tail probability under an assumed null model, not the probability that the null model itself is correct.
 

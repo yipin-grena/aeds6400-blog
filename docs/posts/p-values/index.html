@@ -250,7 +250,7 @@ window.Quarto = {
 </section>
 <section id="visualizing-the-null-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-null-distribution">Visualizing the Null Distribution</h2>
-<p>The cleanest way to see this distinction is to simulate the null distribution directly in R:</p>
+<p>The cleanest way to see this distinction is to simulate the null distribution directly in R: For simplicity the simulation below treats the test as one-sided, counting only results at least as large as the observed statistic.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -286,7 +286,7 @@ Figure&nbsp;1: 10,000 simulated experiments in a world where the null hypothesis
 </div>
 </div>
 </div>
-<p>A <span class="math inline">\(p\)</span>-value of 2.9% means that in a universe where the effect is entirely zero, data as extreme as yours would occur that often purely by chance.</p>
+<p>A <span class="math inline">\(p\)</span>-value of 2.9% means that t if the effect were exactly zero, roughly 3 in every 100 studies like yours would produce data this extreme or more so. It says nothing about whether the effect is zero.</p>
 <p>The histogram visualizes 10,000 experiments conducted in a world where <span class="math inline">\(H_0\)</span> is true. The red shaded tail represents the proportion of simulated trials that produced a statistic at or beyond our observed value <span class="math inline">\(t_{\text{obs}}\)</span>. The area of that tail is the p-value: a tail probability under an assumed null model, not the probability that the null model itself is correct.</p>
 </section>
 <section id="a-brief-historical-accident" class="level2">
