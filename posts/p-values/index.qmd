@@ -65,8 +65,8 @@ The histogram visualizes 10,000 experiments conducted in a world where $H_0$ is 
 ## A Brief Historical Accident
 When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.
 
+## Takeawayy
 A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.
 
 ## References
-
 Fisher, R. A. (1925). *Statistical Methods for Research Workers*. Oliver and Boyd.
