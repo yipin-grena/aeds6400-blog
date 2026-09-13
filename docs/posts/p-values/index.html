@@ -242,7 +242,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="what-the-math-actually-says">What the Math Actually Says</h2>
 <p>A p-value is formally defined as: <span class="math display">\[p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})\]</span> What people mistakenly hear is the inverted posterior probability: <span class="math display">\[P(H_0 \text{ true} \mid \text{data})\]</span> These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from <span class="math inline">\(P(\text{data} \mid H_0)\)</span> to <span class="math inline">\(P(H_0 \mid \text{data})\)</span> requires Bayes’ rule, which demands an explicit prior belief about the plausibility of <span class="math inline">\(H_0\)</span> before the experiment began.</p>
 <p>The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:</p>
-<p>-Assume the null hypothesis is completely true. -Generate the sampling distribution of your test statistic under that assumption. -Measure the probability of observing a test statistic at least as extreme as <span class="math inline">\(t_{\text{obs}}\)</span></p>
+<ul>
+<li>Assume the null hypothesis is completely true.</li>
+<li>Generate the sampling distribution of your test statistic under that assumption.</li>
+<li>Measure the probability of observing a test statistic at least as extreme as <span class="math inline">\(t_{\text{obs}}\)</span></li>
+</ul>
 </section>
 <section id="visualizing-the-null-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-null-distribution">Visualizing the Null Distribution</h2>
@@ -289,8 +293,8 @@ Figure&nbsp;1: 10,000 simulated experiments in a world where the null hypothesis
 <h2 class="anchored" data-anchor-id="a-brief-historical-accident">A Brief Historical Accident</h2>
 <p>When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.</p>
 </section>
-<section id="takeawayy" class="level2">
-<h2 class="anchored" data-anchor-id="takeawayy">Takeawayy</h2>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
 <p>A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.</p>
 </section>
 <section id="references" class="level2">

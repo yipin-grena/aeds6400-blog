@@ -25,9 +25,9 @@ These are fundamentally different quantities. The second equation cannot even be
 
 The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:
 
--Assume the null hypothesis is completely true.
--Generate the sampling distribution of your test statistic under that assumption.
--Measure the probability of observing a test statistic at least as extreme as $t_{\text{obs}}$
+- Assume the null hypothesis is completely true.
+- Generate the sampling distribution of your test statistic under that assumption.
+- Measure the probability of observing a test statistic at least as extreme as $t_{\text{obs}}$
 
 
 ## Visualizing the Null Distribution
@@ -65,7 +65,7 @@ The histogram visualizes 10,000 experiments conducted in a world where $H_0$ is 
 ## A Brief Historical Accident
 When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.
 
-## Takeawayy
+## Takeaway
 A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.
 
 ## References
