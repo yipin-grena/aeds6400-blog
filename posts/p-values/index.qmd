@@ -1,13 +1,72 @@
 ---
 title: "What a p-value actually tells you"
 description: "The most common misreading in applied statistics, and why it's so hard to resist"
-author: "Your Name"
+author: "Yipin Zhang"
 date: "2026-09-14"
 categories: [statistics, inference]
 ---
 
-## The claim that sounds right
+## The Claim That Sounds Right
+A study looks at a new treatment and reports $p=0.03$. Within hours, a press release declares the finding "97% likely to be real," and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick.
 
-A study reports $p = 0.03$.
 
+## Why the Brain Flips the Conditional
+The reason the error remains is due to an unconscious substitution. When researchers carry out experiments in order to find out about reality, they ask themselves: How likely is my hypothesis given these results? However, standard significance testing is unable to provide an answer to that question; it only answers a reversed one: Assuming that the null hypothesis is true, how likely is the data in question? Since people never naturally look for the probability of their data in a hypothetical situation in which nothing at all works, the brain automatically replaces the question that was originally wanted with the one that has actually been calculated.
+
+It is straightforward to identify the flaw when looking at ordinary language: although it is clearly true that most professional basketball players are tall, it is absurd to say that most tall people are professional basketball players. The two statements involve the same categories, yet reversing the conditional completely changes the truth of the claim. Similarly, when we switch the categories from 'basketball players' to 'data' and 'hypotheses', our instinct fails to recognise that the same reversal is taking place.
+
+
+## What the Math Actually Says
+A p-value is formally defined as:
 $$p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})$$
+What people mistakenly hear is the inverted posterior probability:
+$$P(H_0 \text{ true} \mid \text{data})$$
+These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from $P(\text{data} \mid H_0)$ to $P(H_0 \mid \text{data})$ requires Bayes' rule, which demands an explicit prior belief about the plausibility of $H_0$ before the experiment began.
+
+The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:
+
+-Assume the null hypothesis is completely true.
+-Generate the sampling distribution of your test statistic under that assumption.
+-Measure the probability of observing a test statistic at least as extreme as $t_{\text{obs}}$
+
+
+## Visualizing the Null Distribution
+The cleanest way to see this distinction is to simulate the null distribution directly in R:
+```{r}
+#| label: fig-null-dist
+#| fig-cap: "10,000 simulated experiments in a world where the null hypothesis is true. The shaded tail is the p-value."
+
+set.seed(42)
+
+n          <- 30
+obs_stat   <- 0.34
+null_stats <- replicate(10000, mean(rnorm(n, mean = 0, sd = 1)))
+
+p_value <- mean(null_stats >= obs_stat)
+
+h <- hist(null_stats, breaks = 50, plot = FALSE)
+
+plot(h, col = "gray90", border = "gray70",
+     main = "Simulated Null Distribution",
+     xlab = "Sample mean under H0",
+     xlim = c(-0.8, 0.8))
+
+tail_bins <- which(h$mids >= obs_stat)
+rect(h$breaks[tail_bins], 0,
+     h$breaks[tail_bins + 1], h$counts[tail_bins],
+     col = "tomato", border = "gray70")
+
+abline(v = obs_stat, col = "red3", lwd = 2, lty = 2)
+```
+A $p$-value of `r round(p_value * 100, 1)`% means that in a universe where the effect is entirely zero, data as extreme as yours would occur that often purely by chance.
+
+The histogram visualizes 10,000 experiments conducted in a world where $H_0$ is true. The red shaded tail represents the proportion of simulated trials that produced a statistic at or beyond our observed value $t_{\text{obs}}$. The area of that tail is the p-value: a tail probability under an assumed null model, not the probability that the null model itself is correct.
+
+## A Brief Historical Accident
+When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.
+
+A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.
+
+## References
+
+Fisher, R. A. (1925). *Statistical Methods for Research Workers*. Oliver and Boyd.

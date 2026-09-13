@@ -22,9 +22,192 @@
 
 
 <section id="the-claim-that-sounds-right" class="level2">
-<h2 class="anchored" data-anchor-id="the-claim-that-sounds-right">The claim that sounds right</h2>
-<p>A study reports <img src="https://latex.codecogs.com/png.latex?p%20=%200.03">.</p>
-<p><img src="https://latex.codecogs.com/png.latex?p%20=%20P(T%20%5Cgeq%20t_%7B%5Ctext%7Bobs%7D%7D%20%5Cmid%20H_0%20%5Ctext%7B%20true%7D)"></p>
+<h2 class="anchored" data-anchor-id="the-claim-that-sounds-right">The Claim That Sounds Right</h2>
+<p>A study looks at a new treatment and reports p=0.03. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick.</p>
+</section>
+<section id="why-the-brain-flips-the-conditional" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-brain-flips-the-conditional">Why the Brain Flips the Conditional</h2>
+<p>The reason the error remains is due to an unconscious substitution. When researchers carry out experiments in order to find out about reality, they ask themselves: How likely is my hypothesis given these results? However, standard significance testing is unable to provide an answer to that question; it only answers a reversed one: Assuming that the null hypothesis is true, how likely is the data in question? Since people never naturally look for the probability of their data in a hypothetical situation in which nothing at all works, the brain automatically replaces the question that was originally wanted with the one that has actually been calculated.</p>
+<p>It is straightforward to identify the flaw when looking at ordinary language: although it is clearly true that most professional basketball players are tall, it is absurd to say that most tall people are professional basketball players. The two statements involve the same categories, yet reversing the conditional completely changes the truth of the claim. Similarly, when we switch the categories from ‘basketball players’ to ‘data’ and ‘hypotheses’, our instinct fails to recognise that the same reversal is taking place.</p>
+</section>
+<section id="what-the-math-actually-says" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-math-actually-says">What the Math Actually Says</h2>
+<p>A p-value is formally defined as: <img src="https://latex.codecogs.com/png.latex?p%20=%20P(T%20%5Cgeq%20t_%7B%5Ctext%7Bobs%7D%7D%20%5Cmid%20H_0%20%5Ctext%7B%20true%7D)"> What people mistakenly hear is the inverted posterior probability: <img src="https://latex.codecogs.com/png.latex?P(H_0%20%5Ctext%7B%20true%7D%20%5Cmid%20%5Ctext%7Bdata%7D)"> These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from <img src="https://latex.codecogs.com/png.latex?P(%5Ctext%7Bdata%7D%20%5Cmid%20H_0)"> to <img src="https://latex.codecogs.com/png.latex?P(H_0%20%5Cmid%20%5Ctext%7Bdata%7D)"> requires Bayes’ rule, which demands an explicit prior belief about the plausibility of <img src="https://latex.codecogs.com/png.latex?H_0"> before the experiment began.</p>
+<p>The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:</p>
+<p>Assume the null hypothesis is completely true.</p>
+<p>Generate the sampling distribution of your test statistic under that assumption.</p>
+<p>Measure the probability of observing a test statistic at least as extreme as <img src="https://latex.codecogs.com/png.latex?t_%7B%5Ctext%7Bobs%7D%7D"></p>
+</section>
+<section id="visualizing-the-null-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-null-distribution">Visualizing the Null Distribution</h2>
+<p>The cleanest way to see this distinction is to simulate the null distribution directly in R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">n          <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span></span>
+<span id="cb1-4">obs_stat   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.34</span></span>
+<span id="cb1-5">null_stats <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replicate</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)))</span>
+<span id="cb1-6"></span>
+<span id="cb1-7">p_value <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(null_stats <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> obs_stat)</span>
+<span id="cb1-8"></span>
+<span id="cb1-9">h <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">hist</span>(null_stats, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">breaks =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb1-10"></span>
+<span id="cb1-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(h, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray90"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">border =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray70"</span>,</span>
+<span id="cb1-12">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Simulated Null Distribution"</span>,</span>
+<span id="cb1-13">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sample mean under H0"</span>,</span>
+<span id="cb1-14">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>))</span>
+<span id="cb1-15"></span>
+<span id="cb1-16">tail_bins <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">which</span>(h<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mids <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> obs_stat)</span>
+<span id="cb1-17"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rect</span>(h<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>breaks[tail_bins], <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb1-18">     h<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>breaks[tail_bins <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], h<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>counts[tail_bins],</span>
+<span id="cb1-19">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tomato"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">border =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray70"</span>)</span>
+<span id="cb1-20"></span>
+<span id="cb1-21"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">v =</span> obs_stat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red3"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lty =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div id="fig-null-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://your-website-url.example.com/posts/p-values/index_files/figure-html/fig-null-dist-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: 10,000 simulated experiments in a world where the null hypothesis is true. The shaded tail is the p-value.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A <img src="https://latex.codecogs.com/png.latex?p">-value of 2.9% means that in a universe where the effect is entirely zero, data as extreme as yours would occur that often purely by chance.</p>
+<p>The histogram visualizes 10,000 experiments conducted in a world where <img src="https://latex.codecogs.com/png.latex?H_0"> is true. The red shaded tail represents the proportion of simulated trials that produced a statistic at or beyond our observed value <img src="https://latex.codecogs.com/png.latex?t_%7B%5Ctext%7Bobs%7D%7D">. The area of that tail is the p-value: a tail probability under an assumed null model, not the probability that the null model itself is correct.</p>
+</section>
+<section id="a-brief-historical-accident" class="level2">
+<h2 class="anchored" data-anchor-id="a-brief-historical-accident">A Brief Historical Accident</h2>
+<p>When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.</p>
+<p>A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.</p>
+</section>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
 
 
 </section>

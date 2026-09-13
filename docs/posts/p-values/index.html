@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -195,9 +230,70 @@ window.Quarto = {
 
 
 <section id="the-claim-that-sounds-right" class="level2">
-<h2 class="anchored" data-anchor-id="the-claim-that-sounds-right">The claim that sounds right</h2>
-<p>A study reports <span class="math inline">\(p = 0.03\)</span>.</p>
-<p><span class="math display">\[p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})\]</span></p>
+<h2 class="anchored" data-anchor-id="the-claim-that-sounds-right">The Claim That Sounds Right</h2>
+<p>A study looks at a new treatment and reports p=0.03. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick.</p>
+</section>
+<section id="why-the-brain-flips-the-conditional" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-brain-flips-the-conditional">Why the Brain Flips the Conditional</h2>
+<p>The reason the error remains is due to an unconscious substitution. When researchers carry out experiments in order to find out about reality, they ask themselves: How likely is my hypothesis given these results? However, standard significance testing is unable to provide an answer to that question; it only answers a reversed one: Assuming that the null hypothesis is true, how likely is the data in question? Since people never naturally look for the probability of their data in a hypothetical situation in which nothing at all works, the brain automatically replaces the question that was originally wanted with the one that has actually been calculated.</p>
+<p>It is straightforward to identify the flaw when looking at ordinary language: although it is clearly true that most professional basketball players are tall, it is absurd to say that most tall people are professional basketball players. The two statements involve the same categories, yet reversing the conditional completely changes the truth of the claim. Similarly, when we switch the categories from ‘basketball players’ to ‘data’ and ‘hypotheses’, our instinct fails to recognise that the same reversal is taking place.</p>
+</section>
+<section id="what-the-math-actually-says" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-math-actually-says">What the Math Actually Says</h2>
+<p>A p-value is formally defined as: <span class="math display">\[p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})\]</span> What people mistakenly hear is the inverted posterior probability: <span class="math display">\[P(H_0 \text{ true} \mid \text{data})\]</span> These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from <span class="math inline">\(P(\text{data} \mid H_0)\)</span> to <span class="math inline">\(P(H_0 \mid \text{data})\)</span> requires Bayes’ rule, which demands an explicit prior belief about the plausibility of <span class="math inline">\(H_0\)</span> before the experiment began.</p>
+<p>The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:</p>
+<p>Assume the null hypothesis is completely true.</p>
+<p>Generate the sampling distribution of your test statistic under that assumption.</p>
+<p>Measure the probability of observing a test statistic at least as extreme as <span class="math inline">\(t_{\text{obs}}\)</span></p>
+</section>
+<section id="visualizing-the-null-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-null-distribution">Visualizing the Null Distribution</h2>
+<p>The cleanest way to see this distinction is to simulate the null distribution directly in R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n          <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>obs_stat   <span class="ot">&lt;-</span> <span class="fl">0.34</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>null_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">mean</span>(<span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">mean</span>(null_stats <span class="sc">&gt;=</span> obs_stat)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">hist</span>(null_stats, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(h, <span class="at">col =</span> <span class="st">"gray90"</span>, <span class="at">border =</span> <span class="st">"gray70"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Simulated Null Distribution"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sample mean under H0"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">0.8</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>tail_bins <span class="ot">&lt;-</span> <span class="fu">which</span>(h<span class="sc">$</span>mids <span class="sc">&gt;=</span> obs_stat)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(h<span class="sc">$</span>breaks[tail_bins], <span class="dv">0</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>     h<span class="sc">$</span>breaks[tail_bins <span class="sc">+</span> <span class="dv">1</span>], h<span class="sc">$</span>counts[tail_bins],</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"tomato"</span>, <span class="at">border =</span> <span class="st">"gray70"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> obs_stat, <span class="at">col =</span> <span class="st">"red3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-null-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-null-dist-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: 10,000 simulated experiments in a world where the null hypothesis is true. The shaded tail is the p-value.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A <span class="math inline">\(p\)</span>-value of 2.9% means that in a universe where the effect is entirely zero, data as extreme as yours would occur that often purely by chance.</p>
+<p>The histogram visualizes 10,000 experiments conducted in a world where <span class="math inline">\(H_0\)</span> is true. The red shaded tail represents the proportion of simulated trials that produced a statistic at or beyond our observed value <span class="math inline">\(t_{\text{obs}}\)</span>. The area of that tail is the p-value: a tail probability under an assumed null model, not the probability that the null model itself is correct.</p>
+</section>
+<section id="a-brief-historical-accident" class="level2">
+<h2 class="anchored" data-anchor-id="a-brief-historical-accident">A Brief Historical Accident</h2>
+<p>When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.</p>
+<p>A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.</p>
+</section>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
 
 
 </section>
