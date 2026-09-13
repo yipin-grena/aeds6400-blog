@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/p-values/index.html",
+    "href": "posts/p-values/index.html",
+    "title": "What a p-value actually tells you",
+    "section": "",
+    "text": "A study reports \\(p = 0.03\\).\n\\[p = P(T \\geq t_{\\text{obs}} \\mid H_0 \\text{ true})\\]"
+  },
+  {
+    "objectID": "posts/p-values/index.html#the-claim-that-sounds-right",
+    "href": "posts/p-values/index.html#the-claim-that-sounds-right",
+    "title": "What a p-value actually tells you",
+    "section": "",
+    "text": "A study reports \\(p = 0.03\\).\n\\[p = P(T \\geq t_{\\text{obs}} \\mid H_0 \\text{ true})\\]"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "aeds6400-blog",
+    "section": "",
+    "text": "What a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYour Name\n\n\n\n\n\nNo matching items"
+  }
+]

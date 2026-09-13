@@ -1,0 +1,13 @@
+---
+title: "What a p-value actually tells you"
+description: "The most common misreading in applied statistics, and why it's so hard to resist"
+author: "Your Name"
+date: "2026-09-14"
+categories: [statistics, inference]
+---
+
+## The claim that sounds right
+
+A study reports $p = 0.03$.
+
+$$p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})$$

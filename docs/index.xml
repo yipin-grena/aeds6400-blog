@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>yipin zhang_aeds6400-blog</title>
+<link>https://your-website-url.example.com/</link>
+<atom:link href="https://your-website-url.example.com/index.xml" rel="self" type="application/rss+xml"/>
+<description>A blog built with Quarto</description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Mon, 14 Sep 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>What a p-value actually tells you</title>
+  <dc:creator>Your Name</dc:creator>
+  <link>https://your-website-url.example.com/posts/p-values/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="the-claim-that-sounds-right" class="level2">
+<h2 class="anchored" data-anchor-id="the-claim-that-sounds-right">The claim that sounds right</h2>
+<p>A study reports <img src="https://latex.codecogs.com/png.latex?p%20=%200.03">.</p>
+<p><img src="https://latex.codecogs.com/png.latex?p%20=%20P(T%20%5Cgeq%20t_%7B%5Ctext%7Bobs%7D%7D%20%5Cmid%20H_0%20%5Ctext%7B%20true%7D)"></p>
+
+
+</section>
+
+ ]]></description>
+  <category>statistics</category>
+  <category>inference</category>
+  <guid>https://your-website-url.example.com/posts/p-values/</guid>
+  <pubDate>Mon, 14 Sep 2026 04:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
