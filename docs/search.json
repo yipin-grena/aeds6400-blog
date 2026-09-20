@@ -68,5 +68,40 @@
     "title": "aeds6400-blog",
     "section": "",
     "text": "What a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYipin Zhang\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/web-scraping/index.html#where-the-data-comes-from",
+    "href": "posts/web-scraping/index.html#where-the-data-comes-from",
+    "title": "TODO - a title that states the finding",
+    "section": "Where the data comes from",
+    "text": "Where the data comes from"
+  },
+  {
+    "objectID": "posts/web-scraping/index.html#turning-comments-into-data",
+    "href": "posts/web-scraping/index.html#turning-comments-into-data",
+    "title": "TODO - a title that states the finding",
+    "section": "Turning comments into data",
+    "text": "Turning comments into data\n\n\ntrend |&gt;\n  slice_max(share_2026, n = 12) |&gt;\n  ggplot(aes(100 * share_2026, reorder(skill, share_2026))) +\n  geom_col(fill = \"steelblue\") +\n  labs(x = \"% of postings mentioning the skill\", y = NULL,\n       subtitle = paste0(\"Share of \", n_2026, \" job postings\")) +\n  theme_minimal(base_size = 12)\n\n\n\n\n\n\n\nFigure 1: Most-requested technologies, September 2026"
+  },
+  {
+    "objectID": "posts/web-scraping/index.html#what-moved",
+    "href": "posts/web-scraping/index.html#what-moved",
+    "title": "TODO - a title that states the finding",
+    "section": "What moved",
+    "text": "What moved\n\n\ntrend |&gt;\n  filter(n_2025 + n_2026 &gt;= 20) |&gt;\n  mutate(sig = p_value &lt; 0.05) |&gt;\n  ggplot(aes(change_pp, reorder(skill, change_pp), fill = sig)) +\n  geom_col() +\n  geom_vline(xintercept = 0, colour = \"grey30\") +\n  scale_fill_manual(values = c(\"TRUE\" = \"steelblue\", \"FALSE\" = \"grey78\"),\n                    labels = c(\"TRUE\" = \"p &lt; 0.05\", \"FALSE\" = \"within noise\"),\n                    name = NULL) +\n  labs(x = \"Percentage-point change\", y = NULL) +\n  theme_minimal(base_size = 12) +\n  theme(legend.position = \"bottom\")\n\n\n\n\n\n\n\nFigure 2: Change in share of postings, September 2025 to September 2026. Grey bars are not distinguishable from sampling noise."
+  },
+  {
+    "objectID": "posts/web-scraping/index.html#so-what-should-you-learn",
+    "href": "posts/web-scraping/index.html#so-what-should-you-learn",
+    "title": "TODO - a title that states the finding",
+    "section": "So what should you learn?",
+    "text": "So what should you learn?\n\n\ntrend |&gt;\n  filter(n_2025 + n_2026 &gt;= 20) |&gt;\n  transmute(Skill = skill,\n            `2025 (%)` = round(100 * share_2025, 1),\n            `2026 (%)` = round(100 * share_2026, 1),\n            `Change (pp)` = round(change_pp, 1),\n            `p` = round(p_value, 3)) |&gt;\n  kable()\n\n\n\nTable 1: Skill demand, September 2025 vs September 2026\n\n\n\n\n\n\nSkill\n2025 (%)\n2026 (%)\nChange (pp)\np\n\n\n\n\nPython\n26.4\n27.2\n0.8\n0.910\n\n\nTypeScript\n28.1\n20.7\n-7.4\n0.054\n\n\nReact\n27.4\n20.3\n-7.1\n0.062\n\n\nPostgres\n15.4\n16.9\n1.5\n0.720\n\n\nLLMs\n13.0\n15.7\n2.7\n0.436\n\n\nAWS\n13.7\n13.4\n-0.3\n1.000\n\n\nKubernetes\n9.0\n10.0\n0.9\n0.817\n\n\nRust\n6.7\n8.0\n1.4\n0.651\n\n\nDocker\n5.4\n7.7\n2.3\n0.347\n\n\nGo\n8.7\n6.5\n-2.2\n0.419\n\n\nTerraform\n5.7\n6.1\n0.4\n0.966\n\n\nC++\n5.7\n4.6\n-1.1\n0.698\n\n\nJavaScript\n3.3\n4.6\n1.3\n0.587\n\n\nSQL\n3.7\n4.6\n0.9\n0.739\n\n\nMachine learning\n5.7\n3.1\n-2.6\n0.196"
+  },
+  {
+    "objectID": "posts/web-scraping/index.html#takeaway",
+    "href": "posts/web-scraping/index.html#takeaway",
+    "title": "TODO - a title that states the finding",
+    "section": "Takeaway",
+    "text": "Takeaway\n\n\nCode and data: posts/web-scraping/"
   }
 ]

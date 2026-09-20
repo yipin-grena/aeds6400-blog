@@ -1,87 +1,76 @@
 # ==============================================================
 # 01_scrape.R - Hacker News "Who is hiring?" job postings
 #
-# Collects top-level comments (= one job posting each) from two
-# monthly hiring threads a year apart.
+# Run by hand. index.qmd reads the saved CSV and never scrapes.
 #
-# Run this BY HAND, once. index.qmd never touches the site; it
-# reads the saved CSV instead.
+# Why scrape at all? Class 5 puts an official API above scraping,
+# and Hacker News has one. The assignment requires rvest, so this
+# collects the same data from public HTML instead.
 #
-# robots.txt for news.ycombinator.com, checked 2026-09-19:
-#   /item?       allowed      <- the thread pages, what we fetch
-#   /submitted?  DISALLOWED   <- so the thread IDs below were found
-#                by hand in a browser, never scraped
-#   Crawl-delay: 30           <- honoured by DELAY_SEC
-#
-# Working directory must be posts/web-scraping/
+# robots.txt (news.ycombinator.com, checked 2026-09-19):
+#   /item?       allowed
+#   /submitted?  DISALLOWED - thread IDs were found by hand
+#   Crawl-delay: 30
 # ==============================================================
 
 library(rvest)
 library(httr)
 library(robotstxt)
 library(dplyr)
-library(purrr)
 library(readr)
+library(here)
 
-# --- Settings -------------------------------------------------
+# ---- setup: paths and settings in one place ----
 
-USER_AGENT <- "AEDS 6400 coursework (grenaz@sas.upenn.edu)"  # TODO your email
-DELAY_SEC  <- 30    # HN's robots.txt asks for 30 seconds
-MAX_PAGES  <- 15    # safety stop, in case the loop misbehaves
-HTML_CACHE <- "data/raw/html"
-RAW_OUT    <- "data/raw/postings_raw.csv"
+POST_DIR  <- here("posts", "web-scraping")
+HTML_DIR  <- file.path(POST_DIR, "data", "raw", "html")
+RAW_FILE  <- file.path(POST_DIR, "data", "raw", "postings_raw.csv")
+META_FILE <- file.path(POST_DIR, "data", "raw", "metadata.csv")
 
-# Thread IDs, looked up by hand (not scraped - /submitted? is disallowed)
-threads <- tribble(
-  ~label,     ~item_id,
-  "2026-09",  49522897L,
-  "2025-09",  45093192L
+BASE_URL   <- "https://news.ycombinator.com/item"
+USER_AGENT <- "AEDS 6400 coursework (grenaz@sas.upenn.edu)"
+DELAY_SEC  <- 30    # robots.txt asks for 30
+MAX_PAGES  <- 15    # safety stop
+
+threads <- tibble(
+  label   = c("2025-09", "2026-09"),
+  item_id = c(45093192L, 49522897L)
 )
 
-dir.create(HTML_CACHE, recursive = TRUE, showWarnings = FALSE)
+dir.create(HTML_DIR, recursive = TRUE, showWarnings = FALSE)
 
 
-# --- 1. Confirm robots.txt permits what we're about to do -----
+# ---- 1. is scraping permitted? ----
 
-if (!isTRUE(paths_allowed("https://news.ycombinator.com/item", bot = "*"))) {
-  stop("robots.txt disallows /item - stop here, do not work around it.")
-}
+stopifnot(paths_allowed(BASE_URL, bot = "*"))
 
 
-# --- 2. Fetch one page: cached, rate-limited, identified ------
-# Cached pages are re-read from disk, so fixing a parsing mistake
-# and re-running costs the site nothing.
+# ---- 2. fetch one page: cached, delayed, identified ----
 
 fetch_page <- function(item_id, p) {
-  name <- sprintf("hn_%d_p%02d", item_id, p)
-  path <- file.path(HTML_CACHE, paste0(name, ".html"))
+  path <- file.path(HTML_DIR, sprintf("hn_%d_p%02d.html", item_id, p))
   
   if (file.exists(path)) {
-    message("cached:   ", name)
+    message("cached:   ", basename(path))
     return(read_html(path))
   }
   
-  url <- sprintf("https://news.ycombinator.com/item?id=%d&p=%d", item_id, p)
+  url <- sprintf("%s?id=%d&p=%d", BASE_URL, item_id, p)
   message("fetching: ", url)
   
-  resp <- GET(url, user_agent(USER_AGENT))
-  stop_for_status(resp)
-  writeBin(content(resp, "raw"), path)
+  response <- GET(url, user_agent(USER_AGENT))
+  stop_for_status(response)
+  writeBin(content(response, "raw"), path)
   
   Sys.sleep(DELAY_SEC)
   read_html(path)
 }
 
 
-# --- 3. Pull the comments out of one page ---------------------
-# Each comment is a <tr class="athing comtr">. The td.ind cell
-# carries the reply depth, so indent == 0 identifies a top-level
-# comment - in these threads, one employer's job posting.
-#
-# html_elements() (plural) gets one node per comment; then
-# html_element() (singular) inside each one returns NA for a
-# missing field instead of a shorter vector, which keeps the
-# columns aligned.
+# ---- 3. extract the comments from one page ----
+# indent == 0 marks a top-level comment, which in these threads is
+# one employer's job posting. html_element() (singular) inside each
+# comment returns NA for a missing field, keeping columns aligned.
 
 parse_page <- function(page) {
   rows <- html_elements(page, "tr.athing.comtr")
@@ -89,49 +78,74 @@ parse_page <- function(page) {
   
   tibble(
     comment_id = html_attr(rows, "id"),
-    indent     = rows |> html_element("td.ind")       |> html_attr("indent") |> as.integer(),
-    poster     = rows |> html_element("a.hnuser")     |> html_text2(),
-    posted_at  = rows |> html_element("span.age")     |> html_attr("title"),
-    text       = rows |> html_element("div.commtext") |> html_text2()
+    indent     = as.integer(html_attr(html_element(rows, "td.ind"), "indent")),
+    poster     = html_text2(html_element(rows, "a.hnuser")),
+    posted_at  = html_attr(html_element(rows, "span.age"), "title"),
+    text       = html_text2(html_element(rows, "div.commtext"))
   )
 }
 
 
-# --- 4. Walk the pages until we stop seeing new comments ------
-# HN serves short threads whole and paginates long ones with
-# &p=2, &p=3. When you run past the end it hands back page 1
-# again rather than an empty page, so stopping on "no new
-# comment IDs" is safer than stopping on "no rows".
+# ---- 4. walk one thread's pages ----
+# HN serves short threads whole and returns page 1 again past the
+# end, so stop when no new comment IDs appear.
 
 scrape_thread <- function(item_id, label) {
-  out  <- list()
-  seen <- character(0)
+  collected <- list()
+  seen      <- character(0)
   
   for (p in seq_len(MAX_PAGES)) {
-    got <- parse_page(fetch_page(item_id, p))
-    if (is.null(got) || nrow(got) == 0) break
+    page_data <- parse_page(fetch_page(item_id, p))
+    if (is.null(page_data)) break
     
-    got <- dplyr::filter(got, !comment_id %in% seen)
-    if (nrow(got) == 0) break
+    page_data <- page_data[!page_data$comment_id %in% seen, ]
+    if (nrow(page_data) == 0) break
     
-    seen     <- c(seen, got$comment_id)
-    out[[p]] <- got
+    seen           <- c(seen, page_data$comment_id)
+    collected[[p]] <- page_data
   }
   
-  list_rbind(out) |>
-    mutate(thread = label, item_id = item_id)
+  result <- bind_rows(collected)
+  result$thread <- label
+  result
 }
 
-raw <- threads |>
-  pmap(\(label, item_id) scrape_thread(item_id, label)) |>
-  list_rbind() |>
-  mutate(scraped_at = Sys.time())
+
+# ---- 5. loop over threads: create, loop, store ----
+
+scraped <- list()
+for (i in seq_len(nrow(threads))) {
+  scraped[[i]] <- scrape_thread(threads$item_id[i], threads$label[i])
+}
+raw <- bind_rows(scraped)
 
 
-# --- 5. Save --------------------------------------------------
+# ---- 6. validate immediately ----
+# Acquisition succeeding is not the same as the data being correct.
 
-write_csv(raw, RAW_OUT)
+stopifnot(nrow(raw) > 0)
+stopifnot(anyDuplicated(raw$comment_id) == 0)
+stopifnot(all(raw$thread %in% threads$label))
 
-message("\n", nrow(raw), " comments written to ", RAW_OUT)
-message(sum(raw$indent == 0, na.rm = TRUE), " of them are top-level job postings")
-print(count(raw, thread, top_level = indent == 0))
+message("comments scraped: ", nrow(raw))
+message("top-level postings: ", sum(raw$indent == 0, na.rm = TRUE))
+message("share missing text: ", round(100 * mean(is.na(raw$text)), 1), "%")
+print(table(raw$thread, top_level = raw$indent == 0))
+
+
+# ---- 7. save the data and its provenance ----
+
+write_csv(raw, RAW_FILE)
+
+metadata <- tibble(
+  source              = "Hacker News, Ask HN: Who is hiring?",
+  thread              = threads$label,
+  source_url          = paste0(BASE_URL, "?id=", threads$item_id),
+  accessed_at         = format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"),
+  robots_txt          = "https://news.ycombinator.com/robots.txt",
+  crawl_delay_seconds = DELAY_SEC,
+  comments_collected  = sapply(threads$label, function(x) sum(raw$thread == x))
+)
+
+write_csv(metadata, META_FILE)
+message("wrote ", RAW_FILE, " and ", META_FILE)

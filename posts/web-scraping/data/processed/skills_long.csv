@@ -1,1022 +1,1022 @@
 comment_id,thread,company,remote,onsite,hybrid,skill
-49523712,2026-09,QUOBYTE,FALSE,TRUE,FALSE,Kubernetes
-49525651,2026-09,MONUMENTAL,FALSE,TRUE,FALSE,React
-49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Python
-49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,JavaScript
-49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,TypeScript
-49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,C++
-49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Rust
-49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Go
-49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Ruby
-49533854,2026-09,Spanish National Cancer Research Centre (CNIO),FALSE,FALSE,TRUE,Python
-49533854,2026-09,Spanish National Cancer Research Centre (CNIO),FALSE,FALSE,TRUE,Kubernetes
-49533854,2026-09,Spanish National Cancer Research Centre (CNIO),FALSE,FALSE,TRUE,Docker
-49525748,2026-09,Discord,FALSE,TRUE,FALSE,Python
-49525748,2026-09,Discord,FALSE,TRUE,FALSE,JavaScript
-49525748,2026-09,Discord,FALSE,TRUE,FALSE,TypeScript
-49525748,2026-09,Discord,FALSE,TRUE,FALSE,Rust
-49525748,2026-09,Discord,FALSE,TRUE,FALSE,React
-49711313,2026-09,Pango (YC S26),FALSE,FALSE,TRUE,Rust
-49711313,2026-09,Pango (YC S26),FALSE,FALSE,TRUE,Go
-49525423,2026-09,Tufalabs,FALSE,TRUE,FALSE,LLMs
-49523018,2026-09,Smarkets (https://www.smarkets.com),FALSE,TRUE,TRUE,Python
-49523018,2026-09,Smarkets (https://www.smarkets.com),FALSE,TRUE,TRUE,Rust
-49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,Python
-49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,JavaScript
-49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,TypeScript
-49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,React
-49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,AWS
-49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,Postgres
-49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,LLMs
-49531439,2026-09,FitMate,TRUE,FALSE,FALSE,React
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,JavaScript
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,TypeScript
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Go
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,React
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,AWS
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Docker
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Postgres
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Terraform
-49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Python
-49524943,2026-09,GovStar,TRUE,FALSE,FALSE,TypeScript
-49524943,2026-09,GovStar,TRUE,FALSE,FALSE,React
-49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Kubernetes
-49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Docker
-49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Terraform
-49524943,2026-09,GovStar,TRUE,FALSE,FALSE,LLMs
-49528132,2026-09,Relativity Space,FALSE,FALSE,FALSE,R
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Python
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,TypeScript
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Rust
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,AWS
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Kubernetes
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Docker
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Postgres
-49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,LLMs
-49532898,2026-09,NetBird,TRUE,FALSE,FALSE,Go
-49523176,2026-09,Rust developer/software engineer at NLnet foundation in Amsterdam,FALSE,FALSE,FALSE,Rust
-49524167,2026-09,WorkHerohttps://workhero.pro,TRUE,FALSE,FALSE,React
-49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,Python
-49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,TypeScript
-49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,React
-49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,Postgres
-49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,LLMs
-49650855,2026-09,Catalyst·Wayfare AI,TRUE,FALSE,FALSE,Python
-49650855,2026-09,Catalyst·Wayfare AI,TRUE,FALSE,FALSE,LLMs
-49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,Go
-49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,React
-49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,AWS
-49543040,2026-09,Tecuity,FALSE,TRUE,FALSE,SQL
-49543040,2026-09,Tecuity,FALSE,TRUE,FALSE,React
-49530867,2026-09,3C Digital Solutions,TRUE,FALSE,FALSE,AWS
-49530867,2026-09,3C Digital Solutions,TRUE,FALSE,FALSE,Terraform
-49664325,2026-09,Ours Privacy,TRUE,FALSE,FALSE,TypeScript
-49664325,2026-09,Ours Privacy,TRUE,FALSE,FALSE,AWS
-49523228,2026-09,Attendi,FALSE,TRUE,TRUE,Machine learning
-49526894,2026-09,Silkline,FALSE,TRUE,FALSE,TypeScript
-49526894,2026-09,Silkline,FALSE,TRUE,FALSE,React
-49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,Python
-49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,JavaScript
-49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,Java
-49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,Kubernetes
-49527118,2026-09,Puma.tech,TRUE,FALSE,FALSE,LLMs
-49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Python
-49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,TypeScript
-49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,React
-49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Kubernetes
-49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Postgres
-49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Terraform
-49532154,2026-09,Artificial Analysis,FALSE,FALSE,FALSE,TypeScript
-49532154,2026-09,Artificial Analysis,FALSE,FALSE,FALSE,Postgres
-49532957,2026-09,Senior Python Backend Engineer,TRUE,FALSE,FALSE,Python
-49532957,2026-09,Senior Python Backend Engineer,TRUE,FALSE,FALSE,Docker
-49524327,2026-09,Steg.AI,FALSE,TRUE,FALSE,Python
-49524327,2026-09,Steg.AI,FALSE,TRUE,FALSE,C++
-49524327,2026-09,Steg.AI,FALSE,TRUE,FALSE,Machine learning
-49533274,2026-09,Axmed,TRUE,FALSE,FALSE,Python
-49533274,2026-09,Axmed,TRUE,FALSE,FALSE,LLMs
-49667711,2026-09,Lumen Labs,FALSE,TRUE,FALSE,Python
-49530430,2026-09,St. Jude Children's Research Hospital,TRUE,TRUE,FALSE,Rust
-49523740,2026-09,G-Research,FALSE,FALSE,FALSE,Python
-49523808,2026-09,Stream,TRUE,FALSE,FALSE,Go
-49523808,2026-09,Stream,TRUE,FALSE,FALSE,React
-49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,Python
-49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,TypeScript
-49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,Go
-49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,React
-49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,AWS
-49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,LLMs
-49524920,2026-09,OpenAlex,TRUE,FALSE,FALSE,Python
-49524920,2026-09,OpenAlex,TRUE,FALSE,FALSE,SQL
-49530424,2026-09,This Dot Labs,TRUE,FALSE,FALSE,JavaScript
-49530424,2026-09,This Dot Labs,TRUE,FALSE,FALSE,React
-49595476,2026-09,Lucia,TRUE,FALSE,FALSE,Python
-49595476,2026-09,Lucia,TRUE,FALSE,FALSE,Rust
-49627985,2026-09,Netrias,FALSE,TRUE,TRUE,Machine learning
-49523978,2026-09,Vistulo,TRUE,FALSE,FALSE,TypeScript
-49523978,2026-09,Vistulo,TRUE,FALSE,FALSE,Java
-49523978,2026-09,Vistulo,TRUE,FALSE,FALSE,React
-49525053,2026-09,Mingla,TRUE,TRUE,FALSE,Postgres
-49523123,2026-09,yeet,TRUE,FALSE,FALSE,Rust
-49528044,2026-09,Biobase,TRUE,FALSE,FALSE,Python
-49528044,2026-09,Biobase,TRUE,FALSE,FALSE,TypeScript
-49528044,2026-09,Biobase,TRUE,FALSE,FALSE,React
-49528044,2026-09,Biobase,TRUE,FALSE,FALSE,Postgres
-49573833,2026-09,Supero,TRUE,FALSE,FALSE,AWS
-49573833,2026-09,Supero,TRUE,FALSE,FALSE,Kubernetes
-49661611,2026-09,Obi9,TRUE,FALSE,FALSE,Python
-49661611,2026-09,Obi9,TRUE,FALSE,FALSE,TypeScript
-49661611,2026-09,Obi9,TRUE,FALSE,FALSE,React
-49532978,2026-09,Multiply,FALSE,FALSE,FALSE,Python
-49532978,2026-09,Multiply,FALSE,FALSE,FALSE,SQL
-49532978,2026-09,Multiply,FALSE,FALSE,FALSE,Postgres
-49576039,2026-09,PermitFlow (YC W22),FALSE,TRUE,FALSE,LLMs
-49524691,2026-09,CoVar,FALSE,FALSE,TRUE,Python
-49553119,2026-09,Natera,TRUE,FALSE,FALSE,TypeScript
-49553119,2026-09,Natera,TRUE,FALSE,FALSE,React
-49553119,2026-09,Natera,TRUE,FALSE,FALSE,Postgres
-49528405,2026-09,Snowflake,FALSE,TRUE,FALSE,LLMs
-49578811,2026-09,Valkyrie Aero,TRUE,FALSE,FALSE,LLMs
-49559854,2026-09,Flow Traders,FALSE,TRUE,FALSE,Python
-49609343,2026-09,We’re hiring at Langfuse — now part of ClickHouse.,FALSE,FALSE,FALSE,LLMs
-49550471,2026-09,Trax,TRUE,TRUE,FALSE,JavaScript
-49550471,2026-09,Trax,TRUE,TRUE,FALSE,Kubernetes
-49530909,2026-09,Greenzie,FALSE,TRUE,TRUE,Python
-49530909,2026-09,Greenzie,FALSE,TRUE,TRUE,C++
-49524880,2026-09,InfoHawk,TRUE,TRUE,FALSE,TypeScript
-49524880,2026-09,InfoHawk,TRUE,TRUE,FALSE,Postgres
-49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,TypeScript
-49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,React
-49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,AWS
-49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,Docker
-49543632,2026-09,Mastra,TRUE,FALSE,FALSE,TypeScript
-49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,Python
-49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,TypeScript
-49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,Go
-49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,Spark
-49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Python
-49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Rust
-49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,AWS
-49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Kubernetes
-49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Postgres
-49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Terraform
-49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Scala
-49552294,2026-09,MIRA,FALSE,TRUE,FALSE,C++
-49552294,2026-09,MIRA,FALSE,TRUE,FALSE,Rust
-49525399,2026-09,Factory,FALSE,TRUE,FALSE,Python
-49525399,2026-09,Factory,FALSE,TRUE,FALSE,TypeScript
-49525399,2026-09,Factory,FALSE,TRUE,FALSE,Kubernetes
-49525399,2026-09,Factory,FALSE,TRUE,FALSE,Terraform
-49530256,2026-09,BCC,FALSE,FALSE,FALSE,Python
-49530256,2026-09,BCC,FALSE,FALSE,FALSE,C++
-49530256,2026-09,BCC,FALSE,FALSE,FALSE,Kubernetes
-49529763,2026-09,Pagelove,TRUE,FALSE,FALSE,Rust
-49540773,2026-09,Klassif.ai,TRUE,FALSE,TRUE,LLMs
-49528637,2026-09,Deya,TRUE,FALSE,TRUE,React
-49528637,2026-09,Deya,TRUE,FALSE,TRUE,LLMs
-49530464,2026-09,Cardog,TRUE,FALSE,FALSE,TypeScript
-49530464,2026-09,Cardog,TRUE,FALSE,FALSE,Postgres
-49546958,2026-09,Frequenz Energy-as-a-Service GmbH,FALSE,FALSE,FALSE,Rust
-49527588,2026-09,Newtwen,TRUE,FALSE,FALSE,Python
-49527588,2026-09,Newtwen,TRUE,FALSE,FALSE,Docker
-49559434,2026-09,"SwingVision is the AI tennis, pickleball, and padel app that provides automated stats, highlights, and line calling using just your phone. Our mission is to democratize the pro sports experience for all athletes.",FALSE,FALSE,FALSE,Machine learning
-49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,Go
-49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,AWS
-49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,Kubernetes
-49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,Terraform
-49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,Python
-49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,SQL
-49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,AWS
-49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,Docker
-49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,Spark
-49562582,2026-09,Crossref,TRUE,FALSE,FALSE,Java
-49562582,2026-09,Crossref,TRUE,FALSE,FALSE,AWS
-49562582,2026-09,Crossref,TRUE,FALSE,FALSE,Postgres
-49562582,2026-09,Crossref,TRUE,FALSE,FALSE,Terraform
-49523288,2026-09,Neuralwatt,TRUE,FALSE,FALSE,Python
-49523288,2026-09,Neuralwatt,TRUE,FALSE,FALSE,Rust
-49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,Python
-49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,JavaScript
-49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,Java
-49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,Go
-49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,React
-49531417,2026-09,Hiya,FALSE,FALSE,TRUE,Python
-49531417,2026-09,Hiya,FALSE,FALSE,TRUE,TypeScript
-49531417,2026-09,Hiya,FALSE,FALSE,TRUE,AWS
-49531417,2026-09,Hiya,FALSE,FALSE,TRUE,Kubernetes
-49531417,2026-09,Hiya,FALSE,FALSE,TRUE,Docker
-49527113,2026-09,Pathos AI,FALSE,TRUE,FALSE,Python
-49527113,2026-09,Pathos AI,FALSE,TRUE,FALSE,TypeScript
-49527113,2026-09,Pathos AI,FALSE,TRUE,FALSE,LLMs
-49527283,2026-09,ML6,FALSE,FALSE,TRUE,Python
-49527283,2026-09,ML6,FALSE,FALSE,TRUE,AWS
-49527283,2026-09,ML6,FALSE,FALSE,TRUE,LLMs
-49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,Python
-49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,SQL
-49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,TypeScript
-49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,AWS
-49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,Postgres
-49524520,2026-09,Sumble,TRUE,FALSE,FALSE,LLMs
-49543579,2026-09,Odin,TRUE,FALSE,FALSE,TypeScript
-49543579,2026-09,Odin,TRUE,FALSE,FALSE,React
-49543579,2026-09,Odin,TRUE,FALSE,FALSE,Kubernetes
-49543579,2026-09,Odin,TRUE,FALSE,FALSE,Postgres
-49524341,2026-09,Findigs,FALSE,FALSE,FALSE,Python
-49524341,2026-09,Findigs,FALSE,FALSE,FALSE,TypeScript
-49524341,2026-09,Findigs,FALSE,FALSE,FALSE,React
-49554223,2026-09,Akkio,TRUE,FALSE,FALSE,Python
-49554223,2026-09,Akkio,TRUE,FALSE,FALSE,TypeScript
-49554223,2026-09,Akkio,TRUE,FALSE,FALSE,LLMs
-49530381,2026-09,Seeq,TRUE,FALSE,FALSE,Python
-49530381,2026-09,Seeq,TRUE,FALSE,FALSE,React
-49530381,2026-09,Seeq,TRUE,FALSE,FALSE,Postgres
-49530381,2026-09,Seeq,TRUE,FALSE,FALSE,Machine learning
-49533419,2026-09,Robotics and AI Institute,FALSE,TRUE,FALSE,C++
-49525600,2026-09,Balerion AI,FALSE,TRUE,FALSE,Python
-49525600,2026-09,Balerion AI,FALSE,TRUE,FALSE,AWS
-49525600,2026-09,Balerion AI,FALSE,TRUE,FALSE,Postgres
-49526311,2026-09,Amplify Renewables,TRUE,FALSE,TRUE,Python
-49526311,2026-09,Amplify Renewables,TRUE,FALSE,TRUE,LLMs
-49541500,2026-09,Legile,FALSE,FALSE,TRUE,Python
-49541500,2026-09,Legile,FALSE,FALSE,TRUE,TypeScript
-49541500,2026-09,Legile,FALSE,FALSE,TRUE,React
-49541500,2026-09,Legile,FALSE,FALSE,TRUE,Postgres
-49533482,2026-09,Odoo,FALSE,FALSE,TRUE,Python
-49533482,2026-09,Odoo,FALSE,FALSE,TRUE,SQL
-49533482,2026-09,Odoo,FALSE,FALSE,TRUE,Postgres
-49528399,2026-09,Axo,FALSE,FALSE,TRUE,TypeScript
-49528399,2026-09,Axo,FALSE,FALSE,TRUE,Go
-49528399,2026-09,Axo,FALSE,FALSE,TRUE,Postgres
-49524031,2026-09,Pomelo Care,TRUE,FALSE,FALSE,Python
-49524031,2026-09,Pomelo Care,TRUE,FALSE,FALSE,TypeScript
-49524031,2026-09,Pomelo Care,TRUE,FALSE,FALSE,React
-49542221,2026-09,Xaira Therapeutics,FALSE,FALSE,FALSE,LLMs
-49523289,2026-09,Shepherd (Series B),FALSE,TRUE,FALSE,TypeScript
-49523289,2026-09,Shepherd (Series B),FALSE,TRUE,FALSE,React
-49523289,2026-09,Shepherd (Series B),FALSE,TRUE,FALSE,Postgres
-49528234,2026-09,Operations1,FALSE,TRUE,TRUE,LLMs
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,SQL
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,JavaScript
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Go
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,AWS
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Kubernetes
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Docker
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Terraform
-49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Ruby
-49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,TypeScript
-49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,React
-49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,Kubernetes
-49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,Docker
-49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,Postgres
-49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,LLMs
-49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,Python
-49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,SQL
-49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,Kubernetes
-49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,Terraform
-49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Python
-49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Go
-49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Docker
-49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Postgres
-49528837,2026-09,Cora AI,TRUE,FALSE,FALSE,LLMs
-49526831,2026-09,Leidos,FALSE,TRUE,FALSE,C++
-49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,Python
-49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,TypeScript
-49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,React
-49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,AWS
-49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,Postgres
-49541233,2026-09,VLM Run (https://vlm.run),FALSE,FALSE,FALSE,Kubernetes
-49541233,2026-09,VLM Run (https://vlm.run),FALSE,FALSE,FALSE,Docker
-49541233,2026-09,VLM Run (https://vlm.run),FALSE,FALSE,FALSE,LLMs
-49552714,2026-09,AiMi,TRUE,FALSE,FALSE,TypeScript
-49552714,2026-09,AiMi,TRUE,FALSE,FALSE,React
-49552714,2026-09,AiMi,TRUE,FALSE,FALSE,AWS
-49552714,2026-09,AiMi,TRUE,FALSE,FALSE,LLMs
-49525714,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,TypeScript
-49525714,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,React
-49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,TypeScript
-49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,React
-49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,AWS
-49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,Docker
-49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,Postgres
-49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,LLMs
-49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Python
-49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,AWS
-49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Docker
-49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Postgres
-49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Terraform
-49525367,2026-09,MintMCP,FALSE,FALSE,TRUE,LLMs
-49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,Python
-49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,SQL
-49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,TypeScript
-49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,React
-49533651,2026-09,Rerun,TRUE,FALSE,FALSE,Rust
-49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Python
-49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Java
-49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,C++
-49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Rust
-49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Go
-49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Kubernetes
-49525412,2026-09,Krea,FALSE,TRUE,FALSE,LLMs
-49539823,2026-09,Oscilar.com,TRUE,FALSE,FALSE,Java
-49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Python
-49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Rust
-49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Go
-49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Kubernetes
-49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Postgres
-49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Terraform
-49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Scala
-49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,Python
-49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,SQL
-49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,Machine learning
-49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,LLMs
-49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,Python
-49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,TypeScript
-49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,React
-49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,Postgres
-49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,AWS
-49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,Kubernetes
-49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,Docker
-49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,Terraform
-49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,LLMs
-49524978,2026-09,Category Labs,TRUE,FALSE,FALSE,C++
-49524978,2026-09,Category Labs,TRUE,FALSE,FALSE,Rust
-49527374,2026-09,Jawa.gg,TRUE,FALSE,FALSE,TypeScript
-49527374,2026-09,Jawa.gg,TRUE,FALSE,FALSE,Postgres
-49544301,2026-09,Duets Network,TRUE,FALSE,FALSE,React
-49544301,2026-09,Duets Network,TRUE,FALSE,FALSE,AWS
-49544301,2026-09,Duets Network,TRUE,FALSE,FALSE,Postgres
-49531002,2026-09,National Association of Realtors,FALSE,TRUE,FALSE,Python
-49531002,2026-09,National Association of Realtors,FALSE,TRUE,FALSE,SQL
-49528608,2026-09,Railway,TRUE,FALSE,FALSE,AWS
-49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,Python
-49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,AWS
-49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,Postgres
-49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,LLMs
-49525831,2026-09,Ashby,TRUE,FALSE,FALSE,TypeScript
-49525831,2026-09,Ashby,TRUE,FALSE,FALSE,React
-49525831,2026-09,Ashby,TRUE,FALSE,FALSE,Postgres
-49527344,2026-09,AREO,TRUE,FALSE,FALSE,Docker
-49527344,2026-09,AREO,TRUE,FALSE,FALSE,Postgres
-49527344,2026-09,AREO,TRUE,FALSE,FALSE,LLMs
-49527344,2026-09,AREO,TRUE,FALSE,FALSE,Ruby
-49615435,2026-09,ALBERT,TRUE,FALSE,FALSE,Python
-49615435,2026-09,ALBERT,TRUE,FALSE,FALSE,React
-49615435,2026-09,ALBERT,TRUE,FALSE,FALSE,Postgres
-49538459,2026-09,Republic Services,TRUE,FALSE,FALSE,AWS
-49538459,2026-09,Republic Services,TRUE,FALSE,FALSE,LLMs
-49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,AWS
-49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Kubernetes
-49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Docker
-49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Postgres
-49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Terraform
-49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Ruby
-49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,Python
-49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,TypeScript
-49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,React
-49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,LLMs
-49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,Python
-49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,TypeScript
-49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,Rust
-49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,AWS
-49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,Terraform
-49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,Python
-49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,Rust
-49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,React
-49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,Ruby
-49532122,2026-09,Miltenyi Biotec,TRUE,TRUE,FALSE,C++
-49525147,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,TypeScript
-49525147,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,React
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,TypeScript
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,React
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,AWS
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,Ruby
-49524501,2026-09,Baton,FALSE,FALSE,TRUE,Machine learning
-49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,Python
-49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,Go
-49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,Kubernetes
-49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,LLMs
-49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,Python
-49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,JavaScript
-49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,TypeScript
-49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,React
-49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,LLMs
-49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,Ruby
-49713455,2026-09,"At Tether (https://tether.io/) we're hiring! We envision a world where technology enables financial freedom, educational empowerment, energy sustainability, and data sovereignty. All of our roles are fully remote, worldwide. Apply now:",TRUE,FALSE,FALSE,JavaScript
-49549234,2026-09,"Cologne, Germany",TRUE,TRUE,FALSE,Docker
-49527193,2026-09,Anterior,FALSE,TRUE,FALSE,Python
-49527193,2026-09,Anterior,FALSE,TRUE,FALSE,AWS
-49525544,2026-09,DAT,FALSE,FALSE,TRUE,React
-49525544,2026-09,DAT,FALSE,FALSE,TRUE,AWS
-49525544,2026-09,DAT,FALSE,FALSE,TRUE,Kubernetes
-49525544,2026-09,DAT,FALSE,FALSE,TRUE,LLMs
-49527646,2026-09,Paramark,TRUE,FALSE,TRUE,Python
-49527646,2026-09,Paramark,TRUE,FALSE,TRUE,TypeScript
-49527646,2026-09,Paramark,TRUE,FALSE,TRUE,React
-49527646,2026-09,Paramark,TRUE,FALSE,TRUE,Kubernetes
-49527646,2026-09,Paramark,TRUE,FALSE,TRUE,Postgres
-49525548,2026-09,RINSE,TRUE,FALSE,FALSE,Python
-49525548,2026-09,RINSE,TRUE,FALSE,FALSE,TypeScript
-49525548,2026-09,RINSE,TRUE,FALSE,FALSE,React
-49525548,2026-09,RINSE,TRUE,FALSE,FALSE,Postgres
-49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,Python
-49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,JavaScript
-49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,React
-49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,AWS
-49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,Docker
-49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,Postgres
-49598051,2026-09,BOSS-IQ,TRUE,FALSE,FALSE,TypeScript
-49598051,2026-09,BOSS-IQ,TRUE,FALSE,FALSE,React
-49598051,2026-09,BOSS-IQ,TRUE,FALSE,FALSE,Postgres
-49542805,2026-09,Foray Bioscience,FALSE,FALSE,FALSE,Python
-49542805,2026-09,Foray Bioscience,FALSE,FALSE,FALSE,Machine learning
-49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Python
-49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,TypeScript
-49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,React
-49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Kubernetes
-49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Postgres
-49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Terraform
-49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,LLMs
-49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,TypeScript
-49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,Go
-49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,React
-49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,Postgres
-49525483,2026-09,Furtim Modus,FALSE,FALSE,TRUE,Java
-49525483,2026-09,Furtim Modus,FALSE,FALSE,TRUE,AWS
-49525483,2026-09,Furtim Modus,FALSE,FALSE,TRUE,Postgres
-49523558,2026-09,Stpkr Technologies,FALSE,TRUE,FALSE,Java
-49523558,2026-09,Stpkr Technologies,FALSE,TRUE,FALSE,C++
-49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,Python
-49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,SQL
-49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,React
-49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,LLMs
-49523422,2026-09,Proxybase,TRUE,FALSE,FALSE,Rust
-49525603,2026-09,Astoria AI,TRUE,FALSE,FALSE,Python
-49525603,2026-09,Astoria AI,TRUE,FALSE,FALSE,TypeScript
-49525603,2026-09,Astoria AI,TRUE,FALSE,FALSE,LLMs
-49523675,2026-09,Sudowrite,TRUE,FALSE,FALSE,React
-49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,Python
-49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,TypeScript
-49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,C++
-49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,React
-49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,AWS
-49523830,2026-09,Lead SWE,TRUE,FALSE,FALSE,TypeScript
-49523830,2026-09,Lead SWE,TRUE,FALSE,FALSE,Postgres
 45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,Python
-45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,Rust
-45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,React
-45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,Ruby
-45094200,2025-09,MONUMENTAL,FALSE,TRUE,FALSE,React
 45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Python
-45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,TypeScript
-45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Rust
-45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,AWS
-45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Kubernetes
-45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Terraform
-45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Scala
-45093778,2025-09,Dash0,TRUE,FALSE,FALSE,Kubernetes
-45096239,2025-09,Common Prefix,TRUE,FALSE,FALSE,Rust
-45099497,2025-09,ShieldAI,TRUE,FALSE,FALSE,TypeScript
-45099497,2025-09,ShieldAI,TRUE,FALSE,FALSE,React
-45099497,2025-09,ShieldAI,TRUE,FALSE,FALSE,LLMs
 45095292,2025-09,Tandem Health,FALSE,FALSE,FALSE,Python
-45095292,2025-09,Tandem Health,FALSE,FALSE,FALSE,TypeScript
-45095292,2025-09,Tandem Health,FALSE,FALSE,FALSE,React
-45095292,2025-09,Tandem Health,FALSE,FALSE,FALSE,Kubernetes
-45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,Go
-45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,AWS
-45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,Kubernetes
-45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,Terraform
-45095955,2025-09,RentSpree,FALSE,FALSE,TRUE,TypeScript
-45095955,2025-09,RentSpree,FALSE,FALSE,TRUE,React
 45095784,2025-09,Count,TRUE,FALSE,FALSE,Python
-45095784,2025-09,Count,TRUE,FALSE,FALSE,SQL
-45095784,2025-09,Count,TRUE,FALSE,FALSE,TypeScript
-45095784,2025-09,Count,TRUE,FALSE,FALSE,React
-45095784,2025-09,Count,TRUE,FALSE,FALSE,Kubernetes
-45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,TypeScript
-45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,Go
-45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,React
-45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,Kubernetes
 45100710,2025-09,Stream,TRUE,FALSE,FALSE,Python
-45100710,2025-09,Stream,TRUE,FALSE,FALSE,Go
-45100710,2025-09,Stream,TRUE,FALSE,FALSE,React
-45098670,2025-09,"Sumble is the newco from the founders of Kaggle. We are hiring software engineers, data engineers, machine learning/ai engineers, a product manager and a designer. Can view our roles and apply here:https://apply.workable.com/sumble-inc/",FALSE,FALSE,FALSE,Machine learning
-45098670,2025-09,"Sumble is the newco from the founders of Kaggle. We are hiring software engineers, data engineers, machine learning/ai engineers, a product manager and a designer. Can view our roles and apply here:https://apply.workable.com/sumble-inc/",FALSE,FALSE,FALSE,LLMs
 45096958,2025-09,CVector,TRUE,FALSE,FALSE,Python
-45096958,2025-09,CVector,TRUE,FALSE,FALSE,TypeScript
-45096958,2025-09,CVector,TRUE,FALSE,FALSE,React
-45096958,2025-09,CVector,TRUE,FALSE,FALSE,AWS
-45096958,2025-09,CVector,TRUE,FALSE,FALSE,Postgres
-45093366,2025-09,Komodo Health,TRUE,FALSE,FALSE,LLMs
-45093237,2025-09,Proton,TRUE,FALSE,FALSE,TypeScript
-45093237,2025-09,Proton,TRUE,FALSE,FALSE,Rust
-45093237,2025-09,Proton,TRUE,FALSE,FALSE,React
-45093237,2025-09,Proton,TRUE,FALSE,FALSE,LLMs
 45094377,2025-09,9 Mothers Defense,FALSE,FALSE,TRUE,Python
-45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,TypeScript
-45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,React
-45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,AWS
-45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,Docker
-45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,Postgres
 45097625,2025-09,Duranta,FALSE,TRUE,FALSE,Python
-45097625,2025-09,Duranta,FALSE,TRUE,FALSE,AWS
 45093219,2025-09,Revere Defense Technologies - Autonomous Networks and Infrastructure,FALSE,FALSE,FALSE,Python
-45093219,2025-09,Revere Defense Technologies - Autonomous Networks and Infrastructure,FALSE,FALSE,FALSE,C++
-45093219,2025-09,Revere Defense Technologies - Autonomous Networks and Infrastructure,FALSE,FALSE,FALSE,Rust
 45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,Python
-45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,JavaScript
-45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,TypeScript
-45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,Java
-45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,C++
-45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,React
 45093262,2025-09,Zeven,FALSE,TRUE,FALSE,Python
-45093262,2025-09,Zeven,FALSE,TRUE,FALSE,TypeScript
-45093262,2025-09,Zeven,FALSE,TRUE,FALSE,React
-45093262,2025-09,Zeven,FALSE,TRUE,FALSE,AWS
-45093262,2025-09,Zeven,FALSE,TRUE,FALSE,Postgres
 45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,Python
-45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,TypeScript
-45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,Go
-45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,AWS
-45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,Docker
-45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,Terraform
-45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,LLMs
 45096461,2025-09,Neuralwatt,TRUE,FALSE,FALSE,Python
-45096461,2025-09,Neuralwatt,TRUE,FALSE,FALSE,Rust
-45096461,2025-09,Neuralwatt,TRUE,FALSE,FALSE,LLMs
-45140826,2025-09,Strum AI,FALSE,FALSE,FALSE,LLMs
-45094499,2025-09,Howie.systems (EU VC funded),FALSE,TRUE,FALSE,TypeScript
-45094499,2025-09,Howie.systems (EU VC funded),FALSE,TRUE,FALSE,Postgres
-45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,React
-45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,AWS
-45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,Postgres
-45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,Terraform
-45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,LLMs
 45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,Python
-45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,TypeScript
-45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,AWS
-45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,Kubernetes
-45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,Docker
-45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,Postgres
-45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,LLMs
-45093618,2025-09,PlantingSpace,TRUE,FALSE,FALSE,LLMs
-45223932,2025-09,Tufalabs,FALSE,TRUE,FALSE,LLMs
-45095827,2025-09,Humaans (YC W21),FALSE,FALSE,TRUE,TypeScript
-45095827,2025-09,Humaans (YC W21),FALSE,FALSE,TRUE,React
-45095827,2025-09,Humaans (YC W21),FALSE,FALSE,TRUE,Postgres
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,TypeScript
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Java
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Go
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,AWS
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Kubernetes
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Postgres
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Terraform
-45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Ruby
-45094636,2025-09,Freetrade,FALSE,TRUE,FALSE,TypeScript
-45094636,2025-09,Freetrade,FALSE,TRUE,FALSE,Postgres
 45093306,2025-09,Friendly Captcha,TRUE,FALSE,FALSE,Python
-45093306,2025-09,Friendly Captcha,TRUE,FALSE,FALSE,TypeScript
-45093306,2025-09,Friendly Captcha,TRUE,FALSE,FALSE,Go
-45093306,2025-09,Friendly Captcha,TRUE,FALSE,FALSE,Postgres
-45096269,2025-09,RevEng.AI,TRUE,TRUE,FALSE,Machine learning
 45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,Python
-45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,TypeScript
-45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,React
-45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,AWS
-45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,Postgres
 45102389,2025-09,P2P.org — We’re Hiring (Remote / Global),TRUE,FALSE,FALSE,Python
-45102389,2025-09,P2P.org — We’re Hiring (Remote / Global),TRUE,FALSE,FALSE,SQL
 45102419,2025-09,Findigs,FALSE,FALSE,TRUE,Python
-45102419,2025-09,Findigs,FALSE,FALSE,TRUE,TypeScript
-45102419,2025-09,Findigs,FALSE,FALSE,TRUE,React
-45118823,2025-09,"Goji Labs (gojilabs.com): Various roles, all REMOTE.",TRUE,FALSE,FALSE,TypeScript
-45118823,2025-09,"Goji Labs (gojilabs.com): Various roles, all REMOTE.",TRUE,FALSE,FALSE,Ruby
-45123219,2025-09,7Gen (https://7gen.com/),TRUE,FALSE,TRUE,Machine learning
-45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,TypeScript
-45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,AWS
-45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Kubernetes
-45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Docker
-45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Spark
-45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Terraform
-45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Scala
 45094918,2025-09,BCC,TRUE,TRUE,FALSE,Python
-45094918,2025-09,BCC,TRUE,TRUE,FALSE,C++
-45094918,2025-09,BCC,TRUE,TRUE,FALSE,Kubernetes
-45186789,2025-09,Company: Impression Ventures (Fintech VC fund),FALSE,FALSE,FALSE,LLMs
 45096398,2025-09,Elyos (https://elyos.ai),FALSE,TRUE,FALSE,Python
-45096398,2025-09,Elyos (https://elyos.ai),FALSE,TRUE,FALSE,Postgres
-45096398,2025-09,Elyos (https://elyos.ai),FALSE,TRUE,FALSE,LLMs
-45093698,2025-09,Upway,FALSE,FALSE,TRUE,TypeScript
-45093698,2025-09,Upway,FALSE,FALSE,TRUE,React
 45130064,2025-09,CloudTrucks (4 days/wk in-person in SF),FALSE,FALSE,FALSE,Python
-45130064,2025-09,CloudTrucks (4 days/wk in-person in SF),FALSE,FALSE,FALSE,TypeScript
-45130064,2025-09,CloudTrucks (4 days/wk in-person in SF),FALSE,FALSE,FALSE,React
-45130064,2025-09,CloudTrucks (4 days/wk in-person in SF),FALSE,FALSE,FALSE,Postgres
-45101792,2025-09,Prove AI,TRUE,FALSE,FALSE,TypeScript
-45101792,2025-09,Prove AI,TRUE,FALSE,FALSE,React
-45128499,2025-09,Queueco,FALSE,FALSE,FALSE,Machine learning
-45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,AWS
-45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Kubernetes
-45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Docker
-45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Postgres
-45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Terraform
-45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Ruby
 45119770,2025-09,SalesJack,TRUE,FALSE,FALSE,Python
-45119770,2025-09,SalesJack,TRUE,FALSE,FALSE,TypeScript
-45119770,2025-09,SalesJack,TRUE,FALSE,FALSE,React
 45102049,2025-09,"N43 Studio is a venture studio dedicated to building bold, technology-driven companies from the ground up. We identify emerging opportunities, develop ideas into working prototypes, and launch ventures designed to scale.",FALSE,FALSE,FALSE,Python
-45102049,2025-09,"N43 Studio is a venture studio dedicated to building bold, technology-driven companies from the ground up. We identify emerging opportunities, develop ideas into working prototypes, and launch ventures designed to scale.",FALSE,FALSE,FALSE,TypeScript
-45102049,2025-09,"N43 Studio is a venture studio dedicated to building bold, technology-driven companies from the ground up. We identify emerging opportunities, develop ideas into working prototypes, and launch ventures designed to scale.",FALSE,FALSE,FALSE,Go
-45102049,2025-09,"N43 Studio is a venture studio dedicated to building bold, technology-driven companies from the ground up. We identify emerging opportunities, develop ideas into working prototypes, and launch ventures designed to scale.",FALSE,FALSE,FALSE,React
 45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,Python
-45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,TypeScript
-45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,Java
-45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,C++
-45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,React
-45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,Ruby
-45113485,2025-09,# UniCredit [https://www.unicreditgroup.eu/en.html],FALSE,FALSE,TRUE,React
 45214244,2025-09,Meedan,TRUE,FALSE,FALSE,Python
-45214244,2025-09,Meedan,TRUE,FALSE,FALSE,Machine learning
-45190219,2025-09,Freed,FALSE,FALSE,FALSE,TypeScript
-45190219,2025-09,Freed,FALSE,FALSE,FALSE,React
-45190219,2025-09,Freed,FALSE,FALSE,FALSE,LLMs
-45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,Go
-45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,Terraform
-45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,Machine learning
-45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,LLMs
-45095780,2025-09,ScribbleVet (https://scribblevet.com),TRUE,FALSE,FALSE,React
-45095780,2025-09,ScribbleVet (https://scribblevet.com),TRUE,FALSE,FALSE,Postgres
 45105270,2025-09,Clerq,FALSE,TRUE,FALSE,Python
-45105270,2025-09,Clerq,FALSE,TRUE,FALSE,React
-45105270,2025-09,Clerq,FALSE,TRUE,FALSE,AWS
-45216157,2025-09,Fold,TRUE,FALSE,FALSE,TypeScript
-45216157,2025-09,Fold,TRUE,FALSE,FALSE,React
-45102337,2025-09,ROCKSTAR GAMES,FALSE,TRUE,FALSE,SQL
-45102337,2025-09,ROCKSTAR GAMES,FALSE,TRUE,FALSE,AWS
-45105226,2025-09,Trunk,TRUE,FALSE,FALSE,TypeScript
-45105226,2025-09,Trunk,TRUE,FALSE,FALSE,C++
-45105226,2025-09,Trunk,TRUE,FALSE,FALSE,React
-45105226,2025-09,Trunk,TRUE,FALSE,FALSE,AWS
-45105226,2025-09,Trunk,TRUE,FALSE,FALSE,Kubernetes
 45097684,2025-09,April,FALSE,TRUE,FALSE,Python
-45097684,2025-09,April,FALSE,TRUE,FALSE,TypeScript
 45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,Python
-45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,SQL
-45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,AWS
-45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,Terraform
-45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,LLMs
-45104272,2025-09,Seeq,TRUE,FALSE,FALSE,TypeScript
-45104272,2025-09,Seeq,TRUE,FALSE,FALSE,React
-45104272,2025-09,Seeq,TRUE,FALSE,FALSE,Machine learning
-45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,SQL
-45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,Go
-45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,AWS
-45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,Postgres
-45104609,2025-09,Rocket Alumni Solutions,TRUE,FALSE,FALSE,TypeScript
 45128988,2025-09,ML6,FALSE,FALSE,TRUE,Python
-45128988,2025-09,ML6,FALSE,FALSE,TRUE,AWS
-45128988,2025-09,ML6,FALSE,FALSE,TRUE,Machine learning
-45128988,2025-09,ML6,FALSE,FALSE,TRUE,LLMs
-45246219,2025-09,Watchful,FALSE,TRUE,FALSE,Terraform
-45105157,2025-09,Category Labs,TRUE,FALSE,FALSE,C++
-45105157,2025-09,Category Labs,TRUE,FALSE,FALSE,Rust
-45103002,2025-09,Materialize,FALSE,TRUE,TRUE,SQL
-45103201,2025-09,Absinthe Labs,TRUE,FALSE,TRUE,LLMs
 45127383,2025-09,Abnormal AI,TRUE,FALSE,FALSE,Python
-45127383,2025-09,Abnormal AI,TRUE,FALSE,FALSE,Go
-45127383,2025-09,Abnormal AI,TRUE,FALSE,FALSE,Spark
-45127383,2025-09,Abnormal AI,TRUE,FALSE,FALSE,Machine learning
 45100681,2025-09,V7,FALSE,FALSE,TRUE,Python
-45100681,2025-09,V7,FALSE,FALSE,TRUE,LLMs
 45214572,2025-09,Trak,TRUE,FALSE,FALSE,Python
+45099891,2025-09,Kaedim,FALSE,TRUE,FALSE,Python
+45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Python
+45096644,2025-09,Roundtable,FALSE,FALSE,FALSE,Python
+45125593,2025-09,Sundogs,TRUE,FALSE,FALSE,Python
+45218055,2025-09,Ataraxis AI,TRUE,FALSE,FALSE,Python
+45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,Python
+45099367,2025-09,Composio,FALSE,FALSE,FALSE,Python
+45104067,2025-09,Equity Trust,TRUE,FALSE,FALSE,Python
+45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,Python
+45164548,2025-09,Aleph,TRUE,FALSE,FALSE,Python
+45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,Python
+45126657,2025-09,Chase,FALSE,TRUE,FALSE,Python
+45178034,2025-09,Hopkins PE — Remote (US/UK time zones preferred) — Forward-Deployed Engineer & Embedded Analyst — chris@hopkins.pe,TRUE,FALSE,FALSE,Python
+45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,Python
+45135266,2025-09,PosterChild Inc ($2M pre-seed),FALSE,FALSE,TRUE,Python
+45101653,2025-09,Stealth Solar Tech Startup,TRUE,FALSE,FALSE,Python
+45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,Python
+45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,Python
+45186482,2025-09,Replai (www.replai.io),TRUE,FALSE,FALSE,Python
+45100763,2025-09,Coachcube,FALSE,TRUE,FALSE,Python
+45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,Python
+45127516,2025-09,Vivint,FALSE,TRUE,FALSE,Python
+45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,Python
+45136616,2025-09,Link11,TRUE,FALSE,FALSE,Python
+45095716,2025-09,Rinse,TRUE,FALSE,TRUE,Python
+45099765,2025-09,CredCore,FALSE,FALSE,FALSE,Python
+45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,Python
+45114372,2025-09,Belidor,FALSE,TRUE,FALSE,Python
+45221721,2025-09,Censys,TRUE,FALSE,FALSE,Python
+45119967,2025-09,Picnic,FALSE,TRUE,FALSE,Python
+45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,Python
+45125832,2025-09,AbbVie,TRUE,FALSE,FALSE,Python
+45110575,2025-09,Bluesky Social,TRUE,FALSE,FALSE,Python
+45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,Python
+45094132,2025-09,Cogram,TRUE,FALSE,FALSE,Python
+45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Python
+45107348,2025-09,"Full Time and Part Time roles Distark is hiring, an edutainment brand building learning videos for Education. Our small, passionate team creates animated shows and learning tools that help kids (ages 3-9) fall in love with curiosity and real-world learning. We use custom automation to speed up everything from story writing to animation. See what we’re making:https://www.youtube.com/watch?v=c46VaM_VZGU",FALSE,FALSE,FALSE,Python
+45161373,2025-09,Showpass,FALSE,TRUE,TRUE,Python
+45180199,2025-09,Anvil (https://anvil.works),FALSE,TRUE,FALSE,Python
+45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Python
+45096338,2025-09,krea.ai,FALSE,FALSE,FALSE,Python
+45102400,2025-09,Clio,TRUE,FALSE,TRUE,Python
+45210953,2025-09,Hiring: Senior Data Engineer (Remote Contract),TRUE,FALSE,FALSE,Python
+45095990,2025-09,40GRID - Full-time Remote,TRUE,FALSE,FALSE,Python
+45094456,2025-09,Zigment (https://zigment.ai),FALSE,TRUE,FALSE,Python
+45094015,2025-09,Faction,FALSE,TRUE,FALSE,Python
+45094279,2025-09,We're building the serverless platform that powers millions of developers at the edge. Looking for passionate engineers to shape the future of edge computing.,FALSE,FALSE,FALSE,Python
+49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Python
+49533854,2026-09,Spanish National Cancer Research Centre (CNIO),FALSE,FALSE,TRUE,Python
+49525748,2026-09,Discord,FALSE,TRUE,FALSE,Python
+49523018,2026-09,Smarkets (https://www.smarkets.com),FALSE,TRUE,TRUE,Python
+49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,Python
+49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Python
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Python
+49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,Python
+49650855,2026-09,Catalyst·Wayfare AI,TRUE,FALSE,FALSE,Python
+49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,Python
+49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Python
+49532957,2026-09,Senior Python Backend Engineer,TRUE,FALSE,FALSE,Python
+49524327,2026-09,Steg.AI,FALSE,TRUE,FALSE,Python
+49533274,2026-09,Axmed,TRUE,FALSE,FALSE,Python
+49667711,2026-09,Lumen Labs,FALSE,TRUE,FALSE,Python
+49523740,2026-09,G-Research,FALSE,FALSE,FALSE,Python
+49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,Python
+49524920,2026-09,OpenAlex,TRUE,FALSE,FALSE,Python
+49595476,2026-09,Lucia,TRUE,FALSE,FALSE,Python
+49528044,2026-09,Biobase,TRUE,FALSE,FALSE,Python
+49661611,2026-09,Obi9,TRUE,FALSE,FALSE,Python
+49532978,2026-09,Multiply,FALSE,FALSE,FALSE,Python
+49524691,2026-09,CoVar,FALSE,FALSE,TRUE,Python
+49559854,2026-09,Flow Traders,FALSE,TRUE,FALSE,Python
+49530909,2026-09,Greenzie,FALSE,TRUE,TRUE,Python
+49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,Python
+49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Python
+49525399,2026-09,Factory,FALSE,TRUE,FALSE,Python
+49530256,2026-09,BCC,FALSE,FALSE,FALSE,Python
+49527588,2026-09,Newtwen,TRUE,FALSE,FALSE,Python
+49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,Python
+49523288,2026-09,Neuralwatt,TRUE,FALSE,FALSE,Python
+49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,Python
+49531417,2026-09,Hiya,FALSE,FALSE,TRUE,Python
+49527113,2026-09,Pathos AI,FALSE,TRUE,FALSE,Python
+49527283,2026-09,ML6,FALSE,FALSE,TRUE,Python
+49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,Python
+49524341,2026-09,Findigs,FALSE,FALSE,FALSE,Python
+49554223,2026-09,Akkio,TRUE,FALSE,FALSE,Python
+49530381,2026-09,Seeq,TRUE,FALSE,FALSE,Python
+49525600,2026-09,Balerion AI,FALSE,TRUE,FALSE,Python
+49526311,2026-09,Amplify Renewables,TRUE,FALSE,TRUE,Python
+49541500,2026-09,Legile,FALSE,FALSE,TRUE,Python
+49533482,2026-09,Odoo,FALSE,FALSE,TRUE,Python
+49524031,2026-09,Pomelo Care,TRUE,FALSE,FALSE,Python
+49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,Python
+49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Python
+49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,Python
+49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Python
+49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,Python
+49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Python
+49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Python
+49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,Python
+49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,Python
+49531002,2026-09,National Association of Realtors,FALSE,TRUE,FALSE,Python
+49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,Python
+49615435,2026-09,ALBERT,TRUE,FALSE,FALSE,Python
+49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,Python
+49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,Python
+49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,Python
+49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,Python
+49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,Python
+49527193,2026-09,Anterior,FALSE,TRUE,FALSE,Python
+49527646,2026-09,Paramark,TRUE,FALSE,TRUE,Python
+49525548,2026-09,RINSE,TRUE,FALSE,FALSE,Python
+49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,Python
+49542805,2026-09,Foray Bioscience,FALSE,FALSE,FALSE,Python
+49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Python
+49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,Python
+49525603,2026-09,Astoria AI,TRUE,FALSE,FALSE,Python
+49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,Python
+45095784,2025-09,Count,TRUE,FALSE,FALSE,SQL
+45102389,2025-09,P2P.org — We’re Hiring (Remote / Global),TRUE,FALSE,FALSE,SQL
+45102337,2025-09,ROCKSTAR GAMES,FALSE,TRUE,FALSE,SQL
+45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,SQL
+45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,SQL
+45103002,2025-09,Materialize,FALSE,TRUE,TRUE,SQL
+45097523,2025-09,Come build the data platform of tomorrow!,FALSE,FALSE,FALSE,SQL
+45094862,2025-09,Braden Health,FALSE,TRUE,FALSE,SQL
+45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,SQL
+45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,SQL
+45210953,2025-09,Hiring: Senior Data Engineer (Remote Contract),TRUE,FALSE,FALSE,SQL
+49543040,2026-09,Tecuity,FALSE,TRUE,FALSE,SQL
+49524920,2026-09,OpenAlex,TRUE,FALSE,FALSE,SQL
+49532978,2026-09,Multiply,FALSE,FALSE,FALSE,SQL
+49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,SQL
+49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,SQL
+49533482,2026-09,Odoo,FALSE,FALSE,TRUE,SQL
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,SQL
+49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,SQL
+49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,SQL
+49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,SQL
+49531002,2026-09,National Association of Realtors,FALSE,TRUE,FALSE,SQL
+49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,SQL
+45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,JavaScript
+45096644,2025-09,Roundtable,FALSE,FALSE,FALSE,JavaScript
+45128707,2025-09,"Routefusion (routefusion.com) — Staff Software Engineer — Node.js, JavaScript/TypeScript — Fintech — Hybrid (Austin, TX)",FALSE,FALSE,TRUE,JavaScript
+45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,JavaScript
+45101653,2025-09,Stealth Solar Tech Startup,TRUE,FALSE,FALSE,JavaScript
+45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,JavaScript
+45136616,2025-09,Link11,TRUE,FALSE,FALSE,JavaScript
+45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,JavaScript
+45180199,2025-09,Anvil (https://anvil.works),FALSE,TRUE,FALSE,JavaScript
+45097165,2025-09,Bubblehouse,TRUE,FALSE,FALSE,JavaScript
+49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,JavaScript
+49525748,2026-09,Discord,FALSE,TRUE,FALSE,JavaScript
+49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,JavaScript
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,JavaScript
+49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,JavaScript
+49530424,2026-09,This Dot Labs,TRUE,FALSE,FALSE,JavaScript
+49550471,2026-09,Trax,TRUE,TRUE,FALSE,JavaScript
+49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,JavaScript
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,JavaScript
+49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,JavaScript
+49713455,2026-09,"At Tether (https://tether.io/) we're hiring! We envision a world where technology enables financial freedom, educational empowerment, energy sustainability, and data sovereignty. All of our roles are fully remote, worldwide. Apply now:",TRUE,FALSE,FALSE,JavaScript
+49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,JavaScript
+45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,TypeScript
+45099497,2025-09,ShieldAI,TRUE,FALSE,FALSE,TypeScript
+45095292,2025-09,Tandem Health,FALSE,FALSE,FALSE,TypeScript
+45095955,2025-09,RentSpree,FALSE,FALSE,TRUE,TypeScript
+45095784,2025-09,Count,TRUE,FALSE,FALSE,TypeScript
+45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,TypeScript
+45096958,2025-09,CVector,TRUE,FALSE,FALSE,TypeScript
+45093237,2025-09,Proton,TRUE,FALSE,FALSE,TypeScript
+45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,TypeScript
+45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,TypeScript
+45093262,2025-09,Zeven,FALSE,TRUE,FALSE,TypeScript
+45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,TypeScript
+45094499,2025-09,Howie.systems (EU VC funded),FALSE,TRUE,FALSE,TypeScript
+45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,TypeScript
+45095827,2025-09,Humaans (YC W21),FALSE,FALSE,TRUE,TypeScript
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,TypeScript
+45094636,2025-09,Freetrade,FALSE,TRUE,FALSE,TypeScript
+45093306,2025-09,Friendly Captcha,TRUE,FALSE,FALSE,TypeScript
+45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,TypeScript
+45102419,2025-09,Findigs,FALSE,FALSE,TRUE,TypeScript
+45118823,2025-09,"Goji Labs (gojilabs.com): Various roles, all REMOTE.",TRUE,FALSE,FALSE,TypeScript
+45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,TypeScript
+45093698,2025-09,Upway,FALSE,FALSE,TRUE,TypeScript
+45130064,2025-09,CloudTrucks (4 days/wk in-person in SF),FALSE,FALSE,FALSE,TypeScript
+45101792,2025-09,Prove AI,TRUE,FALSE,FALSE,TypeScript
+45119770,2025-09,SalesJack,TRUE,FALSE,FALSE,TypeScript
+45102049,2025-09,"N43 Studio is a venture studio dedicated to building bold, technology-driven companies from the ground up. We identify emerging opportunities, develop ideas into working prototypes, and launch ventures designed to scale.",FALSE,FALSE,FALSE,TypeScript
+45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,TypeScript
+45190219,2025-09,Freed,FALSE,FALSE,FALSE,TypeScript
+45216157,2025-09,Fold,TRUE,FALSE,FALSE,TypeScript
+45105226,2025-09,Trunk,TRUE,FALSE,FALSE,TypeScript
+45097684,2025-09,April,FALSE,TRUE,FALSE,TypeScript
+45104272,2025-09,Seeq,TRUE,FALSE,FALSE,TypeScript
+45104609,2025-09,Rocket Alumni Solutions,TRUE,FALSE,FALSE,TypeScript
 45214572,2025-09,Trak,TRUE,FALSE,FALSE,TypeScript
-45214572,2025-09,Trak,TRUE,FALSE,FALSE,React
-45214572,2025-09,Trak,TRUE,FALSE,FALSE,Postgres
-45214572,2025-09,Trak,TRUE,FALSE,FALSE,Terraform
 45105525,2025-09,HomeCloud,TRUE,FALSE,FALSE,TypeScript
-45105525,2025-09,HomeCloud,TRUE,FALSE,FALSE,AWS
-45105525,2025-09,HomeCloud,TRUE,FALSE,FALSE,LLMs
 45094601,2025-09,Foxglove,TRUE,TRUE,FALSE,TypeScript
+45095426,2025-09,Fold,TRUE,FALSE,FALSE,TypeScript
+45105873,2025-09,Datadog,FALSE,TRUE,FALSE,TypeScript
+45100677,2025-09,JustWatch,TRUE,FALSE,TRUE,TypeScript
+45128707,2025-09,"Routefusion (routefusion.com) — Staff Software Engineer — Node.js, JavaScript/TypeScript — Fintech — Hybrid (Austin, TX)",FALSE,FALSE,TRUE,TypeScript
+45094862,2025-09,Braden Health,FALSE,TRUE,FALSE,TypeScript
+45095810,2025-09,eventfirst,TRUE,FALSE,FALSE,TypeScript
+45103797,2025-09,VitVio,TRUE,FALSE,FALSE,TypeScript
+45103981,2025-09,Hardfin,TRUE,TRUE,FALSE,TypeScript
+45127220,2025-09,Axiom,TRUE,FALSE,FALSE,TypeScript
+45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,TypeScript
+45099367,2025-09,Composio,FALSE,FALSE,FALSE,TypeScript
+45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,TypeScript
+45164548,2025-09,Aleph,TRUE,FALSE,FALSE,TypeScript
+45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,TypeScript
+45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,TypeScript
+45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,TypeScript
+45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,TypeScript
+45106305,2025-09,Coder,FALSE,FALSE,FALSE,TypeScript
+45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,TypeScript
+45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,TypeScript
+45160963,2025-09,Blotato,TRUE,FALSE,FALSE,TypeScript
+45219796,2025-09,Marex,FALSE,TRUE,FALSE,TypeScript
+45113488,2025-09,Promptwatch,TRUE,FALSE,TRUE,TypeScript
+45197701,2025-09,Trove,TRUE,FALSE,FALSE,TypeScript
+45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,TypeScript
+45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,TypeScript
+45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,TypeScript
+45170835,2025-09,MeritFirst,FALSE,TRUE,FALSE,TypeScript
+45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,TypeScript
+45098236,2025-09,Retirable,FALSE,TRUE,TRUE,TypeScript
+45099765,2025-09,CredCore,FALSE,FALSE,FALSE,TypeScript
+45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,TypeScript
+45221721,2025-09,Censys,TRUE,FALSE,FALSE,TypeScript
+45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,TypeScript
+45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,TypeScript
+45183446,2025-09,pawaPay (pawapay.io),TRUE,FALSE,FALSE,TypeScript
+45125832,2025-09,AbbVie,TRUE,FALSE,FALSE,TypeScript
+45110575,2025-09,Bluesky Social,TRUE,FALSE,FALSE,TypeScript
+45094669,2025-09,Master Works / Nabeh,FALSE,TRUE,FALSE,TypeScript
+45094132,2025-09,Cogram,TRUE,FALSE,FALSE,TypeScript
+45097832,2025-09,PetsApp – The future of pet care,TRUE,FALSE,FALSE,TypeScript
+45104655,2025-09,ARound (web-based augmented reality for sports)https://aroundar.com- a Stagwell company -https://www.stagwellglobal.com,TRUE,FALSE,FALSE,TypeScript
+45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,TypeScript
+45161373,2025-09,Showpass,FALSE,TRUE,TRUE,TypeScript
+45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,TypeScript
+45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,TypeScript
+45094015,2025-09,Faction,FALSE,TRUE,FALSE,TypeScript
+49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,TypeScript
+49525748,2026-09,Discord,FALSE,TRUE,FALSE,TypeScript
+49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,TypeScript
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,TypeScript
+49524943,2026-09,GovStar,TRUE,FALSE,FALSE,TypeScript
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,TypeScript
+49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,TypeScript
+49664325,2026-09,Ours Privacy,TRUE,FALSE,FALSE,TypeScript
+49526894,2026-09,Silkline,FALSE,TRUE,FALSE,TypeScript
+49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,TypeScript
+49532154,2026-09,Artificial Analysis,FALSE,FALSE,FALSE,TypeScript
+49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,TypeScript
+49523978,2026-09,Vistulo,TRUE,FALSE,FALSE,TypeScript
+49528044,2026-09,Biobase,TRUE,FALSE,FALSE,TypeScript
+49661611,2026-09,Obi9,TRUE,FALSE,FALSE,TypeScript
+49553119,2026-09,Natera,TRUE,FALSE,FALSE,TypeScript
+49524880,2026-09,InfoHawk,TRUE,TRUE,FALSE,TypeScript
+49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,TypeScript
+49543632,2026-09,Mastra,TRUE,FALSE,FALSE,TypeScript
+49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,TypeScript
+49525399,2026-09,Factory,FALSE,TRUE,FALSE,TypeScript
+49530464,2026-09,Cardog,TRUE,FALSE,FALSE,TypeScript
+49531417,2026-09,Hiya,FALSE,FALSE,TRUE,TypeScript
+49527113,2026-09,Pathos AI,FALSE,TRUE,FALSE,TypeScript
+49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,TypeScript
+49543579,2026-09,Odin,TRUE,FALSE,FALSE,TypeScript
+49524341,2026-09,Findigs,FALSE,FALSE,FALSE,TypeScript
+49554223,2026-09,Akkio,TRUE,FALSE,FALSE,TypeScript
+49541500,2026-09,Legile,FALSE,FALSE,TRUE,TypeScript
+49528399,2026-09,Axo,FALSE,FALSE,TRUE,TypeScript
+49524031,2026-09,Pomelo Care,TRUE,FALSE,FALSE,TypeScript
+49523289,2026-09,Shepherd (Series B),FALSE,TRUE,FALSE,TypeScript
+49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,TypeScript
+49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,TypeScript
+49552714,2026-09,AiMi,TRUE,FALSE,FALSE,TypeScript
+49525714,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,TypeScript
+49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,TypeScript
+49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,TypeScript
+49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,TypeScript
+49527374,2026-09,Jawa.gg,TRUE,FALSE,FALSE,TypeScript
+49525831,2026-09,Ashby,TRUE,FALSE,FALSE,TypeScript
+49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,TypeScript
+49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,TypeScript
+49525147,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,TypeScript
+49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,TypeScript
+49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,TypeScript
+49527646,2026-09,Paramark,TRUE,FALSE,TRUE,TypeScript
+49525548,2026-09,RINSE,TRUE,FALSE,FALSE,TypeScript
+49598051,2026-09,BOSS-IQ,TRUE,FALSE,FALSE,TypeScript
+49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,TypeScript
+49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,TypeScript
+49525603,2026-09,Astoria AI,TRUE,FALSE,FALSE,TypeScript
+49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,TypeScript
+49523830,2026-09,Lead SWE,TRUE,FALSE,FALSE,TypeScript
+45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,Java
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Java
+45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,Java
+45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Java
+45249657,2025-09,Friendsurance,FALSE,FALSE,TRUE,Java
+45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Java
+45126657,2025-09,Chase,FALSE,TRUE,FALSE,Java
+45119967,2025-09,Picnic,FALSE,TRUE,FALSE,Java
+45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,Java
+45183446,2025-09,pawaPay (pawapay.io),TRUE,FALSE,FALSE,Java
+45161044,2025-09,Chicago IL,FALSE,TRUE,FALSE,Java
+49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,Java
+49523978,2026-09,Vistulo,TRUE,FALSE,FALSE,Java
+49562582,2026-09,Crossref,TRUE,FALSE,FALSE,Java
+49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,Java
+49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Java
+49539823,2026-09,Oscilar.com,TRUE,FALSE,FALSE,Java
+49525483,2026-09,Furtim Modus,FALSE,FALSE,TRUE,Java
+49523558,2026-09,Stpkr Technologies,FALSE,TRUE,FALSE,Java
+45093219,2025-09,Revere Defense Technologies - Autonomous Networks and Infrastructure,FALSE,FALSE,FALSE,C++
+45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,C++
+45094918,2025-09,BCC,TRUE,TRUE,FALSE,C++
+45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,C++
+45105226,2025-09,Trunk,TRUE,FALSE,FALSE,C++
+45105157,2025-09,Category Labs,TRUE,FALSE,FALSE,C++
+45244754,2025-09,Solitude Labs,FALSE,TRUE,FALSE,C++
+45103797,2025-09,VitVio,TRUE,FALSE,FALSE,C++
+45093487,2025-09,Shorebird,TRUE,FALSE,FALSE,C++
+45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,C++
+45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,C++
+45129900,2025-09,Thunder Compute (S24),FALSE,FALSE,FALSE,C++
+45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,C++
+45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,C++
+45137778,2025-09,Holepunch,TRUE,FALSE,FALSE,C++
+45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,C++
+45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,C++
+49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,C++
+49524327,2026-09,Steg.AI,FALSE,TRUE,FALSE,C++
+49530909,2026-09,Greenzie,FALSE,TRUE,TRUE,C++
+49552294,2026-09,MIRA,FALSE,TRUE,FALSE,C++
+49530256,2026-09,BCC,FALSE,FALSE,FALSE,C++
+49533419,2026-09,Robotics and AI Institute,FALSE,TRUE,FALSE,C++
+49526831,2026-09,Leidos,FALSE,TRUE,FALSE,C++
+49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,C++
+49524978,2026-09,Category Labs,TRUE,FALSE,FALSE,C++
+49532122,2026-09,Miltenyi Biotec,TRUE,TRUE,FALSE,C++
+49523558,2026-09,Stpkr Technologies,FALSE,TRUE,FALSE,C++
+49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,C++
+45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,Rust
+45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Rust
+45096239,2025-09,Common Prefix,TRUE,FALSE,FALSE,Rust
+45093237,2025-09,Proton,TRUE,FALSE,FALSE,Rust
+45093219,2025-09,Revere Defense Technologies - Autonomous Networks and Infrastructure,FALSE,FALSE,FALSE,Rust
+45096461,2025-09,Neuralwatt,TRUE,FALSE,FALSE,Rust
+45105157,2025-09,Category Labs,TRUE,FALSE,FALSE,Rust
 45094601,2025-09,Foxglove,TRUE,TRUE,FALSE,Rust
+45094162,2025-09,Nebula,TRUE,TRUE,FALSE,Rust
+45244754,2025-09,Solitude Labs,FALSE,TRUE,FALSE,Rust
+45100806,2025-09,iGent AI,FALSE,FALSE,TRUE,Rust
+45125787,2025-09,TAHO,TRUE,FALSE,FALSE,Rust
+45110036,2025-09,Zed Industries,TRUE,FALSE,FALSE,Rust
+45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,Rust
+45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,Rust
+45103649,2025-09,yeet,TRUE,FALSE,FALSE,Rust
+45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,Rust
+45104655,2025-09,ARound (web-based augmented reality for sports)https://aroundar.com- a Stagwell company -https://www.stagwellglobal.com,TRUE,FALSE,FALSE,Rust
+45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Rust
+45094279,2025-09,We're building the serverless platform that powers millions of developers at the edge. Looking for passionate engineers to shape the future of edge computing.,FALSE,FALSE,FALSE,Rust
+49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Rust
+49525748,2026-09,Discord,FALSE,TRUE,FALSE,Rust
+49711313,2026-09,Pango (YC S26),FALSE,FALSE,TRUE,Rust
+49523018,2026-09,Smarkets (https://www.smarkets.com),FALSE,TRUE,TRUE,Rust
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Rust
+49523176,2026-09,Rust developer/software engineer at NLnet foundation in Amsterdam,FALSE,FALSE,FALSE,Rust
+49530430,2026-09,St. Jude Children's Research Hospital,TRUE,TRUE,FALSE,Rust
+49595476,2026-09,Lucia,TRUE,FALSE,FALSE,Rust
+49523123,2026-09,yeet,TRUE,FALSE,FALSE,Rust
+49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Rust
+49552294,2026-09,MIRA,FALSE,TRUE,FALSE,Rust
+49529763,2026-09,Pagelove,TRUE,FALSE,FALSE,Rust
+49546958,2026-09,Frequenz Energy-as-a-Service GmbH,FALSE,FALSE,FALSE,Rust
+49523288,2026-09,Neuralwatt,TRUE,FALSE,FALSE,Rust
+49533651,2026-09,Rerun,TRUE,FALSE,FALSE,Rust
+49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Rust
+49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Rust
+49524978,2026-09,Category Labs,TRUE,FALSE,FALSE,Rust
+49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,Rust
+49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,Rust
+49523422,2026-09,Proxybase,TRUE,FALSE,FALSE,Rust
+45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,Go
+45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,Go
+45100710,2025-09,Stream,TRUE,FALSE,FALSE,Go
+45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,Go
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Go
+45093306,2025-09,Friendly Captcha,TRUE,FALSE,FALSE,Go
+45102049,2025-09,"N43 Studio is a venture studio dedicated to building bold, technology-driven companies from the ground up. We identify emerging opportunities, develop ideas into working prototypes, and launch ventures designed to scale.",FALSE,FALSE,FALSE,Go
+45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,Go
+45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,Go
+45127383,2025-09,Abnormal AI,TRUE,FALSE,FALSE,Go
+45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Go
+45094162,2025-09,Nebula,TRUE,TRUE,FALSE,Go
+45103981,2025-09,Hardfin,TRUE,TRUE,FALSE,Go
+45099367,2025-09,Composio,FALSE,FALSE,FALSE,Go
+45169753,2025-09,Squint,FALSE,TRUE,FALSE,Go
+45106305,2025-09,Coder,FALSE,FALSE,FALSE,Go
+45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,Go
+45100763,2025-09,Coachcube,FALSE,TRUE,FALSE,Go
+45127516,2025-09,Vivint,FALSE,TRUE,FALSE,Go
+45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,Go
+45104008,2025-09,Beautiful.ai,TRUE,FALSE,FALSE,Go
+45221721,2025-09,Censys,TRUE,FALSE,FALSE,Go
+45110575,2025-09,Bluesky Social,TRUE,FALSE,FALSE,Go
+45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,Go
+45097165,2025-09,Bubblehouse,TRUE,FALSE,FALSE,Go
+45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Go
+49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Go
+49711313,2026-09,Pango (YC S26),FALSE,FALSE,TRUE,Go
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Go
+49532898,2026-09,NetBird,TRUE,FALSE,FALSE,Go
+49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,Go
+49523808,2026-09,Stream,TRUE,FALSE,FALSE,Go
+49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,Go
+49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,Go
+49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,Go
+49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,Go
+49528399,2026-09,Axo,FALSE,FALSE,TRUE,Go
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Go
+49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Go
+49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Go
+49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Go
+49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,Go
+49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,Go
+49528132,2026-09,Relativity Space,FALSE,FALSE,FALSE,R
+45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,React
+45094200,2025-09,MONUMENTAL,FALSE,TRUE,FALSE,React
+45099497,2025-09,ShieldAI,TRUE,FALSE,FALSE,React
+45095292,2025-09,Tandem Health,FALSE,FALSE,FALSE,React
+45095955,2025-09,RentSpree,FALSE,FALSE,TRUE,React
+45095784,2025-09,Count,TRUE,FALSE,FALSE,React
+45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,React
+45100710,2025-09,Stream,TRUE,FALSE,FALSE,React
+45096958,2025-09,CVector,TRUE,FALSE,FALSE,React
+45093237,2025-09,Proton,TRUE,FALSE,FALSE,React
+45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,React
+45096212,2025-09,Stellar Science,FALSE,FALSE,TRUE,React
+45093262,2025-09,Zeven,FALSE,TRUE,FALSE,React
+45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,React
+45095827,2025-09,Humaans (YC W21),FALSE,FALSE,TRUE,React
+45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,React
+45102419,2025-09,Findigs,FALSE,FALSE,TRUE,React
+45093698,2025-09,Upway,FALSE,FALSE,TRUE,React
+45130064,2025-09,CloudTrucks (4 days/wk in-person in SF),FALSE,FALSE,FALSE,React
+45101792,2025-09,Prove AI,TRUE,FALSE,FALSE,React
+45119770,2025-09,SalesJack,TRUE,FALSE,FALSE,React
+45102049,2025-09,"N43 Studio is a venture studio dedicated to building bold, technology-driven companies from the ground up. We identify emerging opportunities, develop ideas into working prototypes, and launch ventures designed to scale.",FALSE,FALSE,FALSE,React
+45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,React
+45113485,2025-09,# UniCredit [https://www.unicreditgroup.eu/en.html],FALSE,FALSE,TRUE,React
+45190219,2025-09,Freed,FALSE,FALSE,FALSE,React
+45095780,2025-09,ScribbleVet (https://scribblevet.com),TRUE,FALSE,FALSE,React
+45105270,2025-09,Clerq,FALSE,TRUE,FALSE,React
+45216157,2025-09,Fold,TRUE,FALSE,FALSE,React
+45105226,2025-09,Trunk,TRUE,FALSE,FALSE,React
+45104272,2025-09,Seeq,TRUE,FALSE,FALSE,React
+45214572,2025-09,Trak,TRUE,FALSE,FALSE,React
 45094601,2025-09,Foxglove,TRUE,TRUE,FALSE,React
 45142104,2025-09,Fabric (stealth),TRUE,FALSE,FALSE,React
 45142606,2025-09,Rabbet (YC S17),TRUE,FALSE,FALSE,React
-45142606,2025-09,Rabbet (YC S17),TRUE,FALSE,FALSE,Postgres
-45095426,2025-09,Fold,TRUE,FALSE,FALSE,TypeScript
 45095426,2025-09,Fold,TRUE,FALSE,FALSE,React
-45099891,2025-09,Kaedim,FALSE,TRUE,FALSE,Python
 45099891,2025-09,Kaedim,FALSE,TRUE,FALSE,React
-45099891,2025-09,Kaedim,FALSE,TRUE,FALSE,AWS
-45099891,2025-09,Kaedim,FALSE,TRUE,FALSE,Machine learning
-45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Python
-45105873,2025-09,Datadog,FALSE,TRUE,FALSE,TypeScript
-45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Java
-45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Go
 45105873,2025-09,Datadog,FALSE,TRUE,FALSE,React
-45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Kubernetes
-45198636,2025-09,PermitFlow (YC W22),FALSE,TRUE,FALSE,LLMs
-45097523,2025-09,Come build the data platform of tomorrow!,FALSE,FALSE,FALSE,SQL
-45100677,2025-09,JustWatch,TRUE,FALSE,TRUE,TypeScript
-45094162,2025-09,Nebula,TRUE,TRUE,FALSE,Rust
-45094162,2025-09,Nebula,TRUE,TRUE,FALSE,Go
 45094162,2025-09,Nebula,TRUE,TRUE,FALSE,React
-45096644,2025-09,Roundtable,FALSE,FALSE,FALSE,Python
-45096644,2025-09,Roundtable,FALSE,FALSE,FALSE,JavaScript
 45106379,2025-09,Great Question,TRUE,FALSE,FALSE,React
-45106379,2025-09,Great Question,TRUE,FALSE,FALSE,AWS
-45106379,2025-09,Great Question,TRUE,FALSE,FALSE,Postgres
-45106379,2025-09,Great Question,TRUE,FALSE,FALSE,Ruby
-45249657,2025-09,Friendsurance,FALSE,FALSE,TRUE,Java
-45128707,2025-09,"Routefusion (routefusion.com) — Staff Software Engineer — Node.js, JavaScript/TypeScript — Fintech — Hybrid (Austin, TX)",FALSE,FALSE,TRUE,JavaScript
-45128707,2025-09,"Routefusion (routefusion.com) — Staff Software Engineer — Node.js, JavaScript/TypeScript — Fintech — Hybrid (Austin, TX)",FALSE,FALSE,TRUE,TypeScript
-45244754,2025-09,Solitude Labs,FALSE,TRUE,FALSE,C++
-45244754,2025-09,Solitude Labs,FALSE,TRUE,FALSE,Rust
-45094862,2025-09,Braden Health,FALSE,TRUE,FALSE,SQL
-45094862,2025-09,Braden Health,FALSE,TRUE,FALSE,TypeScript
 45094862,2025-09,Braden Health,FALSE,TRUE,FALSE,React
-45100806,2025-09,iGent AI,FALSE,FALSE,TRUE,Rust
-45100806,2025-09,iGent AI,FALSE,FALSE,TRUE,LLMs
-45125593,2025-09,Sundogs,TRUE,FALSE,FALSE,Python
-45125593,2025-09,Sundogs,TRUE,FALSE,FALSE,Kubernetes
-45125593,2025-09,Sundogs,TRUE,FALSE,FALSE,Docker
-45095810,2025-09,eventfirst,TRUE,FALSE,FALSE,TypeScript
 45095810,2025-09,eventfirst,TRUE,FALSE,FALSE,React
-45095810,2025-09,eventfirst,TRUE,FALSE,FALSE,LLMs
-45218055,2025-09,Ataraxis AI,TRUE,FALSE,FALSE,Python
-45103797,2025-09,VitVio,TRUE,FALSE,FALSE,TypeScript
-45103797,2025-09,VitVio,TRUE,FALSE,FALSE,C++
 45103797,2025-09,VitVio,TRUE,FALSE,FALSE,React
-45103797,2025-09,VitVio,TRUE,FALSE,FALSE,Postgres
-45103981,2025-09,Hardfin,TRUE,TRUE,FALSE,TypeScript
-45103981,2025-09,Hardfin,TRUE,TRUE,FALSE,Go
-45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,AWS
-45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,Kubernetes
-45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,Docker
-45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,Machine learning
-45212860,2025-09,TigerData (FKA Timescale) [ Global,TRUE,FALSE,FALSE,Postgres
-45125787,2025-09,TAHO,TRUE,FALSE,FALSE,Rust
-45127220,2025-09,Axiom,TRUE,FALSE,FALSE,TypeScript
 45127220,2025-09,Axiom,TRUE,FALSE,FALSE,React
-45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Java
-45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Kubernetes
-45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Docker
-45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Postgres
-45110036,2025-09,Zed Industries,TRUE,FALSE,FALSE,Rust
-45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,Python
-45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,TypeScript
 45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,React
-45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,Machine learning
-45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,LLMs
-45099367,2025-09,Composio,FALSE,FALSE,FALSE,Python
-45099367,2025-09,Composio,FALSE,FALSE,FALSE,TypeScript
-45099367,2025-09,Composio,FALSE,FALSE,FALSE,Go
 45099367,2025-09,Composio,FALSE,FALSE,FALSE,React
-45104067,2025-09,Equity Trust,TRUE,FALSE,FALSE,Python
-45104067,2025-09,Equity Trust,TRUE,FALSE,FALSE,AWS
-45093487,2025-09,Shorebird,TRUE,FALSE,FALSE,C++
 45093487,2025-09,Shorebird,TRUE,FALSE,FALSE,React
-45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,Python
-45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,TypeScript
-45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,Kubernetes
-45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,Postgres
-45164548,2025-09,Aleph,TRUE,FALSE,FALSE,Python
-45164548,2025-09,Aleph,TRUE,FALSE,FALSE,TypeScript
 45164548,2025-09,Aleph,TRUE,FALSE,FALSE,React
-45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,Python
-45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,JavaScript
-45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,TypeScript
-45099520,2025-09,ELI Beamlines (ELI ERIC),FALSE,TRUE,FALSE,C++
-45126657,2025-09,Chase,FALSE,TRUE,FALSE,Python
-45126657,2025-09,Chase,FALSE,TRUE,FALSE,Java
-45126657,2025-09,Chase,FALSE,TRUE,FALSE,AWS
-45178034,2025-09,Hopkins PE — Remote (US/UK time zones preferred) — Forward-Deployed Engineer & Embedded Analyst — chris@hopkins.pe,TRUE,FALSE,FALSE,Python
 45178034,2025-09,Hopkins PE — Remote (US/UK time zones preferred) — Forward-Deployed Engineer & Embedded Analyst — chris@hopkins.pe,TRUE,FALSE,FALSE,React
+45111016,2025-09,Aha! (https://www.aha.io),TRUE,FALSE,FALSE,React
+45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,React
+45135266,2025-09,PosterChild Inc ($2M pre-seed),FALSE,FALSE,TRUE,React
+45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,React
+45106305,2025-09,Coder,FALSE,FALSE,FALSE,React
+45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,React
+45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,React
+45152815,2025-09,Duckbill engineering is hiring a full-time ONSITE full-stack senior SWE in downtown San Francisco. We WFH Tuesdays and Thursdays.,FALSE,TRUE,FALSE,React
+45219796,2025-09,Marex,FALSE,TRUE,FALSE,React
+45113488,2025-09,Promptwatch,TRUE,FALSE,TRUE,React
+45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,React
+45099757,2025-09,fleming.de,FALSE,FALSE,TRUE,React
+45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,React
+45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,React
+45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,React
+45098236,2025-09,Retirable,FALSE,TRUE,TRUE,React
+45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,React
+45115964,2025-09,Sharecare,TRUE,FALSE,FALSE,React
+45109131,2025-09,Comulate,FALSE,TRUE,FALSE,React
+45114372,2025-09,Belidor,FALSE,TRUE,FALSE,React
+45108636,2025-09,Digital Onboarding,TRUE,FALSE,FALSE,React
+45100978,2025-09,EAGL,FALSE,TRUE,FALSE,React
+45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,React
+45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,React
+45183446,2025-09,pawaPay (pawapay.io),TRUE,FALSE,FALSE,React
+45094669,2025-09,Master Works / Nabeh,FALSE,TRUE,FALSE,React
+45094132,2025-09,Cogram,TRUE,FALSE,FALSE,React
+45097832,2025-09,PetsApp – The future of pet care,TRUE,FALSE,FALSE,React
+45161373,2025-09,Showpass,FALSE,TRUE,TRUE,React
+45095135,2025-09,Mattermost,TRUE,FALSE,FALSE,React
+45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,React
+45097165,2025-09,Bubblehouse,TRUE,FALSE,FALSE,React
+45100767,2025-09,Phrasing,TRUE,FALSE,FALSE,React
+45095990,2025-09,40GRID - Full-time Remote,TRUE,FALSE,FALSE,React
+49525651,2026-09,MONUMENTAL,FALSE,TRUE,FALSE,React
+49525748,2026-09,Discord,FALSE,TRUE,FALSE,React
+49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,React
+49531439,2026-09,FitMate,TRUE,FALSE,FALSE,React
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,React
+49524943,2026-09,GovStar,TRUE,FALSE,FALSE,React
+49524167,2026-09,WorkHerohttps://workhero.pro,TRUE,FALSE,FALSE,React
+49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,React
+49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,React
+49543040,2026-09,Tecuity,FALSE,TRUE,FALSE,React
+49526894,2026-09,Silkline,FALSE,TRUE,FALSE,React
+49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,React
+49523808,2026-09,Stream,TRUE,FALSE,FALSE,React
+49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,React
+49530424,2026-09,This Dot Labs,TRUE,FALSE,FALSE,React
+49523978,2026-09,Vistulo,TRUE,FALSE,FALSE,React
+49528044,2026-09,Biobase,TRUE,FALSE,FALSE,React
+49661611,2026-09,Obi9,TRUE,FALSE,FALSE,React
+49553119,2026-09,Natera,TRUE,FALSE,FALSE,React
+49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,React
+49528637,2026-09,Deya,TRUE,FALSE,TRUE,React
+49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,React
+49543579,2026-09,Odin,TRUE,FALSE,FALSE,React
+49524341,2026-09,Findigs,FALSE,FALSE,FALSE,React
+49530381,2026-09,Seeq,TRUE,FALSE,FALSE,React
+49541500,2026-09,Legile,FALSE,FALSE,TRUE,React
+49524031,2026-09,Pomelo Care,TRUE,FALSE,FALSE,React
+49523289,2026-09,Shepherd (Series B),FALSE,TRUE,FALSE,React
+49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,React
+49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,React
+49552714,2026-09,AiMi,TRUE,FALSE,FALSE,React
+49525714,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,React
+49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,React
+49528364,2026-09,Product Genius,TRUE,FALSE,FALSE,React
+49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,React
+49544301,2026-09,Duets Network,TRUE,FALSE,FALSE,React
+49525831,2026-09,Ashby,TRUE,FALSE,FALSE,React
+49615435,2026-09,ALBERT,TRUE,FALSE,FALSE,React
+49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,React
+49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,React
+49525147,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,React
+49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,React
+49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,React
+49525544,2026-09,DAT,FALSE,FALSE,TRUE,React
+49527646,2026-09,Paramark,TRUE,FALSE,TRUE,React
+49525548,2026-09,RINSE,TRUE,FALSE,FALSE,React
+49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,React
+49598051,2026-09,BOSS-IQ,TRUE,FALSE,FALSE,React
+49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,React
+49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,React
+49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,React
+49523675,2026-09,Sudowrite,TRUE,FALSE,FALSE,React
+49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,React
+45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,AWS
+45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,AWS
+45096958,2025-09,CVector,TRUE,FALSE,FALSE,AWS
+45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,AWS
+45097625,2025-09,Duranta,FALSE,TRUE,FALSE,AWS
+45093262,2025-09,Zeven,FALSE,TRUE,FALSE,AWS
+45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,AWS
+45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,AWS
+45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,AWS
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,AWS
+45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,AWS
+45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,AWS
+45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,AWS
+45105270,2025-09,Clerq,FALSE,TRUE,FALSE,AWS
+45102337,2025-09,ROCKSTAR GAMES,FALSE,TRUE,FALSE,AWS
+45105226,2025-09,Trunk,TRUE,FALSE,FALSE,AWS
+45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,AWS
+45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,AWS
+45128988,2025-09,ML6,FALSE,FALSE,TRUE,AWS
+45105525,2025-09,HomeCloud,TRUE,FALSE,FALSE,AWS
+45099891,2025-09,Kaedim,FALSE,TRUE,FALSE,AWS
+45106379,2025-09,Great Question,TRUE,FALSE,FALSE,AWS
+45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,AWS
+45104067,2025-09,Equity Trust,TRUE,FALSE,FALSE,AWS
+45126657,2025-09,Chase,FALSE,TRUE,FALSE,AWS
+45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,AWS
+45160963,2025-09,Blotato,TRUE,FALSE,FALSE,AWS
+45152815,2025-09,Duckbill engineering is hiring a full-time ONSITE full-stack senior SWE in downtown San Francisco. We WFH Tuesdays and Thursdays.,FALSE,TRUE,FALSE,AWS
+45100763,2025-09,Coachcube,FALSE,TRUE,FALSE,AWS
+45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,AWS
+45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,AWS
+45095716,2025-09,Rinse,TRUE,FALSE,TRUE,AWS
+45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,AWS
+45114372,2025-09,Belidor,FALSE,TRUE,FALSE,AWS
+45181745,2025-09,Looking for an Alliance Manager for AWS/Azure,FALSE,FALSE,FALSE,AWS
+45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,AWS
+45094132,2025-09,Cogram,TRUE,FALSE,FALSE,AWS
+45097832,2025-09,PetsApp – The future of pet care,TRUE,FALSE,FALSE,AWS
+45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,AWS
+45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,AWS
+45102400,2025-09,Clio,TRUE,FALSE,TRUE,AWS
+49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,AWS
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,AWS
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,AWS
+49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,AWS
+49530867,2026-09,3C Digital Solutions,TRUE,FALSE,FALSE,AWS
+49664325,2026-09,Ours Privacy,TRUE,FALSE,FALSE,AWS
+49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,AWS
+49573833,2026-09,Supero,TRUE,FALSE,FALSE,AWS
+49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,AWS
+49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,AWS
+49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,AWS
+49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,AWS
+49562582,2026-09,Crossref,TRUE,FALSE,FALSE,AWS
+49531417,2026-09,Hiya,FALSE,FALSE,TRUE,AWS
+49527283,2026-09,ML6,FALSE,FALSE,TRUE,AWS
+49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,AWS
+49525600,2026-09,Balerion AI,FALSE,TRUE,FALSE,AWS
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,AWS
+49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,AWS
+49552714,2026-09,AiMi,TRUE,FALSE,FALSE,AWS
+49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,AWS
+49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,AWS
+49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,AWS
+49544301,2026-09,Duets Network,TRUE,FALSE,FALSE,AWS
+49528608,2026-09,Railway,TRUE,FALSE,FALSE,AWS
+49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,AWS
+49538459,2026-09,Republic Services,TRUE,FALSE,FALSE,AWS
+49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,AWS
+49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,AWS
+49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,AWS
+49527193,2026-09,Anterior,FALSE,TRUE,FALSE,AWS
+49525544,2026-09,DAT,FALSE,FALSE,TRUE,AWS
+49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,AWS
+49525483,2026-09,Furtim Modus,FALSE,FALSE,TRUE,AWS
+49524180,2026-09,"Beacon AI builds intelligent systems that make aviation safer and more autonomous. We’ve completed multiple DoD programs and are expanding our team with exceptional technical leaders to push the boundaries of human-machine collaboration in the cockpit. At Beacon, you will lead by example, mentoring and growing a small team of talented engineers (typically 1–2 to start) while staying hands-on in design and execution. You’ll help shape critical systems that advance aviation safety and autonomy, working alongside a team that values effort, creativity, and accountability.",FALSE,FALSE,FALSE,AWS
+45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Kubernetes
+45093778,2025-09,Dash0,TRUE,FALSE,FALSE,Kubernetes
+45095292,2025-09,Tandem Health,FALSE,FALSE,FALSE,Kubernetes
+45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,Kubernetes
+45095784,2025-09,Count,TRUE,FALSE,FALSE,Kubernetes
+45095901,2025-09,Oneleet (YC S22),TRUE,FALSE,FALSE,Kubernetes
+45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,Kubernetes
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Kubernetes
+45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Kubernetes
+45094918,2025-09,BCC,TRUE,TRUE,FALSE,Kubernetes
+45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Kubernetes
+45105226,2025-09,Trunk,TRUE,FALSE,FALSE,Kubernetes
+45105873,2025-09,Datadog,FALSE,TRUE,FALSE,Kubernetes
+45125593,2025-09,Sundogs,TRUE,FALSE,FALSE,Kubernetes
+45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,Kubernetes
+45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Kubernetes
+45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,Kubernetes
+45129900,2025-09,Thunder Compute (S24),FALSE,FALSE,FALSE,Kubernetes
+45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,Kubernetes
+45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,Kubernetes
+45099765,2025-09,CredCore,FALSE,FALSE,FALSE,Kubernetes
+45155504,2025-09,Toptal Core is hiring full-time remote (Europe timezones) Senior Ruby Engineer.,TRUE,FALSE,FALSE,Kubernetes
+45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Kubernetes
+45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,Kubernetes
+45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,Kubernetes
+45096338,2025-09,krea.ai,FALSE,FALSE,FALSE,Kubernetes
+45102400,2025-09,Clio,TRUE,FALSE,TRUE,Kubernetes
+49523712,2026-09,QUOBYTE,FALSE,TRUE,FALSE,Kubernetes
+49533854,2026-09,Spanish National Cancer Research Centre (CNIO),FALSE,FALSE,TRUE,Kubernetes
+49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Kubernetes
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Kubernetes
+49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,Kubernetes
+49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Kubernetes
+49573833,2026-09,Supero,TRUE,FALSE,FALSE,Kubernetes
+49550471,2026-09,Trax,TRUE,TRUE,FALSE,Kubernetes
+49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Kubernetes
+49525399,2026-09,Factory,FALSE,TRUE,FALSE,Kubernetes
+49530256,2026-09,BCC,FALSE,FALSE,FALSE,Kubernetes
+49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,Kubernetes
+49531417,2026-09,Hiya,FALSE,FALSE,TRUE,Kubernetes
+49543579,2026-09,Odin,TRUE,FALSE,FALSE,Kubernetes
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Kubernetes
+49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,Kubernetes
+49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,Kubernetes
+49541233,2026-09,VLM Run (https://vlm.run),FALSE,FALSE,FALSE,Kubernetes
+49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Kubernetes
+49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Kubernetes
+49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,Kubernetes
+49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Kubernetes
+49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,Kubernetes
+49525544,2026-09,DAT,FALSE,FALSE,TRUE,Kubernetes
+49527646,2026-09,Paramark,TRUE,FALSE,TRUE,Kubernetes
+49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Kubernetes
+45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,Docker
+45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,Docker
+45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,Docker
+45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Docker
+45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Docker
+45125593,2025-09,Sundogs,TRUE,FALSE,FALSE,Docker
+45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,Docker
+45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Docker
+45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,Docker
+45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,Docker
+45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,Docker
+45115964,2025-09,Sharecare,TRUE,FALSE,FALSE,Docker
+45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Docker
+45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,Docker
+45161373,2025-09,Showpass,FALSE,TRUE,TRUE,Docker
+45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Docker
+49533854,2026-09,Spanish National Cancer Research Centre (CNIO),FALSE,FALSE,TRUE,Docker
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Docker
+49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Docker
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Docker
+49532957,2026-09,Senior Python Backend Engineer,TRUE,FALSE,FALSE,Docker
+49552564,2026-09,Confido Legal,TRUE,FALSE,FALSE,Docker
+49527588,2026-09,Newtwen,TRUE,FALSE,FALSE,Docker
+49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,Docker
+49531417,2026-09,Hiya,FALSE,FALSE,TRUE,Docker
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Docker
+49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,Docker
+49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Docker
+49541233,2026-09,VLM Run (https://vlm.run),FALSE,FALSE,FALSE,Docker
+49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,Docker
+49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Docker
+49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,Docker
+49527344,2026-09,AREO,TRUE,FALSE,FALSE,Docker
+49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Docker
+49549234,2026-09,"Cologne, Germany",TRUE,TRUE,FALSE,Docker
+49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,Docker
+45096958,2025-09,CVector,TRUE,FALSE,FALSE,Postgres
+45104657,2025-09,SewerAI,FALSE,FALSE,TRUE,Postgres
+45093262,2025-09,Zeven,FALSE,TRUE,FALSE,Postgres
+45094499,2025-09,Howie.systems (EU VC funded),FALSE,TRUE,FALSE,Postgres
+45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,Postgres
+45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,Postgres
+45095827,2025-09,Humaans (YC W21),FALSE,FALSE,TRUE,Postgres
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Postgres
+45094636,2025-09,Freetrade,FALSE,TRUE,FALSE,Postgres
+45093306,2025-09,Friendly Captcha,TRUE,FALSE,FALSE,Postgres
+45094579,2025-09,Nova Credit,TRUE,FALSE,FALSE,Postgres
+45096398,2025-09,Elyos (https://elyos.ai),FALSE,TRUE,FALSE,Postgres
+45130064,2025-09,CloudTrucks (4 days/wk in-person in SF),FALSE,FALSE,FALSE,Postgres
+45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Postgres
+45095780,2025-09,ScribbleVet (https://scribblevet.com),TRUE,FALSE,FALSE,Postgres
+45098164,2025-09,FunnelStory,TRUE,FALSE,FALSE,Postgres
+45214572,2025-09,Trak,TRUE,FALSE,FALSE,Postgres
+45142606,2025-09,Rabbet (YC S17),TRUE,FALSE,FALSE,Postgres
+45106379,2025-09,Great Question,TRUE,FALSE,FALSE,Postgres
+45103797,2025-09,VitVio,TRUE,FALSE,FALSE,Postgres
+45212860,2025-09,TigerData (FKA Timescale) [ Global,TRUE,FALSE,FALSE,Postgres
+45102951,2025-09,FusionAuth,TRUE,TRUE,TRUE,Postgres
+45129596,2025-09,Tram Case,FALSE,FALSE,FALSE,Postgres
 45178034,2025-09,Hopkins PE — Remote (US/UK time zones preferred) — Forward-Deployed Engineer & Embedded Analyst — chris@hopkins.pe,TRUE,FALSE,FALSE,Postgres
-45105723,2025-09,Vantage,TRUE,FALSE,FALSE,Ruby
-45169753,2025-09,Squint,FALSE,TRUE,FALSE,Go
+45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,Postgres
+45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,Postgres
+45152815,2025-09,Duckbill engineering is hiring a full-time ONSITE full-stack senior SWE in downtown San Francisco. We WFH Tuesdays and Thursdays.,FALSE,TRUE,FALSE,Postgres
+45113488,2025-09,Promptwatch,TRUE,FALSE,TRUE,Postgres
+45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,Postgres
+45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,Postgres
+45170835,2025-09,MeritFirst,FALSE,TRUE,FALSE,Postgres
+45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,Postgres
+45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,Postgres
+45155504,2025-09,Toptal Core is hiring full-time remote (Europe timezones) Senior Ruby Engineer.,TRUE,FALSE,FALSE,Postgres
+45115964,2025-09,Sharecare,TRUE,FALSE,FALSE,Postgres
+45109131,2025-09,Comulate,FALSE,TRUE,FALSE,Postgres
+45114372,2025-09,Belidor,FALSE,TRUE,FALSE,Postgres
+45108636,2025-09,Digital Onboarding,TRUE,FALSE,FALSE,Postgres
+45100978,2025-09,EAGL,FALSE,TRUE,FALSE,Postgres
+45094132,2025-09,Cogram,TRUE,FALSE,FALSE,Postgres
+45104655,2025-09,ARound (web-based augmented reality for sports)https://aroundar.com- a Stagwell company -https://www.stagwellglobal.com,TRUE,FALSE,FALSE,Postgres
+45161373,2025-09,Showpass,FALSE,TRUE,TRUE,Postgres
+45096199,2025-09,Railway,TRUE,FALSE,FALSE,Postgres
+45180199,2025-09,Anvil (https://anvil.works),FALSE,TRUE,FALSE,Postgres
+45100767,2025-09,Phrasing,TRUE,FALSE,FALSE,Postgres
+45094015,2025-09,Faction,FALSE,TRUE,FALSE,Postgres
+49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,Postgres
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Postgres
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Postgres
+49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,Postgres
+49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Postgres
+49532154,2026-09,Artificial Analysis,FALSE,FALSE,FALSE,Postgres
+49525053,2026-09,Mingla,TRUE,TRUE,FALSE,Postgres
+49528044,2026-09,Biobase,TRUE,FALSE,FALSE,Postgres
+49532978,2026-09,Multiply,FALSE,FALSE,FALSE,Postgres
+49553119,2026-09,Natera,TRUE,FALSE,FALSE,Postgres
+49524880,2026-09,InfoHawk,TRUE,TRUE,FALSE,Postgres
+49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Postgres
+49530464,2026-09,Cardog,TRUE,FALSE,FALSE,Postgres
+49562582,2026-09,Crossref,TRUE,FALSE,FALSE,Postgres
+49524406,2026-09,Enrollment123,TRUE,FALSE,FALSE,Postgres
+49543579,2026-09,Odin,TRUE,FALSE,FALSE,Postgres
+49530381,2026-09,Seeq,TRUE,FALSE,FALSE,Postgres
+49525600,2026-09,Balerion AI,FALSE,TRUE,FALSE,Postgres
+49541500,2026-09,Legile,FALSE,FALSE,TRUE,Postgres
+49533482,2026-09,Odoo,FALSE,FALSE,TRUE,Postgres
+49528399,2026-09,Axo,FALSE,FALSE,TRUE,Postgres
+49523289,2026-09,Shepherd (Series B),FALSE,TRUE,FALSE,Postgres
+49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,Postgres
+49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Postgres
+49525729,2026-09,"We're building a unified platform for credit and financial data to power financial inclusion globally. Our mission is to unlock economic opportunities for consumers historically excluded from traditional credit systems by transforming diverse data into actionable risk insights. We are YC company backed by investors from Canapi Ventures, Kleiner Perkins, General Catalyst, and Index Ventures",FALSE,FALSE,FALSE,Postgres
+49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,Postgres
+49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Postgres
+49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Postgres
+49525270,2026-09,Sunspell,FALSE,TRUE,FALSE,Postgres
+49527374,2026-09,Jawa.gg,TRUE,FALSE,FALSE,Postgres
+49544301,2026-09,Duets Network,TRUE,FALSE,FALSE,Postgres
+49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,Postgres
+49525831,2026-09,Ashby,TRUE,FALSE,FALSE,Postgres
+49527344,2026-09,AREO,TRUE,FALSE,FALSE,Postgres
+49615435,2026-09,ALBERT,TRUE,FALSE,FALSE,Postgres
+49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Postgres
+49527646,2026-09,Paramark,TRUE,FALSE,TRUE,Postgres
+49525548,2026-09,RINSE,TRUE,FALSE,FALSE,Postgres
+49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,Postgres
+49598051,2026-09,BOSS-IQ,TRUE,FALSE,FALSE,Postgres
+49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Postgres
+49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,Postgres
+49525483,2026-09,Furtim Modus,FALSE,FALSE,TRUE,Postgres
+49523830,2026-09,Lead SWE,TRUE,FALSE,FALSE,Postgres
+45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Spark
+45127383,2025-09,Abnormal AI,TRUE,FALSE,FALSE,Spark
+49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,Spark
+49527133,2026-09,Virtasant (1099 contractor for a client of ours),TRUE,FALSE,FALSE,Spark
+45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Terraform
+45096555,2025-09,Spacelift,TRUE,FALSE,FALSE,Terraform
+45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,Terraform
+45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,Terraform
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Terraform
+45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Terraform
+45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Terraform
+45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,Terraform
+45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,Terraform
+45246219,2025-09,Watchful,FALSE,TRUE,FALSE,Terraform
+45214572,2025-09,Trak,TRUE,FALSE,FALSE,Terraform
+45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,Terraform
+45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,Terraform
+45094132,2025-09,Cogram,TRUE,FALSE,FALSE,Terraform
+45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Terraform
+45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Terraform
+45102400,2025-09,Clio,TRUE,FALSE,TRUE,Terraform
+49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Terraform
+49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Terraform
+49530867,2026-09,3C Digital Solutions,TRUE,FALSE,FALSE,Terraform
+49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Terraform
+49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Terraform
+49525399,2026-09,Factory,FALSE,TRUE,FALSE,Terraform
+49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,Terraform
+49562582,2026-09,Crossref,TRUE,FALSE,FALSE,Terraform
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Terraform
+49608356,2026-09,Newton's Tree,FALSE,FALSE,TRUE,Terraform
+49541107,2026-09,"Enveritas (YC S18, non-profit)",TRUE,FALSE,FALSE,Terraform
+49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Terraform
+49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,Terraform
+49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Terraform
+49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,Terraform
+49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,Terraform
+45098670,2025-09,"Sumble is the newco from the founders of Kaggle. We are hiring software engineers, data engineers, machine learning/ai engineers, a product manager and a designer. Can view our roles and apply here:https://apply.workable.com/sumble-inc/",FALSE,FALSE,FALSE,Machine learning
+45096269,2025-09,RevEng.AI,TRUE,TRUE,FALSE,Machine learning
+45123219,2025-09,7Gen (https://7gen.com/),TRUE,FALSE,TRUE,Machine learning
+45128499,2025-09,Queueco,FALSE,FALSE,FALSE,Machine learning
+45214244,2025-09,Meedan,TRUE,FALSE,FALSE,Machine learning
+45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,Machine learning
+45104272,2025-09,Seeq,TRUE,FALSE,FALSE,Machine learning
+45128988,2025-09,ML6,FALSE,FALSE,TRUE,Machine learning
+45127383,2025-09,Abnormal AI,TRUE,FALSE,FALSE,Machine learning
+45099891,2025-09,Kaedim,FALSE,TRUE,FALSE,Machine learning
+45127375,2025-09,Serac Group,FALSE,TRUE,FALSE,Machine learning
+45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,Machine learning
+45119967,2025-09,Picnic,FALSE,TRUE,FALSE,Machine learning
+45161044,2025-09,Chicago IL,FALSE,TRUE,FALSE,Machine learning
+45094210,2025-09,Continua AI,FALSE,TRUE,FALSE,Machine learning
+45139894,2025-09,Jane Street,FALSE,FALSE,TRUE,Machine learning
+45102400,2025-09,Clio,TRUE,FALSE,TRUE,Machine learning
+49523228,2026-09,Attendi,FALSE,TRUE,TRUE,Machine learning
+49524327,2026-09,Steg.AI,FALSE,TRUE,FALSE,Machine learning
+49627985,2026-09,Netrias,FALSE,TRUE,TRUE,Machine learning
+49559434,2026-09,"SwingVision is the AI tennis, pickleball, and padel app that provides automated stats, highlights, and line calling using just your phone. Our mission is to democratize the pro sports experience for all athletes.",FALSE,FALSE,FALSE,Machine learning
+49530381,2026-09,Seeq,TRUE,FALSE,FALSE,Machine learning
+49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,Machine learning
+49524501,2026-09,Baton,FALSE,FALSE,TRUE,Machine learning
+49542805,2026-09,Foray Bioscience,FALSE,FALSE,FALSE,Machine learning
+45099497,2025-09,ShieldAI,TRUE,FALSE,FALSE,LLMs
+45098670,2025-09,"Sumble is the newco from the founders of Kaggle. We are hiring software engineers, data engineers, machine learning/ai engineers, a product manager and a designer. Can view our roles and apply here:https://apply.workable.com/sumble-inc/",FALSE,FALSE,FALSE,LLMs
+45093366,2025-09,Komodo Health,TRUE,FALSE,FALSE,LLMs
+45093237,2025-09,Proton,TRUE,FALSE,FALSE,LLMs
+45099022,2025-09,Ploid AI,FALSE,FALSE,TRUE,LLMs
+45096461,2025-09,Neuralwatt,TRUE,FALSE,FALSE,LLMs
+45140826,2025-09,Strum AI,FALSE,FALSE,FALSE,LLMs
+45096131,2025-09,Langdock (YC S23),FALSE,TRUE,FALSE,LLMs
+45102938,2025-09,Connie Health,FALSE,FALSE,TRUE,LLMs
+45093618,2025-09,PlantingSpace,TRUE,FALSE,FALSE,LLMs
+45223932,2025-09,Tufalabs,FALSE,TRUE,FALSE,LLMs
+45186789,2025-09,Company: Impression Ventures (Fintech VC fund),FALSE,FALSE,FALSE,LLMs
+45096398,2025-09,Elyos (https://elyos.ai),FALSE,TRUE,FALSE,LLMs
+45190219,2025-09,Freed,FALSE,FALSE,FALSE,LLMs
+45095254,2025-09,Terrace Networks,TRUE,FALSE,FALSE,LLMs
+45213476,2025-09,HomeVision,TRUE,FALSE,TRUE,LLMs
+45128988,2025-09,ML6,FALSE,FALSE,TRUE,LLMs
+45103201,2025-09,Absinthe Labs,TRUE,FALSE,TRUE,LLMs
+45100681,2025-09,V7,FALSE,FALSE,TRUE,LLMs
+45105525,2025-09,HomeCloud,TRUE,FALSE,FALSE,LLMs
+45198636,2025-09,PermitFlow (YC W22),FALSE,TRUE,FALSE,LLMs
+45100806,2025-09,iGent AI,FALSE,FALSE,TRUE,LLMs
+45095810,2025-09,eventfirst,TRUE,FALSE,FALSE,LLMs
+45107147,2025-09,Layer Health,FALSE,FALSE,TRUE,LLMs
 45096769,2025-09,CreativeMode (S24),FALSE,FALSE,FALSE,LLMs
 45104145,2025-09,Imbue,FALSE,TRUE,FALSE,LLMs
-45111016,2025-09,Aha! (https://www.aha.io),TRUE,FALSE,FALSE,React
-45111016,2025-09,Aha! (https://www.aha.io),TRUE,FALSE,FALSE,Ruby
-45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,Python
-45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,TypeScript
-45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,C++
-45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,Rust
-45113539,2025-09,Oxidian,TRUE,FALSE,FALSE,React
-45135266,2025-09,PosterChild Inc ($2M pre-seed),FALSE,FALSE,TRUE,Python
-45135266,2025-09,PosterChild Inc ($2M pre-seed),FALSE,FALSE,TRUE,React
 45101341,2025-09,Polar Sky,FALSE,TRUE,TRUE,LLMs
-45129900,2025-09,Thunder Compute (S24),FALSE,FALSE,FALSE,C++
-45129900,2025-09,Thunder Compute (S24),FALSE,FALSE,FALSE,Kubernetes
-45101653,2025-09,Stealth Solar Tech Startup,TRUE,FALSE,FALSE,Python
-45101653,2025-09,Stealth Solar Tech Startup,TRUE,FALSE,FALSE,JavaScript
-45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,JavaScript
-45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,TypeScript
-45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,C++
-45099952,2025-09,Undetect.io,TRUE,FALSE,FALSE,Docker
-45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,TypeScript
-45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,React
-45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,Postgres
-45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,Ruby
-45106305,2025-09,Coder,FALSE,FALSE,FALSE,TypeScript
-45106305,2025-09,Coder,FALSE,FALSE,FALSE,Go
-45106305,2025-09,Coder,FALSE,FALSE,FALSE,React
-45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,Python
-45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,SQL
-45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,C++
-45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,Go
-45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,Kubernetes
-45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,Python
-45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,TypeScript
-45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,React
-45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,AWS
-45114278,2025-09,"Riverline (Bengaluru, India)",FALSE,TRUE,FALSE,Docker
-45186482,2025-09,Replai (www.replai.io),TRUE,FALSE,FALSE,Python
-45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,TypeScript
-45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,React
-45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,Docker
-45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,Postgres
 45108645,2025-09,Loman AI,FALSE,FALSE,TRUE,LLMs
-45160963,2025-09,Blotato,TRUE,FALSE,FALSE,TypeScript
-45160963,2025-09,Blotato,TRUE,FALSE,FALSE,AWS
 45213010,2025-09,Flok Health,FALSE,TRUE,FALSE,LLMs
-45152815,2025-09,Duckbill engineering is hiring a full-time ONSITE full-stack senior SWE in downtown San Francisco. We WFH Tuesdays and Thursdays.,FALSE,TRUE,FALSE,React
-45152815,2025-09,Duckbill engineering is hiring a full-time ONSITE full-stack senior SWE in downtown San Francisco. We WFH Tuesdays and Thursdays.,FALSE,TRUE,FALSE,AWS
-45152815,2025-09,Duckbill engineering is hiring a full-time ONSITE full-stack senior SWE in downtown San Francisco. We WFH Tuesdays and Thursdays.,FALSE,TRUE,FALSE,Postgres
-45219796,2025-09,Marex,FALSE,TRUE,FALSE,TypeScript
-45219796,2025-09,Marex,FALSE,TRUE,FALSE,React
-45113488,2025-09,Promptwatch,TRUE,FALSE,TRUE,TypeScript
-45113488,2025-09,Promptwatch,TRUE,FALSE,TRUE,React
-45113488,2025-09,Promptwatch,TRUE,FALSE,TRUE,Postgres
-45100763,2025-09,Coachcube,FALSE,TRUE,FALSE,Python
-45100763,2025-09,Coachcube,FALSE,TRUE,FALSE,Go
-45100763,2025-09,Coachcube,FALSE,TRUE,FALSE,AWS
-45197701,2025-09,Trove,TRUE,FALSE,FALSE,TypeScript
-45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,Python
-45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,TypeScript
-45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,React
-45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,AWS
-45109406,2025-09,BillionToOne (YC S17),FALSE,FALSE,TRUE,Terraform
-45127516,2025-09,Vivint,FALSE,TRUE,FALSE,Python
-45127516,2025-09,Vivint,FALSE,TRUE,FALSE,Go
-45137778,2025-09,Holepunch,TRUE,FALSE,FALSE,C++
-45099757,2025-09,fleming.de,FALSE,FALSE,TRUE,React
-45099757,2025-09,fleming.de,FALSE,FALSE,TRUE,Ruby
-45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,Python
-45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,TypeScript
-45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,React
-45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,Postgres
 45182238,2025-09,Weave Platform (https://www.weave.bio/),FALSE,FALSE,TRUE,LLMs
-45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,TypeScript
-45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,React
-45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,AWS
-45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,Postgres
 45106635,2025-09,Memorang (AI-powered EdTech stack),TRUE,FALSE,FALSE,LLMs
-45170835,2025-09,MeritFirst,FALSE,TRUE,FALSE,TypeScript
-45170835,2025-09,MeritFirst,FALSE,TRUE,FALSE,Postgres
-45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,TypeScript
-45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,Go
-45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,React
-45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,Kubernetes
-45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,Postgres
-45098236,2025-09,Retirable,FALSE,TRUE,TRUE,TypeScript
-45098236,2025-09,Retirable,FALSE,TRUE,TRUE,React
-45136616,2025-09,Link11,TRUE,FALSE,FALSE,Python
-45136616,2025-09,Link11,TRUE,FALSE,FALSE,JavaScript
-45095716,2025-09,Rinse,TRUE,FALSE,TRUE,Python
-45095716,2025-09,Rinse,TRUE,FALSE,TRUE,AWS
-45099765,2025-09,CredCore,FALSE,FALSE,FALSE,Python
-45099765,2025-09,CredCore,FALSE,FALSE,FALSE,TypeScript
-45099765,2025-09,CredCore,FALSE,FALSE,FALSE,Kubernetes
-45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,Python
-45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,SQL
-45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,TypeScript
-45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,React
-45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,AWS
-45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,Postgres
 45130831,2025-09,Opsin Security,FALSE,FALSE,TRUE,LLMs
-45155504,2025-09,Toptal Core is hiring full-time remote (Europe timezones) Senior Ruby Engineer.,TRUE,FALSE,FALSE,Kubernetes
-45155504,2025-09,Toptal Core is hiring full-time remote (Europe timezones) Senior Ruby Engineer.,TRUE,FALSE,FALSE,Postgres
 45155504,2025-09,Toptal Core is hiring full-time remote (Europe timezones) Senior Ruby Engineer.,TRUE,FALSE,FALSE,LLMs
-45155504,2025-09,Toptal Core is hiring full-time remote (Europe timezones) Senior Ruby Engineer.,TRUE,FALSE,FALSE,Ruby
-45104008,2025-09,Beautiful.ai,TRUE,FALSE,FALSE,Go
-45115964,2025-09,Sharecare,TRUE,FALSE,FALSE,React
-45115964,2025-09,Sharecare,TRUE,FALSE,FALSE,Docker
-45115964,2025-09,Sharecare,TRUE,FALSE,FALSE,Postgres
-45109131,2025-09,Comulate,FALSE,TRUE,FALSE,React
-45109131,2025-09,Comulate,FALSE,TRUE,FALSE,Postgres
-45114372,2025-09,Belidor,FALSE,TRUE,FALSE,Python
-45114372,2025-09,Belidor,FALSE,TRUE,FALSE,React
-45114372,2025-09,Belidor,FALSE,TRUE,FALSE,AWS
-45114372,2025-09,Belidor,FALSE,TRUE,FALSE,Postgres
-45108636,2025-09,Digital Onboarding,TRUE,FALSE,FALSE,React
-45108636,2025-09,Digital Onboarding,TRUE,FALSE,FALSE,Postgres
-45221721,2025-09,Censys,TRUE,FALSE,FALSE,Python
-45221721,2025-09,Censys,TRUE,FALSE,FALSE,TypeScript
-45221721,2025-09,Censys,TRUE,FALSE,FALSE,Go
-45100978,2025-09,EAGL,FALSE,TRUE,FALSE,React
-45100978,2025-09,EAGL,FALSE,TRUE,FALSE,Postgres
-45181745,2025-09,Looking for an Alliance Manager for AWS/Azure,FALSE,FALSE,FALSE,AWS
-45119967,2025-09,Picnic,FALSE,TRUE,FALSE,Python
-45119967,2025-09,Picnic,FALSE,TRUE,FALSE,Java
-45119967,2025-09,Picnic,FALSE,TRUE,FALSE,Machine learning
-45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,JavaScript
-45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,TypeScript
-45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,Java
-45120310,2025-09,VDX.tv (http://www.vdx.tv),TRUE,FALSE,FALSE,React
-45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,Python
-45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,TypeScript
-45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,C++
-45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,Rust
-45098095,2025-09,zoetro.pe,TRUE,TRUE,FALSE,React
-45183446,2025-09,pawaPay (pawapay.io),TRUE,FALSE,FALSE,TypeScript
-45183446,2025-09,pawaPay (pawapay.io),TRUE,FALSE,FALSE,Java
-45183446,2025-09,pawaPay (pawapay.io),TRUE,FALSE,FALSE,React
-45125832,2025-09,AbbVie,TRUE,FALSE,FALSE,Python
-45125832,2025-09,AbbVie,TRUE,FALSE,FALSE,TypeScript
 45125832,2025-09,AbbVie,TRUE,FALSE,FALSE,LLMs
-45110575,2025-09,Bluesky Social,TRUE,FALSE,FALSE,Python
-45110575,2025-09,Bluesky Social,TRUE,FALSE,FALSE,TypeScript
-45110575,2025-09,Bluesky Social,TRUE,FALSE,FALSE,Go
-45103649,2025-09,yeet,TRUE,FALSE,FALSE,Rust
-45094669,2025-09,Master Works / Nabeh,FALSE,TRUE,FALSE,TypeScript
-45094669,2025-09,Master Works / Nabeh,FALSE,TRUE,FALSE,React
 45094669,2025-09,Master Works / Nabeh,FALSE,TRUE,FALSE,LLMs
-45161044,2025-09,Chicago IL,FALSE,TRUE,FALSE,Java
-45161044,2025-09,Chicago IL,FALSE,TRUE,FALSE,Machine learning
-45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,Python
-45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,C++
-45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,Rust
-45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,AWS
-45094315,2025-09,Citymapper by Via,FALSE,TRUE,TRUE,Terraform
-45094210,2025-09,Continua AI,FALSE,TRUE,FALSE,Machine learning
 45094210,2025-09,Continua AI,FALSE,TRUE,FALSE,LLMs
-45094132,2025-09,Cogram,TRUE,FALSE,FALSE,Python
-45094132,2025-09,Cogram,TRUE,FALSE,FALSE,TypeScript
-45094132,2025-09,Cogram,TRUE,FALSE,FALSE,React
-45094132,2025-09,Cogram,TRUE,FALSE,FALSE,AWS
-45094132,2025-09,Cogram,TRUE,FALSE,FALSE,Postgres
-45094132,2025-09,Cogram,TRUE,FALSE,FALSE,Terraform
-45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Python
-45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Kubernetes
-45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Docker
-45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Terraform
-45107348,2025-09,"Full Time and Part Time roles Distark is hiring, an edutainment brand building learning videos for Education. Our small, passionate team creates animated shows and learning tools that help kids (ages 3-9) fall in love with curiosity and real-world learning. We use custom automation to speed up everything from story writing to animation. See what we’re making:https://www.youtube.com/watch?v=c46VaM_VZGU",FALSE,FALSE,FALSE,Python
-45097832,2025-09,PetsApp – The future of pet care,TRUE,FALSE,FALSE,TypeScript
-45097832,2025-09,PetsApp – The future of pet care,TRUE,FALSE,FALSE,React
-45097832,2025-09,PetsApp – The future of pet care,TRUE,FALSE,FALSE,AWS
-45104655,2025-09,ARound (web-based augmented reality for sports)https://aroundar.com- a Stagwell company -https://www.stagwellglobal.com,TRUE,FALSE,FALSE,TypeScript
-45104655,2025-09,ARound (web-based augmented reality for sports)https://aroundar.com- a Stagwell company -https://www.stagwellglobal.com,TRUE,FALSE,FALSE,Rust
-45104655,2025-09,ARound (web-based augmented reality for sports)https://aroundar.com- a Stagwell company -https://www.stagwellglobal.com,TRUE,FALSE,FALSE,Postgres
-45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,TypeScript
-45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,AWS
-45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,Kubernetes
-45094629,2025-09,GoGoGrandparent (YC S16),TRUE,FALSE,FALSE,Docker
-45161373,2025-09,Showpass,FALSE,TRUE,TRUE,Python
-45161373,2025-09,Showpass,FALSE,TRUE,TRUE,TypeScript
-45161373,2025-09,Showpass,FALSE,TRUE,TRUE,React
-45161373,2025-09,Showpass,FALSE,TRUE,TRUE,Docker
-45161373,2025-09,Showpass,FALSE,TRUE,TRUE,Postgres
-45095135,2025-09,Mattermost,TRUE,FALSE,FALSE,React
-45096199,2025-09,Railway,TRUE,FALSE,FALSE,Postgres
-45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,TypeScript
-45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,Go
-45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,React
-45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,Kubernetes
-45180199,2025-09,Anvil (https://anvil.works),FALSE,TRUE,FALSE,Python
-45180199,2025-09,Anvil (https://anvil.works),FALSE,TRUE,FALSE,JavaScript
-45180199,2025-09,Anvil (https://anvil.works),FALSE,TRUE,FALSE,Postgres
-45139894,2025-09,Jane Street,FALSE,FALSE,TRUE,Machine learning
-45097165,2025-09,Bubblehouse,TRUE,FALSE,FALSE,JavaScript
-45097165,2025-09,Bubblehouse,TRUE,FALSE,FALSE,Go
-45097165,2025-09,Bubblehouse,TRUE,FALSE,FALSE,React
-45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Python
-45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,TypeScript
-45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Rust
-45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Go
-45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,AWS
-45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Docker
-45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Terraform
-45096338,2025-09,krea.ai,FALSE,FALSE,FALSE,Python
-45096338,2025-09,krea.ai,FALSE,FALSE,FALSE,Kubernetes
-45102400,2025-09,Clio,TRUE,FALSE,TRUE,Python
-45102400,2025-09,Clio,TRUE,FALSE,TRUE,AWS
-45102400,2025-09,Clio,TRUE,FALSE,TRUE,Kubernetes
-45102400,2025-09,Clio,TRUE,FALSE,TRUE,Terraform
-45102400,2025-09,Clio,TRUE,FALSE,TRUE,Machine learning
 45102400,2025-09,Clio,TRUE,FALSE,TRUE,LLMs
-45102400,2025-09,Clio,TRUE,FALSE,TRUE,Ruby
-45100767,2025-09,Phrasing,TRUE,FALSE,FALSE,React
-45100767,2025-09,Phrasing,TRUE,FALSE,FALSE,Postgres
-45210953,2025-09,Hiring: Senior Data Engineer (Remote Contract),TRUE,FALSE,FALSE,Python
-45210953,2025-09,Hiring: Senior Data Engineer (Remote Contract),TRUE,FALSE,FALSE,SQL
-45095990,2025-09,40GRID - Full-time Remote,TRUE,FALSE,FALSE,Python
-45095990,2025-09,40GRID - Full-time Remote,TRUE,FALSE,FALSE,React
-45094456,2025-09,Zigment (https://zigment.ai),FALSE,TRUE,FALSE,Python
 45093287,2025-09,SmarterDx,TRUE,FALSE,FALSE,LLMs
-45094015,2025-09,Faction,FALSE,TRUE,FALSE,Python
-45094015,2025-09,Faction,FALSE,TRUE,FALSE,TypeScript
-45094015,2025-09,Faction,FALSE,TRUE,FALSE,Postgres
 45094015,2025-09,Faction,FALSE,TRUE,FALSE,LLMs
-45094279,2025-09,We're building the serverless platform that powers millions of developers at the edge. Looking for passionate engineers to shape the future of edge computing.,FALSE,FALSE,FALSE,Python
-45094279,2025-09,We're building the serverless platform that powers millions of developers at the edge. Looking for passionate engineers to shape the future of edge computing.,FALSE,FALSE,FALSE,Rust
+49525423,2026-09,Tufalabs,FALSE,TRUE,FALSE,LLMs
+49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,LLMs
+49524943,2026-09,GovStar,TRUE,FALSE,FALSE,LLMs
+49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,LLMs
+49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,LLMs
+49650855,2026-09,Catalyst·Wayfare AI,TRUE,FALSE,FALSE,LLMs
+49527118,2026-09,Puma.tech,TRUE,FALSE,FALSE,LLMs
+49533274,2026-09,Axmed,TRUE,FALSE,FALSE,LLMs
+49649994,2026-09,"Anterior (Sequoia-backed, Series B)",FALSE,FALSE,FALSE,LLMs
+49576039,2026-09,PermitFlow (YC W22),FALSE,TRUE,FALSE,LLMs
+49528405,2026-09,Snowflake,FALSE,TRUE,FALSE,LLMs
+49578811,2026-09,Valkyrie Aero,TRUE,FALSE,FALSE,LLMs
+49609343,2026-09,We’re hiring at Langfuse — now part of ClickHouse.,FALSE,FALSE,FALSE,LLMs
+49540773,2026-09,Klassif.ai,TRUE,FALSE,TRUE,LLMs
+49528637,2026-09,Deya,TRUE,FALSE,TRUE,LLMs
+49527113,2026-09,Pathos AI,FALSE,TRUE,FALSE,LLMs
+49527283,2026-09,ML6,FALSE,FALSE,TRUE,LLMs
+49524520,2026-09,Sumble,TRUE,FALSE,FALSE,LLMs
+49554223,2026-09,Akkio,TRUE,FALSE,FALSE,LLMs
+49526311,2026-09,Amplify Renewables,TRUE,FALSE,TRUE,LLMs
+49542221,2026-09,Xaira Therapeutics,FALSE,FALSE,FALSE,LLMs
+49528234,2026-09,Operations1,FALSE,TRUE,TRUE,LLMs
+49523716,2026-09,Monumint (YC W24),FALSE,FALSE,FALSE,LLMs
+49528837,2026-09,Cora AI,TRUE,FALSE,FALSE,LLMs
+49541233,2026-09,VLM Run (https://vlm.run),FALSE,FALSE,FALSE,LLMs
+49552714,2026-09,AiMi,TRUE,FALSE,FALSE,LLMs
+49534032,2026-09,Interview Resources,TRUE,FALSE,FALSE,LLMs
+49525367,2026-09,MintMCP,FALSE,FALSE,TRUE,LLMs
+49525412,2026-09,Krea,FALSE,TRUE,FALSE,LLMs
+49534359,2026-09,Lokker.com,TRUE,FALSE,FALSE,LLMs
+49538902,2026-09,MWI Animal Health,TRUE,FALSE,FALSE,LLMs
+49530057,2026-09,DrSwarm,FALSE,FALSE,FALSE,LLMs
+49527344,2026-09,AREO,TRUE,FALSE,FALSE,LLMs
+49538459,2026-09,Republic Services,TRUE,FALSE,FALSE,LLMs
+49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,LLMs
+49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,LLMs
+49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,LLMs
+49525544,2026-09,DAT,FALSE,FALSE,TRUE,LLMs
+49537584,2026-09,Prior Labs,FALSE,TRUE,FALSE,LLMs
+49547792,2026-09,Search Atlas,TRUE,FALSE,FALSE,LLMs
+49525603,2026-09,Astoria AI,TRUE,FALSE,FALSE,LLMs
+45095872,2025-09,Radar Labs,TRUE,FALSE,FALSE,Scala
+45140646,2025-09,Narrative I/O,TRUE,FALSE,FALSE,Scala
+49539168,2026-09,Senzing (entity resolution SDK),TRUE,FALSE,FALSE,Scala
+49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Scala
+45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,Ruby
+45093198,2025-09,*BLACKLANE IS HIRING!* (Berlin / Barcelona / London – HYBRID)https://www.blacklane.com/en/career/ped/,FALSE,FALSE,TRUE,Ruby
+45118823,2025-09,"Goji Labs (gojilabs.com): Various roles, all REMOTE.",TRUE,FALSE,FALSE,Ruby
+45117469,2025-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Ruby
+45112506,2025-09,Prophet Town LLC,TRUE,FALSE,TRUE,Ruby
+45106379,2025-09,Great Question,TRUE,FALSE,FALSE,Ruby
+45105723,2025-09,Vantage,TRUE,FALSE,FALSE,Ruby
+45111016,2025-09,Aha! (https://www.aha.io),TRUE,FALSE,FALSE,Ruby
+45108839,2025-09,Pocketflows,FALSE,FALSE,FALSE,Ruby
+45099757,2025-09,fleming.de,FALSE,FALSE,TRUE,Ruby
+45155504,2025-09,Toptal Core is hiring full-time remote (Europe timezones) Senior Ruby Engineer.,TRUE,FALSE,FALSE,Ruby
+45102400,2025-09,Clio,TRUE,FALSE,TRUE,Ruby
+49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Ruby
+49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Ruby
+49527344,2026-09,AREO,TRUE,FALSE,FALSE,Ruby
+49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Ruby
+49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,Ruby
+49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,Ruby
+49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,Ruby

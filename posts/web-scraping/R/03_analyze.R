@@ -1,25 +1,37 @@
 # ==============================================================
 # 03_analyze.R - year-over-year comparison of skill demand
 #
-# Reads  data/processed/postings.csv, skills_long.csv
-# Writes output/tables/skill_trends.csv
-#        output/figures/skill_share_2026.png
-#        output/figures/skill_change.png
+# Writes results/tables/skill_trends.csv
+#        results/figures/skill_share_2026.png
+#        results/figures/skill_change.png
 # ==============================================================
 
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(here)
 
-postings    <- read_csv("data/processed/postings.csv",    show_col_types = FALSE)
-skills_long <- read_csv("data/processed/skills_long.csv", show_col_types = FALSE)
+POST_DIR   <- here("posts", "web-scraping")
+FIG_DIR    <- file.path(POST_DIR, "results", "figures")
+TAB_DIR    <- file.path(POST_DIR, "results", "tables")
+TREND_FILE <- file.path(TAB_DIR, "skill_trends.csv")
+
+dir.create(FIG_DIR, recursive = TRUE, showWarnings = FALSE)
+dir.create(TAB_DIR, recursive = TRUE, showWarnings = FALSE)
+
+postings    <- read_csv(file.path(POST_DIR, "data", "processed", "postings.csv"),
+                        show_col_types = FALSE)
+skills_long <- read_csv(file.path(POST_DIR, "data", "processed", "skills_long.csv"),
+                        show_col_types = FALSE)
 
 
-# --- 1. Share, not count --------------------------------------
-# 2025 had 299 postings and 2026 had 261, so raw counts aren't
-# comparable across years. Share of postings mentioning a skill is.
+# ---- 1. share, not count ----
+# The two threads have different numbers of postings, so raw counts
+# are not comparable across years.
 
 totals <- count(postings, thread, name = "n_postings")
+n_2025 <- totals$n_postings[totals$thread == "2025-09"]
+n_2026 <- totals$n_postings[totals$thread == "2026-09"]
 
 shares <- skills_long |>
   count(thread, skill) |>
@@ -27,74 +39,65 @@ shares <- skills_long |>
   mutate(share = n / n_postings)
 
 
-# --- 2. One row per skill, both years side by side ------------
+# ---- 2. one row per skill ----
 
 s25 <- shares |> filter(thread == "2025-09") |> select(skill, n_2025 = n, share_2025 = share)
 s26 <- shares |> filter(thread == "2026-09") |> select(skill, n_2026 = n, share_2026 = share)
 
 trend <- full_join(s25, s26, by = "skill") |>
   mutate(across(where(is.numeric), \(x) coalesce(x, 0)),
-         change_pp = 100 * (share_2026 - share_2025)) |>
-  arrange(desc(share_2026))
-
-write_csv(trend, "output/tables/skill_trends.csv")
+         change_pp = 100 * (share_2026 - share_2025))
 
 
-# --- 3. What's in demand now ----------------------------------
+# ---- 3. which changes exceed sampling noise? ----
+# With roughly 280 postings a year, a difference of a few percentage
+# points is indistinguishable from chance. Test each one.
 
-p1 <- trend |>
-  slice_head(n = 12) |>
-  ggplot(aes(x = 100 * share_2026, y = reorder(skill, share_2026))) +
+trend$p_value <- NA_real_
+for (i in seq_len(nrow(trend))) {
+  if (trend$n_2025[i] + trend$n_2026[i] >= 20) {
+    test <- prop.test(c(trend$n_2025[i], trend$n_2026[i]), c(n_2025, n_2026))
+    trend$p_value[i] <- test$p.value
+  }
+}
+
+trend <- arrange(trend, desc(share_2026))
+write_csv(trend, TREND_FILE)
+
+
+# ---- 4. figures ----
+
+fig_demand <- trend |>
+  slice_max(share_2026, n = 12) |>
+  ggplot(aes(100 * share_2026, reorder(skill, share_2026))) +
   geom_col(fill = "steelblue") +
-  labs(
-    title    = "TODO - a title that states the finding",
-    subtitle = paste0("Share of ", totals$n_postings[totals$thread == "2026-09"],
-                      " job postings, Hacker News hiring thread, September 2026"),
-    x = "% of postings mentioning the skill",
-    y = NULL
-  ) +
+  labs(title = "TODO - a title that states the finding",
+       subtitle = paste0("Share of ", n_2026, " job postings, September 2026"),
+       x = "% of postings mentioning the skill", y = NULL) +
   theme_minimal(base_size = 12)
 
-ggsave("output/figures/skill_share_2026.png", p1, width = 8, height = 5, dpi = 300)
+ggsave(file.path(FIG_DIR, "skill_share_2026.png"),
+       fig_demand,
+       width = 8, height = 5, dpi = 300)
 
-
-# --- 4. What's moving -----------------------------------------
-
-p2 <- trend |>
-  filter(n_2025 + n_2026 >= 20) |>   # ignore skills too rare to read into
-  ggplot(aes(x = change_pp, y = reorder(skill, change_pp), fill = change_pp > 0)) +
+fig_change <- trend |>
+  filter(n_2025 + n_2026 >= 20) |>
+  mutate(significant = p_value < 0.05) |>
+  ggplot(aes(change_pp, reorder(skill, change_pp), fill = significant)) +
   geom_col() +
   geom_vline(xintercept = 0, colour = "grey30") +
-  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "tomato"), guide = "none") +
-  labs(
-    title    = "TODO - a title that states the finding",
-    subtitle = "Change in share of postings, September 2025 to September 2026",
-    x = "Percentage-point change",
-    y = NULL
-  ) +
-  theme_minimal(base_size = 12)
+  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "grey78"),
+                    labels = c("TRUE" = "p < 0.05", "FALSE" = "within noise"),
+                    name = NULL) +
+  labs(title = "TODO - a title that states the finding",
+       subtitle = "Change in share of postings, September 2025 to September 2026",
+       x = "Percentage-point change", y = NULL) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
 
-ggsave("output/figures/skill_change.png", p2, width = 8, height = 5, dpi = 300)
+ggsave(file.path(FIG_DIR, "skill_change.png"),
+       fig_change, width = 8, height = 5, dpi = 300)
 
-
-message("\nSkill trends:")
+message("postings: ", n_2025, " (2025) and ", n_2026, " (2026)")
+message("changes significant at p < 0.05: ", sum(trend$p_value < 0.05, na.rm = TRUE))
 print(trend, n = Inf)
-
-
-# --- 5. Which changes exceed sampling noise? ------------------
-# Two-proportion test. With ~300 and ~261 postings, differences
-# under roughly 4 percentage points are indistinguishable from
-# chance, so most of the table is noise.
-
-n25 <- totals$n_postings[totals$thread == "2025-09"]
-n26 <- totals$n_postings[totals$thread == "2026-09"]
-
-trend <- trend |>
-  rowwise() |>
-  mutate(
-    p_value = if (n_2025 + n_2026 >= 20)
-      prop.test(c(n_2025, n_2026), c(n25, n26))$p.value else NA_real_
-  ) |>
-  ungroup()
-
-write_csv(trend, "output/tables/skill_trends.csv")

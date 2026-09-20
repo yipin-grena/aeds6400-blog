@@ -1,0 +1,195 @@
+---
+
+title: "TODO - a title that states the finding"
+
+author: "Yipin Zhang"
+
+date: 2026-09-21
+
+categories: \[web scraping, rvest, labor market\]
+
+execute:
+
+warning: false
+
+message: false
+
+---
+
+\`\`\`{r}
+
+#\| label: setup
+
+#\| include: false
+
+library(dplyr)
+
+library(ggplot2)
+
+library(readr)
+
+library(knitr)
+
+library(here)
+
+\# Reads saved files only. The scrape lives in R/01_scrape.R and is run
+
+\# by hand, so rendering this post never contacts Hacker News.
+
+POST_DIR \<- here("posts", "web-scraping")
+
+postings \<- read_csv(file.path(POST_DIR, "data", "processed", "postings.csv"),
+
+show_col_types = FALSE)
+
+trend \<- read_csv(file.path(POST_DIR, "results", "tables", "skill_trends.csv"),
+
+show_col_types = FALSE)
+
+n_2025 \<- sum(postings\$thread == "2025-09")
+
+n_2026 \<- sum(postings\$thread == "2026-09")
+
+n_sig \<- sum(trend\$p_value \< 0.05, na.rm = TRUE)
+
+py_share \<- round(100 \* trend\$share_2026\[trend\$skill == "Python"\], 1)
+
+r_count \<- trend\$n_2026\[trend\$skill == "R"\]
+
+\`\`\`
+
+\## The question
+
+\<!-- \~100 words. Open with the stake: you write R for every assignment,
+
+and R appears in \`r r_count\` of \`r n_2026\` postings. Then the question -
+
+what do employers actually ask for, and has it shifted enough in a
+
+year to change what you should study next? --\>
+
+\## Where the data comes from
+
+\<!-- \~120 words. HN's monthly hiring thread; one top-level comment is one
+
+employer. September 2025 and September 2026 holds the month fixed.
+
+robots.txt allows /item and disallows /submitted, so thread IDs were
+
+looked up by hand. 30-second delay, pages cached. One sentence on the
+
+API: HN has one, the assignment requires rvest. Criteria 4 and 8. --\>
+
+\## Turning comments into data
+
+\<!-- \~120 words. 863 comments, \`r n_2026 + n_2025\` postings after filtering to
+
+indent 0 and dropping 19 with no text. Then the measurement problem:
+
+\\bsql\\b misses PostgreSQL; a case-insensitive \\bGo\\b matched the verb
+
+"go" until you caught it. Being explicit about this is what makes the
+
+numbers credible. --\>
+
+\`\`\`{r}
+
+#\| label: fig-demand
+
+#\| fig-cap: "Most-requested technologies, September 2026"
+
+trend \|\>
+
+slice_max(share_2026, n = 12) \|\>
+
+ggplot(aes(100 \* share_2026, reorder(skill, share_2026))) +
+
+geom_col(fill = "steelblue") +
+
+labs(x = "% of postings mentioning the skill", y = NULL,
+
+subtitle = paste0("Share of ", n_2026, " job postings")) +
+
+theme_minimal(base_size = 12)
+
+\`\`\`
+
+\## What the year-over-year comparison can and cannot show
+
+\<!-- \~180 words. TypeScript -7.4pp and React -7.1pp are the largest moves and
+
+they move together. But none of the \`r nrow(trend)\` changes reaches
+
+p \< 0.05. Explain why levels are measured well and changes are not: two
+
+standard errors stack. Then say plainly what you are not claiming. --\>
+
+\`\`\`{r}
+
+#\| label: fig-change
+
+#\| fig-cap: "Change in share of postings, September 2025 to September 2026. No change is distinguishable from sampling noise."
+
+trend \|\>
+
+filter(n_2025 + n_2026 \>= 20) \|\>
+
+mutate(significant = p_value \< 0.05) \|\>
+
+ggplot(aes(change_pp, reorder(skill, change_pp), fill = significant)) +
+
+geom_col() +
+
+geom_vline(xintercept = 0, colour = "grey30") +
+
+scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "grey78"),
+
+labels = c("TRUE" = "p \< 0.05", "FALSE" = "within noise"),
+
+name = NULL) +
+
+labs(x = "Percentage-point change", y = NULL) +
+
+theme_minimal(base_size = 12) +
+
+theme(legend.position = "bottom")
+
+\`\`\`
+
+\## So what should you learn?
+
+\<!-- \~130 words. The recommendation: choose from where demand sits, not from
+
+where it looks to be heading. Be specific. Criterion 10. --\>
+
+\`\`\`{r}
+
+#\| label: tbl-trends
+
+#\| tbl-cap: "Skill demand, September 2025 vs September 2026"
+
+trend \|\>
+
+filter(n_2025 + n_2026 \>= 20) \|\>
+
+transmute(Skill = skill,
+
+\`2025 (%)\` = round(100 \* share_2025, 1),
+
+\`2026 (%)\` = round(100 \* share_2026, 1),
+
+\`Change (pp)\` = round(change_pp, 1),
+
+\`p\` = round(p_value, 3)) \|\>
+
+kable()
+
+\`\`\`
+
+\## Takeaway
+
+<!-- ~60 words. One sentence a reader could repeat. -->
+
+---
+
+\*\*Code and data:\*\* \[\`posts/web-scraping/\`\](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/web-scraping)
