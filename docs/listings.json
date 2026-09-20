@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/web-scraping/index.html",
       "/posts/p-values/index.html"
     ]
   }

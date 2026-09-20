@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="TODO">
+<meta name="author" content="Yipin Zhang">
 <meta name="dcterms.date" content="2026-09-21">
 <meta name="description" content="TODO - one line">
 
@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>TODO </p>
+               <p>Yipin Zhang </p>
             </div>
     </div>
       
@@ -206,24 +206,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="the-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<!-- ~100 words. Open with the R-versus-Python stake. Then the question:
-     what do employers ask for, and has it moved enough in a year to
-     change what a student should study? -->
+<p>WRITE HERE. ~100 words. You write R for every assignment; R appears in 1 of 261 postings. What do employers actually ask for, and has it shifted enough in a year to change what you should study?</p>
 </section>
 <section id="where-the-data-comes-from" class="level2">
 <h2 class="anchored" data-anchor-id="where-the-data-comes-from">Where the data comes from</h2>
-<!-- ~120 words. HN's monthly hiring thread, September 2025 and September
-     2026. Same month a year apart controls for seasonal hiring.
-     robots.txt: /item allowed, /submitted disallowed (so thread IDs were
-     looked up by hand in a browser), 30-second crawl delay honoured,
-     pages cached locally. Criteria 4 and 8. -->
+<p>WRITE HERE. ~120 words. HN monthly hiring thread, one top-level comment per employer. Same month a year apart holds seasonality fixed. robots.txt allows /item, disallows /submitted, 30-second delay, pages cached. One sentence on the API.</p>
 </section>
 <section id="turning-comments-into-data" class="level2">
 <h2 class="anchored" data-anchor-id="turning-comments-into-data">Turning comments into data</h2>
-<!-- ~120 words. 560 postings from 863 comments. The indent
-     trick. Then the word-boundary problem - it's the most interesting
-     methodological choice you made, and admitting that \bsql\b misses
-     PostgreSQL is more credible than pretending the measure is clean. -->
+<p>WRITE HERE. ~120 words. 863 comments to 560 postings. The word-boundary problem: isses PostgreSQL; a case-insensitive atched the verb “go” until it was caught.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>trend <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(share_2026, <span class="at">n =</span> <span class="dv">12</span>) <span class="sc">|&gt;</span></span>
@@ -246,17 +237,14 @@ Figure&nbsp;1: Most-requested technologies, September 2026
 </div>
 </div>
 </section>
-<section id="what-moved" class="level2">
-<h2 class="anchored" data-anchor-id="what-moved">What moved</h2>
-<!-- ~180 words. TypeScript and React both down about 7pp, together.
-     "Machine learning" down while "LLMs" up - same work, different
-     vocabulary. Then the discipline: with ~280 postings a year, only
-     0 changes clear p < 0.05. Name what you are NOT claiming. -->
+<section id="what-the-comparison-can-and-cannot-show" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-comparison-can-and-cannot-show">What the comparison can and cannot show</h2>
+<p>WRITE HERE. ~180 words. TypeScript and React fell together, the two largest moves. But 0 of the changes reach p &lt; 0.05. Levels are measured well; changes stack two standard errors.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>trend <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_2025 <span class="sc">+</span> n_2026 <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sig =</span> p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(change_pp, <span class="fu">reorder</span>(skill, change_pp), <span class="at">fill =</span> sig)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(change_pp, <span class="fu">reorder</span>(skill, change_pp), <span class="at">fill =</span> significant)) <span class="sc">+</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey30"</span>) <span class="sc">+</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"grey78"</span>),</span>
@@ -272,7 +260,7 @@ Figure&nbsp;1: Most-requested technologies, September 2026
 <img src="index_files/figure-html/fig-change-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-change-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Change in share of postings, September 2025 to September 2026. Grey bars are not distinguishable from sampling noise.
+Figure&nbsp;2: Change in share of postings, September 2025 to September 2026. No change is distinguishable from sampling noise.
 </figcaption>
 </figure>
 </div>
@@ -281,16 +269,15 @@ Figure&nbsp;2: Change in share of postings, September 2025 to September 2026. Gr
 </section>
 <section id="so-what-should-you-learn" class="level2">
 <h2 class="anchored" data-anchor-id="so-what-should-you-learn">So what should you learn?</h2>
-<!-- ~130 words. The recommendation. Be specific enough to act on and
-     honest about which parts the data supports. Criterion 10. -->
+<p>WRITE HERE. ~130 words. Choose from where demand sits, not where it looks to be heading. Be specific.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>trend <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_2025 <span class="sc">+</span> n_2026 <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Skill =</span> skill,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2025 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2025, <span class="dv">1</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2026 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2026, <span class="dv">1</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2025 (%)</span><span class="st">`</span>    <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2025, <span class="dv">1</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2026 (%)</span><span class="st">`</span>    <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2026, <span class="dv">1</span>),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(change_pp, <span class="dv">1</span>),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">p</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(p_value, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">p             =</span> <span class="fu">round</span>(p_value, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-trends" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -425,7 +412,7 @@ Table&nbsp;1: Skill demand, September 2025 vs September 2026
 </section>
 <section id="takeaway" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
-<!-- ~60 words. One sentence a reader could repeat. -->
+<p>WRITE HERE. ~60 words. One sentence a reader could repeat.</p>
 <hr>
 <p><strong>Code and data:</strong> <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/web-scraping"><code>posts/web-scraping/</code></a></p>
 
