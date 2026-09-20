@@ -1,0 +1,21 @@
+skill,pattern
+Python,(?i)\bpython\b
+SQL,(?i)\bsql\b
+JavaScript,(?i)\bjavascript\b
+TypeScript,(?i)\btypescript\b
+Java,(?i)\bjava\b(?!script)
+C++,\bC\+\+
+Rust,(?i)\brust\b
+Go,(?i:\bgolang\b)|\b(?:Go|GO)\b(?![ -]+(?i:to[ -]+market|for[ ]+it))
+R,(?<!Terran )\bR\b(?![&+])
+React,(?i)\breact\b
+AWS,(?i)\baws\b
+Kubernetes,(?i)\bkubernetes\b|\bk8s\b
+Docker,(?i)\bdocker\b
+Postgres,(?i)\bpostgres(ql)?\b
+Spark,(?i)\bspark\b
+Terraform,(?i)\bterraform\b
+Machine learning,(?i)\bmachine learning\b
+LLMs,(?i)\bllms?\b|\bgenai\b
+Scala,(?i)\bscala\b
+Ruby,(?i)\bruby\b

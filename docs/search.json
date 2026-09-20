@@ -9,51 +9,51 @@
   {
     "objectID": "posts/web-scraping/index.html",
     "href": "posts/web-scraping/index.html",
-    "title": "TODO - a title that states the finding",
+    "title": "Python leads technology mentions in Hacker News hiring posts",
     "section": "",
-    "text": "WRITE HERE. ~100 words. You write R for every assignment; R appears in 1 of 261 postings. What do employers actually ask for, and has it shifted enough in a year to change what you should study?"
+    "text": "The fact that I studied R led me to question how classroom programming stacks up against the technologies referred to in job advertisements. For a person looking into technology careers, would learning Python, web development, or cloud infrastructure be a useful next move? I collected two of the Hacker News “Who is hiring?” threads and then compared them using a fixed list of 20 technology categories. Python is mentioned in 27.7% of the hiring comments that remained from September 2026, which is the highest proportion among the categories in question, while I was surprised to find out that R appears in 0 of 256 postings. Python is a reasonable place to start for this kind of job. However, the analysis does not indicate which skill will yield the highest payoff or increase an individual’s chances of getting an offer."
   },
   {
-    "objectID": "posts/web-scraping/index.html#the-question",
-    "href": "posts/web-scraping/index.html#the-question",
-    "title": "TODO - a title that states the finding",
+    "objectID": "posts/web-scraping/index.html#what-technological-skill-should-i-turn-my-attention-to-next",
+    "href": "posts/web-scraping/index.html#what-technological-skill-should-i-turn-my-attention-to-next",
+    "title": "Python leads technology mentions in Hacker News hiring posts",
     "section": "",
-    "text": "WRITE HERE. ~100 words. You write R for every assignment; R appears in 1 of 261 postings. What do employers actually ask for, and has it shifted enough in a year to change what you should study?"
+    "text": "The fact that I studied R led me to question how classroom programming stacks up against the technologies referred to in job advertisements. For a person looking into technology careers, would learning Python, web development, or cloud infrastructure be a useful next move? I collected two of the Hacker News “Who is hiring?” threads and then compared them using a fixed list of 20 technology categories. Python is mentioned in 27.7% of the hiring comments that remained from September 2026, which is the highest proportion among the categories in question, while I was surprised to find out that R appears in 0 of 256 postings. Python is a reasonable place to start for this kind of job. However, the analysis does not indicate which skill will yield the highest payoff or increase an individual’s chances of getting an offer."
   },
   {
-    "objectID": "posts/web-scraping/index.html#where-the-data-comes-from",
-    "href": "posts/web-scraping/index.html#where-the-data-comes-from",
-    "title": "TODO - a title that states the finding",
-    "section": "Where the data comes from",
-    "text": "Where the data comes from\nWRITE HERE. ~120 words. HN monthly hiring thread, one top-level comment per employer. Same month a year apart holds seasonality fixed. robots.txt allows /item, disallows /submitted, 30-second delay, pages cached. One sentence on the API."
+    "objectID": "posts/web-scraping/index.html#where-the-data-come-from",
+    "href": "posts/web-scraping/index.html#where-the-data-come-from",
+    "title": "Python leads technology mentions in Hacker News hiring posts",
+    "section": "Where the data come from",
+    "text": "Where the data come from\nThe sources are the September 2025 and September 2026 threads. The saved acquisition metadata are dated 19 September 2026. My R scraper uses rvest to extract public HTML, caches pages, and waits 30 seconds after each new page request. The current robots.txt specifies that delay and does not disallow /item. The workflow does not bypass logins, paywalls, or CAPTCHAs. Hacker News also provides an official API, which would ordinarily be preferable; HTML extraction is used here to practise the assignment’s required rvest workflow. Reproducing the saved analysis needs no new requests."
   },
   {
-    "objectID": "posts/web-scraping/index.html#turning-comments-into-data",
-    "href": "posts/web-scraping/index.html#turning-comments-into-data",
-    "title": "TODO - a title that states the finding",
-    "section": "Turning comments into data",
-    "text": "Turning comments into data\nWRITE HERE. ~120 words. 863 comments to 560 postings. The word-boundary problem: isses PostgreSQL; a case-insensitive atched the verb “go” until it was caught.\n\ntrend |&gt;\n  slice_max(share_2026, n = 12) |&gt;\n  ggplot(aes(100 * share_2026, reorder(skill, share_2026))) +\n  geom_col(fill = \"steelblue\") +\n  labs(x = \"% of postings mentioning the skill\", y = NULL,\n       subtitle = paste0(\"Share of \", n_2026, \" job postings\")) +\n  theme_minimal(base_size = 12)\n\n\n\n\n\n\n\nFigure 1: Most-requested technologies, September 2026"
+    "objectID": "posts/web-scraping/index.html#turning-comments-into-measurements",
+    "href": "posts/web-scraping/index.html#turning-comments-into-measurements",
+    "title": "Python leads technology mentions in Hacker News hiring posts",
+    "section": "Turning comments into measurements",
+    "text": "Turning comments into measurements\nThe files contain 863 comments, some of which are replies. I kept the top-level comments that include text, removed duplicate comment IDs, and excluded 10 entries identified during review as discussions, personal job-seeking or service offers, or insufficiently informative content. The final dataset consists of 294 hiring comments from 2025 and 256 from 2026. The IDs of the excluded entries together with the reasons for their exclusion are saved with the code. Each comment is counted only once even if it promotes more than one job; likewise, the same employer can be listed more than once.\nKeyword matching also has to be checked. I only caught the “Go” bug because its count jumped from 26 to 42 between two runs on identical data, triggered by phrases like “Go for it” and “Go-To-Market”. Updating the matching rules resolved those false positives and captured the all-caps GO spelling. For the other options, the criteria are intentionally kept narrow: SQL counts the single term, while Postgres includes PostgreSQL. It is not appropriate to add the percentages since comments can refer to both. These adjustments cover mentions such as company technology stacks, not the verified requirements for each advertised role.\n\n\nShow code\nknitr::include_graphics(file.path(POST_DIR, \"results\", \"figures\", \"skill_share_2026.png\"))\n\n\n\n\n\n\n\n\nFigure 1: Leading technology categories in retained September 2026 hiring comments. Ties at rank 12 are included."
   },
   {
-    "objectID": "posts/web-scraping/index.html#what-the-comparison-can-and-cannot-show",
-    "href": "posts/web-scraping/index.html#what-the-comparison-can-and-cannot-show",
-    "title": "TODO - a title that states the finding",
-    "section": "What the comparison can and cannot show",
-    "text": "What the comparison can and cannot show\nWRITE HERE. ~180 words. TypeScript and React fell together, the two largest moves. But 0 of the changes reach p &lt; 0.05. Levels are measured well; changes stack two standard errors.\n\ntrend |&gt;\n  filter(n_2025 + n_2026 &gt;= 20) |&gt;\n  mutate(significant = p_value &lt; 0.05) |&gt;\n  ggplot(aes(change_pp, reorder(skill, change_pp), fill = significant)) +\n  geom_col() +\n  geom_vline(xintercept = 0, colour = \"grey30\") +\n  scale_fill_manual(values = c(\"TRUE\" = \"steelblue\", \"FALSE\" = \"grey78\"),\n                    labels = c(\"TRUE\" = \"p &lt; 0.05\", \"FALSE\" = \"within noise\"),\n                    name = NULL) +\n  labs(x = \"Percentage-point change\", y = NULL) +\n  theme_minimal(base_size = 12) +\n  theme(legend.position = \"bottom\")\n\n\n\n\n\n\n\nFigure 2: Change in share of postings, September 2025 to September 2026. No change is distinguishable from sampling noise."
+    "objectID": "posts/web-scraping/index.html#what-was-the-difference-between-the-two-snapshots",
+    "href": "posts/web-scraping/index.html#what-was-the-difference-between-the-two-snapshots",
+    "title": "Python leads technology mentions in Hacker News hiring posts",
+    "section": "What was the difference between the two snapshots?",
+    "text": "What was the difference between the two snapshots?\nTypeScript and React make up 20.3% and 19.9% of the retained comments from 2026, respectively. Their proportions are 8.3 and 8.0 percentage points lower than in the 2025 snapshot. These are the observed differences, not an indication of a widespread decline in demand for web development.\nComparing two September threads eliminates one aspect of the seasonal mismatch by using the same calendar month, but it does not keep the hiring population constant. The September 2026 data was still incomplete at the time of collection, and each thread includes different employers and positions. Because this is a self-selecting online community, not a random selection of jobs, keyword rules may also miss abbreviations or count occasional references. For these reasons I give the comparison only a descriptive account rather than treating these differences as evidence about the wider labour market.\n\n\nShow code\nknitr::include_graphics(file.path(POST_DIR, \"results\", \"figures\", \"skill_change.png\"))\n\n\n\n\n\n\n\n\nFigure 2: Observed differences in mention shares across the two saved September threads. These are descriptive comparisons, not causal effects or population estimates."
   },
   {
-    "objectID": "posts/web-scraping/index.html#so-what-should-you-learn",
-    "href": "posts/web-scraping/index.html#so-what-should-you-learn",
-    "title": "TODO - a title that states the finding",
-    "section": "So what should you learn?",
-    "text": "So what should you learn?\nWRITE HERE. ~130 words. Choose from where demand sits, not where it looks to be heading. Be specific.\n\ntrend |&gt;\n  filter(n_2025 + n_2026 &gt;= 20) |&gt;\n  transmute(Skill = skill,\n            `2025 (%)`    = round(100 * share_2025, 1),\n            `2026 (%)`    = round(100 * share_2026, 1),\n            `Change (pp)` = round(change_pp, 1),\n            p             = round(p_value, 3)) |&gt;\n  kable()\n\n\n\nTable 1: Skill demand, September 2025 vs September 2026\n\n\n\n\n\n\nSkill\n2025 (%)\n2026 (%)\nChange (pp)\np\n\n\n\n\nPython\n26.4\n27.2\n0.8\n0.910\n\n\nTypeScript\n28.1\n20.7\n-7.4\n0.054\n\n\nReact\n27.4\n20.3\n-7.1\n0.062\n\n\nPostgres\n15.4\n16.9\n1.5\n0.720\n\n\nLLMs\n13.0\n15.7\n2.7\n0.436\n\n\nAWS\n13.7\n13.4\n-0.3\n1.000\n\n\nKubernetes\n9.0\n10.0\n0.9\n0.817\n\n\nRust\n6.7\n8.0\n1.4\n0.651\n\n\nDocker\n5.4\n7.7\n2.3\n0.347\n\n\nGo\n8.7\n6.5\n-2.2\n0.419\n\n\nTerraform\n5.7\n6.1\n0.4\n0.966\n\n\nC++\n5.7\n4.6\n-1.1\n0.698\n\n\nJavaScript\n3.3\n4.6\n1.3\n0.587\n\n\nSQL\n3.7\n4.6\n0.9\n0.739\n\n\nMachine learning\n5.7\n3.1\n-2.6\n0.196"
+    "objectID": "posts/web-scraping/index.html#what-is-the-right-thing-for-a-student-to-do-in-this-situation",
+    "href": "posts/web-scraping/index.html#what-is-the-right-thing-for-a-student-to-do-in-this-situation",
+    "title": "Python leads technology mentions in Hacker News hiring posts",
+    "section": "What is the right thing for a student to do in this situation?",
+    "text": "What is the right thing for a student to do in this situation?\nIf a student is already using R and wants to learn about the types of jobs listed here, I suggest they create a small Python project by obtaining data, cleaning it, and publishing a reproducible analysis. While Python is prominent, such a project should be seen as a reasonable experiment rather than a sure way to secure a job. Alternatively, a student aiming for a career in web development could build a TypeScript/React application, since both are still frequently mentioned even though they have lower proportions in this comparison.\nBefore you decide on a longer course, look at a selection of advertisements that correspond to your location, level of experience, and the position you want. Determine which technologies are essential and which only refer to the employer’s technology stack. This matters because the dataset includes senior engineering positions, junior ones, and non-technical roles. The lack of a verified R keyword match in this case does not prove that R is unimportant for jobs in economics or statistics.\n\n\nShow code\ntrend |&gt;\n  transmute(Category = skill,\n            `2025 count` = n_2025,\n            `2025 (%)` = round(100 * share_2025, 1),\n            `2026 count` = n_2026,\n            `2026 (%)` = round(100 * share_2026, 1),\n            `Change (pp)` = round(change_pp, 1)) |&gt;\n  knitr::kable()\n\n\n\n\nTable 1: Keyword mentions by year. Counts are hiring comments; percentages use all retained hiring comments in that year. Categories overlap.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCategory\n2025 count\n2025 (%)\n2026 count\n2026 (%)\nChange (pp)\n\n\n\n\nPython\n79\n26.9\n71\n27.7\n0.9\n\n\nTypeScript\n84\n28.6\n52\n20.3\n-8.3\n\n\nReact\n82\n27.9\n51\n19.9\n-8.0\n\n\nPostgres\n46\n15.6\n43\n16.8\n1.2\n\n\nLLMs\n39\n13.3\n41\n16.0\n2.8\n\n\nAWS\n41\n13.9\n33\n12.9\n-1.1\n\n\nKubernetes\n27\n9.2\n26\n10.2\n1.0\n\n\nRust\n20\n6.8\n21\n8.2\n1.4\n\n\nDocker\n16\n5.4\n19\n7.4\n2.0\n\n\nGo\n26\n8.8\n15\n5.9\n-3.0\n\n\nTerraform\n17\n5.8\n15\n5.9\n0.1\n\n\nC++\n17\n5.8\n12\n4.7\n-1.1\n\n\nSQL\n11\n3.7\n12\n4.7\n0.9\n\n\nJavaScript\n10\n3.4\n11\n4.3\n0.9\n\n\nJava\n11\n3.7\n8\n3.1\n-0.6\n\n\nMachine learning\n17\n5.8\n8\n3.1\n-2.7\n\n\nRuby\n12\n4.1\n6\n2.3\n-1.7\n\n\nScala\n2\n0.7\n2\n0.8\n0.1\n\n\nSpark\n2\n0.7\n2\n0.8\n0.1\n\n\nR\n0\n0.0\n0\n0.0\n0.0"
   },
   {
     "objectID": "posts/web-scraping/index.html#takeaway",
     "href": "posts/web-scraping/index.html#takeaway",
-    "title": "TODO - a title that states the finding",
+    "title": "Python leads technology mentions in Hacker News hiring posts",
     "section": "Takeaway",
-    "text": "Takeaway\nWRITE HERE. ~60 words. One sentence a reader could repeat.\n\nCode and data: posts/web-scraping/"
+    "text": "Takeaway\nPython is a practical first language for students exploring this hiring community. Use the ranking to select the ads and skills to review, then check the actual positions. Although two scraped threads can help you make a well-focused decision, they cannot show what all employers want.\n\nCode, data, and replication instructions: GitHub repository."
   },
   {
     "objectID": "posts/p-values/index.html",
@@ -116,6 +116,6 @@
     "href": "index.html",
     "title": "aeds6400-blog",
     "section": "",
-    "text": "TODO - a title that states the finding\n\n\n\nweb scraping\n\nrvest\n\nlabor market\n\n\n\nTODO - one line\n\n\n\n\n\nSep 21, 2026\n\n\nYipin Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nWhat a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYipin Zhang\n\n\n\n\n\nNo matching items"
+    "text": "Python leads technology mentions in Hacker News hiring posts\n\n\n\nweb scraping\n\nrvest\n\nlabor market\n\n\n\nA comparison of two September hiring threads suggests a practical learning priority, with limits on what keyword counts can tell us.\n\n\n\n\n\nSep 21, 2026\n\n\nYipin Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nWhat a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYipin Zhang\n\n\n\n\n\nNo matching items"
   }
 ]

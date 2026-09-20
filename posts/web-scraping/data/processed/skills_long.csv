@@ -185,7 +185,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,JavaScript
 49525748,2026-09,Discord,FALSE,TRUE,FALSE,JavaScript
 49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,JavaScript
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,JavaScript
 49525549,2026-09,Solution Street,FALSE,TRUE,TRUE,JavaScript
 49530424,2026-09,This Dot Labs,TRUE,FALSE,FALSE,JavaScript
 49550471,2026-09,Trax,TRUE,TRUE,FALSE,JavaScript
@@ -281,7 +280,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,TypeScript
 49525748,2026-09,Discord,FALSE,TRUE,FALSE,TypeScript
 49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,TypeScript
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,TypeScript
 49524943,2026-09,GovStar,TRUE,FALSE,FALSE,TypeScript
 49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,TypeScript
 49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,TypeScript
@@ -322,7 +320,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,TypeScript
 49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,TypeScript
 49525147,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,TypeScript
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,TypeScript
 49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,TypeScript
 49527646,2026-09,Paramark,TRUE,FALSE,TRUE,TypeScript
 49525548,2026-09,RINSE,TRUE,FALSE,FALSE,TypeScript
@@ -435,21 +432,20 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 45094162,2025-09,Nebula,TRUE,TRUE,FALSE,Go
 45103981,2025-09,Hardfin,TRUE,TRUE,FALSE,Go
 45099367,2025-09,Composio,FALSE,FALSE,FALSE,Go
-45169753,2025-09,Squint,FALSE,TRUE,FALSE,Go
+45129900,2025-09,Thunder Compute (S24),FALSE,FALSE,FALSE,Go
 45106305,2025-09,Coder,FALSE,FALSE,FALSE,Go
 45094855,2025-09,ClickHouse,TRUE,FALSE,FALSE,Go
 45100763,2025-09,Coachcube,FALSE,TRUE,FALSE,Go
 45127516,2025-09,Vivint,FALSE,TRUE,FALSE,Go
 45112155,2025-09,Adalat AI,TRUE,FALSE,FALSE,Go
-45104008,2025-09,Beautiful.ai,TRUE,FALSE,FALSE,Go
 45221721,2025-09,Censys,TRUE,FALSE,FALSE,Go
 45110575,2025-09,Bluesky Social,TRUE,FALSE,FALSE,Go
+45096470,2025-09,/Noona,TRUE,FALSE,FALSE,Go
 45215864,2025-09,Fullstory,TRUE,FALSE,FALSE,Go
 45097165,2025-09,Bubblehouse,TRUE,FALSE,FALSE,Go
 45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Go
 49523835,2026-09,*Fastly,FALSE,TRUE,FALSE,Go
 49711313,2026-09,Pango (YC S26),FALSE,FALSE,TRUE,Go
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Go
 49532898,2026-09,NetBird,TRUE,FALSE,FALSE,Go
 49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,Go
 49523808,2026-09,Stream,TRUE,FALSE,FALSE,Go
@@ -457,14 +453,12 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49523408,2026-09,Astronomer,TRUE,FALSE,FALSE,Go
 49527115,2026-09,Spacelift,TRUE,FALSE,FALSE,Go
 49550509,2026-09,Hiring: Senior Software Engineers (LATAM/US/Canada-based),FALSE,FALSE,FALSE,Go
-49528399,2026-09,Axo,FALSE,FALSE,TRUE,Go
 49523768,2026-09,Justworks,FALSE,FALSE,TRUE,Go
 49523704,2026-09,CyberAtlas,TRUE,FALSE,FALSE,Go
 49527209,2026-09,Loft Orbital,FALSE,FALSE,FALSE,Go
 49541874,2026-09,SentiLink,TRUE,TRUE,TRUE,Go
 49555567,2026-09,vCluster Labs,TRUE,FALSE,FALSE,Go
 49530116,2026-09,Mattermost,TRUE,FALSE,FALSE,Go
-49528132,2026-09,Relativity Space,FALSE,FALSE,FALSE,R
 45098052,2025-09,SerpApi,TRUE,TRUE,FALSE,React
 45094200,2025-09,MONUMENTAL,FALSE,TRUE,FALSE,React
 45099497,2025-09,ShieldAI,TRUE,FALSE,FALSE,React
@@ -551,7 +545,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49525748,2026-09,Discord,FALSE,TRUE,FALSE,React
 49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,React
 49531439,2026-09,FitMate,TRUE,FALSE,FALSE,React
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,React
 49524943,2026-09,GovStar,TRUE,FALSE,FALSE,React
 49524167,2026-09,WorkHerohttps://workhero.pro,TRUE,FALSE,FALSE,React
 49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,React
@@ -588,7 +581,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49523985,2026-09,Starbridge,TRUE,FALSE,FALSE,React
 49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,React
 49525147,2026-09,Relevant Healthcare,TRUE,FALSE,FALSE,React
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,React
 49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,React
 49525544,2026-09,DAT,FALSE,FALSE,TRUE,React
 49527646,2026-09,Paramark,TRUE,FALSE,TRUE,React
@@ -642,7 +634,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,AWS
 45102400,2025-09,Clio,TRUE,FALSE,TRUE,AWS
 49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,AWS
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,AWS
 49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,AWS
 49553487,2026-09,Apex Dental Partners,TRUE,FALSE,TRUE,AWS
 49530867,2026-09,3C Digital Solutions,TRUE,FALSE,FALSE,AWS
@@ -670,7 +661,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49538459,2026-09,Republic Services,TRUE,FALSE,FALSE,AWS
 49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,AWS
 49534764,2026-09,Strobe Power,FALSE,TRUE,FALSE,AWS
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,AWS
 49527193,2026-09,Anterior,FALSE,TRUE,FALSE,AWS
 49525544,2026-09,DAT,FALSE,FALSE,TRUE,AWS
 49523703,2026-09,VersaFeed.com,TRUE,FALSE,FALSE,AWS
@@ -746,7 +736,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 45161373,2025-09,Showpass,FALSE,TRUE,TRUE,Docker
 45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Docker
 49533854,2026-09,Spanish National Cancer Research Centre (CNIO),FALSE,FALSE,TRUE,Docker
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Docker
 49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Docker
 49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Docker
 49532957,2026-09,Senior Python Backend Engineer,TRUE,FALSE,FALSE,Docker
@@ -812,7 +801,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 45100767,2025-09,Phrasing,TRUE,FALSE,FALSE,Postgres
 45094015,2025-09,Faction,FALSE,TRUE,FALSE,Postgres
 49522989,2026-09,Snouthttps://snout.com/,TRUE,FALSE,FALSE,Postgres
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Postgres
 49615973,2026-09,Remote (US) Close (https://close.com),TRUE,FALSE,FALSE,Postgres
 49662536,2026-09,Squoosh.AI,TRUE,FALSE,FALSE,Postgres
 49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Postgres
@@ -876,7 +864,6 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 45098287,2025-09,Data Engineer,TRUE,FALSE,FALSE,Terraform
 45095984,2025-09,AllSpice,TRUE,FALSE,TRUE,Terraform
 45102400,2025-09,Clio,TRUE,FALSE,TRUE,Terraform
-49686668,2026-09,"Location: London, UK Remote: Yes — UK remote or London hybrid/onsite Willing to relocate: No Right to work: UK — no sponsorship required Availability: Immediately",TRUE,TRUE,TRUE,Terraform
 49524943,2026-09,GovStar,TRUE,FALSE,FALSE,Terraform
 49530867,2026-09,3C Digital Solutions,TRUE,FALSE,FALSE,Terraform
 49522929,2026-09,Open Education Applications / Neon,FALSE,FALSE,TRUE,Terraform
@@ -1018,5 +1005,4 @@ comment_id,thread,company,remote,onsite,hybrid,skill
 49527344,2026-09,AREO,TRUE,FALSE,FALSE,Ruby
 49529957,2026-09,Chronograph (chronograph.pe),TRUE,FALSE,FALSE,Ruby
 49531646,2026-09,SerpApi,TRUE,TRUE,FALSE,Ruby
-49625444,2026-09,"Location: Lahore, Pakistan Remote: Yes",TRUE,FALSE,FALSE,Ruby
 49546647,2026-09,Prophet Town LLC,TRUE,FALSE,TRUE,Ruby

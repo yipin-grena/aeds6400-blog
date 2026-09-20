@@ -8,9 +8,9 @@
 
 <meta name="author" content="Yipin Zhang">
 <meta name="dcterms.date" content="2026-09-21">
-<meta name="description" content="TODO - one line">
+<meta name="description" content="A comparison of two September hiring threads suggests a practical learning priority, with limits on what keyword counts can tell us.">
 
-<title>TODO - a title that states the finding – Yipin Zhang</title>
+<title>Python leads technology mentions in Hacker News hiring posts – Yipin Zhang</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -78,7 +78,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -158,10 +157,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">TODO - a title that states the finding</h1>
+      <h1 class="title">Python leads technology mentions in Hacker News hiring posts</h1>
                   <div>
         <div class="description">
-          TODO - one line
+          A comparison of two September hiring threads suggests a practical learning priority, with limits on what keyword counts can tell us.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -204,203 +203,262 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="the-question" class="level2">
-<h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p>WRITE HERE. ~100 words. You write R for every assignment; R appears in 1 of 261 postings. What do employers actually ask for, and has it shifted enough in a year to change what you should study?</p>
+<section id="what-technological-skill-should-i-turn-my-attention-to-next" class="level2">
+<h2 data-anchor-id="what-technological-skill-should-i-turn-my-attention-to-next">What technological skill should I turn my attention to next?</h2>
+<p>The fact that I studied R led me to question how classroom programming stacks up against the technologies referred to in job advertisements. For a person looking into technology careers, would learning Python, web development, or cloud infrastructure be a useful next move? I collected two of the Hacker News “Who is hiring?” threads and then compared them using a fixed list of 20 technology categories. Python is mentioned in 27.7% of the hiring comments that remained from September 2026, which is the highest proportion among the categories in question, while I was surprised to find out that R appears in 0 of 256 postings. Python is a reasonable place to start for this kind of job. However, the analysis does not indicate which skill will yield the highest payoff or increase an individual’s chances of getting an offer.</p>
 </section>
-<section id="where-the-data-comes-from" class="level2">
-<h2 class="anchored" data-anchor-id="where-the-data-comes-from">Where the data comes from</h2>
-<p>WRITE HERE. ~120 words. HN monthly hiring thread, one top-level comment per employer. Same month a year apart holds seasonality fixed. robots.txt allows /item, disallows /submitted, 30-second delay, pages cached. One sentence on the API.</p>
+<section id="where-the-data-come-from" class="level2">
+<h2 data-anchor-id="where-the-data-come-from">Where the data come from</h2>
+<p>The sources are the <a href="https://news.ycombinator.com/item?id=45093192">September 2025</a> and <a href="https://news.ycombinator.com/item?id=49522897">September 2026</a> threads. The saved acquisition metadata are dated 19 September 2026. My R scraper uses <code>rvest</code> to extract public HTML, caches pages, and waits 30 seconds after each new page request. The current <a href="https://news.ycombinator.com/robots.txt">robots.txt</a> specifies that delay and does not disallow <code>/item</code>. The workflow does not bypass logins, paywalls, or CAPTCHAs. Hacker News also provides an <a href="https://github.com/HackerNews/API">official API</a>, which would ordinarily be preferable; HTML extraction is used here to practise the assignment’s required <code>rvest</code> workflow. Reproducing the saved analysis needs no new requests.</p>
 </section>
-<section id="turning-comments-into-data" class="level2">
-<h2 class="anchored" data-anchor-id="turning-comments-into-data">Turning comments into data</h2>
-<p>WRITE HERE. ~120 words. 863 comments to 560 postings. The word-boundary problem: isses PostgreSQL; a case-insensitive atched the verb “go” until it was caught.</p>
+<section id="turning-comments-into-measurements" class="level2">
+<h2 data-anchor-id="turning-comments-into-measurements">Turning comments into measurements</h2>
+<p>The files contain 863 comments, some of which are replies. I kept the top-level comments that include text, removed duplicate comment IDs, and excluded 10 entries identified during review as discussions, personal job-seeking or service offers, or insufficiently informative content. The final dataset consists of 294 hiring comments from 2025 and 256 from 2026. The IDs of the excluded entries together with the reasons for their exclusion are saved with the code. Each comment is counted only once even if it promotes more than one job; likewise, the same employer can be listed more than once.</p>
+<p>Keyword matching also has to be checked. I only caught the “Go” bug because its count jumped from 26 to 42 between two runs on identical data, triggered by phrases like “Go for it” and “Go-To-Market”. Updating the matching rules resolved those false positives and captured the all-caps GO spelling. For the other options, the criteria are intentionally kept narrow: SQL counts the single term, while Postgres includes PostgreSQL. It is not appropriate to add the percentages since comments can refer to both. These adjustments cover mentions such as company technology stacks, not the verified requirements for each advertised role.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>trend <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(share_2026, <span class="at">n =</span> <span class="dv">12</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="dv">100</span> <span class="sc">*</span> share_2026, <span class="fu">reorder</span>(skill, share_2026))) <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"% of postings mentioning the skill"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"Share of "</span>, n_2026, <span class="st">" job postings"</span>)) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"skill_share_2026.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
-<div id="fig-demand" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-demand" class="quarto-float quarto-figure quarto-figure-center" alt="Horizontal bars comparing technology mention shares, with Python highest.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-demand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-demand-1.png" class="img-fluid figure-img" width="672">
+<img src="results/figures/skill_share_2026.png" class="img-fluid figure-img" style="width:100.0%" alt="Horizontal bars comparing technology mention shares, with Python highest.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Most-requested technologies, September 2026
+Figure&nbsp;1: Leading technology categories in retained September 2026 hiring comments. Ties at rank 12 are included.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="what-the-comparison-can-and-cannot-show" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-comparison-can-and-cannot-show">What the comparison can and cannot show</h2>
-<p>WRITE HERE. ~180 words. TypeScript and React fell together, the two largest moves. But 0 of the changes reach p &lt; 0.05. Levels are measured well; changes stack two standard errors.</p>
+<section id="what-was-the-difference-between-the-two-snapshots" class="level2">
+<h2 data-anchor-id="what-was-the-difference-between-the-two-snapshots">What was the difference between the two snapshots?</h2>
+<p>TypeScript and React make up 20.3% and 19.9% of the retained comments from 2026, respectively. Their proportions are 8.3 and 8.0 percentage points lower than in the 2025 snapshot. These are the observed differences, not an indication of a widespread decline in demand for web development.</p>
+<p>Comparing two September threads eliminates one aspect of the seasonal mismatch by using the same calendar month, but it does not keep the hiring population constant. The September 2026 data was still incomplete at the time of collection, and each thread includes different employers and positions. Because this is a self-selecting online community, not a random selection of jobs, keyword rules may also miss abbreviations or count occasional references. For these reasons I give the comparison only a descriptive account rather than treating these differences as evidence about the wider labour market.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>trend <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_2025 <span class="sc">+</span> n_2026 <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(change_pp, <span class="fu">reorder</span>(skill, change_pp), <span class="at">fill =</span> significant)) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey30"</span>) <span class="sc">+</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"grey78"</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"p &lt; 0.05"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"within noise"</span>),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Percentage-point change"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"skill_change.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
-<div id="fig-change" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-change" class="quarto-float quarto-figure quarto-figure-center" alt="Dot plot of percentage-point differences, with the largest declines for TypeScript and React.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-change-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-change-1.png" class="img-fluid figure-img" width="672">
+<img src="results/figures/skill_change.png" class="img-fluid figure-img" style="width:100.0%" alt="Dot plot of percentage-point differences, with the largest declines for TypeScript and React.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-change-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Change in share of postings, September 2025 to September 2026. No change is distinguishable from sampling noise.
+Figure&nbsp;2: Observed differences in mention shares across the two saved September threads. These are descriptive comparisons, not causal effects or population estimates.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="so-what-should-you-learn" class="level2">
-<h2 class="anchored" data-anchor-id="so-what-should-you-learn">So what should you learn?</h2>
-<p>WRITE HERE. ~130 words. Choose from where demand sits, not where it looks to be heading. Be specific.</p>
+<section id="what-is-the-right-thing-for-a-student-to-do-in-this-situation" class="level2">
+<h2 data-anchor-id="what-is-the-right-thing-for-a-student-to-do-in-this-situation">What is the right thing for a student to do in this situation?</h2>
+<p>If a student is already using R and wants to learn about the types of jobs listed here, I suggest they create a small Python project by obtaining data, cleaning it, and publishing a reproducible analysis. While Python is prominent, such a project should be seen as a reasonable experiment rather than a sure way to secure a job. Alternatively, a student aiming for a career in web development could build a TypeScript/React application, since both are still frequently mentioned even though they have lower proportions in this comparison.</p>
+<p>Before you decide on a longer course, look at a selection of advertisements that correspond to your location, level of experience, and the position you want. Determine which technologies are essential and which only refer to the employer’s technology stack. This matters because the dataset includes senior engineering positions, junior ones, and non-technical roles. The lack of a verified R keyword match in this case does not prove that R is unimportant for jobs in economics or statistics.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>trend <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_2025 <span class="sc">+</span> n_2026 <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Skill =</span> skill,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2025 (%)</span><span class="st">`</span>    <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2025, <span class="dv">1</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2026 (%)</span><span class="st">`</span>    <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2026, <span class="dv">1</span>),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(change_pp, <span class="dv">1</span>),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">p             =</span> <span class="fu">round</span>(p_value, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="tbl-trends" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Category =</span> skill,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2025 count</span><span class="st">`</span> <span class="ot">=</span> n_2025,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2025 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2025, <span class="dv">1</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2026 count</span><span class="st">`</span> <span class="ot">=</span> n_2026,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">2026 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> share_2026, <span class="dv">1</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(change_pp, <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-trends" class="cell quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Skill demand, September 2025 vs September 2026
+Table&nbsp;1: Keyword mentions by year. Counts are hiring comments; percentages use all retained hiring comments in that year. Categories overlap.
 </figcaption>
 <div aria-describedby="tbl-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 17%">
+</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Skill</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;">2025 count</th>
 <th style="text-align: right;">2025 (%)</th>
+<th style="text-align: right;">2026 count</th>
 <th style="text-align: right;">2026 (%)</th>
 <th style="text-align: right;">Change (pp)</th>
-<th style="text-align: right;">p</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Python</td>
-<td style="text-align: right;">26.4</td>
-<td style="text-align: right;">27.2</td>
-<td style="text-align: right;">0.8</td>
-<td style="text-align: right;">0.910</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">26.9</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">0.9</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">TypeScript</td>
-<td style="text-align: right;">28.1</td>
-<td style="text-align: right;">20.7</td>
-<td style="text-align: right;">-7.4</td>
-<td style="text-align: right;">0.054</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">28.6</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: right;">-8.3</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">React</td>
-<td style="text-align: right;">27.4</td>
-<td style="text-align: right;">20.3</td>
-<td style="text-align: right;">-7.1</td>
-<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">27.9</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">19.9</td>
+<td style="text-align: right;">-8.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Postgres</td>
-<td style="text-align: right;">15.4</td>
-<td style="text-align: right;">16.9</td>
-<td style="text-align: right;">1.5</td>
-<td style="text-align: right;">0.720</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">15.6</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">16.8</td>
+<td style="text-align: right;">1.2</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">LLMs</td>
-<td style="text-align: right;">13.0</td>
-<td style="text-align: right;">15.7</td>
-<td style="text-align: right;">2.7</td>
-<td style="text-align: right;">0.436</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">13.3</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">2.8</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">AWS</td>
-<td style="text-align: right;">13.7</td>
-<td style="text-align: right;">13.4</td>
-<td style="text-align: right;">-0.3</td>
-<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">13.9</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">12.9</td>
+<td style="text-align: right;">-1.1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Kubernetes</td>
-<td style="text-align: right;">9.0</td>
-<td style="text-align: right;">10.0</td>
-<td style="text-align: right;">0.9</td>
-<td style="text-align: right;">0.817</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">10.2</td>
+<td style="text-align: right;">1.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Rust</td>
-<td style="text-align: right;">6.7</td>
-<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">6.8</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">8.2</td>
 <td style="text-align: right;">1.4</td>
-<td style="text-align: right;">0.651</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Docker</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">5.4</td>
-<td style="text-align: right;">7.7</td>
-<td style="text-align: right;">2.3</td>
-<td style="text-align: right;">0.347</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">7.4</td>
+<td style="text-align: right;">2.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Go</td>
-<td style="text-align: right;">8.7</td>
-<td style="text-align: right;">6.5</td>
-<td style="text-align: right;">-2.2</td>
-<td style="text-align: right;">0.419</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">5.9</td>
+<td style="text-align: right;">-3.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Terraform</td>
-<td style="text-align: right;">5.7</td>
-<td style="text-align: right;">6.1</td>
-<td style="text-align: right;">0.4</td>
-<td style="text-align: right;">0.966</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">5.9</td>
+<td style="text-align: right;">0.1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">C++</td>
-<td style="text-align: right;">5.7</td>
-<td style="text-align: right;">4.6</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4.7</td>
 <td style="text-align: right;">-1.1</td>
-<td style="text-align: right;">0.698</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">JavaScript</td>
-<td style="text-align: right;">3.3</td>
-<td style="text-align: right;">4.6</td>
-<td style="text-align: right;">1.3</td>
-<td style="text-align: right;">0.587</td>
+<td style="text-align: left;">SQL</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">3.7</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4.7</td>
+<td style="text-align: right;">0.9</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SQL</td>
-<td style="text-align: right;">3.7</td>
-<td style="text-align: right;">4.6</td>
+<td style="text-align: left;">JavaScript</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">4.3</td>
 <td style="text-align: right;">0.9</td>
-<td style="text-align: right;">0.739</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Machine learning</td>
-<td style="text-align: right;">5.7</td>
+<td style="text-align: left;">Java</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">3.7</td>
+<td style="text-align: right;">8</td>
 <td style="text-align: right;">3.1</td>
-<td style="text-align: right;">-2.6</td>
-<td style="text-align: right;">0.196</td>
+<td style="text-align: right;">-0.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Machine learning</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">-2.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ruby</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4.1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">-1.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scala</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spark</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
 </tr>
 </tbody>
 </table>
@@ -411,10 +469,10 @@ Table&nbsp;1: Skill demand, September 2025 vs September 2026
 </div>
 </section>
 <section id="takeaway" class="level2">
-<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
-<p>WRITE HERE. ~60 words. One sentence a reader could repeat.</p>
+<h2 data-anchor-id="takeaway">Takeaway</h2>
+<p>Python is a practical first language for students exploring this hiring community. Use the ranking to select the ads and skills to review, then check the actual positions. Although two scraped threads can help you make a well-focused decision, they cannot show what all employers want.</p>
 <hr>
-<p><strong>Code and data:</strong> <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/web-scraping"><code>posts/web-scraping/</code></a></p>
+<p><strong>Code, data, and replication instructions:</strong> <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/web-scraping">GitHub repository</a>.</p>
 
 
 </section>
@@ -422,13 +480,6 @@ Table&nbsp;1: Skill demand, September 2025 vs September 2026
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     

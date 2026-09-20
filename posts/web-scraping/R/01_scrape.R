@@ -7,9 +7,10 @@
 # and Hacker News has one. The assignment requires rvest, so this
 # collects the same data from public HTML instead.
 #
-# robots.txt (news.ycombinator.com, checked 2026-09-19):
-#   /item?       allowed
-#   /submitted?  DISALLOWED - thread IDs were found by hand
+# robots.txt (news.ycombinator.com, reviewed 2026-09-20):
+#   Current check (2026-09-20): /item is not disallowed.
+#   The earlier claim that /submitted is disallowed was not substantiated.
+#   Thread IDs were supplied explicitly; robots.txt is not blanket permission.
 #   Crawl-delay: 30
 # ==============================================================
 
@@ -19,6 +20,7 @@ library(robotstxt)
 library(dplyr)
 library(readr)
 library(here)
+here::i_am("posts/web-scraping/R/01_scrape.R")
 
 # ---- setup: paths and settings in one place ----
 
@@ -42,7 +44,17 @@ dir.create(HTML_DIR, recursive = TRUE, showWarnings = FALSE)
 
 # ---- 1. is scraping permitted? ----
 
-stopifnot(paths_allowed(BASE_URL, bot = "*"))
+# Default is offline replication. Opt in deliberately to new requests:
+# options(hn.allow_network = TRUE)
+ALLOW_NETWORK <- isTRUE(getOption("hn.allow_network", FALSE))
+fetched_new <- FALSE
+if (ALLOW_NETWORK && file.exists(META_FILE)) {
+  stop("Use separate raw-output paths for a fresh snapshot; see README.")
+}
+if (ALLOW_NETWORK) {
+  stopifnot(paths_allowed(BASE_URL, bot = "*"))
+  Sys.sleep(DELAY_SEC)
+}
 
 
 # ---- 2. fetch one page: cached, delayed, identified ----
@@ -58,7 +70,12 @@ fetch_page <- function(item_id, p) {
   url <- sprintf("%s?id=%d&p=%d", BASE_URL, item_id, p)
   message("fetching: ", url)
   
+  if (!ALLOW_NETWORK) {
+    stop("Missing cached HTML: ", path,
+         ". See README before enabling a fresh scrape.")
+  }
   response <- GET(url, user_agent(USER_AGENT))
+  fetched_new <<- TRUE
   stop_for_status(response)
   writeBin(content(response, "raw"), path)
   
@@ -68,8 +85,8 @@ fetch_page <- function(item_id, p) {
 
 
 # ---- 3. extract the comments from one page ----
-# indent == 0 marks a top-level comment, which in these threads is
-# one employer's job posting. html_element() (singular) inside each
+# indent == 0 marks a top-level comment, a candidate hiring advertisement.
+# Cleaning must still remove discussion and job-seeking entries. html_element() (singular) inside each
 # comment returns NA for a missing field, keeping columns aligned.
 
 parse_page <- function(page) {
@@ -103,6 +120,7 @@ scrape_thread <- function(item_id, label) {
     
     seen           <- c(seen, page_data$comment_id)
     collected[[p]] <- page_data
+    if (p == MAX_PAGES) stop("Page limit reached; check completeness before saving.")
   }
   
   result <- bind_rows(collected)
@@ -135,6 +153,9 @@ print(table(raw$thread, top_level = raw$indent == 0))
 
 # ---- 7. save the data and its provenance ----
 
+if (fetched_new && file.exists(META_FILE)) {
+  stop("Fresh and cached inputs may be mixed. Use a separate snapshot directory.")
+}
 write_csv(raw, RAW_FILE)
 
 metadata <- tibble(
@@ -147,5 +168,8 @@ metadata <- tibble(
   comments_collected  = sapply(threads$label, function(x) sum(raw$thread == x))
 )
 
-write_csv(metadata, META_FILE)
+# Cache reads must not relabel the original acquisition date as today.
+if (!file.exists(META_FILE) || fetched_new) {
+  write_csv(metadata, META_FILE)
+}
 message("wrote ", RAW_FILE, " and ", META_FILE)
