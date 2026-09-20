@@ -79,3 +79,22 @@ ggsave("output/figures/skill_change.png", p2, width = 8, height = 5, dpi = 300)
 
 message("\nSkill trends:")
 print(trend, n = Inf)
+
+
+# --- 5. Which changes exceed sampling noise? ------------------
+# Two-proportion test. With ~300 and ~261 postings, differences
+# under roughly 4 percentage points are indistinguishable from
+# chance, so most of the table is noise.
+
+n25 <- totals$n_postings[totals$thread == "2025-09"]
+n26 <- totals$n_postings[totals$thread == "2026-09"]
+
+trend <- trend |>
+  rowwise() |>
+  mutate(
+    p_value = if (n_2025 + n_2026 >= 20)
+      prop.test(c(n_2025, n_2026), c(n25, n26))$p.value else NA_real_
+  ) |>
+  ungroup()
+
+write_csv(trend, "output/tables/skill_trends.csv")
