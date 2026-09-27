@@ -1,0 +1,11 @@
+data/raw/*
+!data/raw/README.md
+.Rhistory
+.RData
+.Rproj.user/
+.quarto/
+_output/
+.env
+.Renviron
+
+/index.html

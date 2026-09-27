@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "posts/**/index.qmd"
 
 website:
   description: "A blog built with Quarto"
