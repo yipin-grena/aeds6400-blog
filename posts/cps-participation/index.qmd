@@ -22,7 +22,7 @@ source(file.path(POST_DIR, "R", "analysis.R"))
 a <- readRDS(file.path(POST_DIR, "results", "analysis.rds"))
 change_text <- function(x) {
   if (abs(x) < 0.05) return("approximately unchanged")
-  sprintf("%.1f percentage points %s", abs(x), ifelse(x > 0, "higher", "lower"))
+  sprintf("%.1f percentage %s %s", abs(x), ifelse(round(abs(x), 1) == 1, "point", "points"), ifelse(x > 0, "higher", "lower"))
 }
 rate_for <- function(year, group) {
   z <- a$annual$rate[a$annual$YEAR == year & a$annual$age_group == group]
@@ -43,13 +43,13 @@ age_mix_gap <- 100 * (last$standardized - last$observed)
 
 A low unemployment rate does not tell us whether people are participating in the labor market. Someone who stops looking for work generally leaves the unemployment-rate denominator. Labor-force participation asks a different question: what share of the population is working or looking for work? That distinction matters when comparing younger adults, people in their main working years, and older adults.
 
-I use IPUMS CPS microdata to ask whether participation in 2024 returned to its 2019 level equally across age groups. The overall annual rate fell from 63.4% to 62.9%, leaving it `r change_text(observed_change)` in 2024 than in 2019. The figures below examine how that aggregate comparison relates to participation within age groups and changes in the population's age mix.
+I analyze IPUMS CPS microdata in order to determine participation levels in 2024 relative to the levels in 2019. The overall annual participation rate decreased from 63.4% to 62.9%, which means that participation in 2024 was `r change_text(observed_change)` than in 2019. The figures below present how that aggregate comparison relates to participation within age groups and changes in the population's age mix.
 
 ## Measuring participation consistently
 
-The analysis uses all 72 Basic Monthly CPS samples from January 2019 through December 2024. It includes civilians age 16 or older with a defined labor-force status and a positive sampling weight. March Basic is included; the separate ASEC supplement is excluded.
+Labor-market participation is measured in a consistent way. The analysis includes all 72 Basic Monthly CPS samples from January 2019 through December 2024. It includes civilians age 16 or older with a defined labor-force status and a positive sampling weight. It includes March Basic but excludes the separate ASEC supplement.
 
-For every month and age group, I divide the weighted number in the labor force by the weighted eligible population. I use [WTFINL](https://cps.ipums.org/cps-action/variables/WTFINL), the Basic Monthly person weight, so observations represent different numbers of people. [LABFORCE](https://cps.ipums.org/cps-action/variables/LABFORCE) identifies participation. Each annual estimate then averages the twelve monthly rates equally. These are descriptive, unadjusted estimates, not seasonally adjusted headline statistics.
+For each month and age group, I divide the weighted number in the labor force by the weighted eligible population. I use [WTFINL](https://cps.ipums.org/cps-action/variables/WTFINL), the Basic Monthly person weight, so observations represent different numbers of people. [LABFORCE](https://cps.ipums.org/cps-action/variables/LABFORCE) identifies participation. Each annual estimate then averages the twelve monthly rates equally. These are descriptive, unadjusted estimates, not seasonally adjusted headline statistics.
 
 ## First, compare participation levels
 
@@ -60,9 +60,9 @@ For every month and age group, I divide the weighted number in the labor force b
 knitr::include_graphics(file.path(POST_DIR, "results", "figures", "trends.png"))
 ```
 
-Figure 1 separates four stages of working life. Among adults aged 25–54, participation was `r rate_for(2019, "25-54")`% in 2019 and `r rate_for(2024, "25-54")`% in 2024. For adults aged 65 and older, the corresponding estimates were `r rate_for(2019, "65+")`% and `r rate_for(2024, "65+")`%.
+Figure 1 shows participation across four stages of working life. Among adults aged 25–54, participation was `r rate_for(2019, "25-54")`% in 2019 and `r rate_for(2024, "25-54")`% in 2024. For adults aged 65 and older, the corresponding estimates were `r rate_for(2019, "65+")`% and `r rate_for(2024, "65+")`%.
 
-All four groups experienced a decline between 2019 and 2020. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The common vertical scale shows large differences in participation levels; the next figure makes the smaller changes easier to see.
+All four groups declined between 2019 and 2020. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The common vertical scale shows large differences in participation levels; the next figure makes the smaller changes easier to see.
 
 ## Next, compare changes against the same baseline
 
@@ -73,9 +73,9 @@ All four groups experienced a decline between 2019 and 2020. Their subsequent pa
 knitr::include_graphics(file.path(POST_DIR, "results", "figures", "changes.png"))
 ```
 
-Figure 2 puts each group on a common change scale. Adults aged 25–54 recorded the largest increase, about 1.0 percentage point. Participation among ages 55–64 rose by 0.7 points, while ages 16–24 were close to their baseline, rising only 0.1 points. Adults aged 65 and older were the only group below their 2019 rate, by 0.8 points.
+Figure 2 plots each group on a common change metric. Adults aged 25 to 54 recorded the highest rise, roughly 1.0 percentage point. The age group 55–64 saw an increase of 0.7 points, while those aged 16–24 were approximately unchanged, gaining just 0.1 points. Adults aged 65 and older were the only group below their 2019 value, down by 0.8 points.
 
-The recovery therefore was uneven. It would be misleading to describe all older adults as having the same experience: those aged 55–64 moved above their baseline, whereas those aged 65 and older did not. These comparisons describe outcomes; they do not identify whether retirement, health, schooling, or care responsibilities caused the differences.
+Thus, recovery was uneven. It would be inaccurate to say that all older adults had the same experience: for instance, the age group 55 to 64 exceeded its baseline while the group aged 65 and older did not. These comparisons describe outcomes, but they do not identify whether retirement, health, schooling, or care responsibilities caused the differences.
 
 ## Finally, hold the age mix fixed
 
@@ -88,11 +88,11 @@ knitr::include_graphics(file.path(POST_DIR, "results", "figures", "age_mix.png")
 
 An overall rate combines each group's participation rate with its population share. Figure 3 holds the four shares at their 2019 values for each calendar month while allowing participation within groups to change. Under that calculation, participation in 2024 was `r change_text(adjusted_change)` than in 2019. The standardized 2024 level was `r change_text(age_mix_gap)` than the observed level.
 
-Thus, the observed shortfall becomes a modest increase when the broad age mix is held fixed. A shift in population shares toward groups with lower participation can pull down the overall rate even when most groups improve. The roughly 1.0-point gap quantifies that composition effect under this particular standardization. It is not an estimate of what a policy would accomplish. Changes within these broad age bands remain, and the survey does not follow a fixed cohort for this analysis.
+Thus, the observed shortfall becomes a modest increase when the broad age mix is held fixed. A shift in population shares toward groups with lower participation can pull down the overall rate even when most groups improve. The roughly 1.0-point gap quantifies that composition effect under this particular standardization. It does not estimate what a policy would accomplish. Changes within these broad age bands remain, and the survey does not follow a fixed cohort for this analysis.
 
 ## Takeaway and limits
 
-By 2024, participation had surpassed its 2019 level for adults aged 25–64, approximately returned to it for younger adults, and remained lower for adults aged 65 and older. The aggregate shortfall therefore does not indicate a universal failure to recover. Population composition and differences across ages both matter.
+By 2024, participation had surpassed its 2019 level for adults aged 25–64, approximately returned to it for younger adults, and remained lower for adults aged 65 and older. The aggregate shortfall therefore does not indicate a universal failure to recover. Population composition and age differences both matter.
 
 The CPS has a complex rotating design, and [pandemic-era collection disruptions](https://cps.ipums.org/cps/covid19.shtml) complicate interpretation. I report descriptive differences without claiming causality or statistical significance. Annual averages also hide short-lived monthly changes.
 
