@@ -93,11 +93,15 @@ make_figures <- function(a) {
   common <- theme_minimal(base_size = 13) + theme(panel.grid.minor = element_blank(),
     plot.title = element_text(face = "bold"), plot.caption = element_text(hjust = 0, size = 9), legend.position = "bottom")
   caption <- "Source: IPUMS CPS, Census Bureau and BLS. Civilians age 16+; WTFINL weights.\nAnnual means of 12 monthly rates; not seasonally adjusted."
-  p1 <- ggplot(a$annual, aes(YEAR, 100 * rate, color = age_group, group = age_group)) +
+  trends <- a$annual |> group_by(age_group) |>
+    mutate(change_pp = 100 * (rate - rate[YEAR == 2019])) |> ungroup()
+  p1 <- ggplot(trends, aes(YEAR, change_pp, color = age_group, group = age_group)) +
+    geom_hline(yintercept = 0, color = "grey55", linetype = "dashed") +
     geom_line(linewidth = 0.9) + geom_point(size = 2.1) + facet_wrap(~age_group, ncol = 2) +
     scale_color_manual(values = palette, guide = "none") + scale_x_continuous(breaks = 2019:2024) +
-    scale_y_continuous(limits = c(0, 100)) +
-    labs(title = "Labor-force participation by age group", subtitle = "Labor-force participation, 2019-2024", x = NULL, y = "Share in the labor force (%)", caption = caption) + common
+    labs(title = "Prime-age participation recovered; 65+ did not",
+      subtitle = "Change from each age group's 2019 participation rate",
+      x = NULL, y = "Change (percentage points)", caption = caption) + common
   p2 <- ggplot(a$changes, aes(change_pp, age_group, color = age_group)) +
     geom_vline(xintercept = 0, linetype = "dashed", color = "grey55") +
     geom_segment(aes(x = 0, xend = change_pp, yend = age_group), linewidth = 1) + geom_point(size = 3) +

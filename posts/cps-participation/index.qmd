@@ -30,6 +30,13 @@ rate_for <- function(year, group) {
   sprintf("%.1f", 100 * z)
 }
 changes <- a$changes
+change_for <- function(group) {
+  x <- changes$change_pp[changes$age_group == group]
+  stopifnot(length(x) == 1)
+  sprintf("%.1f", abs(x))
+}
+month_count <- nrow(unique(a$monthly[c("YEAR", "MONTH")]))
+record_count <- tail(a$audit$records, 1)
 largest <- changes[which.max(changes$change_pp), ]
 smallest <- changes[which.min(changes$change_pp), ]
 base <- a$overall[a$overall$YEAR == 2019, ]
@@ -43,26 +50,26 @@ age_mix_gap <- 100 * (last$standardized - last$observed)
 
 A low unemployment rate does not tell us whether people are participating in the labor market. Someone who stops looking for work generally leaves the unemployment-rate denominator. Labor-force participation asks a different question: what share of the population is working or looking for work? That distinction matters when comparing younger adults, people in their main working years, and older adults.
 
-I analyze IPUMS CPS microdata in order to determine participation levels in 2024 relative to the levels in 2019. The overall annual participation rate decreased from 63.4% to 62.9%, which means that participation in 2024 was `r change_text(observed_change)` than in 2019. The figures below present how that aggregate comparison relates to participation within age groups and changes in the population's age mix.
+I analyze IPUMS CPS microdata in order to determine participation levels in 2024 relative to the levels in 2019. The overall annual participation rate decreased from `r sprintf("%.1f", 100 * base$observed)`% to `r sprintf("%.1f", 100 * last$observed)`%, which means that participation in 2024 was `r change_text(observed_change)` than in 2019. The figures below present how that aggregate comparison relates to participation within age groups and changes in the population's age mix.
 
 ## Measuring participation consistently
 
-Labor-market participation is measured in a consistent way. The analysis includes all 72 Basic Monthly CPS samples from January 2019 through December 2024. It includes civilians age 16 or older with a defined labor-force status and a positive sampling weight. It includes March Basic but excludes the separate ASEC supplement.
+Labor-market participation is measured in a consistent way. The analysis includes all `r month_count` Basic Monthly CPS samples from January 2019 through December 2024. It includes civilians age 16 or older with a defined labor-force status and a positive sampling weight. It includes March Basic but excludes the separate ASEC supplement.
 
-For each month and age group, I divide the weighted number in the labor force by the weighted eligible population. I use [WTFINL](https://cps.ipums.org/cps-action/variables/WTFINL), the Basic Monthly person weight, so observations represent different numbers of people. [LABFORCE](https://cps.ipums.org/cps-action/variables/LABFORCE) identifies participation. Each annual estimate then averages the twelve monthly rates equally. These are descriptive, unadjusted estimates, not seasonally adjusted headline statistics.
+For each month and age group, I divide the weighted number in the labor force by the weighted eligible population. I use [WTFINL](https://cps.ipums.org/cps-action/variables/WTFINL), the Basic Monthly person weight, so observations represent different numbers of people. [LABFORCE](https://cps.ipums.org/cps-action/variables/LABFORCE) identifies participation. Each annual estimate then averages the twelve monthly rates equally. These are descriptive, unadjusted estimates. IPUMS recommends [COMPWT](https://cps.ipums.org/cps-action/variables/COMPWT) for replicating published BLS labor-force estimates; WTFINL is appropriate for most Basic Monthly analyses, so these rates need not match BLS headline figures.
 
-## First, compare participation levels
+## First, compare recovery paths
 
 ```{r}
 #| label: fig-trends
-#| fig-cap: "Annual means of monthly weighted participation rates. Identical vertical scales make age-group levels comparable."
-#| fig-alt: "Four panels showing annual labor-force participation for ages 16-24, 25-54, 55-64, and 65 and older."
+#| fig-cap: "Annual means of monthly weighted participation rates, expressed as changes from 2019. Panels use identical percentage-point scales; zero marks each group’s baseline."
+#| fig-alt: "Four panels showing changes in participation from 2019 for four age groups, with a shared scale and a zero baseline."
 knitr::include_graphics(file.path(POST_DIR, "results", "figures", "trends.png"))
 ```
 
-Figure 1 shows participation across four stages of working life. Among adults aged 25–54, participation was `r rate_for(2019, "25-54")`% in 2019 and `r rate_for(2024, "25-54")`% in 2024. For adults aged 65 and older, the corresponding estimates were `r rate_for(2019, "65+")`% and `r rate_for(2024, "65+")`%.
+Figure 1 shows changes from 2019 across four stages of working life. Among adults aged 25–54, participation was `r rate_for(2019, "25-54")`% in 2019 and `r rate_for(2024, "25-54")`% in 2024. For adults aged 65 and older, the corresponding estimates were `r rate_for(2019, "65+")`% and `r rate_for(2024, "65+")`%.
 
-All four groups declined between 2019 and 2020. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The common vertical scale shows large differences in participation levels; the next figure makes the smaller changes easier to see.
+All four groups declined between 2019 and 2020. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The shared change scale makes the declines and recovery paths visible, but gives up a direct comparison of participation levels. Figure 2 focuses on the final year.
 
 ## Next, compare changes against the same baseline
 
@@ -73,7 +80,7 @@ All four groups declined between 2019 and 2020. Their subsequent paths diverged:
 knitr::include_graphics(file.path(POST_DIR, "results", "figures", "changes.png"))
 ```
 
-Figure 2 plots each group on a common change metric. Adults aged 25 to 54 recorded the highest rise, roughly 1.0 percentage point. The age group 55–64 saw an increase of 0.7 points, while those aged 16–24 were approximately unchanged, gaining just 0.1 points. Adults aged 65 and older were the only group below their 2019 value, down by 0.8 points.
+Figure 2 plots each group on a common change metric. Adults aged 25 to 54 recorded the highest rise, roughly `r change_for("25-54")` percentage points. The age group 55–64 saw an increase of `r change_for("55-64")` points, while those aged 16–24 were approximately unchanged, gaining just `r change_for("16-24")` points. Adults aged 65 and older were the only group below their 2019 value, down by `r change_for("65+")` points.
 
 Thus, recovery was uneven. It would be inaccurate to say that all older adults had the same experience: for instance, the age group 55 to 64 exceeded its baseline while the group aged 65 and older did not. These comparisons describe outcomes, but they do not identify whether retirement, health, schooling, or care responsibilities caused the differences.
 
@@ -88,7 +95,7 @@ knitr::include_graphics(file.path(POST_DIR, "results", "figures", "age_mix.png")
 
 An overall rate combines each group's participation rate with its population share. Figure 3 holds the four shares at their 2019 values for each calendar month while allowing participation within groups to change. Under that calculation, participation in 2024 was `r change_text(adjusted_change)` than in 2019. The standardized 2024 level was `r change_text(age_mix_gap)` than the observed level.
 
-Thus, the observed shortfall becomes a modest increase when the broad age mix is held fixed. A shift in population shares toward groups with lower participation can pull down the overall rate even when most groups improve. The roughly 1.0-point gap quantifies that composition effect under this particular standardization. It does not estimate what a policy would accomplish. Changes within these broad age bands remain, and the survey does not follow a fixed cohort for this analysis.
+Thus, the observed shortfall becomes a modest increase when the broad age mix is held fixed. A shift in population shares toward groups with lower participation can pull down the overall rate even when most groups improve. The roughly `r sprintf("%.1f", age_mix_gap)`-point gap quantifies that composition effect under this particular standardization. It does not estimate what a policy would accomplish. Changes within these broad age bands remain, and the survey does not follow a fixed cohort for this analysis.
 
 ## Takeaway and limits
 
@@ -98,6 +105,6 @@ The CPS has a complex rotating design, and [pandemic-era collection disruptions]
 
 ---
 
-**Data:** Flood et al. (2025), [IPUMS CPS: Version 13.0](https://doi.org/10.18128/D030.V13.0), University of Minnesota. Basic Monthly samples, January 2019–December 2024; extract created September 27, 2026. The analysis uses 6,146,546 eligible person-month observations, not unique individuals.
+**Data:** Flood et al. (2025), [IPUMS CPS: Version 13.0](https://doi.org/10.18128/D030.V13.0), University of Minnesota. Basic Monthly samples, January 2019–December 2024; extract created September 27, 2026. The analysis uses `r format(record_count, big.mark = ",", scientific = FALSE, trim = TRUE)` eligible person-month observations, not unique individuals.
 
 **Code and replication:** [Blog repository](https://github.com/yipin-grena/aeds6400-blog). The post folder contains the R analysis, aggregate results, figures, and replication instructions. Raw microdata are excluded from Git.

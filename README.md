@@ -10,7 +10,6 @@ Blog posts by Yipin Zhang (grenaz@sas.upenn.edu), Fall 2026.
 |---|------|----------------------|
 | 1 | [What is a p-value?](https://yipin-grena.github.io/aeds6400-blog/posts/p-values/) | `posts/p-values/` |
 | 2 | [Python leads technology mentions in Hacker News hiring posts](https://yipin-grena.github.io/aeds6400-blog/posts/web-scraping/) | [`posts/web-scraping/`](posts/web-scraping/README.md) |
-
 | 3 | [Did labor-force participation recover equally across age groups?](https://yipin-grena.github.io/aeds6400-blog/posts/cps-participation/) | [`posts/cps-participation/`](posts/cps-participation/README.md) |
 
 ## Repository layout
@@ -23,16 +22,17 @@ the rest of the site.
 aeds6400-blog/
 ├── _quarto.yml              site configuration
 ├── index.qmd                home page and post listing
-├── docs/                    rendered site served by GitHub Pages
+├── docs/                    rendered GitHub Pages site
 └── posts/
-    ├── p-values/
-    └── web-scraping/        Blog Post 2 (see its README)
-        ├── index.qmd        the post
-        ├── README.md        data sources, ethics, replication steps
-        ├── R/               01_scrape, 02_clean, 03_analyze
-        ├── data/raw/        scraped CSV, provenance, cached HTML
-        ├── data/processed/  analysis-ready tables
-        └── results/         figures and tables
+    ├── p-values/            Blog Post 1
+    ├── web-scraping/        Blog Post 2: R scripts, saved data, results
+    └── cps-participation/   Blog Post 3
+        ├── index.qmd        post with computed values
+        ├── README.md        methods and replication
+        ├── run.R            analysis entry point
+        ├── R/analysis.R     import, validation, weighting, figures
+        ├── data/raw/        local IPUMS extract, excluded from Git
+        └── results/         aggregate tables, figures, saved R results
 ```
 
 ## Reproducing a post
@@ -46,14 +46,21 @@ source(here::here("posts", "web-scraping", "R", "02_clean.R"))
 source(here::here("posts", "web-scraping", "R", "03_analyze.R"))
 ```
 
-Step 1 reads committed HTML snapshots rather than contacting the source site,
+For Blog Post 2, step 1 reads committed HTML snapshots rather than contacting the source site,
 so the analysis reproduces with no network requests. Per-post details,
 including data provenance and the scraping ethics checklist, are in each
 post's own README.
+
+For Blog Post 3, obtain the IPUMS extract described in [its README](posts/cps-participation/README.md), then run from the repository root:
+
+```sh
+Rscript posts/cps-participation/run.R
+```
+
+This regenerates the aggregate results and charts. Rendering uses the committed aggregate results, so the raw microdata are only needed to rerun the analysis.
 
 Render the site with `quarto render` from the repository root.
 
 ## Environment
 
-R 4.5.1. Package versions used for the most recent run of Blog Post 2 are
-recorded in `posts/web-scraping/results/session-info.txt`.
+R 4.5.1. Package versions are recorded separately in `posts/web-scraping/results/session-info.txt` and `posts/cps-participation/results/session-info.txt`. Each post README lists its dependencies and data requirements.
