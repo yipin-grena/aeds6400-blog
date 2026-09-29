@@ -29,6 +29,9 @@ rate_for <- function(year, group) {
   stopifnot(length(z) == 1)
   sprintf("%.1f", 100 * z)
 }
+youth_rates <- a$annual[a$annual$age_group == "16-24", ]
+youth_drop_2020 <- 100 * (youth_rates$rate[youth_rates$YEAR == 2020] -
+                          youth_rates$rate[youth_rates$YEAR == 2019])
 changes <- a$changes
 change_for <- function(group) {
   x <- changes$change_pp[changes$age_group == group]
@@ -69,7 +72,7 @@ knitr::include_graphics(file.path(POST_DIR, "results", "figures", "trends.png"))
 
 Figure 1 shows changes from 2019 across four stages of working life. Among adults aged 25–54, participation was `r rate_for(2019, "25-54")`% in 2019 and `r rate_for(2024, "25-54")`% in 2024. For adults aged 65 and older, the corresponding estimates were `r rate_for(2019, "65+")`% and `r rate_for(2024, "65+")`%.
 
-All four groups declined between 2019 and 2020. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The shared change scale makes the declines and recovery paths visible, but gives up a direct comparison of participation levels. Figure 2 focuses on the final year.
+All four groups declined between 2019 and 2020. Ages 16–24 had the deepest decline (`r sprintf("%.1f", youth_drop_2020)` percentage points), possibly reflecting disruption to entry-level work; their participation rebounded above baseline in 2023 before falling back toward it in 2024. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The shared change scale makes the declines and recovery paths visible, but gives up a direct comparison of participation levels. Figure 2 focuses on the final year.
 
 ## Next, compare changes against the same baseline
 

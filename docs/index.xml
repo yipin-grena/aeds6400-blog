@@ -8,7 +8,7 @@
 <title>Yipin Zhang</title>
 <link>https://yipin-grena.github.io/aeds6400-blog/</link>
 <atom:link href="https://yipin-grena.github.io/aeds6400-blog/index.xml" rel="self" type="application/rss+xml"/>
-<description>A blog built with Quarto</description>
+<description>Exploring economic questions with data, code, and visualizations for AEDS 6400.</description>
 <generator>quarto-1.10.18</generator>
 <lastBuildDate>Sun, 27 Sep 2026 04:00:00 GMT</lastBuildDate>
 <item>
@@ -64,7 +64,7 @@ Figure&nbsp;1: Annual means of monthly weighted participation rates, expressed a
 </div>
 </div>
 <p>Figure 1 shows changes from 2019 across four stages of working life. Among adults aged 25–54, participation was 82.7% in 2019 and 83.7% in 2024. For adults aged 65 and older, the corresponding estimates were 20.7% and 19.9%.</p>
-<p>All four groups declined between 2019 and 2020. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The shared change scale makes the declines and recovery paths visible, but gives up a direct comparison of participation levels. Figure 2 focuses on the final year.</p>
+<p>All four groups declined between 2019 and 2020. Ages 16–24 had the deepest decline (-2.4 percentage points), possibly reflecting disruption to entry-level work; their participation rebounded above baseline in 2023 before falling back toward it in 2024. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The shared change scale makes the declines and recovery paths visible, but gives up a direct comparison of participation levels. Figure 2 focuses on the final year.</p>
 </section>
 <section id="next-compare-changes-against-the-same-baseline" class="level2">
 <h2 class="anchored" data-anchor-id="next-compare-changes-against-the-same-baseline">Next, compare changes against the same baseline</h2>
