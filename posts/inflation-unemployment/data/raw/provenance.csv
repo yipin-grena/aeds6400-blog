@@ -1,0 +1,3 @@
+"series_id","url","retrieved_utc","md5"
+"CPIAUCSL","https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL&cosd=2014-01-01&coed=2024-12-01","2026-10-01 19:33:37 UTC","f8dfb8413f752425fd65587aafa71c31"
+"UNRATE","https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE&cosd=2014-01-01&coed=2024-12-01","2026-10-01 19:33:37 UTC","c0a588b29f08d64cd002e321c3fb3f33"

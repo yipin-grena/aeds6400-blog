@@ -49,6 +49,69 @@
     "text": "Takeaway\nPython is a practical first language for students exploring this hiring community. Use the ranking to select the ads and skills to review, then check the actual positions. Although two scraped threads can help you make a well-focused decision, they cannot show what all employers want.\n\nCode, data, and replication instructions: GitHub repository."
   },
   {
+    "objectID": "posts/inflation-unemployment/index.html",
+    "href": "posts/inflation-unemployment/index.html",
+    "title": "Did lower inflation require much higher unemployment?",
+    "section": "",
+    "text": "Does bringing inflation down require a large increase in unemployment? The question matters because price stability and access to jobs both affect living standards. A simple inflation–unemployment trade-off suggests that a weaker labor market should accompany slower price growth. But a chart showing two variables moving together cannot establish how much unemployment a policy must create to reduce inflation.\nI examine U.S. monthly data from 2015 through 2024, comparing the years before COVID, the disruption in 2020–2021, and inflation’s rise and retreat in 2022–2024. This fixed window provides a pre-pandemic benchmark and keeps the comparison separate from later developments. The central finding is that the relationship changed substantially across these periods."
+  },
+  {
+    "objectID": "posts/inflation-unemployment/index.html#a-trade-off-that-changes-with-time",
+    "href": "posts/inflation-unemployment/index.html#a-trade-off-that-changes-with-time",
+    "title": "Did lower inflation require much higher unemployment?",
+    "section": "",
+    "text": "Does bringing inflation down require a large increase in unemployment? The question matters because price stability and access to jobs both affect living standards. A simple inflation–unemployment trade-off suggests that a weaker labor market should accompany slower price growth. But a chart showing two variables moving together cannot establish how much unemployment a policy must create to reduce inflation.\nI examine U.S. monthly data from 2015 through 2024, comparing the years before COVID, the disruption in 2020–2021, and inflation’s rise and retreat in 2022–2024. This fixed window provides a pre-pandemic benchmark and keeps the comparison separate from later developments. The central finding is that the relationship changed substantially across these periods."
+  },
+  {
+    "objectID": "posts/inflation-unemployment/index.html#measuring-the-two-rates",
+    "href": "posts/inflation-unemployment/index.html#measuring-the-two-rates",
+    "title": "Did lower inflation require much higher unemployment?",
+    "section": "Measuring the two rates",
+    "text": "Measuring the two rates\nThe data come from the Bureau of Labor Statistics through FRED: CPIAUCSL, the all-items consumer price index, and UNRATE, the unemployment rate. Both series are seasonally adjusted. Unemployment measures unemployed people as a share of the civilian labor force, not the entire population.\nI calculate inflation as 100 × (CPI this month / CPI twelve months earlier − 1). An extra year of CPI data supplies the initial comparison, leaving 120 matched monthly observations. This is a growth rate, rather than the CPI’s index level: falling positive inflation means prices are increasing more slowly, not necessarily falling. Because the calculation uses seasonally adjusted CPI, it can differ slightly from the commonly reported year-over-year rate based on unadjusted CPI."
+  },
+  {
+    "objectID": "posts/inflation-unemployment/index.html#first-establish-the-sequence",
+    "href": "posts/inflation-unemployment/index.html#first-establish-the-sequence",
+    "title": "Did lower inflation require much higher unemployment?",
+    "section": "First, establish the sequence",
+    "text": "First, establish the sequence\n\nknitr::include_graphics(file.path(POST_DIR, \"results/figures/timeline.png\"))\n\n\n\n\n\n\n\nFigure 1: Aligned monthly series with a common vertical scale. The unemployment spike precedes the inflation peak.\n\n\n\n\n\nFigure 1 shows unemployment reaching 14.8% in April 2020, when inflation was only 0.3%. Inflation instead peaked at 9.0% in June 2022, with unemployment at 3.6%. These peaks describe different stages of the episode, rather than one simultaneous shock.\nBy December 2024, inflation was 2.9% and unemployment was 4.1%. Relative to the inflation peak, inflation declined 6.1 percentage points while unemployment rose 0.5 points. The endpoint comparison is striking, but the intervening path matters too."
+  },
+  {
+    "objectID": "posts/inflation-unemployment/index.html#next-compare-relationships-across-periods",
+    "href": "posts/inflation-unemployment/index.html#next-compare-relationships-across-periods",
+    "title": "Did lower inflation require much higher unemployment?",
+    "section": "Next, compare relationships across periods",
+    "text": "Next, compare relationships across periods\n\nknitr::include_graphics(file.path(POST_DIR, \"results/figures/scatter.png\"))\n\n\n\n\n\n\n\nFigure 2: Each point pairs inflation and unemployment in the same month. Period boundaries are descriptive calendar groupings, not estimated structural breaks.\n\n\n\n\n\nFigure 2 shows why one fitted line would hide important differences. Before COVID, relatively low unemployment coexisted with modest inflation. During 2020–2021, high-unemployment months had low inflation, while inflation rose as unemployment receded. In 2022–2024, inflation varied widely within a much narrower unemployment range.\nFor a concrete comparison, unemployment was 3.6% in December 2019 and 3.6% in June 2022, but inflation was 2.3% and 9.0%, respectively. Unemployment alone does not summarize the inflation environment."
+  },
+  {
+    "objectID": "posts/inflation-unemployment/index.html#finally-follow-the-disinflation-path",
+    "href": "posts/inflation-unemployment/index.html#finally-follow-the-disinflation-path",
+    "title": "Did lower inflation require much higher unemployment?",
+    "section": "Finally, follow the disinflation path",
+    "text": "Finally, follow the disinflation path\n\nknitr::include_graphics(file.path(POST_DIR, \"results/figures/path.png\"))\n\n\n\n\n\n\n\nFigure 3: Arrows connect consecutive quarters from 2022 through 2024. Both coordinates are averages of monthly rates; the horizontal scale is deliberately narrower than in Figure 2.\n\n\n\n\n\nFigure 3 restores the time ordering lost in the scatterplot. Between 2022 Q2 and 2023 Q2, average inflation fell from 8.6% to 4.1%, while unemployment moved from 3.6% to 3.5%. Much of that initial disinflation occurred without rising unemployment. By 2024 Q4, unemployment had increased to 4.1%, with inflation at 2.7%. The later labor-market cooling should not be erased by focusing only on the earlier improvement."
+  },
+  {
+    "objectID": "posts/inflation-unemployment/index.html#takeaway-and-limits",
+    "href": "posts/inflation-unemployment/index.html#takeaway-and-limits",
+    "title": "Did lower inflation require much higher unemployment?",
+    "section": "Takeaway and limits",
+    "text": "Takeaway and limits\nThese charts do not reveal a stable, mechanical trade-off. Inflation fell substantially after its peak without unemployment returning anywhere near its pandemic high. However, that does not show disinflation is always costless or that a particular policy caused the outcome. Supply conditions, demand, expectations, and policy may all affect the relationship; these two series cannot separate their contributions. Nor does this analysis track individual workers or household-specific prices.\nThe takeaway is to examine timing and economic context before treating a correlation as a policy menu. Lower inflation and a relatively strong labor market coexisted during much of this recovery, even as unemployment edged upward later.\n\nData and replication: BLS series distributed by FRED, downloaded 2026-10-01. These are revised historical observations, not real-time vintages. Code, saved data, and instructions reproduce all figures and reported numbers."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "aeds6400-blog",
+    "section": "",
+    "text": "Did lower inflation require much higher unemployment?\n\n\n\ninflation\n\nunemployment\n\ndata visualization\n\n\n\nThree views of U.S. inflation and unemployment before, during, and after the pandemic.\n\n\n\n\n\nOct 1, 2026\n\n\nYipin Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nDid labor-force participation recover equally across age groups?\n\n\n\nlabor market\n\nCPS\n\ndata visualization\n\n\n\nThree views of participation and population aging in the United States, 2019-2024.\n\n\n\n\n\nSep 27, 2026\n\n\nYipin Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nPython leads technology mentions in Hacker News hiring posts\n\n\n\nweb scraping\n\nrvest\n\nlabor market\n\n\n\nA comparison of two September hiring threads suggests a practical learning priority, with limits on what keyword counts can tell us.\n\n\n\n\n\nSep 21, 2026\n\n\nYipin Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nWhat a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYipin Zhang\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
     "objectID": "posts/cps-participation/index.html",
     "href": "posts/cps-participation/index.html",
     "title": "Did labor-force participation recover equally across age groups?",
@@ -96,20 +159,6 @@
     "title": "Did labor-force participation recover equally across age groups?",
     "section": "Takeaway and limits",
     "text": "Takeaway and limits\nBy 2024, participation had surpassed its 2019 level for adults aged 25–64, approximately returned to it for younger adults, and remained lower for adults aged 65 and older. The aggregate shortfall therefore does not indicate a universal failure to recover. Population composition and age differences both matter.\nThe CPS has a complex rotating design, and pandemic-era collection disruptions complicate interpretation. I report descriptive differences without claiming causality or statistical significance. Annual averages also hide short-lived monthly changes.\n\nData: Flood et al. (2025), IPUMS CPS: Version 13.0, University of Minnesota. Basic Monthly samples, January 2019–December 2024; extract created September 27, 2026. The analysis uses 6,146,546 eligible person-month observations, not unique individuals.\nCode and replication: Blog repository. The post folder contains the R analysis, aggregate results, figures, and replication instructions. Raw microdata are excluded from Git."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "aeds6400-blog",
-    "section": "",
-    "text": "Did labor-force participation recover equally across age groups?\n\n\n\nlabor market\n\nCPS\n\ndata visualization\n\n\n\nThree views of participation and population aging in the United States, 2019-2024.\n\n\n\n\n\nSep 27, 2026\n\n\nYipin Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nPython leads technology mentions in Hacker News hiring posts\n\n\n\nweb scraping\n\nrvest\n\nlabor market\n\n\n\nA comparison of two September hiring threads suggests a practical learning priority, with limits on what keyword counts can tell us.\n\n\n\n\n\nSep 21, 2026\n\n\nYipin Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nWhat a p-value actually tells you\n\n\n\nstatistics\n\ninference\n\n\n\nThe most common misreading in applied statistics, and why it’s so hard to resist\n\n\n\n\n\nSep 14, 2026\n\n\nYipin Zhang\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/p-values/index.html",

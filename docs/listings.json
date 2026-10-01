@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/inflation-unemployment/index.html",
       "/posts/cps-participation/index.html",
       "/posts/web-scraping/index.html",
       "/posts/p-values/index.html"

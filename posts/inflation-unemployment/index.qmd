@@ -1,0 +1,83 @@
+---
+title: "Did lower inflation require much higher unemployment?"
+description: "Three views of U.S. inflation and unemployment before, during, and after the pandemic."
+author: "Yipin Zhang"
+date: 2026-10-01
+categories: [inflation, unemployment, data visualization]
+image: results/figures/path.png
+execute:
+  freeze: false
+  cache: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+here::i_am("posts/inflation-unemployment/index.qmd")
+POST_DIR <- here::here("posts", "inflation-unemployment")
+a <- readRDS(file.path(POST_DIR, "results/analysis.rds"))
+f <- function(x) sprintf("%.1f", x)
+date_label <- function(x) format(x, "%B %Y")
+qval <- function(label, variable) a$quarterly[[variable]][a$quarterly$label == label]
+point <- function(date, variable) a$monthly[[variable]][a$monthly$date == as.Date(date)]
+provenance <- read.csv(file.path(POST_DIR, "data/raw/provenance.csv"))
+```
+
+## A trade-off that changes with time
+
+Does bringing inflation down require a large increase in unemployment? The question matters because price stability and access to jobs both affect living standards. A simple inflation–unemployment trade-off suggests that a weaker labor market should accompany slower price growth. But a chart showing two variables moving together cannot establish how much unemployment a policy must create to reduce inflation.
+
+I examine U.S. monthly data from 2015 through 2024, comparing the years before COVID, the disruption in 2020–2021, and inflation's rise and retreat in 2022–2024. This fixed window provides a pre-pandemic benchmark and keeps the comparison separate from later developments. The central finding is that the relationship changed substantially across these periods.
+
+## Measuring the two rates
+
+The data come from the Bureau of Labor Statistics through FRED: [CPIAUCSL](https://fred.stlouisfed.org/series/CPIAUCSL), the all-items consumer price index, and [UNRATE](https://fred.stlouisfed.org/series/UNRATE), the unemployment rate. Both series are seasonally adjusted. Unemployment measures unemployed people as a share of the civilian labor force, not the entire population.
+
+I calculate inflation as `100 × (CPI this month / CPI twelve months earlier − 1)`. An extra year of CPI data supplies the initial comparison, leaving `r nrow(a$monthly)` matched monthly observations. This is a growth rate, rather than the CPI's index level: falling positive inflation means prices are increasing more slowly, not necessarily falling. Because the calculation uses seasonally adjusted CPI, it can differ slightly from the commonly reported year-over-year rate based on unadjusted CPI.
+
+## First, establish the sequence
+
+```{r}
+#| label: fig-timeline
+#| fig-cap: "Aligned monthly series with a common vertical scale. The unemployment spike precedes the inflation peak."
+#| fig-alt: "Two time-series panels show unemployment surging in 2020 and inflation peaking in 2022."
+knitr::include_graphics(file.path(POST_DIR, "results/figures/timeline.png"))
+```
+
+Figure 1 shows unemployment reaching `r f(a$u_peak$UNRATE)`% in `r date_label(a$u_peak$date)`, when inflation was only `r f(a$u_peak$inflation)`%. Inflation instead peaked at `r f(a$peak$inflation)`% in `r date_label(a$peak$date)`, with unemployment at `r f(a$peak$UNRATE)`%. These peaks describe different stages of the episode, rather than one simultaneous shock.
+
+By `r date_label(a$end$date)`, inflation was `r f(a$end$inflation)`% and unemployment was `r f(a$end$UNRATE)`%. Relative to the inflation peak, inflation declined `r f(a$peak$inflation - a$end$inflation)` percentage points while unemployment rose `r f(a$end$UNRATE - a$peak$UNRATE)` points. The endpoint comparison is striking, but the intervening path matters too.
+
+## Next, compare relationships across periods
+
+```{r}
+#| label: fig-scatter
+#| fig-cap: "Each point pairs inflation and unemployment in the same month. Period boundaries are descriptive calendar groupings, not estimated structural breaks."
+#| fig-alt: "A scatterplot distinguishes pre-COVID months, 2020-2021, and 2022-2024 using both colors and shapes."
+knitr::include_graphics(file.path(POST_DIR, "results/figures/scatter.png"))
+```
+
+Figure 2 shows why one fitted line would hide important differences. Before COVID, relatively low unemployment coexisted with modest inflation. During 2020–2021, high-unemployment months had low inflation, while inflation rose as unemployment receded. In 2022–2024, inflation varied widely within a much narrower unemployment range.
+
+For a concrete comparison, unemployment was `r f(point("2019-12-01", "UNRATE"))`% in December 2019 and `r f(point("2022-06-01", "UNRATE"))`% in June 2022, but inflation was `r f(point("2019-12-01", "inflation"))`% and `r f(point("2022-06-01", "inflation"))`%, respectively. Unemployment alone does not summarize the inflation environment.
+
+## Finally, follow the disinflation path
+
+```{r}
+#| label: fig-path
+#| fig-cap: "Arrows connect consecutive quarters from 2022 through 2024. Both coordinates are averages of monthly rates; the horizontal scale is deliberately narrower than in Figure 2."
+#| fig-alt: "A chronological quarterly path shows inflation falling sharply in 2023 with little unemployment movement, followed by a rise in unemployment during 2024."
+knitr::include_graphics(file.path(POST_DIR, "results/figures/path.png"))
+```
+
+Figure 3 restores the time ordering lost in the scatterplot. Between 2022 Q2 and 2023 Q2, average inflation fell from `r f(qval("2022 Q2", "inflation"))`% to `r f(qval("2023 Q2", "inflation"))`%, while unemployment moved from `r f(qval("2022 Q2", "unemployment"))`% to `r f(qval("2023 Q2", "unemployment"))`%. Much of that initial disinflation occurred without rising unemployment. By 2024 Q4, unemployment had increased to `r f(qval("2024 Q4", "unemployment"))`%, with inflation at `r f(qval("2024 Q4", "inflation"))`%. The later labor-market cooling should not be erased by focusing only on the earlier improvement.
+
+## Takeaway and limits
+
+These charts do not reveal a stable, mechanical trade-off. Inflation fell substantially after its peak without unemployment returning anywhere near its pandemic high. However, that does not show disinflation is always costless or that a particular policy caused the outcome. Supply conditions, demand, expectations, and policy may all affect the relationship; these two series cannot separate their contributions. Nor does this analysis track individual workers or household-specific prices.
+
+The takeaway is to examine timing and economic context before treating a correlation as a policy menu. Lower inflation and a relatively strong labor market coexisted during much of this recovery, even as unemployment edged upward later.
+
+---
+
+**Data and replication:** BLS series distributed by FRED, downloaded `r substr(provenance$retrieved_utc[1], 1, 10)`. These are revised historical observations, not real-time vintages. [Code, saved data, and instructions](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment) reproduce all figures and reported numbers.

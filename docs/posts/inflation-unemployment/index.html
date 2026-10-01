@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Yipin Zhang">
+<meta name="dcterms.date" content="2026-10-01">
+<meta name="description" content="Three views of U.S. inflation and unemployment before, during, and after the pandemic.">
 
-<title>aeds6400-blog – Yipin Zhang</title>
+<title>Did lower inflation require much higher unemployment? – Yipin Zhang</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,28 +29,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,77 +111,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
+<link rel="stylesheet" href="../../styles.css">
+</head>
 
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="Yipin Zhang" href="index.xml" data-external="1"></head>
-
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Yipin Zhang</span>
     </a>
   </div>
@@ -156,7 +134,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -174,176 +152,133 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">aeds6400-blog</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Did lower inflation require much higher unemployment?</h1>
+                  <div>
+        <div class="description">
+          Three views of U.S. inflation and unemployment before, during, and after the pandemic.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">inflation</div>
+                <div class="quarto-category">unemployment</div>
+                <div class="quarto-category">data visualization</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Yipin Zhang </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 1, 2026</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Q1BT">CPS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YSUyMHZpc3VhbGl6YXRpb24=">data visualization <span class="quarto-category-count">(2)</span></div><div class="category" data-category="aW5mZXJlbmNl">inference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW5mbGF0aW9u">inflation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bGFib3IlMjBtYXJrZXQ=">labor market <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cnZlc3Q=">rvest <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dW5lbXBsb3ltZW50">unemployment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="d2ViJTIwc2NyYXBpbmc=">web scraping <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="aW5mbGF0aW9uJTJDdW5lbXBsb3ltZW50JTJDZGF0YSUyMHZpc3VhbGl6YXRpb24=" data-listing-date-sort="1790827200000" data-listing-file-modified-sort="1790883390000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="787">
-<div class="thumbnail"><a href="./posts/inflation-unemployment/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/inflation-unemployment/results/figures/path.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/inflation-unemployment/index.html" class="no-external">Did lower inflation require much higher unemployment?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('aW5mbGF0aW9u'); return false;">inflation</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dW5lbXBsb3ltZW50'); return false;">unemployment</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHZpc3VhbGl6YXRpb24='); return false;">data visualization</div>
-
+<section id="a-trade-off-that-changes-with-time" class="level2">
+<h2 class="anchored" data-anchor-id="a-trade-off-that-changes-with-time">A trade-off that changes with time</h2>
+<p>Does bringing inflation down require a large increase in unemployment? The question matters because price stability and access to jobs both affect living standards. A simple inflation–unemployment trade-off suggests that a weaker labor market should accompany slower price growth. But a chart showing two variables moving together cannot establish how much unemployment a policy must create to reduce inflation.</p>
+<p>I examine U.S. monthly data from 2015 through 2024, comparing the years before COVID, the disruption in 2020–2021, and inflation’s rise and retreat in 2022–2024. This fixed window provides a pre-pandemic benchmark and keeps the comparison separate from later developments. The central finding is that the relationship changed substantially across these periods.</p>
+</section>
+<section id="measuring-the-two-rates" class="level2">
+<h2 class="anchored" data-anchor-id="measuring-the-two-rates">Measuring the two rates</h2>
+<p>The data come from the Bureau of Labor Statistics through FRED: <a href="https://fred.stlouisfed.org/series/CPIAUCSL">CPIAUCSL</a>, the all-items consumer price index, and <a href="https://fred.stlouisfed.org/series/UNRATE">UNRATE</a>, the unemployment rate. Both series are seasonally adjusted. Unemployment measures unemployed people as a share of the civilian labor force, not the entire population.</p>
+<p>I calculate inflation as <code>100 × (CPI this month / CPI twelve months earlier − 1)</code>. An extra year of CPI data supplies the initial comparison, leaving 120 matched monthly observations. This is a growth rate, rather than the CPI’s index level: falling positive inflation means prices are increasing more slowly, not necessarily falling. Because the calculation uses seasonally adjusted CPI, it can differ slightly from the commonly reported year-over-year rate based on unadjusted CPI.</p>
+</section>
+<section id="first-establish-the-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="first-establish-the-sequence">First, establish the sequence</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results/figures/timeline.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-timeline" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two time-series panels show unemployment surging in 2020 and inflation peaking in 2022.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/timeline.png" class="img-fluid figure-img" alt="Two time-series panels show unemployment surging in 2020 and inflation peaking in 2022.">
 </div>
-<div class="delink listing-description"><a href="./posts/inflation-unemployment/index.html" class="no-external">
-<p>Three views of U.S. inflation and unemployment before, during, and after the pandemic.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/inflation-unemployment/index.html" class="no-external">
-<div class="listing-date">
-Oct 1, 2026
-</div>
-<div class="listing-author">
-Yipin Zhang
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bGFib3IlMjBtYXJrZXQlMkNDUFMlMkNkYXRhJTIwdmlzdWFsaXphdGlvbg==" data-listing-date-sort="1790481600000" data-listing-file-modified-sort="1790640004034" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1103">
-<div class="thumbnail"><a href="./posts/cps-participation/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/cps-participation/results/figures/trends.png" alt="Four panels showing changes in participation from 2019 for four age groups, with a shared scale and a zero baseline."  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/cps-participation/index.html" class="no-external">Did labor-force participation recover equally across age groups?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGFib3IlMjBtYXJrZXQ='); return false;">labor market</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q1BT'); return false;">CPS</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHZpc3VhbGl6YXRpb24='); return false;">data visualization</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/cps-participation/index.html" class="no-external">
-<p>Three views of participation and population aging in the United States, 2019-2024.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/cps-participation/index.html" class="no-external">
-<div class="listing-date">
-Sep 27, 2026
-</div>
-<div class="listing-author">
-Yipin Zhang
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="d2ViJTIwc2NyYXBpbmclMkNydmVzdCUyQ2xhYm9yJTIwbWFya2V0" data-listing-date-sort="1789963200000" data-listing-file-modified-sort="1790475397000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1160">
-<div class="thumbnail"><a href="./posts/web-scraping/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/web-scraping/results/figures/skill_share_2026.png" alt="Horizontal bars comparing technology mention shares, with Python highest."  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/web-scraping/index.html" class="no-external">Python leads technology mentions in Hacker News hiring posts</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2ViJTIwc2NyYXBpbmc='); return false;">web scraping</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cnZlc3Q='); return false;">rvest</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGFib3IlMjBtYXJrZXQ='); return false;">labor market</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/web-scraping/index.html" class="no-external">
-<p>A comparison of two September hiring threads suggests a practical learning priority, with limits on what keyword counts can tell us.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/web-scraping/index.html" class="no-external">
-<div class="listing-date">
-Sep 21, 2026
-</div>
-<div class="listing-author">
-Yipin Zhang
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="c3RhdGlzdGljcyUyQ2luZmVyZW5jZQ==" data-listing-date-sort="1789358400000" data-listing-file-modified-sort="1790475397000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="784">
-<div class="thumbnail"><a href="./posts/p-values/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/p-values/index_files/figure-html/fig-null-dist-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/p-values/index.html" class="no-external">What a p-value actually tells you</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">statistics</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('aW5mZXJlbmNl'); return false;">inference</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/p-values/index.html" class="no-external">
-<p>The most common misreading in applied statistics, and why it’s so hard to resist</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/p-values/index.html" class="no-external">
-<div class="listing-date">
-Sep 14, 2026
-</div>
-<div class="listing-author">
-Yipin Zhang
-</div>
-</a>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Aligned monthly series with a common vertical scale. The unemployment spike precedes the inflation peak.
+</figcaption>
+</figure>
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+<p>Figure 1 shows unemployment reaching 14.8% in April 2020, when inflation was only 0.3%. Inflation instead peaked at 9.0% in June 2022, with unemployment at 3.6%. These peaks describe different stages of the episode, rather than one simultaneous shock.</p>
+<p>By December 2024, inflation was 2.9% and unemployment was 4.1%. Relative to the inflation peak, inflation declined 6.1 percentage points while unemployment rose 0.5 points. The endpoint comparison is striking, but the intervening path matters too.</p>
+</section>
+<section id="next-compare-relationships-across-periods" class="level2">
+<h2 class="anchored" data-anchor-id="next-compare-relationships-across-periods">Next, compare relationships across periods</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results/figures/scatter.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot distinguishes pre-COVID months, 2020-2021, and 2022-2024 using both colors and shapes.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/scatter.png" class="img-fluid figure-img" alt="A scatterplot distinguishes pre-COVID months, 2020-2021, and 2022-2024 using both colors and shapes.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Each point pairs inflation and unemployment in the same month. Period boundaries are descriptive calendar groupings, not estimated structural breaks.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure 2 shows why one fitted line would hide important differences. Before COVID, relatively low unemployment coexisted with modest inflation. During 2020–2021, high-unemployment months had low inflation, while inflation rose as unemployment receded. In 2022–2024, inflation varied widely within a much narrower unemployment range.</p>
+<p>For a concrete comparison, unemployment was 3.6% in December 2019 and 3.6% in June 2022, but inflation was 2.3% and 9.0%, respectively. Unemployment alone does not summarize the inflation environment.</p>
+</section>
+<section id="finally-follow-the-disinflation-path" class="level2">
+<h2 class="anchored" data-anchor-id="finally-follow-the-disinflation-path">Finally, follow the disinflation path</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results/figures/path.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-path" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A chronological quarterly path shows inflation falling sharply in 2023 with little unemployment movement, followed by a rise in unemployment during 2024.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/path.png" class="img-fluid figure-img" alt="A chronological quarterly path shows inflation falling sharply in 2023 with little unemployment movement, followed by a rise in unemployment during 2024.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Arrows connect consecutive quarters from 2022 through 2024. Both coordinates are averages of monthly rates; the horizontal scale is deliberately narrower than in Figure 2.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure 3 restores the time ordering lost in the scatterplot. Between 2022 Q2 and 2023 Q2, average inflation fell from 8.6% to 4.1%, while unemployment moved from 3.6% to 3.5%. Much of that initial disinflation occurred without rising unemployment. By 2024 Q4, unemployment had increased to 4.1%, with inflation at 2.7%. The later labor-market cooling should not be erased by focusing only on the earlier improvement.</p>
+</section>
+<section id="takeaway-and-limits" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway-and-limits">Takeaway and limits</h2>
+<p>These charts do not reveal a stable, mechanical trade-off. Inflation fell substantially after its peak without unemployment returning anywhere near its pandemic high. However, that does not show disinflation is always costless or that a particular policy caused the outcome. Supply conditions, demand, expectations, and policy may all affect the relationship; these two series cannot separate their contributions. Nor does this analysis track individual workers or household-specific prices.</p>
+<p>The takeaway is to examine timing and economic context before treating a correlation as a policy menu. Lower inflation and a relatively strong labor market coexisted during much of this recovery, even as unemployment edged upward later.</p>
+<hr>
+<p><strong>Data and replication:</strong> BLS series distributed by FRED, downloaded 2026-10-01. These are revised historical observations, not real-time vintages. <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment">Code, saved data, and instructions</a> reproduce all figures and reported numbers.</p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

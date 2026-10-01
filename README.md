@@ -11,6 +11,7 @@ Blog posts by Yipin Zhang (grenaz@sas.upenn.edu), Fall 2026.
 | 1 | [What is a p-value?](https://yipin-grena.github.io/aeds6400-blog/posts/p-values/) | `posts/p-values/` |
 | 2 | [Python leads technology mentions in Hacker News hiring posts](https://yipin-grena.github.io/aeds6400-blog/posts/web-scraping/) | [`posts/web-scraping/`](posts/web-scraping/README.md) |
 | 3 | [Did labor-force participation recover equally across age groups?](https://yipin-grena.github.io/aeds6400-blog/posts/cps-participation/) | [`posts/cps-participation/`](posts/cps-participation/README.md) |
+| 4 | [Did lower inflation require much higher unemployment?](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/) | [`posts/inflation-unemployment/`](posts/inflation-unemployment/README.md) |
 
 ## Repository layout
 
@@ -26,6 +27,7 @@ aeds6400-blog/
 └── posts/
     ├── p-values/            Blog Post 1
     ├── web-scraping/        Blog Post 2: R scripts, saved data, results
+    ├── inflation-unemployment/  Blog Post 4: FRED snapshots, R code, results
     └── cps-participation/   Blog Post 3
         ├── index.qmd        post with computed values
         ├── README.md        methods and replication
@@ -59,8 +61,10 @@ Rscript posts/cps-participation/run.R
 
 This regenerates the aggregate results and charts. Rendering uses the committed aggregate results, so the raw microdata are only needed to rerun the analysis.
 
+For Blog Post 4, run `Rscript posts/inflation-unemployment/run.R` from the repository root to reproduce from the committed FRED snapshots. Add `--refresh` only to download revised data. See [its README](posts/inflation-unemployment/README.md) for definitions and dependencies.
+
 Render the site with `quarto render` from the repository root.
 
 ## Environment
 
-R 4.5.1. Package versions are recorded separately in `posts/web-scraping/results/session-info.txt` and `posts/cps-participation/results/session-info.txt`. Each post README lists its dependencies and data requirements.
+R 4.5.1. Package versions are recorded separately in `posts/web-scraping/results/session-info.txt` and `posts/cps-participation/results/session-info.txt`. Blog Post 4 records its environment in `posts/inflation-unemployment/results/session-info.txt`. Each post README lists its dependencies and data requirements.

@@ -1,0 +1,6 @@
+here::i_am("posts/inflation-unemployment/run.R")
+root <- here::here("posts", "inflation-unemployment")
+source(file.path(root, "R/acquire.R"))
+source(file.path(root, "R/analysis.R"))
+acquire_data(root, refresh = "--refresh" %in% commandArgs(trailingOnly = TRUE))
+run_analysis(root)
