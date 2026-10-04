@@ -165,14 +165,14 @@
     "href": "posts/p-values/index.html",
     "title": "What a p-value actually tells you",
     "section": "",
-    "text": "Imagine reading a study that reports \\(p=0.03\\). Does that mean its conclusion has a 97% probability of being correct? No—but understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: what probability does a p-value actually measure, and what can we conclude from it?\nThis distinction is important enough that the American Statistical Association’s statement on p-values explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar."
+    "text": "Imagine reading a study that reports \\(p=0.03\\). Does that mean its conclusion has a 97% probability of being correct? No. Understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: what probability does a p-value actually measure, and what can we conclude from it?\nThis distinction is important enough that the American Statistical Association’s statement on p-values explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar."
   },
   {
     "objectID": "posts/p-values/index.html#does-p-0.03-mean-a-97-chance-of-being-right",
     "href": "posts/p-values/index.html#does-p-0.03-mean-a-97-chance-of-being-right",
     "title": "What a p-value actually tells you",
     "section": "",
-    "text": "Imagine reading a study that reports \\(p=0.03\\). Does that mean its conclusion has a 97% probability of being correct? No—but understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: what probability does a p-value actually measure, and what can we conclude from it?\nThis distinction is important enough that the American Statistical Association’s statement on p-values explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar."
+    "text": "Imagine reading a study that reports \\(p=0.03\\). Does that mean its conclusion has a 97% probability of being correct? No. Understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: what probability does a p-value actually measure, and what can we conclude from it?\nThis distinction is important enough that the American Statistical Association’s statement on p-values explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar."
   },
   {
     "objectID": "posts/p-values/index.html#start-with-the-direction-of-the-question",
@@ -186,7 +186,7 @@
     "href": "posts/p-values/index.html#build-a-simple-null-world",
     "title": "What a p-value actually tells you",
     "section": "Build a simple null world",
-    "text": "Build a simple null world\nSuppose we observe 30 independent measurements on a standardized outcome and want to test whether its population mean is positive. Our hypothetical observed sample mean is 0.34. Assume the observations are normally distributed with a known standard deviation of 1. These are teaching assumptions, not data from an actual study.\nThe null hypothesis is \\(H_0:\\mu=0\\), and the alternative is \\(H_1:\\mu&gt;0\\). Because we specify a positive direction in advance, this is a one-sided test. Its p-value is\n\\[\np=P(\\bar X\\geq 0.34\\mid\\mu=0,\\text{ assumed sampling model}).\n\\]\nHere, \\(\\bar X\\) is the sample mean. Under the null, it varies around zero with standard deviation \\(1/\\sqrt{30}\\). The p-value measures the right-tail probability beyond 0.34—not the probability of observing exactly 0.34, and not the probability that \\(\\mu=0\\)."
+    "text": "Build a simple null world\nSuppose we observe 30 independent measurements on a standardized outcome and want to test whether its population mean is positive. Our hypothetical observed sample mean is 0.34. Assume the observations are normally distributed with a known standard deviation of 1. These are teaching assumptions, not data from an actual study.\nThe null hypothesis is \\(H_0:\\mu=0\\), and the alternative is \\(H_1:\\mu&gt;0\\). Because we specify a positive direction in advance, this is a one-sided test. Its p-value is\n\\[\np=P(\\bar X\\geq 0.34\\mid\\mu=0,\\text{ assumed sampling model}).\n\\]\nHere, \\(\\bar X\\) is the sample mean. Under the null, it varies around zero with standard deviation \\(1/\\sqrt{30}\\). The p-value measures the right-tail probability beyond 0.34. It does not measure the probability of observing exactly 0.34 or the probability that \\(\\mu=0\\)."
   },
   {
     "objectID": "posts/p-values/index.html#use-simulation-to-make-the-probability-visible",
@@ -207,6 +207,6 @@
     "href": "posts/p-values/index.html#reference",
     "title": "What a p-value actually tells you",
     "section": "Reference",
-    "text": "Reference\nWasserstein, R. L., and Lazar, N. A. (2016). The ASA’s Statement on p-Values: Context, Process, and Purpose. The American Statistician, 70(2), 129–133."
+    "text": "Reference\nWasserstein, R. L., and Lazar, N. A. (2016). The ASA’s Statement on p-Values: Context, Process, and Purpose. The American Statistician, 70(2), pages 129 to 133."
   }
 ]

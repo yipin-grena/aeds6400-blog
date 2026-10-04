@@ -3,7 +3,7 @@ title: "What a p-value actually tells you"
 description: "Why a small p-value is evidence against a statistical model, not the probability that the model is false."
 author: "Yipin Zhang"
 date: "2026-09-14"
-date-modified: "2026-10-03"
+date-modified: "2026-10-04"
 categories: [statistics, inference]
 execute:
   freeze: false
@@ -12,7 +12,7 @@ execute:
 
 ## Does p = 0.03 mean a 97% chance of being right?
 
-Imagine reading a study that reports $p=0.03$. Does that mean its conclusion has a 97% probability of being correct? No—but understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: **what probability does a p-value actually measure, and what can we conclude from it?**
+Imagine reading a study that reports $p=0.03$. Does that mean its conclusion has a 97% probability of being correct? No. Understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: **what probability does a p-value actually measure, and what can we conclude from it?**
 
 This distinction is important enough that the [American Statistical Association's statement on p-values](https://doi.org/10.1080/00031305.2016.1154108) explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar.
 
@@ -34,7 +34,7 @@ $$
 p=P(\bar X\geq 0.34\mid\mu=0,\text{ assumed sampling model}).
 $$
 
-Here, $\bar X$ is the sample mean. Under the null, it varies around zero with standard deviation $1/\sqrt{30}$. The p-value measures the right-tail probability beyond 0.34—not the probability of observing exactly 0.34, and not the probability that $\mu=0$.
+Here, $\bar X$ is the sample mean. Under the null, it varies around zero with standard deviation $1/\sqrt{30}$. The p-value measures the right-tail probability beyond 0.34. It does not measure the probability of observing exactly 0.34 or the probability that $\mu=0$.
 
 ## Use simulation to make the probability visible
 
@@ -89,4 +89,4 @@ The takeaway is to read a p-value as **a statement about results under a model**
 
 ## Reference
 
-Wasserstein, R. L., and Lazar, N. A. (2016). [The ASA's Statement on p-Values: Context, Process, and Purpose](https://doi.org/10.1080/00031305.2016.1154108). *The American Statistician*, 70(2), 129–133.
+Wasserstein, R. L., and Lazar, N. A. (2016). [The ASA's Statement on p-Values: Context, Process, and Purpose](https://doi.org/10.1080/00031305.2016.1154108). *The American Statistician*, 70(2), pages 129 to 133.

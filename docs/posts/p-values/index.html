@@ -215,7 +215,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">October 3, 2026</p>
+        <p class="date-modified">October 4, 2026</p>
       </div>
     </div>
       
@@ -235,7 +235,7 @@ window.Quarto = {
 
 <section id="does-p-0.03-mean-a-97-chance-of-being-right" class="level2">
 <h2 class="anchored" data-anchor-id="does-p-0.03-mean-a-97-chance-of-being-right">Does p = 0.03 mean a 97% chance of being right?</h2>
-<p>Imagine reading a study that reports <span class="math inline">\(p=0.03\)</span>. Does that mean its conclusion has a 97% probability of being correct? No—but understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: <strong>what probability does a p-value actually measure, and what can we conclude from it?</strong></p>
+<p>Imagine reading a study that reports <span class="math inline">\(p=0.03\)</span>. Does that mean its conclusion has a 97% probability of being correct? No.&nbsp;Understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: <strong>what probability does a p-value actually measure, and what can we conclude from it?</strong></p>
 <p>This distinction is important enough that the <a href="https://doi.org/10.1080/00031305.2016.1154108">American Statistical Association’s statement on p-values</a> explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar.</p>
 </section>
 <section id="start-with-the-direction-of-the-question" class="level2">
@@ -251,7 +251,7 @@ window.Quarto = {
 <p><span class="math display">\[
 p=P(\bar X\geq 0.34\mid\mu=0,\text{ assumed sampling model}).
 \]</span></p>
-<p>Here, <span class="math inline">\(\bar X\)</span> is the sample mean. Under the null, it varies around zero with standard deviation <span class="math inline">\(1/\sqrt{30}\)</span>. The p-value measures the right-tail probability beyond 0.34—not the probability of observing exactly 0.34, and not the probability that <span class="math inline">\(\mu=0\)</span>.</p>
+<p>Here, <span class="math inline">\(\bar X\)</span> is the sample mean. Under the null, it varies around zero with standard deviation <span class="math inline">\(1/\sqrt{30}\)</span>. The p-value measures the right-tail probability beyond 0.34. It does not measure the probability of observing exactly 0.34 or the probability that <span class="math inline">\(\mu=0\)</span>.</p>
 </section>
 <section id="use-simulation-to-make-the-probability-visible" class="level2">
 <h2 class="anchored" data-anchor-id="use-simulation-to-make-the-probability-visible">Use simulation to make the probability visible</h2>
@@ -291,7 +291,7 @@ Figure&nbsp;1: Simulated sample means under the null (histogram), with their exa
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>
-<p>Wasserstein, R. L., and Lazar, N. A. (2016). <a href="https://doi.org/10.1080/00031305.2016.1154108">The ASA’s Statement on p-Values: Context, Process, and Purpose</a>. <em>The American Statistician</em>, 70(2), 129–133.</p>
+<p>Wasserstein, R. L., and Lazar, N. A. (2016). <a href="https://doi.org/10.1080/00031305.2016.1154108">The ASA’s Statement on p-Values: Context, Process, and Purpose</a>. <em>The American Statistician</em>, 70(2), pages 129 to 133.</p>
 
 
 </section>
