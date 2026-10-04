@@ -1,73 +1,92 @@
 ---
 title: "What a p-value actually tells you"
-description: "The most common misreading in applied statistics, and why it's so hard to resist"
+description: "Why a small p-value is evidence against a statistical model, not the probability that the model is false."
 author: "Yipin Zhang"
 date: "2026-09-14"
+date-modified: "2026-10-03"
 categories: [statistics, inference]
+execute:
+  freeze: false
+  cache: false
 ---
 
-## The Claim That Sounds Right
-A study looks at a new treatment and reports $p=0.03$. Within hours, a press release declares the finding "97% likely to be real," and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick.
+## Does p = 0.03 mean a 97% chance of being right?
 
+Imagine reading a study that reports $p=0.03$. Does that mean its conclusion has a 97% probability of being correct? No—but understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: **what probability does a p-value actually measure, and what can we conclude from it?**
 
-## Why the Brain Flips the Conditional
-The reason the error remains is due to an unconscious substitution. When researchers carry out experiments in order to find out about reality, they ask themselves: How likely is my hypothesis given these results? However, standard significance testing is unable to provide an answer to that question; it only answers a reversed one: Assuming that the null hypothesis is true, how likely is the data in question? Since people never naturally look for the probability of their data in a hypothetical situation in which nothing at all works, the brain automatically replaces the question that was originally wanted with the one that has actually been calculated.
+This distinction is important enough that the [American Statistical Association's statement on p-values](https://doi.org/10.1080/00031305.2016.1154108) explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar.
 
-It is straightforward to identify the flaw when looking at ordinary language: although it is clearly true that most professional basketball players are tall, it is absurd to say that most tall people are professional basketball players. The two statements involve the same categories, yet reversing the conditional completely changes the truth of the claim. Similarly, when we switch the categories from 'basketball players' to 'data' and 'hypotheses', our instinct fails to recognise that the same reversal is taking place.
+## Start with the direction of the question
 
+We often want to ask, “Given these results, how plausible is my hypothesis?” A significance test instead asks, “If the null model were correct, how often would results this extreme or more extreme occur?” The first question concerns the hypothesis after seeing the data; the second concerns possible data under an assumed hypothesis.
 
-## What the Math Actually Says
-A p-value is formally defined as:
-$$p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})$$
-What people mistakenly hear is the inverted posterior probability:
-$$P(H_0 \text{ true} \mid \text{data})$$
-These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from $P(\text{data} \mid H_0)$ to $P(H_0 \mid \text{data})$ requires Bayes' rule, which demands an explicit prior belief about the plausibility of $H_0$ before the experiment began.
+An analogy helps: knowing that a professional basketball player is likely to be tall does not tell us that a tall person is likely to be a professional basketball player. Reversing the condition changes the question. In statistics, a posterior probability such as $P(H_0\mid\text{data})$ requires a model for the alternatives and prior probabilities, not just a p-value.
 
-The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:
+We can make that distinction concrete by constructing a world where the null hypothesis is true from the outset.
 
-- Assume the null hypothesis is completely true.
-- Generate the sampling distribution of your test statistic under that assumption.
-- Measure the probability of observing a test statistic at least as extreme as $t_{\text{obs}}$
+## Build a simple null world
 
+Suppose we observe 30 independent measurements on a standardized outcome and want to test whether its population mean is positive. Our hypothetical observed sample mean is 0.34. Assume the observations are normally distributed with a **known** standard deviation of 1. These are teaching assumptions, not data from an actual study.
 
-## Visualizing the Null Distribution
-The cleanest way to see this distinction is to simulate the null distribution directly in R:
-For simplicity the simulation below treats the test as one-sided, counting only results at least as large as the observed statistic.
+The null hypothesis is $H_0:\mu=0$, and the alternative is $H_1:\mu>0$. Because we specify a positive direction in advance, this is a one-sided test. Its p-value is
+
+$$
+p=P(\bar X\geq 0.34\mid\mu=0,\text{ assumed sampling model}).
+$$
+
+Here, $\bar X$ is the sample mean. Under the null, it varies around zero with standard deviation $1/\sqrt{30}$. The p-value measures the right-tail probability beyond 0.34—not the probability of observing exactly 0.34, and not the probability that $\mu=0$.
+
+## Use simulation to make the probability visible
+
+The R code below repeats this hypothetical experiment 10,000 times. Each repetition draws 30 observations from the null model and records their mean. Counting the means at least as large as 0.34 approximates the probability in the equation. Simulation is useful here because it turns an abstract conditional probability into a fraction of repeated experiments.
+
+```{r}
+#| label: simulate-null
+set.seed(42)                 # Make the simulation reproducible.
+n <- 30
+obs_stat <- 0.34
+repetitions <- 10000
+null_stats <- replicate(repetitions, mean(rnorm(n, mean = 0, sd = 1)))
+p_sim <- mean(null_stats >= obs_stat)
+p_exact <- pnorm(obs_stat, mean = 0, sd = 1 / sqrt(n), lower.tail = FALSE)
+stopifnot(abs(p_sim - p_exact) < 5 * sqrt(p_exact * (1 - p_exact) / repetitions))
+```
+
+`rnorm()` generates observations, `replicate()` repeats the experiment, and the final `mean()` of the comparison counts the fraction meeting our threshold. `pnorm()` calculates the exact normal tail probability for comparison; it does not simulate another set of experiments.
+
 ```{r}
 #| label: fig-null-dist
-#| fig-cap: "10,000 simulated experiments in a world where the null hypothesis is true. The shaded tail is the p-value."
-
-set.seed(42)
-
-n          <- 30
-obs_stat   <- 0.34
-null_stats <- replicate(10000, mean(rnorm(n, mean = 0, sd = 1)))
-
-p_value <- mean(null_stats >= obs_stat)
-
-h <- hist(null_stats, breaks = 50, plot = FALSE)
-
-plot(h, col = "gray90", border = "gray70",
-     main = "Simulated Null Distribution",
-     xlab = "Sample mean under H0",
-     xlim = c(-0.8, 0.8))
-
-tail_bins <- which(h$mids >= obs_stat)
-rect(h$breaks[tail_bins], 0,
-     h$breaks[tail_bins + 1], h$counts[tail_bins],
-     col = "tomato", border = "gray70")
-
-abline(v = obs_stat, col = "red3", lwd = 2, lty = 2)
+#| echo: false
+#| fig-cap: "Simulated sample means under the null (histogram), with their exact normal density (blue). The orange area under the curve is the exact one-sided p-value beyond the observed mean of 0.34."
+#| fig-alt: "A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34."
+#| fig-width: 8
+#| fig-height: 4.8
+#| fig-path: results/figures/
+par(mar = c(4.4, 4.2, 3, 1))
+hist(null_stats, breaks = 55, probability = TRUE,
+     col = "gray92", border = "white", xlim = c(-0.75, 0.75),
+     main = "How often does a zero-mean model produce a mean this large?",
+     xlab = "Sample mean across 30 observations", ylab = "Density", cex.main = 0.95)
+x <- seq(-0.75, 0.75, length.out = 1000)
+lines(x, dnorm(x, sd = 1 / sqrt(n)), col = "#0072B2", lwd = 2)
+tail_x <- seq(obs_stat, 0.75, length.out = 400)
+polygon(c(obs_stat, tail_x, 0.75), c(0, dnorm(tail_x, sd = 1 / sqrt(n)), 0),
+        col = "#D55E0080", border = NA)
+abline(v = obs_stat, col = "#D55E00", lty = 2, lwd = 2)
+legend("topleft", legend = c("Exact null density", "Observed mean = 0.34"),
+       col = c("#0072B2", "#D55E00"), lty = c(1, 2), lwd = 2, bty = "n", cex = 0.85)
 ```
-A $p$-value of `r round(p_value * 100, 1)`% means that t if the effect were exactly zero, roughly 3 in every 100 studies like yours would produce data this extreme or more so. It says nothing about whether the effect is zero.
 
-The histogram visualizes 10,000 experiments conducted in a world where $H_0$ is true. The red shaded tail represents the proportion of simulated trials that produced a statistic at or beyond our observed value $t_{\text{obs}}$. The area of that tail is the p-value: a tail probability under an assumed null model, not the probability that the null model itself is correct.
+The simulated fraction is `r sprintf("%.1f", 100 * p_sim)`%, close to the exact value of `r sprintf("%.2f", 100 * p_exact)`%. Thus, under our zero-mean model, about `r sprintf("%.1f", 100 * p_exact)` in every 100 repetitions would produce a mean at least this large. The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.
 
-## A Brief Historical Accident
-When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.
+## What should we conclude?
 
-## Takeaway
-A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.
+The observed mean is unusual under the specified null model, providing evidence against it. But every simulated experiment assumed the null was true: we never generated a mixture of true and false hypotheses. The simulation therefore cannot tell us what fraction of hypotheses are true after a small p-value appears.
 
-## References
-Fisher, R. A. (1925). *Statistical Methods for Research Workers*. Oliver and Boyd.
+Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.
+
+The takeaway is to read a p-value as **a statement about results under a model**. Report what was estimated and how uncertain it is, and resist translating $p=0.03$ into “97% certain.” That translation answers a question the test never calculated.
+
+## Reference
+
+Wasserstein, R. L., and Lazar, N. A. (2016). [The ASA's Statement on p-Values: Context, Process, and Purpose](https://doi.org/10.1080/00031305.2016.1154108). *The American Statistician*, 70(2), 129–133.

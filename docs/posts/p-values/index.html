@@ -8,7 +8,7 @@
 
 <meta name="author" content="Yipin Zhang">
 <meta name="dcterms.date" content="2026-09-14">
-<meta name="description" content="The most common misreading in applied statistics, and why it’s so hard to resist">
+<meta name="description" content="Why a small p-value is evidence against a statistical model, not the probability that the model is false.">
 
 <title>What a p-value actually tells you – Yipin Zhang</title>
 <style>
@@ -185,7 +185,7 @@ window.Quarto = {
       <h1 class="title">What a p-value actually tells you</h1>
                   <div>
         <div class="description">
-          The most common misreading in applied statistics, and why it’s so hard to resist
+          Why a small p-value is evidence against a statistical model, not the probability that the model is false.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -212,6 +212,12 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 3, 2026</p>
+      </div>
+    </div>
       
     </div>
     
@@ -227,77 +233,65 @@ window.Quarto = {
 
 
 
-<section id="the-claim-that-sounds-right" class="level2">
-<h2 class="anchored" data-anchor-id="the-claim-that-sounds-right">The Claim That Sounds Right</h2>
-<p>A study looks at a new treatment and reports <span class="math inline">\(p=0.03\)</span>. Within hours, a press release declares the finding “97% likely to be real,” and readers naturally infer there is only a 3% probability that the null hypothesis is true. This seems intuitive, simple, and satisfying. It is in fact entirely incorrect. A p-value does not measure the probability that a hypothesis is correct, nor does it quantify the likelihood that your finding was a fluke. Confusing what the data tells us about a hypothesis and what a hypothesis tells us about the data is the most common misunderstanding in applied statistics—and overcoming this mistake involves recognizing a subtle mental trick.</p>
+<section id="does-p-0.03-mean-a-97-chance-of-being-right" class="level2">
+<h2 class="anchored" data-anchor-id="does-p-0.03-mean-a-97-chance-of-being-right">Does p = 0.03 mean a 97% chance of being right?</h2>
+<p>Imagine reading a study that reports <span class="math inline">\(p=0.03\)</span>. Does that mean its conclusion has a 97% probability of being correct? No—but understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: <strong>what probability does a p-value actually measure, and what can we conclude from it?</strong></p>
+<p>This distinction is important enough that the <a href="https://doi.org/10.1080/00031305.2016.1154108">American Statistical Association’s statement on p-values</a> explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar.</p>
 </section>
-<section id="why-the-brain-flips-the-conditional" class="level2">
-<h2 class="anchored" data-anchor-id="why-the-brain-flips-the-conditional">Why the Brain Flips the Conditional</h2>
-<p>The reason the error remains is due to an unconscious substitution. When researchers carry out experiments in order to find out about reality, they ask themselves: How likely is my hypothesis given these results? However, standard significance testing is unable to provide an answer to that question; it only answers a reversed one: Assuming that the null hypothesis is true, how likely is the data in question? Since people never naturally look for the probability of their data in a hypothetical situation in which nothing at all works, the brain automatically replaces the question that was originally wanted with the one that has actually been calculated.</p>
-<p>It is straightforward to identify the flaw when looking at ordinary language: although it is clearly true that most professional basketball players are tall, it is absurd to say that most tall people are professional basketball players. The two statements involve the same categories, yet reversing the conditional completely changes the truth of the claim. Similarly, when we switch the categories from ‘basketball players’ to ‘data’ and ‘hypotheses’, our instinct fails to recognise that the same reversal is taking place.</p>
+<section id="start-with-the-direction-of-the-question" class="level2">
+<h2 class="anchored" data-anchor-id="start-with-the-direction-of-the-question">Start with the direction of the question</h2>
+<p>We often want to ask, “Given these results, how plausible is my hypothesis?” A significance test instead asks, “If the null model were correct, how often would results this extreme or more extreme occur?” The first question concerns the hypothesis after seeing the data; the second concerns possible data under an assumed hypothesis.</p>
+<p>An analogy helps: knowing that a professional basketball player is likely to be tall does not tell us that a tall person is likely to be a professional basketball player. Reversing the condition changes the question. In statistics, a posterior probability such as <span class="math inline">\(P(H_0\mid\text{data})\)</span> requires a model for the alternatives and prior probabilities, not just a p-value.</p>
+<p>We can make that distinction concrete by constructing a world where the null hypothesis is true from the outset.</p>
 </section>
-<section id="what-the-math-actually-says" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-math-actually-says">What the Math Actually Says</h2>
-<p>A p-value is formally defined as: <span class="math display">\[p = P(T \geq t_{\text{obs}} \mid H_0 \text{ true})\]</span> What people mistakenly hear is the inverted posterior probability: <span class="math display">\[P(H_0 \text{ true} \mid \text{data})\]</span> These are fundamentally different quantities. The second equation cannot even be computed from the p-value alone; moving from <span class="math inline">\(P(\text{data} \mid H_0)\)</span> to <span class="math inline">\(P(H_0 \mid \text{data})\)</span> requires Bayes’ rule, which demands an explicit prior belief about the plausibility of <span class="math inline">\(H_0\)</span> before the experiment began.</p>
-<p>The p-value contains zero information about priors. Instead, it operates strictly inside a hypothetical baseline:</p>
-<ul>
-<li>Assume the null hypothesis is completely true.</li>
-<li>Generate the sampling distribution of your test statistic under that assumption.</li>
-<li>Measure the probability of observing a test statistic at least as extreme as <span class="math inline">\(t_{\text{obs}}\)</span></li>
-</ul>
+<section id="build-a-simple-null-world" class="level2">
+<h2 class="anchored" data-anchor-id="build-a-simple-null-world">Build a simple null world</h2>
+<p>Suppose we observe 30 independent measurements on a standardized outcome and want to test whether its population mean is positive. Our hypothetical observed sample mean is 0.34. Assume the observations are normally distributed with a <strong>known</strong> standard deviation of 1. These are teaching assumptions, not data from an actual study.</p>
+<p>The null hypothesis is <span class="math inline">\(H_0:\mu=0\)</span>, and the alternative is <span class="math inline">\(H_1:\mu&gt;0\)</span>. Because we specify a positive direction in advance, this is a one-sided test. Its p-value is</p>
+<p><span class="math display">\[
+p=P(\bar X\geq 0.34\mid\mu=0,\text{ assumed sampling model}).
+\]</span></p>
+<p>Here, <span class="math inline">\(\bar X\)</span> is the sample mean. Under the null, it varies around zero with standard deviation <span class="math inline">\(1/\sqrt{30}\)</span>. The p-value measures the right-tail probability beyond 0.34—not the probability of observing exactly 0.34, and not the probability that <span class="math inline">\(\mu=0\)</span>.</p>
 </section>
-<section id="visualizing-the-null-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-the-null-distribution">Visualizing the Null Distribution</h2>
-<p>The cleanest way to see this distinction is to simulate the null distribution directly in R: For simplicity the simulation below treats the test as one-sided, counting only results at least as large as the observed statistic.</p>
+<section id="use-simulation-to-make-the-probability-visible" class="level2">
+<h2 class="anchored" data-anchor-id="use-simulation-to-make-the-probability-visible">Use simulation to make the probability visible</h2>
+<p>The R code below repeats this hypothetical experiment 10,000 times. Each repetition draws 30 observations from the null model and records their mean. Counting the means at least as large as 0.34 approximates the probability in the equation. Simulation is useful here because it turns an abstract conditional probability into a fraction of repeated experiments.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n          <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>obs_stat   <span class="ot">&lt;-</span> <span class="fl">0.34</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>null_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">mean</span>(<span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">mean</span>(null_stats <span class="sc">&gt;=</span> obs_stat)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">hist</span>(null_stats, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(h, <span class="at">col =</span> <span class="st">"gray90"</span>, <span class="at">border =</span> <span class="st">"gray70"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Simulated Null Distribution"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sample mean under H0"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">0.8</span>))</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>tail_bins <span class="ot">&lt;-</span> <span class="fu">which</span>(h<span class="sc">$</span>mids <span class="sc">&gt;=</span> obs_stat)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(h<span class="sc">$</span>breaks[tail_bins], <span class="dv">0</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>     h<span class="sc">$</span>breaks[tail_bins <span class="sc">+</span> <span class="dv">1</span>], h<span class="sc">$</span>counts[tail_bins],</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"tomato"</span>, <span class="at">border =</span> <span class="st">"gray70"</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> obs_stat, <span class="at">col =</span> <span class="st">"red3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)                 <span class="co"># Make the simulation reproducible.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>obs_stat <span class="ot">&lt;-</span> <span class="fl">0.34</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>repetitions <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>null_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(repetitions, <span class="fu">mean</span>(<span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p_sim <span class="ot">&lt;-</span> <span class="fu">mean</span>(null_stats <span class="sc">&gt;=</span> obs_stat)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>p_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(obs_stat, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n), <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">abs</span>(p_sim <span class="sc">-</span> p_exact) <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">*</span> <span class="fu">sqrt</span>(p_exact <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_exact) <span class="sc">/</span> repetitions))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>rnorm()</code> generates observations, <code>replicate()</code> repeats the experiment, and the final <code>mean()</code> of the comparison counts the fraction meeting our threshold. <code>pnorm()</code> calculates the exact normal tail probability for comparison; it does not simulate another set of experiments.</p>
+<div class="cell">
 <div class="cell-output-display">
-<div id="fig-null-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-null-dist" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-null-dist-1.png" class="img-fluid figure-img" width="672">
+<img src="results/figures/fig-null-dist-1.png" class="img-fluid figure-img" alt="A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34." width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: 10,000 simulated experiments in a world where the null hypothesis is true. The shaded tail is the p-value.
+Figure&nbsp;1: Simulated sample means under the null (histogram), with their exact normal density (blue). The orange area under the curve is the exact one-sided p-value beyond the observed mean of 0.34.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A <span class="math inline">\(p\)</span>-value of 2.9% means that t if the effect were exactly zero, roughly 3 in every 100 studies like yours would produce data this extreme or more so. It says nothing about whether the effect is zero.</p>
-<p>The histogram visualizes 10,000 experiments conducted in a world where <span class="math inline">\(H_0\)</span> is true. The red shaded tail represents the proportion of simulated trials that produced a statistic at or beyond our observed value <span class="math inline">\(t_{\text{obs}}\)</span>. The area of that tail is the p-value: a tail probability under an assumed null model, not the probability that the null model itself is correct.</p>
+<p>The simulated fraction is 2.9%, close to the exact value of 3.13%. Thus, under our zero-mean model, about 3.1 in every 100 repetitions would produce a mean at least this large. The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.</p>
 </section>
-<section id="a-brief-historical-accident" class="level2">
-<h2 class="anchored" data-anchor-id="a-brief-historical-accident">A Brief Historical Accident</h2>
-<p>When Ronald Fisher introduced the 0.05 threshold in his 1925 classic Statistical Methods for Research Workers, he intended it as an informal, practical benchmark for identifying anomalies worthy of a second look—partly to save researchers from having to interpolate across extensive printed tables. He never conceived it as an absolute dividing line between truth and falsehood, nor as a posterior measure of scientific certainty.</p>
+<section id="what-should-we-conclude" class="level2">
+<h2 class="anchored" data-anchor-id="what-should-we-conclude">What should we conclude?</h2>
+<p>The observed mean is unusual under the specified null model, providing evidence against it. But every simulated experiment assumed the null was true: we never generated a mixture of true and false hypotheses. The simulation therefore cannot tell us what fraction of hypotheses are true after a small p-value appears.</p>
+<p>Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.</p>
+<p>The takeaway is to read a p-value as <strong>a statement about results under a model</strong>. Report what was estimated and how uncertain it is, and resist translating <span class="math inline">\(p=0.03\)</span> into “97% certain.” That translation answers a question the test never calculated.</p>
 </section>
-<section id="takeaway" class="level2">
-<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
-<p>A p-value tells you how surprising your data would be if nothing were happening; it never tells you the probability that nothing is happening.</p>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<p>Fisher, R. A. (1925). <em>Statistical Methods for Research Workers</em>. Oliver and Boyd.</p>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p>Wasserstein, R. L., and Lazar, N. A. (2016). <a href="https://doi.org/10.1080/00031305.2016.1154108">The ASA’s Statement on p-Values: Context, Process, and Purpose</a>. <em>The American Statistician</em>, 70(2), 129–133.</p>
 
 
 </section>
