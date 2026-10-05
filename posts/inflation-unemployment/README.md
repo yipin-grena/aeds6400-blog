@@ -48,9 +48,13 @@ The request covers January 2014–December 2024. The analysis begins in January 
 - Monthly data are matched by date with a one-to-one join. The script rejects missing or duplicate months, nonfinite observations, nonpositive CPI, and unemployment outside 0–100. It requires 120 analysis months.
 - The periods 2015–2019, 2020–2021, and 2022–2024 are transparent calendar groupings, not estimated structural regimes.
 - Each quarterly coordinate is the arithmetic mean of its three monthly rates. The script requires three observations per quarter. Quarterly inflation here is the mean year-over-year rate, not quarterly annualized price growth.
-- Figure 1 uses aligned panels with a common vertical scale. Figure 2 distinguishes periods by both shape and color. Figure 3 connects quarters chronologically and explicitly labels its narrower unemployment axis.
+- Figure 1 focuses on 2022 through 2024 in aligned panels with a common vertical scale, marking peak inflation and the subsequent unemployment trough. Figure 2 distinguishes periods by both shape and color. Figure 3 connects quarters chronologically and explicitly labels its narrower unemployment axis.
 
 The figures describe contemporaneous relationships. They do not estimate causal effects, a structural Phillips curve, or the unemployment cost of any particular policy. Serial dependence, omitted drivers, policy responses, data revisions, and the chosen time window limit interpretation.
+
+The unemployment baseline comparison uses both the inflation peak and the subsequent monthly unemployment trough. The quarterly comparison uses 2023 Q2 because it contains that trough; `results/tables/cutoff_sensitivity.csv` also reports early and later changes using 2023 Q1 and Q3. These comparisons do not estimate structural breaks. All differences use unrounded values before display rounding.
+
+Package versions are documented in the session information, but are not pinned by an `renv.lock` file.
 
 ## Files
 

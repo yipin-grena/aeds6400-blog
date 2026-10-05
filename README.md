@@ -26,15 +26,22 @@ aeds6400-blog/
 ├── docs/                    rendered GitHub Pages site
 └── posts/
     ├── p-values/            Blog Post 1
-    ├── web-scraping/        Blog Post 2: R scripts, saved data, results
-    ├── inflation-unemployment/  Blog Post 4: FRED snapshots, R code, results
-    └── cps-participation/   Blog Post 3
-        ├── index.qmd        post with computed values
-        ├── README.md        methods and replication
-        ├── run.R            analysis entry point
-        ├── R/analysis.R     import, validation, weighting, figures
-        ├── data/raw/        local IPUMS extract, excluded from Git
-        └── results/         aggregate tables, figures, saved R results
+    ├── web-scraping/        Blog Post 2
+    ├── cps-participation/   Blog Post 3
+    │   ├── index.qmd
+    │   ├── README.md
+    │   ├── run.R
+    │   ├── R/analysis.R
+    │   ├── data/raw/        local IPUMS extract, excluded from Git
+    │   └── results/         aggregate tables and figures
+    └── inflation-unemployment/  Blog Post 4
+        ├── index.qmd
+        ├── README.md
+        ├── run.R
+        ├── verify.py
+        ├── R/               acquisition and analysis scripts
+        ├── data/raw/        saved FRED CSVs and provenance
+        └── results/         tables, sensitivity check and figures
 ```
 
 ## Reproducing a post

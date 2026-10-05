@@ -24,26 +24,53 @@ run_analysis <- function(root) {
   peak <- d[which.max(d$inflation), ]
   u_peak <- d[which.max(d$UNRATE), ]
   end <- tail(d, 1)
+  post_peak <- d |> filter(date >= peak$date)
+  trough <- post_peak[which.min(post_peak$UNRATE), ]
   # Quarterly means clarify chronological movement; not a fitted Phillips curve.
   q <- d |> mutate(year = as.integer(format(date, "%Y")), quarter = (as.integer(format(date, "%m")) - 1) %/% 3 + 1) |>
     group_by(year, quarter) |> summarise(inflation = mean(inflation), unemployment = mean(UNRATE), n = n(), .groups = "drop") |>
     mutate(label = paste0(year, " Q", quarter))
   stopifnot(all(q$n == 3))
   q_path <- q |> filter(year >= 2022) |> mutate(next_u = lead(unemployment), next_pi = lead(inflation))
-  a <- list(monthly = d, quarterly = q, peak = peak, u_peak = u_peak, end = end)
+  # Compare adjacent cutoffs rather than treating one quarter as a structural break.
+  start_q <- q |> filter(label == "2022 Q2")
+  end_q <- tail(q, 1)
+  sensitivity <- q |> filter(label %in% c("2023 Q1", "2023 Q2", "2023 Q3")) |>
+    transmute(cutoff = label, early_inflation_drop = start_q$inflation - inflation,
+      early_unemployment_change = unemployment - start_q$unemployment,
+      later_inflation_drop = inflation - end_q$inflation,
+      later_unemployment_change = end_q$unemployment - unemployment)
+  a <- list(monthly = d, quarterly = q, peak = peak, u_peak = u_peak,
+    end = end, trough = trough, sensitivity = sensitivity)
   dir.create(file.path(root, "results/tables"), recursive = TRUE, showWarnings = FALSE)
   write.csv(d, file.path(root, "results/tables/monthly.csv"), row.names = FALSE)
   write.csv(q, file.path(root, "results/tables/quarterly.csv"), row.names = FALSE)
+  write.csv(sensitivity, file.path(root, "results/tables/cutoff_sensitivity.csv"), row.names = FALSE)
   saveRDS(a, file.path(root, "results/analysis.rds"))
   theme <- theme_minimal(base_size = 13) + theme(panel.grid.minor = element_blank(),
     plot.title = element_text(face = "bold"), plot.caption = element_text(hjust = 0, size = 9), legend.position = "bottom")
   src <- "Source: BLS via FRED (CPIAUCSL, UNRATE). Seasonally adjusted monthly series.\nInflation = 12-month percentage change in CPI; unemployment = percent of labor force."
-  long <- d |> select(date, inflation, UNRATE) |> pivot_longer(-date) |>
+  long <- d |> filter(date >= as.Date("2022-01-01")) |> select(date, inflation, UNRATE) |> pivot_longer(-date) |>
     mutate(name = recode(name, inflation = "CPI inflation (12-month % change)", UNRATE = "Unemployment (% of labor force)"))
+  markers <- bind_rows(
+    tibble(date = peak$date, value = peak$inflation, name = "CPI inflation (12-month % change)",
+      label = paste0(format(peak$date, "%b %Y"), ": ", sprintf("%.1f%%", peak$inflation))),
+    tibble(date = trough$date, value = trough$UNRATE, name = "Unemployment (% of labor force)",
+      label = paste0(format(trough$date, "%b %Y"), ": ", sprintf("%.1f%%", trough$UNRATE))))
+  endpoints <- long |> filter(date == end$date)
   p1 <- ggplot(long, aes(date, value, color = name)) + geom_line(linewidth = 0.8) +
+    geom_vline(xintercept = peak$date, linetype = "dotted", color = "grey60") +
+    geom_point(data = markers, size = 2.5) +
+    geom_text(data = markers, aes(label = label), nudge_y = 0.45, color = "grey20", size = 3.2) +
+    geom_point(data = endpoints, size = 2.3) +
+    geom_text(data = endpoints, aes(label = sprintf("%.1f%%", value)), hjust = 1.1,
+      nudge_y = 0.4, size = 3.2, color = "grey20") +
     facet_wrap(~name, ncol = 1) + scale_color_manual(values = c("#D55E00", "#0072B2"), guide = "none") +
-    scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
-    labs(title = "Unemployment spiked first; inflation peaked later", subtitle = "Monthly U.S. rates, January 2015-December 2024; common vertical scale", x = NULL, y = "Percent", caption = src) + theme
+    scale_x_date(breaks = as.Date(c("2022-01-01", "2023-01-01", "2024-01-01")), date_labels = "%Y") +
+    scale_y_continuous(limits = c(0, 10), breaks = seq(0, 10, 2)) +
+    labs(title = "Inflation turned down before unemployment turned up",
+      subtitle = "Monthly U.S. rates, 2022 through 2024; dotted line marks the inflation peak",
+      x = NULL, y = "Percent", caption = src) + theme
   p2 <- ggplot(d, aes(UNRATE, inflation, color = period, shape = period)) + geom_point(size = 2.2, alpha = 0.8) +
     scale_color_manual(values = c("#009E73", "#0072B2", "#D55E00")) +
     labs(title = "Similar unemployment rates came with different inflation", subtitle = "Each point is a month; colors distinguish calendar periods", x = "Unemployment (% of labor force)", y = "CPI inflation (12-month % change)", color = NULL, shape = NULL, caption = src) + theme +

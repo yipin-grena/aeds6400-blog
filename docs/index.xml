@@ -21,109 +21,80 @@
 
 
 
-<section id="one-adjustment-two-stages" class="level2">
-<h2 class="anchored" data-anchor-id="one-adjustment-two-stages">One adjustment, two stages</h2>
-<p>U.S. inflation fell sharply after its 2022 peak, while unemployment increased much less. That comparison raises a specific question. How much did unemployment rise, and did it rise throughout the period when inflation was falling? The distinction matters because an endpoint comparison can hide when workers faced a weakening labor market.</p>
-<p>I use monthly data from 2015 through 2024 to put the adjustment in context. The earlier years provide a benchmark for comparing similar unemployment rates under different inflation conditions. The main finding is that the adjustment occurred in two stages. Inflation initially declined substantially with little change in unemployment. Later, unemployment rose while inflation declined more slowly. These are descriptions of the observed path, not estimates of what a policy required or caused.</p>
+<section id="how-much-did-the-labor-market-weaken" class="level2">
+<h2 class="anchored" data-anchor-id="how-much-did-the-labor-market-weaken">How much did the labor market weaken?</h2>
+<p>U.S. inflation fell sharply after its 2022 peak. How much did unemployment rise during that decline, and when? This question relates to the <a href="https://www.stlouisfed.org/publications/page-one-economics/2021/07/15/inflation-expectations-the-phillips-curve-and-the-feds-dual-mandate">Phillips curve</a>, which connects inflation and unemployment but does not establish a fixed policy tradeoff. For workers, an endpoint comparison can conceal whether a weakening labor market accompanied the entire adjustment or only its later part.</p>
+<p>I examine 2015 through 2024, using the earlier years as context for the adjustment after 2022. The charts suggest an early period of substantial inflation decline with little unemployment movement, followed by a later rise in unemployment. The size of that rise depends on the starting date.</p>
 </section>
-<section id="measuring-the-two-rates" class="level2">
-<h2 class="anchored" data-anchor-id="measuring-the-two-rates">Measuring the two rates</h2>
-<p>The data come from the Bureau of Labor Statistics through FRED. The series are <a href="https://fred.stlouisfed.org/series/CPIAUCSL">CPIAUCSL</a>, the all-items consumer price index, and <a href="https://fred.stlouisfed.org/series/UNRATE">UNRATE</a>, the unemployment rate. Both series are seasonally adjusted. Unemployment measures unemployed people as a share of the civilian labor force, not the entire population.</p>
-<p>I calculate inflation as <code>100 × (CPI this month / CPI twelve months earlier − 1)</code>. An extra year of CPI data supplies the initial comparison, leaving 120 matched monthly observations. This is a growth rate, rather than the CPI’s index level. Falling positive inflation means prices are increasing more slowly, not necessarily falling. Because the calculation uses seasonally adjusted CPI, it can differ slightly from the commonly reported year-over-year rate based on unadjusted CPI.</p>
+<section id="data-and-calculations" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-calculations">Data and calculations</h2>
+<p>I downloaded BLS series <a href="https://fred.stlouisfed.org/series/CPIAUCSL">CPIAUCSL</a> and <a href="https://fred.stlouisfed.org/series/UNRATE">UNRATE</a> programmatically with R’s <code>download.file()</code> and FRED’s public CSV URLs. The <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment">repository includes acquisition and analysis code, saved data, and replication instructions</a>. Its <code>--refresh</code> option downloads updated observations; the default reproduces the saved snapshot.</p>
+<p>Both series are seasonally adjusted. Unemployment is the percentage of the civilian labor force unemployed. Inflation is <code>100 × (CPI this month / CPI twelve months earlier − 1)</code>. An extra year supplies the initial CPI comparison, leaving 120 matched months. Falling positive inflation means prices increase more slowly, not that they fall. Using adjusted CPI can produce small differences from annual headline rates calculated with unadjusted CPI.</p>
 </section>
-<section id="when-did-inflation-and-unemployment-turn" class="level2">
-<h2 class="anchored" data-anchor-id="when-did-inflation-and-unemployment-turn">When did inflation and unemployment turn?</h2>
-<p>Before comparing the two rates directly, Figure 1 establishes their timing. The aligned panels let us see whether their peaks and declines occurred together.</p>
+<section id="when-did-the-two-rates-turn" class="level2">
+<h2 class="anchored" data-anchor-id="when-did-the-two-rates-turn">When did the two rates turn?</h2>
+<p>Figure 1 focuses on 2022 through 2024. Its aligned panels show whether inflation’s decline began at the same time as unemployment’s rise.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">knitr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">include_graphics</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">file.path</span>(POST_DIR, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"results/figures/timeline.png"</span>))</span></code></pre></div></div>
 <div class="cell-output-display">
-<div id="fig-timeline" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two time-series panels show unemployment surging in 2020 and inflation peaking in 2022.">
+<div id="fig-timeline" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Inflation peaks in June 2022, while unemployment reaches its subsequent low in April 2023 before rising.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/timeline.png" class="img-fluid figure-img" alt="Two time-series panels show unemployment surging in 2020 and inflation peaking in 2022.">
+<img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/timeline.png" class="img-fluid figure-img" alt="Inflation peaks in June 2022, while unemployment reaches its subsequent low in April 2023 before rising.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Aligned monthly series with a common vertical scale. The unemployment spike precedes the inflation peak.
+Figure&nbsp;1: Monthly rates on a common scale. The dotted line marks the inflation peak; points label that peak, the subsequent unemployment trough, and December 2024.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 1 shows unemployment reaching 14.8% in April 2020, when inflation was only 0.3%. Inflation instead peaked at 9.0% in June 2022, with unemployment at 3.6%. The unemployment peak preceded the inflation peak, so treating the entire episode as one simultaneous movement would miss its sequence.</p>
-<p>By December 2024, inflation was 2.9% and unemployment was 4.1%. Relative to the inflation peak, inflation declined 6.1 percentage points while unemployment rose 0.5 points. That endpoint comparison measures the overall movement. To understand it, we first need to ask whether the same unemployment rate has consistently been associated with similar inflation.</p>
+<p>Inflation peaked at 9.0% in June 2022, when unemployment was 3.6%. By December 2024, the rates were 2.9% and 4.1%. That is a 6.1 percentage point inflation decline alongside a 0.5 point unemployment rise.</p>
+<p>However, unemployment first fell to 3.4% in April 2023. Measured from that trough, its increase was 0.7 points. Neither baseline is inherently wrong. The first describes movement since peak inflation; the second measures labor market weakening from the subsequent unemployment low.</p>
 </section>
 <section id="did-similar-unemployment-mean-similar-inflation" class="level2">
 <h2 class="anchored" data-anchor-id="did-similar-unemployment-mean-similar-inflation">Did similar unemployment mean similar inflation?</h2>
-<p>Figure 2 pairs the two rates month by month. Colors and shapes distinguish calendar periods so that an apparent relationship across all observations does not obscure differences between episodes.</p>
+<p>Those turning points invite a broader comparison. Figure 2 pairs the rates in each month, with colors and shapes separating calendar periods.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">knitr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">include_graphics</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">file.path</span>(POST_DIR, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"results/figures/scatter.png"</span>))</span></code></pre></div></div>
 <div class="cell-output-display">
-<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot distinguishes pre-COVID months, 2020-2021, and 2022-2024 using both colors and shapes.">
+<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot shows different inflation rates at similar unemployment levels across the three calendar periods.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/scatter.png" class="img-fluid figure-img" alt="A scatterplot distinguishes pre-COVID months, 2020-2021, and 2022-2024 using both colors and shapes.">
+<img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/scatter.png" class="img-fluid figure-img" alt="A scatterplot shows different inflation rates at similar unemployment levels across the three calendar periods.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Each point pairs inflation and unemployment in the same month. Period boundaries are descriptive calendar groupings, not estimated structural breaks.
+Figure&nbsp;2: Each point represents one month. Calendar groups provide historical context and are not estimated structural breaks.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The points occupy different parts of the chart across periods. Before COVID, relatively low unemployment coexisted with modest inflation. During 2020 and 2021, high-unemployment months had low inflation, while inflation rose as unemployment receded. From 2022 through 2024, inflation varied widely within a much narrower unemployment range.</p>
-<p>For a concrete comparison, unemployment was 3.6% in December 2019 and 3.6% in June 2022, but inflation was 2.3% and 9.0%, respectively. Similar unemployment therefore did not imply similar inflation. But this scatterplot loses the order of the observations. Did the later decline in inflation come before, during, or after unemployment began to rise?</p>
+<p>Unemployment was 3.6% in December 2019 and 3.6% in June 2022, but inflation was 2.3% and 9.0%, respectively. Similar unemployment did not imply similar inflation. This cautions against interpreting all the points as one stable relationship. The scatterplot, however, hides time ordering within each group, which the final chart restores.</p>
 </section>
-<section id="how-did-the-adjustment-unfold-after-2022" class="level2">
-<h2 class="anchored" data-anchor-id="how-did-the-adjustment-unfold-after-2022">How did the adjustment unfold after 2022?</h2>
-<p>Figure 3 reconnects observations in time order. I average each rate over three months to make the path easier to follow, at the cost of hiding monthly fluctuations. Downward movement means falling inflation, and rightward movement means rising unemployment. Arrows point toward the next quarter. The narrower horizontal scale makes small unemployment changes visible; distances should not be compared with Figure 2.</p>
+<section id="how-did-the-adjustment-unfold" class="level2">
+<h2 class="anchored" data-anchor-id="how-did-the-adjustment-unfold">How did the adjustment unfold?</h2>
+<p>Figure 3 connects consecutive quarters. Averaging three monthly rates makes the path readable but hides monthly fluctuations. Downward movement means falling inflation; rightward movement means rising unemployment. The horizontal axis is narrower than Figure 2’s, so visual distances are not directly comparable.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">knitr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">include_graphics</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">file.path</span>(POST_DIR, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"results/figures/path.png"</span>))</span></code></pre></div></div>
 <div class="cell-output-display">
-<div id="fig-path" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A chronological quarterly path shows inflation falling sharply in 2023 with little unemployment movement, followed by a rise in unemployment during 2024.">
+<div id="fig-path" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A quarterly path shows substantial initial inflation declines with little unemployment movement, followed by rising unemployment and smaller further inflation declines.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/path.png" class="img-fluid figure-img" alt="A chronological quarterly path shows inflation falling sharply in 2023 with little unemployment movement, followed by a rise in unemployment during 2024.">
+<img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/path.png" class="img-fluid figure-img" alt="A quarterly path shows substantial initial inflation declines with little unemployment movement, followed by rising unemployment and smaller further inflation declines.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Arrows connect consecutive quarters from 2022 through 2024. Both coordinates are averages of monthly rates; the horizontal scale is deliberately narrower than in Figure 2.
+Figure&nbsp;3: Arrows follow consecutive quarters. Quarterly inflation is the mean of monthly annual inflation rates, not an annualized quarterly growth rate.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 3 restores the time ordering lost in the scatterplot. Between 2022 Q2 and 2023 Q2, average inflation fell from 8.6% to 4.1%, while unemployment moved from 3.6% to 3.5%. Much of that initial disinflation occurred without rising unemployment. By 2024 Q4, unemployment had increased to 4.1%, with inflation at 2.7%. From 2023 Q2 to 2024 Q4, unemployment rose 0.6 percentage points, while inflation fell a further 1.3 points. That later stage combined a clearer increase in unemployment with a slower decline in inflation.</p>
+<p>I use 2023 Q2 as a descriptive comparison point because it contains the monthly unemployment trough. From 2022 Q2 to 2023 Q2, inflation fell from 8.6% to 4.1%, while unemployment moved from 3.6% to 3.5%. By 2024 Q4, unemployment was 4.1% and inflation was 2.7%, a further inflation decline of 1.3 points. Differences use unrounded values, so subtracting displayed rates can give a different rounded result.</p>
+<p>Using 2023 Q1 or Q3 instead preserves the broad pattern. Across these three cutoffs, early unemployment changes range from -0.1 to 0.0 percentage points, while later increases range from 0.5 to 0.6 points. The <a href="https://github.com/yipin-grena/aeds6400-blog/blob/main/posts/inflation-unemployment/results/tables/cutoff_sensitivity.csv">saved sensitivity table</a> reports both variables. This is a descriptive distinction, not proof of a structural break.</p>
 </section>
-<section id="what-the-two-stages-tell-us" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-two-stages-tell-us">What the two stages tell us</h2>
-<p>The answer depends on the interval. From the monthly inflation peak to December 2024, unemployment rose 0.5 percentage points as inflation fell 6.1 points. The quarterly path reveals what that summary hides. Much of the initial inflation decline occurred with unemployment nearly unchanged, followed by a period of rising unemployment and smaller additional inflation declines.</p>
-<p>This pattern does not establish that reducing inflation is always costless, or that a particular policy caused either movement. Supply conditions, demand, expectations, and policy may all matter, and these two series cannot separate their contributions. The calendar groups are descriptive, not estimated structural breaks. National averages also conceal differences between workers and households.</p>
-<p>The central takeaway is specific to this episode. Falling inflation and rising unemployment did not move together at a constant pace. Looking at the sequence reveals both the early improvement and the later labor market weakening that an endpoint comparison alone misses.</p>
-<hr>
-<p><strong>Data and replication:</strong> BLS series distributed by FRED, downloaded 2026-10-01. These are revised historical observations, not real-time vintages. <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment">Code, saved data, and instructions</a> reproduce all figures and reported numbers.</p>
+<section id="takeaway-and-limits" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway-and-limits">Takeaway and limits</h2>
+<p>Much of the inflation decline preceded the clearer rise in unemployment. Recognizing that sequence avoids both overstating an immediate tradeoff and overlooking later labor market weakening. The unemployment increase is also larger when measured from its trough rather than from peak inflation.</p>
+<p>These charts cannot identify a policy’s causal effect. Supply conditions, demand, expectations, and policy can all affect the relationship. National averages also conceal differences across workers and households. The finding describes this episode, not a universal rule about the cost of reducing inflation.</p>
+<p><strong>Data and replication.</strong> BLS via FRED, downloaded 2026-10-01. Observations reflect the saved download vintage, not information available in real time during the episode.</p>
 
 
 </section>

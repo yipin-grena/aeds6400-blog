@@ -36,3 +36,16 @@ for row in rows(root / 'results/tables/quarterly.csv'):
         mean = sum(float(x[source]) for x in group) / 3
         assert math.isclose(mean, float(row[output]), abs_tol=1e-10)
 print('Raw checksums, all 120 monthly rates, and all quarterly means verified.')
+
+quarterly = {r['label']: r for r in rows(root / 'results/tables/quarterly.csv')}
+start, end = quarterly['2022 Q2'], quarterly['2024 Q4']
+for row in rows(root / 'results/tables/cutoff_sensitivity.csv'):
+    middle = quarterly[row['cutoff']]
+    expected = {
+        'early_inflation_drop': float(start['inflation']) - float(middle['inflation']),
+        'early_unemployment_change': float(middle['unemployment']) - float(start['unemployment']),
+        'later_inflation_drop': float(middle['inflation']) - float(end['inflation']),
+        'later_unemployment_change': float(end['unemployment']) - float(middle['unemployment'])}
+    for key, value in expected.items():
+        assert math.isclose(float(row[key]), value, abs_tol=1e-10)
+print('All adjacent cutoff comparisons verified.')
