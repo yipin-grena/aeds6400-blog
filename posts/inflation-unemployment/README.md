@@ -2,7 +2,7 @@
 
 [Read the post](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/).
 
-This post asks whether falling inflation coincided with a large increase in unemployment. It uses a new aggregate dataset from BLS/FRED, distinct from the IPUMS microdata in Post 3. Three charts examine timing, differences across calendar periods, and the quarterly path during 2022–2024.
+This post asks how much unemployment rose as inflation fell after 2022, and whether the adjustment unfolded differently over time. It uses a new aggregate dataset from BLS/FRED, distinct from the IPUMS microdata in Post 3. Three charts examine timing, differences across calendar periods, and the quarterly path during 2022–2024.
 
 ## Reproduce
 

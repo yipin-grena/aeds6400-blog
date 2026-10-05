@@ -11,7 +11,7 @@ Blog posts by Yipin Zhang (grenaz@sas.upenn.edu), Fall 2026.
 | 1 | [What is a p-value?](https://yipin-grena.github.io/aeds6400-blog/posts/p-values/) | `posts/p-values/` |
 | 2 | [Python leads technology mentions in Hacker News hiring posts](https://yipin-grena.github.io/aeds6400-blog/posts/web-scraping/) | [`posts/web-scraping/`](posts/web-scraping/README.md) |
 | 3 | [Did labor-force participation recover equally across age groups?](https://yipin-grena.github.io/aeds6400-blog/posts/cps-participation/) | [`posts/cps-participation/`](posts/cps-participation/README.md) |
-| 4 | [Did lower inflation require much higher unemployment?](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/) | [`posts/inflation-unemployment/`](posts/inflation-unemployment/README.md) |
+| 4 | [How much did unemployment rise as inflation fell after 2022?](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/) | [`posts/inflation-unemployment/`](posts/inflation-unemployment/README.md) |
 
 ## Repository layout
 
