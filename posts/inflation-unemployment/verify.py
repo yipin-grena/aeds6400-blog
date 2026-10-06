@@ -38,8 +38,13 @@ for row in rows(root / 'results/tables/quarterly.csv'):
 print('Raw checksums, all 120 monthly rates, and all quarterly means verified.')
 
 quarterly = {r['label']: r for r in rows(root / 'results/tables/quarterly.csv')}
-start, end = quarterly['2022 Q2'], quarterly['2024 Q4']
+start = max((r for r in quarterly.values() if int(r['year']) >= 2022), key=lambda r: float(r['inflation']))
+end = quarterly['2024 Q4']
 for row in rows(root / 'results/tables/cutoff_sensitivity.csv'):
+    threshold = float(start['inflation']) - float(row['fraction']) * (float(start['inflation']) - float(end['inflation']))
+    assert math.isclose(float(row['threshold']), threshold, abs_tol=1e-10)
+    first = next(r for r in quarterly.values() if r['label'] > start['label'] and float(r['inflation']) <= threshold)
+    assert first['label'] == row['cutoff']
     middle = quarterly[row['cutoff']]
     expected = {
         'early_inflation_drop': float(start['inflation']) - float(middle['inflation']),
@@ -48,4 +53,4 @@ for row in rows(root / 'results/tables/cutoff_sensitivity.csv'):
         'later_unemployment_change': float(end['unemployment']) - float(middle['unemployment'])}
     for key, value in expected.items():
         assert math.isclose(float(row[key]), value, abs_tol=1e-10)
-print('All adjacent cutoff comparisons verified.')
+print('Inflation threshold selections and comparisons verified.')

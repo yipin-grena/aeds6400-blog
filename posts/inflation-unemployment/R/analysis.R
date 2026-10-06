@@ -32,16 +32,26 @@ run_analysis <- function(root) {
     mutate(label = paste0(year, " Q", quarter))
   stopifnot(all(q$n == 3))
   q_path <- q |> filter(year >= 2022) |> mutate(next_u = lead(unemployment), next_pi = lead(inflation))
-  # Compare adjacent cutoffs rather than treating one quarter as a structural break.
-  start_q <- q |> filter(label == "2022 Q2")
+  # Select comparison dates using inflation alone, not an unemployment minimum.
+  # This retrospective rule depends on the chosen endpoint and is not a break test.
+  start_q <- q_path[which.max(q_path$inflation), ]
   end_q <- tail(q, 1)
-  sensitivity <- q |> filter(label %in% c("2023 Q1", "2023 Q2", "2023 Q3")) |>
-    transmute(cutoff = label, early_inflation_drop = start_q$inflation - inflation,
-      early_unemployment_change = unemployment - start_q$unemployment,
-      later_inflation_drop = inflation - end_q$inflation,
-      later_unemployment_change = end_q$unemployment - unemployment)
+  candidates <- q_path |> filter(year * 4 + quarter > start_q$year * 4 + start_q$quarter)
+  sensitivity <- bind_rows(lapply(c(0.4, 0.5, 0.6), function(fraction) {
+    threshold <- start_q$inflation - fraction * (start_q$inflation - end_q$inflation)
+    middle <- candidates |> filter(inflation <= threshold) |> slice_head(n = 1)
+    stopifnot(nrow(middle) == 1)
+    tibble(fraction = fraction, threshold = threshold, cutoff = middle$label,
+      early_inflation_drop = start_q$inflation - middle$inflation,
+      early_unemployment_change = middle$unemployment - start_q$unemployment,
+      later_inflation_drop = middle$inflation - end_q$inflation,
+      later_unemployment_change = end_q$unemployment - middle$unemployment)
+  }))
+  comparison <- sensitivity |> filter(fraction == 0.5)
+  split_q <- q |> filter(label == comparison$cutoff)
   a <- list(monthly = d, quarterly = q, peak = peak, u_peak = u_peak,
-    end = end, trough = trough, sensitivity = sensitivity)
+    end = end, trough = trough, sensitivity = sensitivity,
+    start_q = start_q, split_q = split_q, comparison = comparison)
   dir.create(file.path(root, "results/tables"), recursive = TRUE, showWarnings = FALSE)
   write.csv(d, file.path(root, "results/tables/monthly.csv"), row.names = FALSE)
   write.csv(q, file.path(root, "results/tables/quarterly.csv"), row.names = FALSE)

@@ -1,6 +1,6 @@
 ---
 title: "How much did unemployment rise as inflation fell after 2022?"
-description: "The adjustment unfolded in two stages, with falling inflation preceding much of the rise in unemployment."
+description: "Most of the fall in inflation came before the clearer rise in unemployment."
 author: "Yipin Zhang"
 date: 2026-10-01
 date-modified: 2026-10-05
@@ -34,7 +34,7 @@ I examine 2015 through 2024, using the earlier years as context for the adjustme
 
 I downloaded BLS series [CPIAUCSL](https://fred.stlouisfed.org/series/CPIAUCSL) and [UNRATE](https://fred.stlouisfed.org/series/UNRATE) programmatically with R's `download.file()` and FRED's public CSV URLs. The [repository includes acquisition and analysis code, saved data, and replication instructions](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment). Its `--refresh` option downloads updated observations; the default reproduces the saved snapshot.
 
-Both series are seasonally adjusted. Unemployment is the percentage of the civilian labor force unemployed. Inflation is `100 × (CPI this month / CPI twelve months earlier − 1)`. An extra year supplies the initial CPI comparison, leaving `r nrow(a$monthly)` matched months. Falling positive inflation means prices increase more slowly, not that they fall. Using adjusted CPI can produce small differences from annual headline rates calculated with unadjusted CPI.
+Both series are seasonally adjusted. Unemployment is the percentage of the civilian labor force unemployed. Inflation is `100 × (CPI this month / CPI twelve months earlier − 1)`. An extra year supplies the initial CPI comparison, leaving `r nrow(a$monthly)` matched months. Falling positive inflation means prices increase more slowly, not that they fall. Using seasonally adjusted CPI can produce small differences from annual headline rates calculated with unadjusted CPI.
 
 ## When did the two rates turn?
 
@@ -54,7 +54,7 @@ However, unemployment first fell to `r f(a$trough$UNRATE)`% in `r date_label(a$t
 
 ## Did similar unemployment mean similar inflation?
 
-Those turning points invite a broader comparison. Figure 2 pairs the rates in each month, with colors and shapes separating calendar periods.
+Those turning points invite a broader comparison. Figure 2 pairs the rates in each month, with colors and shapes separating 2015 through 2019 (before COVID), 2020 and 2021 (disruption), and 2022 through 2024 (inflation and cooling).
 
 ```{r}
 #| label: fig-scatter
@@ -78,13 +78,17 @@ Figure 3 connects consecutive quarters. Averaging three monthly rates makes the 
 knitr::include_graphics(file.path(POST_DIR, "results/figures/path.png"))
 ```
 
-I use 2023 Q2 as a descriptive comparison point because it contains the monthly unemployment trough. From 2022 Q2 to 2023 Q2, inflation fell from `r f(qval("2022 Q2", "inflation"))`% to `r f(qval("2023 Q2", "inflation"))`%, while unemployment moved from `r f(qval("2022 Q2", "unemployment"))`% to `r f(qval("2023 Q2", "unemployment"))`%. By 2024 Q4, unemployment was `r f(qval("2024 Q4", "unemployment"))`% and inflation was `r f(qval("2024 Q4", "inflation"))`%, a further inflation decline of `r f(qval("2023 Q2", "inflation") - qval("2024 Q4", "inflation"))` points. Differences use unrounded values, so subtracting displayed rates can give a different rounded result.
+Choosing an unemployment trough would partly build a subsequent rise into the comparison. Instead, I select the first quarter when inflation completed at least half its decline from the quarterly peak to 2024 Q4. This uses inflation alone. The threshold is `r f(a$comparison$threshold)`%, first crossed in `r a$split_q$label`. It remains a retrospective rule dependent on the endpoint, not an estimated structural break.
 
-Using 2023 Q1 or Q3 instead preserves the broad pattern. Across these three cutoffs, early unemployment changes range from `r f(min(a$sensitivity$early_unemployment_change))` to `r f(max(a$sensitivity$early_unemployment_change))` percentage points, while later increases range from `r f(min(a$sensitivity$later_unemployment_change))` to `r f(max(a$sensitivity$later_unemployment_change))` points. The [saved sensitivity table](https://github.com/yipin-grena/aeds6400-blog/blob/main/posts/inflation-unemployment/results/tables/cutoff_sensitivity.csv) reports both variables. This is a descriptive distinction, not proof of a structural break.
+From `r a$start_q$label` to `r a$split_q$label`, inflation fell from `r f(a$start_q$inflation)`% to `r f(a$split_q$inflation)`%, while unemployment moved from `r f(a$start_q$unemployment)`% to `r f(a$split_q$unemployment)`%. By 2024 Q4, unemployment was `r f(qval("2024 Q4", "unemployment"))`% and inflation was `r f(qval("2024 Q4", "inflation"))`%, a further inflation decline of `r f(a$comparison$later_inflation_drop)` points. Differences use unrounded values, so subtraction of displayed rates can round differently.
+
+Using 40% or 60% of the inflation decline instead gives comparison quarters from `r a$sensitivity$cutoff[1]` to `r a$sensitivity$cutoff[3]`. The [sensitivity table](https://github.com/yipin-grena/aeds6400-blog/blob/main/posts/inflation-unemployment/results/tables/cutoff_sensitivity.csv) reports the results. All three thresholds show little early unemployment movement and a larger later increase.
+
+Unemployment estimates have [sampling uncertainty](https://www.bls.gov/cps/factsheets/understanding-standard-errors-and-confidence-intervals.htm). A change of a tenth of a point should not be treated as a precise population movement. I have not calculated standard errors for these quarterly comparisons and make no claim of statistical significance.
 
 ## Takeaway and limits
 
-Much of the inflation decline preceded the clearer rise in unemployment. Recognizing that sequence avoids both overstating an immediate tradeoff and overlooking later labor market weakening. The unemployment increase is also larger when measured from its trough rather than from peak inflation.
+Much of the inflation decline preceded the clearer rise in unemployment. In Phillips curve terms, the observed path does not resemble a fixed exchange of one percentage point of unemployment for each point of lower inflation. This does not reject the broader Phillips curve framework. The unemployment increase is also larger when measured from its trough rather than from peak inflation.
 
 These charts cannot identify a policy's causal effect. Supply conditions, demand, expectations, and policy can all affect the relationship. National averages also conceal differences across workers and households. The finding describes this episode, not a universal rule about the cost of reducing inflation.
 

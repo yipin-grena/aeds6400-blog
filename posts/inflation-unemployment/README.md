@@ -52,7 +52,8 @@ The request covers January 2014–December 2024. The analysis begins in January 
 
 The figures describe contemporaneous relationships. They do not estimate causal effects, a structural Phillips curve, or the unemployment cost of any particular policy. Serial dependence, omitted drivers, policy responses, data revisions, and the chosen time window limit interpretation.
 
-The unemployment baseline comparison uses both the inflation peak and the subsequent monthly unemployment trough. The quarterly comparison uses 2023 Q2 because it contains that trough; `results/tables/cutoff_sensitivity.csv` also reports early and later changes using 2023 Q1 and Q3. These comparisons do not estimate structural breaks. All differences use unrounded values before display rounding.
+The unemployment baseline comparison uses both the inflation peak and the subsequent monthly unemployment trough. The quarterly comparison point is chosen using inflation alone: the first quarter after the quarterly inflation peak to complete at least 50% of the decline to 2024 Q4. `results/tables/cutoff_sensitivity.csv` repeats the rule at 40% and 60%. This retrospective rule depends on the endpoint and does not estimate structural breaks. Selecting the unemployment minimum itself would partly predetermine subsequent increases. All differences use unrounded values before display rounding. No standard errors are calculated for quarterly differences, so small changes are not presented as statistically significant.
+
 
 Package versions are documented in the session information, but are not pinned by an `renv.lock` file.
 

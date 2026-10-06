@@ -29,7 +29,7 @@
 <section id="data-and-calculations" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-calculations">Data and calculations</h2>
 <p>I downloaded BLS series <a href="https://fred.stlouisfed.org/series/CPIAUCSL">CPIAUCSL</a> and <a href="https://fred.stlouisfed.org/series/UNRATE">UNRATE</a> programmatically with R’s <code>download.file()</code> and FRED’s public CSV URLs. The <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment">repository includes acquisition and analysis code, saved data, and replication instructions</a>. Its <code>--refresh</code> option downloads updated observations; the default reproduces the saved snapshot.</p>
-<p>Both series are seasonally adjusted. Unemployment is the percentage of the civilian labor force unemployed. Inflation is <code>100 × (CPI this month / CPI twelve months earlier − 1)</code>. An extra year supplies the initial CPI comparison, leaving 120 matched months. Falling positive inflation means prices increase more slowly, not that they fall. Using adjusted CPI can produce small differences from annual headline rates calculated with unadjusted CPI.</p>
+<p>Both series are seasonally adjusted. Unemployment is the percentage of the civilian labor force unemployed. Inflation is <code>100 × (CPI this month / CPI twelve months earlier − 1)</code>. An extra year supplies the initial CPI comparison, leaving 120 matched months. Falling positive inflation means prices increase more slowly, not that they fall. Using seasonally adjusted CPI can produce small differences from annual headline rates calculated with unadjusted CPI.</p>
 </section>
 <section id="when-did-the-two-rates-turn" class="level2">
 <h2 class="anchored" data-anchor-id="when-did-the-two-rates-turn">When did the two rates turn?</h2>
@@ -53,7 +53,7 @@ Figure&nbsp;1: Monthly rates on a common scale. The dotted line marks the inflat
 </section>
 <section id="did-similar-unemployment-mean-similar-inflation" class="level2">
 <h2 class="anchored" data-anchor-id="did-similar-unemployment-mean-similar-inflation">Did similar unemployment mean similar inflation?</h2>
-<p>Those turning points invite a broader comparison. Figure 2 pairs the rates in each month, with colors and shapes separating calendar periods.</p>
+<p>Those turning points invite a broader comparison. Figure 2 pairs the rates in each month, with colors and shapes separating 2015 through 2019 (before COVID), 2020 and 2021 (disruption), and 2022 through 2024 (inflation and cooling).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot shows different inflation rates at similar unemployment levels across the three calendar periods.">
@@ -87,12 +87,14 @@ Figure&nbsp;3: Arrows follow consecutive quarters. Quarterly inflation is the me
 </div>
 </div>
 </div>
-<p>I use 2023 Q2 as a descriptive comparison point because it contains the monthly unemployment trough. From 2022 Q2 to 2023 Q2, inflation fell from 8.6% to 4.1%, while unemployment moved from 3.6% to 3.5%. By 2024 Q4, unemployment was 4.1% and inflation was 2.7%, a further inflation decline of 1.3 points. Differences use unrounded values, so subtracting displayed rates can give a different rounded result.</p>
-<p>Using 2023 Q1 or Q3 instead preserves the broad pattern. Across these three cutoffs, early unemployment changes range from -0.1 to 0.0 percentage points, while later increases range from 0.5 to 0.6 points. The <a href="https://github.com/yipin-grena/aeds6400-blog/blob/main/posts/inflation-unemployment/results/tables/cutoff_sensitivity.csv">saved sensitivity table</a> reports both variables. This is a descriptive distinction, not proof of a structural break.</p>
+<p>Choosing an unemployment trough would partly build a subsequent rise into the comparison. Instead, I select the first quarter when inflation completed at least half its decline from the quarterly peak to 2024 Q4. This uses inflation alone. The threshold is 5.7%, first crossed in 2023 Q2. It remains a retrospective rule dependent on the endpoint, not an estimated structural break.</p>
+<p>From 2022 Q2 to 2023 Q2, inflation fell from 8.6% to 4.1%, while unemployment moved from 3.6% to 3.5%. By 2024 Q4, unemployment was 4.1% and inflation was 2.7%, a further inflation decline of 1.3 points. Differences use unrounded values, so subtraction of displayed rates can round differently.</p>
+<p>Using 40% or 60% of the inflation decline instead gives comparison quarters from 2023 Q1 to 2023 Q2. The <a href="https://github.com/yipin-grena/aeds6400-blog/blob/main/posts/inflation-unemployment/results/tables/cutoff_sensitivity.csv">sensitivity table</a> reports the results. All three thresholds show little early unemployment movement and a larger later increase.</p>
+<p>Unemployment estimates have <a href="https://www.bls.gov/cps/factsheets/understanding-standard-errors-and-confidence-intervals.htm">sampling uncertainty</a>. A change of a tenth of a point should not be treated as a precise population movement. I have not calculated standard errors for these quarterly comparisons and make no claim of statistical significance.</p>
 </section>
 <section id="takeaway-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway-and-limits">Takeaway and limits</h2>
-<p>Much of the inflation decline preceded the clearer rise in unemployment. Recognizing that sequence avoids both overstating an immediate tradeoff and overlooking later labor market weakening. The unemployment increase is also larger when measured from its trough rather than from peak inflation.</p>
+<p>Much of the inflation decline preceded the clearer rise in unemployment. In Phillips curve terms, the observed path does not resemble a fixed exchange of one percentage point of unemployment for each point of lower inflation. This does not reject the broader Phillips curve framework. The unemployment increase is also larger when measured from its trough rather than from peak inflation.</p>
 <p>These charts cannot identify a policy’s causal effect. Supply conditions, demand, expectations, and policy can all affect the relationship. National averages also conceal differences across workers and households. The finding describes this episode, not a universal rule about the cost of reducing inflation.</p>
 <p><strong>Data and replication.</strong> BLS via FRED, downloaded 2026-10-01. Observations reflect the saved download vintage, not information available in real time during the episode.</p>
 
