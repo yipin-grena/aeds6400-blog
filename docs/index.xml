@@ -12,7 +12,7 @@
 <generator>quarto-1.10.18</generator>
 <lastBuildDate>Thu, 01 Oct 2026 04:00:00 GMT</lastBuildDate>
 <item>
-  <title>How much did unemployment rise as inflation fell after 2022?</title>
+  <title>Inflation fell first, unemployment rose later: The U.S. experience through 2024</title>
   <dc:creator>Yipin Zhang</dc:creator>
   <link>https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/</link>
   <description><![CDATA[ 
@@ -22,10 +22,10 @@
 
 
 <p>In 2022, bringing inflation down raised an uncomfortable question. Would relief at the checkout come at the cost of more people losing work? <a href="https://www.minneapolisfed.org/article/2022/us-job-matching-holds-up-keeping-a-soft-landing-in-sight">Some prominent economists warned of a substantial rise in unemployment</a>, while others thought inflation could ease without a painful recession. For households already struggling with rising bills, the possibility of losing a paycheck made the stakes especially high.</p>
-<p>That debate makes the subsequent experience worth examining. Did the fall in U.S. inflation after 2022 come with a large rise in unemployment? And did that rise happen throughout the slowdown in inflation, or mainly toward the end?</p>
-<p>One reason to expect a tradeoff is that strong spending can encourage hiring while also pushing prices up. Slowing spending could ease price pressure but weaken hiring. This is one idea behind the Phillips curve. It is a possibility to investigate, not a rule that the two rates must always follow.</p>
+<p>Did unemployment rise throughout the fall in inflation, or mainly later? I examine the 2022 peak through December 2024, covering the peak year and two full calendar years afterward. This is a bounded historical case study, not an assessment of conditions in 2026; the endpoint does not imply that the adjustment was complete.</p>
+<p>One reason to expect a tradeoff is that strong spending can encourage hiring while also pushing prices up. Slowing spending could ease price pressure but weaken hiring. This is one idea behind the Phillips curve.</p>
 <p>Inflation measures how much prices increased compared with the same month a year earlier. Unemployment measures the share of people working or seeking work who have no job and are looking for one. Falling inflation means prices rise more slowly, not that prices fall.</p>
-<p>The first chart shows why timing matters. Inflation peaked at 9.0% in June 2022 and fell sharply afterward. From that peak to December 2024, unemployment rose by 0.5 percentage points.</p>
+<p>The first chart shows why timing matters. Inflation peaked at 9.0% in June 2022 and fell sharply afterward. By December 2024, unemployment had risen 0.5 percentage points from peak inflation, or 0.7 points from its later low.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-timeline" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Inflation peaks in June 2022, while unemployment reaches its subsequent low in April 2023 before rising.">
@@ -40,7 +40,7 @@ Figure&nbsp;1: Inflation began falling before unemployment began its sustained r
 </div>
 </div>
 </div>
-<p>That comparison misses an important turn along the way. Unemployment initially continued falling, reaching its low in April 2023. From that low to December 2024, it rose 0.7 points. Measuring from peak inflation therefore gives a smaller increase than measuring from the later unemployment low. The starting date changes how much weakening we see.</p>
+<p>That increase deserves attention. The <a href="https://www.stlouisfed.org/on-the-economy/2025/may/making-sense-recession-probabilities">Sahm rule</a>, a recession warning indicator, flags a rise of half a percentage point in the three month average unemployment rate above its lowest average in the preceding year. It triggered in July 2024. That is a different calculation from our endpoint comparison, and a warning rather than a recession diagnosis, but it shows why the later weakening should not be dismissed as painless.</p>
 <p>Was this simply a predictable exchange between inflation and jobs? The second chart checks whether similar unemployment consistently came with similar inflation. Each point represents one month, grouped into 2015 through 2019 before COVID, the disruption in 2020 and 2021, and the inflation and cooling period from 2022 through 2024.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -57,7 +57,8 @@ Figure&nbsp;2: Months with similar unemployment had very different inflation rat
 </div>
 </div>
 <p>Unemployment was 3.6% in December 2019 and 3.6% in June 2022. Yet inflation was 2.3% in the first month and 9.0% in the second. Similar unemployment accompanied very different inflation. Unemployment alone does not explain the price pressures households faced.</p>
-<p>The final chart returns to the recent episode and connects the observations in time. Each point averages three months to make the path easier to follow. Moving downward means inflation fell; moving right means unemployment rose. Its unemployment axis is narrower than the previous chart’s, so distances should not be compared across the two figures.</p>
+<p>There is an economic reason for that difference. In his <a href="https://www.federalreserve.gov/newsevents/speech/powell20240823a.htm">2024 review of the inflation surge</a>, Federal Reserve Chair Jerome Powell described strong spending colliding with disrupted supply chains, followed by energy price shocks after Russia invaded Ukraine. He argued that easing those disruptions helped bring inflation down alongside slower demand. Improving the availability of goods offers a route to lower inflation that does not require a collapse in hiring.</p>
+<p>The final chart returns to the recent episode and connects the observations in time. Each point averages three months to make the path easier to follow. Moving downward means inflation fell; moving right means unemployment rose. The chart zooms in on the smaller unemployment changes.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-path" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A quarterly path shows substantial initial inflation declines with little unemployment movement, followed by rising unemployment and smaller further inflation declines.">
@@ -73,12 +74,13 @@ Figure&nbsp;3: The arrows trace an early fall in inflation followed by a clearer
 </div>
 </div>
 <p>Much of the initial movement was downward. From 2022 Q2 to 2023 Q2, inflation fell from 8.6% to 4.1%, while unemployment stayed close to 3.5%.</p>
-<p>Afterward, the path moved more clearly to the right. By 2024 Q4, unemployment averaged 4.1% and inflation 2.7%. The broad contrast matters more than movements of a tenth of a point, since estimates from a sample of households can fluctuate even without a real change in unemployment.</p>
-<p>The episode does not show a fixed exchange in which each point of lower inflation requires an equal rise in unemployment. It also does not establish that reducing inflation is always painless. The availability of goods, spending, expectations about future prices, and policy can all affect these outcomes. These charts cannot isolate the effects of a particular policy, and national averages conceal different experiences across households.</p>
+<p>Afterward, the path moved more clearly to the right. By 2024 Q4, unemployment averaged 4.1% and inflation 2.7%.</p>
+<p>Through the end of 2024, this pattern was closer to the soft landing view than to predictions that bringing inflation down would require a large, sustained rise in joblessness. Most of the inflation decline arrived before the clearer unemployment increase. The later warning signal qualifies that favorable outcome rather than erasing it.</p>
+<p>These charts cannot establish which policies or supply changes caused the outcome, and small movements in survey estimates should not be treated as exact population changes. The conclusion applies to this period and these national averages, not to every household or what happened after 2024.</p>
 <p>The main takeaways are:</p>
 <ul>
 <li>Much of the fall in inflation came before the clearer rise in unemployment.</li>
-<li>Unemployment rose by 0.5 percentage points from peak inflation, or 0.7 points from its subsequent low. The starting date matters.</li>
+<li>The experience through 2024 was closer to a soft landing, but the later unemployment rise was a meaningful warning.</li>
 <li>Similar unemployment came with very different inflation, so unemployment alone does not explain price pressure.</li>
 </ul>
 <p>Data come from BLS via FRED’s <a href="https://fred.stlouisfed.org/series/CPIAUCSL">consumer price index</a> and <a href="https://fred.stlouisfed.org/series/UNRATE">unemployment rate</a>. The <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment">GitHub repository</a> contains the data, code, methods, and instructions for reproducing the analysis.</p>

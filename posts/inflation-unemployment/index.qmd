@@ -1,5 +1,5 @@
 ---
-title: "How much did unemployment rise as inflation fell after 2022?"
+title: "Inflation fell first, unemployment rose later: The U.S. experience through 2024"
 description: "Most of the fall in inflation came before the clearer rise in unemployment."
 author: "Yipin Zhang"
 date: 2026-10-01
@@ -26,13 +26,13 @@ provenance <- read.csv(file.path(POST_DIR, "data/raw/provenance.csv"))
 
 In 2022, bringing inflation down raised an uncomfortable question. Would relief at the checkout come at the cost of more people losing work? [Some prominent economists warned of a substantial rise in unemployment](https://www.minneapolisfed.org/article/2022/us-job-matching-holds-up-keeping-a-soft-landing-in-sight), while others thought inflation could ease without a painful recession. For households already struggling with rising bills, the possibility of losing a paycheck made the stakes especially high.
 
-That debate makes the subsequent experience worth examining. Did the fall in U.S. inflation after 2022 come with a large rise in unemployment? And did that rise happen throughout the slowdown in inflation, or mainly toward the end?
+Did unemployment rise throughout the fall in inflation, or mainly later? I examine the 2022 peak through December 2024, covering the peak year and two full calendar years afterward. This is a bounded historical case study, not an assessment of conditions in 2026; the endpoint does not imply that the adjustment was complete.
 
-One reason to expect a tradeoff is that strong spending can encourage hiring while also pushing prices up. Slowing spending could ease price pressure but weaken hiring. This is one idea behind the Phillips curve. It is a possibility to investigate, not a rule that the two rates must always follow.
+One reason to expect a tradeoff is that strong spending can encourage hiring while also pushing prices up. Slowing spending could ease price pressure but weaken hiring. This is one idea behind the Phillips curve.
 
 Inflation measures how much prices increased compared with the same month a year earlier. Unemployment measures the share of people working or seeking work who have no job and are looking for one. Falling inflation means prices rise more slowly, not that prices fall.
 
-The first chart shows why timing matters. Inflation peaked at `r f(a$peak$inflation)`% in `r date_label(a$peak$date)` and fell sharply afterward. From that peak to December 2024, unemployment rose by `r f(a$end$UNRATE - a$peak$UNRATE)` percentage points.
+The first chart shows why timing matters. Inflation peaked at `r f(a$peak$inflation)`% in `r date_label(a$peak$date)` and fell sharply afterward. By December 2024, unemployment had risen `r f(a$end$UNRATE - a$peak$UNRATE)` percentage points from peak inflation, or `r f(a$end$UNRATE - a$trough$UNRATE)` points from its later low.
 
 ```{r}
 #| label: fig-timeline
@@ -42,7 +42,7 @@ The first chart shows why timing matters. Inflation peaked at `r f(a$peak$inflat
 knitr::include_graphics(file.path(POST_DIR, "results/figures/timeline.png"))
 ```
 
-That comparison misses an important turn along the way. Unemployment initially continued falling, reaching its low in `r date_label(a$trough$date)`. From that low to December 2024, it rose `r f(a$end$UNRATE - a$trough$UNRATE)` points. Measuring from peak inflation therefore gives a smaller increase than measuring from the later unemployment low. The starting date changes how much weakening we see.
+That increase deserves attention. The [Sahm rule](https://www.stlouisfed.org/on-the-economy/2025/may/making-sense-recession-probabilities), a recession warning indicator, flags a rise of half a percentage point in the three month average unemployment rate above its lowest average in the preceding year. It triggered in July 2024. That is a different calculation from our endpoint comparison, and a warning rather than a recession diagnosis, but it shows why the later weakening should not be dismissed as painless.
 
 Was this simply a predictable exchange between inflation and jobs? The second chart checks whether similar unemployment consistently came with similar inflation. Each point represents one month, grouped into 2015 through 2019 before COVID, the disruption in 2020 and 2021, and the inflation and cooling period from 2022 through 2024.
 
@@ -56,7 +56,9 @@ knitr::include_graphics(file.path(POST_DIR, "results/figures/scatter.png"))
 
 Unemployment was `r f(point("2019-12-01", "UNRATE"))`% in December 2019 and `r f(point("2022-06-01", "UNRATE"))`% in June 2022. Yet inflation was `r f(point("2019-12-01", "inflation"))`% in the first month and `r f(point("2022-06-01", "inflation"))`% in the second. Similar unemployment accompanied very different inflation. Unemployment alone does not explain the price pressures households faced.
 
-The final chart returns to the recent episode and connects the observations in time. Each point averages three months to make the path easier to follow. Moving downward means inflation fell; moving right means unemployment rose. Its unemployment axis is narrower than the previous chart's, so distances should not be compared across the two figures.
+There is an economic reason for that difference. In his [2024 review of the inflation surge](https://www.federalreserve.gov/newsevents/speech/powell20240823a.htm), Federal Reserve Chair Jerome Powell described strong spending colliding with disrupted supply chains, followed by energy price shocks after Russia invaded Ukraine. He argued that easing those disruptions helped bring inflation down alongside slower demand. Improving the availability of goods offers a route to lower inflation that does not require a collapse in hiring.
+
+The final chart returns to the recent episode and connects the observations in time. Each point averages three months to make the path easier to follow. Moving downward means inflation fell; moving right means unemployment rose. The chart zooms in on the smaller unemployment changes.
 
 ```{r}
 #| label: fig-path
@@ -68,14 +70,16 @@ knitr::include_graphics(file.path(POST_DIR, "results/figures/path.png"))
 
 Much of the initial movement was downward. From `r a$start_q$label` to `r a$split_q$label`, inflation fell from `r f(a$start_q$inflation)`% to `r f(a$split_q$inflation)`%, while unemployment stayed close to `r f(a$split_q$unemployment)`%.
 
-Afterward, the path moved more clearly to the right. By 2024 Q4, unemployment averaged `r f(qval("2024 Q4", "unemployment"))`% and inflation `r f(qval("2024 Q4", "inflation"))`%. The broad contrast matters more than movements of a tenth of a point, since estimates from a sample of households can fluctuate even without a real change in unemployment.
+Afterward, the path moved more clearly to the right. By 2024 Q4, unemployment averaged `r f(qval("2024 Q4", "unemployment"))`% and inflation `r f(qval("2024 Q4", "inflation"))`%.
 
-The episode does not show a fixed exchange in which each point of lower inflation requires an equal rise in unemployment. It also does not establish that reducing inflation is always painless. The availability of goods, spending, expectations about future prices, and policy can all affect these outcomes. These charts cannot isolate the effects of a particular policy, and national averages conceal different experiences across households.
+Through the end of 2024, this pattern was closer to the soft landing view than to predictions that bringing inflation down would require a large, sustained rise in joblessness. Most of the inflation decline arrived before the clearer unemployment increase. The later warning signal qualifies that favorable outcome rather than erasing it.
+
+These charts cannot establish which policies or supply changes caused the outcome, and small movements in survey estimates should not be treated as exact population changes. The conclusion applies to this period and these national averages, not to every household or what happened after 2024.
 
 The main takeaways are:
 
 * Much of the fall in inflation came before the clearer rise in unemployment.
-* Unemployment rose by `r f(a$end$UNRATE - a$peak$UNRATE)` percentage points from peak inflation, or `r f(a$end$UNRATE - a$trough$UNRATE)` points from its subsequent low. The starting date matters.
+* The experience through 2024 was closer to a soft landing, but the later unemployment rise was a meaningful warning.
 * Similar unemployment came with very different inflation, so unemployment alone does not explain price pressure.
 
 Data come from BLS via FRED's [consumer price index](https://fred.stlouisfed.org/series/CPIAUCSL) and [unemployment rate](https://fred.stlouisfed.org/series/UNRATE). The [GitHub repository](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment) contains the data, code, methods, and instructions for reproducing the analysis.

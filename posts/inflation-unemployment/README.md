@@ -2,7 +2,7 @@
 
 [Read the post](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/).
 
-This post asks how much unemployment rose as inflation fell after 2022, and whether the adjustment unfolded differently over time. It uses a new aggregate dataset from BLS/FRED, distinct from the IPUMS microdata in Post 3. Three charts examine timing, differences across calendar periods, and the quarterly path during 2022–2024.
+This post asks whether unemployment rose throughout the fall in inflation after 2022 or mainly later. It uses a new aggregate dataset from BLS/FRED, distinct from the IPUMS microdata in Post 3. Three charts examine timing, differences across calendar periods, and the quarterly path during 2022–2024.
 
 ## Reproduce
 
@@ -69,3 +69,11 @@ Package versions are documented in the session information, but are not pinned b
 - `results/analysis.rds`: values used by inline R in the post.
 - `results/figures/`: generated charts.
 - `index.qmd`: article source, captions, and dynamically generated numbers.
+
+## Historical scope and external context
+
+December 2024 closes the peak year and two full calendar years after the 2022 inflation peak. This is an explicit historical window, not the latest available observation, a claim that adjustment ended then, or a conclusion about 2025 or 2026. The soft landing interpretation is limited to the inflation and unemployment evidence through that endpoint.
+
+The article cites [Powell’s August 2024 assessment](https://www.federalreserve.gov/newsevents/speech/powell20240823a.htm) for supply disruptions, energy shocks, and their reversal. Those mechanisms come from the cited assessment; the two plotted series do not identify causal contributions. Powell discusses PCE inflation in that speech, while this analysis consistently uses CPI inflation. No numerical PCE comparison is imported into the figures.
+
+The [St. Louis Fed discussion of recession indicators](https://www.stlouisfed.org/on-the-economy/2025/may/making-sense-recession-probabilities) documents the July 2024 Sahm warning. This is external historical context, not a Sahm series calculated by this project. The rule compares the three month mean unemployment rate with the lowest three month mean over the preceding twelve months, with a 0.50 percentage point threshold. Our June 2022 to December 2024 change is a different statistic and must not be interpreted as that rule. The warning is not an official recession determination.
