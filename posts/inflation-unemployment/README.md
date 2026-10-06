@@ -27,7 +27,7 @@ To deliberately replace the snapshots with current FRED data:
 Rscript posts/inflation-unemployment/run.R --refresh
 ```
 
-No API key is required. The acquisition script saves each CSV response and records its exact URL, UTC retrieval time, and MD5 checksum in `data/raw/provenance.csv`. Revised source data can change historical results, so keep the committed snapshots to reproduce this version.
+The acquisition code uses R's `download.file()` with FRED's public CSV URLs, requesting each series by ID and date range. No API key is required. The acquisition script saves each CSV response and records its exact URL, UTC retrieval time, and MD5 checksum in `data/raw/provenance.csv`. Revised source data can change historical results, so keep the committed snapshots to reproduce this version.
 
 For an independent calculation check using only Python’s standard library, run `python3 posts/inflation-unemployment/verify.py`. It verifies the raw-file checksums and recomputes every monthly inflation rate and quarterly mean.
 
@@ -54,6 +54,8 @@ The figures describe contemporaneous relationships. They do not estimate causal 
 
 The unemployment baseline comparison uses both the inflation peak and the subsequent monthly unemployment trough. The quarterly comparison point is chosen using inflation alone: the first quarter after the quarterly inflation peak to complete at least 50% of the decline to 2024 Q4. `results/tables/cutoff_sensitivity.csv` repeats the rule at 40% and 60%. This retrospective rule depends on the endpoint and does not estimate structural breaks. Selecting the unemployment minimum itself would partly predetermine subsequent increases. All differences use unrounded values before display rounding. No standard errors are calculated for quarterly differences, so small changes are not presented as statistically significant.
 
+
+The 40% threshold selects 2023 Q1, while the 50% and 60% thresholds select 2023 Q2 in the saved data. All three comparisons show little early unemployment movement and a larger later increase. See [the sensitivity table](results/tables/cutoff_sensitivity.csv) for the unrounded calculations. Monthly unemployment estimates have [sampling uncertainty](https://www.bls.gov/cps/factsheets/understanding-standard-errors-and-confidence-intervals.htm); the analysis does not establish statistical significance for quarterly changes. The saved download vintage is recorded in `data/raw/provenance.csv` and does not represent the information available in real time during the episode.
 
 Package versions are documented in the session information, but are not pinned by an `renv.lock` file.
 

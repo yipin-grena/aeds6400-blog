@@ -3,7 +3,7 @@ title: "How much did unemployment rise as inflation fell after 2022?"
 description: "Most of the fall in inflation came before the clearer rise in unemployment."
 author: "Yipin Zhang"
 date: 2026-10-01
-date-modified: 2026-10-05
+date-modified: 2026-10-06
 categories: [inflation, unemployment, data visualization]
 image: results/figures/path.png
 execute:
@@ -24,21 +24,13 @@ point <- function(date, variable) a$monthly[[variable]][a$monthly$date == as.Dat
 provenance <- read.csv(file.path(POST_DIR, "data/raw/provenance.csv"))
 ```
 
-## How much did the labor market weaken?
+Slower price increases bring relief to household budgets, but that relief can feel less reassuring if jobs become harder to find. Did the fall in U.S. inflation after 2022 come with a large rise in unemployment? And did that rise happen throughout the slowdown in inflation, or mainly toward the end?
 
-U.S. inflation fell sharply after its 2022 peak. How much did unemployment rise during that decline, and when? This question relates to the [Phillips curve](https://www.stlouisfed.org/publications/page-one-economics/2021/07/15/inflation-expectations-the-phillips-curve-and-the-feds-dual-mandate), which connects inflation and unemployment but does not establish a fixed policy tradeoff. For workers, an endpoint comparison can conceal whether a weakening labor market accompanied the entire adjustment or only its later part.
+These questions relate to the [Phillips curve](https://www.stlouisfed.org/publications/page-one-economics/2021/07/15/inflation-expectations-the-phillips-curve-and-the-feds-dual-mandate), a framework for thinking about inflation and unemployment. A concern is that cooling demand to slow price increases could also weaken hiring. The recent experience offers a useful comparison, although the charts alone cannot tell us what caused either rate to change.
 
-I examine 2015 through 2024, using the earlier years as context for the adjustment after 2022. The charts suggest an early period of substantial inflation decline with little unemployment movement, followed by a later rise in unemployment. The size of that rise depends on the starting date.
+I compare monthly U.S. unemployment with consumer price inflation using Bureau of Labor Statistics data available through FRED. Both series are seasonally adjusted. Inflation measures how much prices increased compared with the same month a year earlier, while unemployment measures the share of the labor force without work and looking for a job. Falling inflation therefore means prices rise more slowly, not that prices fall.
 
-## Data and calculations
-
-I downloaded BLS series [CPIAUCSL](https://fred.stlouisfed.org/series/CPIAUCSL) and [UNRATE](https://fred.stlouisfed.org/series/UNRATE) programmatically with R's `download.file()` and FRED's public CSV URLs. The [repository includes acquisition and analysis code, saved data, and replication instructions](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment). Its `--refresh` option downloads updated observations; the default reproduces the saved snapshot.
-
-Both series are seasonally adjusted. Unemployment is the percentage of the civilian labor force unemployed. Inflation is `100 × (CPI this month / CPI twelve months earlier − 1)`. An extra year supplies the initial CPI comparison, leaving `r nrow(a$monthly)` matched months. Falling positive inflation means prices increase more slowly, not that they fall. Using seasonally adjusted CPI can produce small differences from annual headline rates calculated with unadjusted CPI.
-
-## When did the two rates turn?
-
-Figure 1 focuses on 2022 through 2024. Its aligned panels show whether inflation's decline began at the same time as unemployment's rise.
+The first chart shows why timing matters. Inflation peaked at `r f(a$peak$inflation)`% in `r date_label(a$peak$date)`, when unemployment was `r f(a$peak$UNRATE)`%. By `r date_label(a$end$date)`, inflation had fallen to `r f(a$end$inflation)`%, while unemployment had risen to `r f(a$end$UNRATE)`%. Across those endpoints, inflation fell `r f(a$peak$inflation - a$end$inflation)` percentage points and unemployment rose `r f(a$end$UNRATE - a$peak$UNRATE)` points.
 
 ```{r}
 #| label: fig-timeline
@@ -48,13 +40,9 @@ Figure 1 focuses on 2022 through 2024. Its aligned panels show whether inflation
 knitr::include_graphics(file.path(POST_DIR, "results/figures/timeline.png"))
 ```
 
-Inflation peaked at `r f(a$peak$inflation)`% in `r date_label(a$peak$date)`, when unemployment was `r f(a$peak$UNRATE)`%. By `r date_label(a$end$date)`, the rates were `r f(a$end$inflation)`% and `r f(a$end$UNRATE)`%. That is a `r f(a$peak$inflation - a$end$inflation)` percentage point inflation decline alongside a `r f(a$end$UNRATE - a$peak$UNRATE)` point unemployment rise.
+That comparison misses an important turn along the way. Unemployment initially continued falling, reaching `r f(a$trough$UNRATE)`% in `r date_label(a$trough$date)`. From that low to December 2024, it rose `r f(a$end$UNRATE - a$trough$UNRATE)` points. The smaller increase measures change since peak inflation; the larger one captures the subsequent weakening from the strongest labor market reading. Both describe the same episode, but answer different questions.
 
-However, unemployment first fell to `r f(a$trough$UNRATE)`% in `r date_label(a$trough$date)`. Measured from that trough, its increase was `r f(a$end$UNRATE - a$trough$UNRATE)` points. Neither baseline is inherently wrong. The first describes movement since peak inflation; the second measures labor market weakening from the subsequent unemployment low.
-
-## Did similar unemployment mean similar inflation?
-
-Those turning points invite a broader comparison. Figure 2 pairs the rates in each month, with colors and shapes separating 2015 through 2019 (before COVID), 2020 and 2021 (disruption), and 2022 through 2024 (inflation and cooling).
+To understand why we should not expect a fixed exchange between the two rates, the second chart puts this episode in a longer context. Each point pairs inflation and unemployment in one month. It distinguishes 2015 through 2019 before COVID, the disruption in 2020 and 2021, and the inflation and cooling period from 2022 through 2024.
 
 ```{r}
 #| label: fig-scatter
@@ -64,11 +52,9 @@ Those turning points invite a broader comparison. Figure 2 pairs the rates in ea
 knitr::include_graphics(file.path(POST_DIR, "results/figures/scatter.png"))
 ```
 
-Unemployment was `r f(point("2019-12-01", "UNRATE"))`% in December 2019 and `r f(point("2022-06-01", "UNRATE"))`% in June 2022, but inflation was `r f(point("2019-12-01", "inflation"))`% and `r f(point("2022-06-01", "inflation"))`%, respectively. Similar unemployment did not imply similar inflation. This cautions against interpreting all the points as one stable relationship. The scatterplot, however, hides time ordering within each group, which the final chart restores.
+Unemployment was `r f(point("2019-12-01", "UNRATE"))`% in December 2019 and `r f(point("2022-06-01", "UNRATE"))`% in June 2022. Yet inflation was `r f(point("2019-12-01", "inflation"))`% in the first month and `r f(point("2022-06-01", "inflation"))`% in the second. Similar unemployment accompanied very different inflation. Unemployment alone does not explain the price pressures households faced.
 
-## How did the adjustment unfold?
-
-Figure 3 connects consecutive quarters. Averaging three monthly rates makes the path readable but hides monthly fluctuations. Downward movement means falling inflation; rightward movement means rising unemployment. The horizontal axis is narrower than Figure 2's, so visual distances are not directly comparable.
+The final chart returns to the recent episode and connects the observations in time. Each point averages three months to make the path easier to follow. Moving downward means inflation fell; moving right means unemployment rose. Its unemployment axis is narrower than the previous chart's, so distances should not be compared across the two figures.
 
 ```{r}
 #| label: fig-path
@@ -78,18 +64,16 @@ Figure 3 connects consecutive quarters. Averaging three monthly rates makes the 
 knitr::include_graphics(file.path(POST_DIR, "results/figures/path.png"))
 ```
 
-Choosing an unemployment trough would partly build a subsequent rise into the comparison. Instead, I select the first quarter when inflation completed at least half its decline from the quarterly peak to 2024 Q4. This uses inflation alone. The threshold is `r f(a$comparison$threshold)`%, first crossed in `r a$split_q$label`. It remains a retrospective rule dependent on the endpoint, not an estimated structural break.
+Much of the initial movement was downward. From `r a$start_q$label` to `r a$split_q$label`, inflation fell from `r f(a$start_q$inflation)`% to `r f(a$split_q$inflation)`%, while unemployment stayed close to `r f(a$split_q$unemployment)`%. I use the latter quarter because it was the first to complete at least half the inflation decline through the end of 2024. This is a descriptive comparison, not evidence of a permanent change in the relationship.
 
-From `r a$start_q$label` to `r a$split_q$label`, inflation fell from `r f(a$start_q$inflation)`% to `r f(a$split_q$inflation)`%, while unemployment moved from `r f(a$start_q$unemployment)`% to `r f(a$split_q$unemployment)`%. By 2024 Q4, unemployment was `r f(qval("2024 Q4", "unemployment"))`% and inflation was `r f(qval("2024 Q4", "inflation"))`%, a further inflation decline of `r f(a$comparison$later_inflation_drop)` points. Differences use unrounded values, so subtraction of displayed rates can round differently.
+Afterward, the path moved more clearly to the right. By 2024 Q4, unemployment averaged `r f(qval("2024 Q4", "unemployment"))`% and inflation `r f(qval("2024 Q4", "inflation"))`%. The broad contrast matters more than movements of a tenth of a point, which should be interpreted cautiously given the survey's sampling uncertainty.
 
-Using 40% or 60% of the inflation decline instead gives comparison quarters from `r a$sensitivity$cutoff[1]` to `r a$sensitivity$cutoff[3]`. The [sensitivity table](https://github.com/yipin-grena/aeds6400-blog/blob/main/posts/inflation-unemployment/results/tables/cutoff_sensitivity.csv) reports the results. All three thresholds show little early unemployment movement and a larger later increase.
+The episode does not resemble a fixed Phillips curve tradeoff in which every point of lower inflation requires a corresponding rise in unemployment. It also does not establish that reducing inflation is always painless. Supply conditions, demand, expectations, and policy can all affect these outcomes, and national averages conceal different experiences across households.
 
-Unemployment estimates have [sampling uncertainty](https://www.bls.gov/cps/factsheets/understanding-standard-errors-and-confidence-intervals.htm). A change of a tenth of a point should not be treated as a precise population movement. I have not calculated standard errors for these quarterly comparisons and make no claim of statistical significance.
+The main takeaways are
 
-## Takeaway and limits
+* Much of the fall in inflation came before the clearer rise in unemployment.
+* Unemployment rose by `r f(a$end$UNRATE - a$peak$UNRATE)` percentage points from peak inflation, or `r f(a$end$UNRATE - a$trough$UNRATE)` points from its subsequent low. The starting date matters.
+* These comparisons describe what happened, rather than the effects of a particular policy.
 
-Much of the inflation decline preceded the clearer rise in unemployment. In Phillips curve terms, the observed path does not resemble a fixed exchange of one percentage point of unemployment for each point of lower inflation. This does not reject the broader Phillips curve framework. The unemployment increase is also larger when measured from its trough rather than from peak inflation.
-
-These charts cannot identify a policy's causal effect. Supply conditions, demand, expectations, and policy can all affect the relationship. National averages also conceal differences across workers and households. The finding describes this episode, not a universal rule about the cost of reducing inflation.
-
-**Data and replication.** BLS via FRED, downloaded `r substr(provenance$retrieved_utc[1], 1, 10)`. Observations reflect the saved download vintage, not information available in real time during the episode.
+Data come from BLS via FRED's [consumer price index](https://fred.stlouisfed.org/series/CPIAUCSL) and [unemployment rate](https://fred.stlouisfed.org/series/UNRATE). The [GitHub repository](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment) contains the data, code, methods, and instructions for reproducing the analysis.
