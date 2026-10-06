@@ -21,10 +21,11 @@
 
 
 
-<p>Slower price increases bring relief to household budgets, but that relief can feel less reassuring if jobs become harder to find. Did the fall in U.S. inflation after 2022 come with a large rise in unemployment? And did that rise happen throughout the slowdown in inflation, or mainly toward the end?</p>
-<p>These questions relate to the <a href="https://www.stlouisfed.org/publications/page-one-economics/2021/07/15/inflation-expectations-the-phillips-curve-and-the-feds-dual-mandate">Phillips curve</a>, a framework for thinking about inflation and unemployment. A concern is that cooling demand to slow price increases could also weaken hiring. The recent experience offers a useful comparison, although the charts alone cannot tell us what caused either rate to change.</p>
-<p>I compare monthly U.S. unemployment with consumer price inflation using Bureau of Labor Statistics data available through FRED. Both series are seasonally adjusted. Inflation measures how much prices increased compared with the same month a year earlier, while unemployment measures the share of the labor force without work and looking for a job. Falling inflation therefore means prices rise more slowly, not that prices fall.</p>
-<p>The first chart shows why timing matters. Inflation peaked at 9.0% in June 2022, when unemployment was 3.6%. By December 2024, inflation had fallen to 2.9%, while unemployment had risen to 4.1%. Across those endpoints, inflation fell 6.1 percentage points and unemployment rose 0.5 points.</p>
+<p>In 2022, bringing inflation down raised an uncomfortable question. Would relief at the checkout come at the cost of more people losing work? <a href="https://www.minneapolisfed.org/article/2022/us-job-matching-holds-up-keeping-a-soft-landing-in-sight">Some prominent economists warned of a substantial rise in unemployment</a>, while others thought inflation could ease without a painful recession. For households already struggling with rising bills, the possibility of losing a paycheck made the stakes especially high.</p>
+<p>That debate makes the subsequent experience worth examining. Did the fall in U.S. inflation after 2022 come with a large rise in unemployment? And did that rise happen throughout the slowdown in inflation, or mainly toward the end?</p>
+<p>One reason to expect a tradeoff is that strong spending can encourage hiring while also pushing prices up. Slowing spending could ease price pressure but weaken hiring. This is one idea behind the Phillips curve. It is a possibility to investigate, not a rule that the two rates must always follow.</p>
+<p>Inflation measures how much prices increased compared with the same month a year earlier. Unemployment measures the share of people working or seeking work who have no job and are looking for one. Falling inflation means prices rise more slowly, not that prices fall.</p>
+<p>The first chart shows why timing matters. Inflation peaked at 9.0% in June 2022 and fell sharply afterward. From that peak to December 2024, unemployment rose by 0.5 percentage points.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-timeline" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Inflation peaks in June 2022, while unemployment reaches its subsequent low in April 2023 before rising.">
@@ -33,14 +34,14 @@
 <img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/timeline.png" class="img-fluid figure-img" alt="Inflation peaks in June 2022, while unemployment reaches its subsequent low in April 2023 before rising.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Monthly rates on a common scale. The dotted line marks the inflation peak; points label that peak, the subsequent unemployment trough, and December 2024.
+Figure&nbsp;1: Inflation began falling before unemployment began its sustained rise.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>That comparison misses an important turn along the way. Unemployment initially continued falling, reaching 3.4% in April 2023. From that low to December 2024, it rose 0.7 points. The smaller increase measures change since peak inflation; the larger one captures the subsequent weakening from the strongest labor market reading. Both describe the same episode, but answer different questions.</p>
-<p>To understand why we should not expect a fixed exchange between the two rates, the second chart puts this episode in a longer context. Each point pairs inflation and unemployment in one month. It distinguishes 2015 through 2019 before COVID, the disruption in 2020 and 2021, and the inflation and cooling period from 2022 through 2024.</p>
+<p>That comparison misses an important turn along the way. Unemployment initially continued falling, reaching its low in April 2023. From that low to December 2024, it rose 0.7 points. Measuring from peak inflation therefore gives a smaller increase than measuring from the later unemployment low. The starting date changes how much weakening we see.</p>
+<p>Was this simply a predictable exchange between inflation and jobs? The second chart checks whether similar unemployment consistently came with similar inflation. Each point represents one month, grouped into 2015 through 2019 before COVID, the disruption in 2020 and 2021, and the inflation and cooling period from 2022 through 2024.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot shows different inflation rates at similar unemployment levels across the three calendar periods.">
@@ -49,7 +50,7 @@ Figure&nbsp;1: Monthly rates on a common scale. The dotted line marks the inflat
 <img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/scatter.png" class="img-fluid figure-img" alt="A scatterplot shows different inflation rates at similar unemployment levels across the three calendar periods.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Each point represents one month. Calendar groups provide historical context and are not estimated structural breaks.
+Figure&nbsp;2: Months with similar unemployment had very different inflation rates across the three periods.
 </figcaption>
 </figure>
 </div>
@@ -65,20 +66,20 @@ Figure&nbsp;2: Each point represents one month. Calendar groups provide historic
 <img src="https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/results/figures/path.png" class="img-fluid figure-img" alt="A quarterly path shows substantial initial inflation declines with little unemployment movement, followed by rising unemployment and smaller further inflation declines.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Arrows follow consecutive quarters. Quarterly inflation is the mean of monthly annual inflation rates, not an annualized quarterly growth rate.
+Figure&nbsp;3: The arrows trace an early fall in inflation followed by a clearer rise in unemployment.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Much of the initial movement was downward. From 2022 Q2 to 2023 Q2, inflation fell from 8.6% to 4.1%, while unemployment stayed close to 3.5%. I use the latter quarter because it was the first to complete at least half the inflation decline through the end of 2024. This is a descriptive comparison, not evidence of a permanent change in the relationship.</p>
-<p>Afterward, the path moved more clearly to the right. By 2024 Q4, unemployment averaged 4.1% and inflation 2.7%. The broad contrast matters more than movements of a tenth of a point, which should be interpreted cautiously given the survey’s sampling uncertainty.</p>
-<p>The episode does not resemble a fixed Phillips curve tradeoff in which every point of lower inflation requires a corresponding rise in unemployment. It also does not establish that reducing inflation is always painless. Supply conditions, demand, expectations, and policy can all affect these outcomes, and national averages conceal different experiences across households.</p>
-<p>The main takeaways are</p>
+<p>Much of the initial movement was downward. From 2022 Q2 to 2023 Q2, inflation fell from 8.6% to 4.1%, while unemployment stayed close to 3.5%.</p>
+<p>Afterward, the path moved more clearly to the right. By 2024 Q4, unemployment averaged 4.1% and inflation 2.7%. The broad contrast matters more than movements of a tenth of a point, since estimates from a sample of households can fluctuate even without a real change in unemployment.</p>
+<p>The episode does not show a fixed exchange in which each point of lower inflation requires an equal rise in unemployment. It also does not establish that reducing inflation is always painless. The availability of goods, spending, expectations about future prices, and policy can all affect these outcomes. These charts cannot isolate the effects of a particular policy, and national averages conceal different experiences across households.</p>
+<p>The main takeaways are:</p>
 <ul>
 <li>Much of the fall in inflation came before the clearer rise in unemployment.</li>
 <li>Unemployment rose by 0.5 percentage points from peak inflation, or 0.7 points from its subsequent low. The starting date matters.</li>
-<li>These comparisons describe what happened, rather than the effects of a particular policy.</li>
+<li>Similar unemployment came with very different inflation, so unemployment alone does not explain price pressure.</li>
 </ul>
 <p>Data come from BLS via FRED’s <a href="https://fred.stlouisfed.org/series/CPIAUCSL">consumer price index</a> and <a href="https://fred.stlouisfed.org/series/UNRATE">unemployment rate</a>. The <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/inflation-unemployment">GitHub repository</a> contains the data, code, methods, and instructions for reproducing the analysis.</p>
 
