@@ -1,0 +1,12 @@
+{
+  "families": 4000,
+  "people": 8000,
+  "income_records": 100000,
+  "unmatched_links": 0,
+  "specifications_checked": 23,
+  "max_relative_mean_error": 4.2122488741957837e-16,
+  "sql_means_match_pandas": true,
+  "slopes_match_covariance_formula": true,
+  "same_pair_ids": true,
+  "no_shock_lifecycle_control": true
+}

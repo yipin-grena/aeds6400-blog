@@ -1,0 +1,5 @@
+Python 3.9.6
+SQLite 3.39.5
+numpy 2.0.2
+pandas 2.3.3
+matplotlib 3.9.4
