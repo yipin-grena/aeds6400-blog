@@ -1,0 +1,23 @@
+[
+  {
+    "file": "b25070_county.zip",
+    "url": "https://www2.census.gov/programs-surveys/acs/replicate_estimates/2024/data/5-year/050/B25070.csv.zip",
+    "retrieved_utc": "2026-10-15T17:07:43.655644+00:00",
+    "sha256": "8233eac67869b801310bed218068f33a866ddbf651232d31d197ec8ffa69e721",
+    "bytes": 5121239
+  },
+  {
+    "file": "b25070_state.zip",
+    "url": "https://www2.census.gov/programs-surveys/acs/replicate_estimates/2024/data/5-year/040/B25070.csv.zip",
+    "retrieved_utc": "2026-10-15T17:07:44.018076+00:00",
+    "sha256": "b2bdea5fe90d89089fb1037150a7475dcdd576a6e9d5cabe0974889a60ac60c1",
+    "bytes": 139051
+  },
+  {
+    "file": "counties_2024.zip",
+    "url": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip",
+    "retrieved_utc": "2026-10-15T17:07:44.428518+00:00",
+    "sha256": "da4051717caec55c75e3748c3608c2a3dbde8d1ff401bbaf4f952e3c3fb63ef1",
+    "bytes": 11626066
+  }
+]

@@ -12,6 +12,7 @@ Blog posts by Yipin Zhang (grenaz@sas.upenn.edu), Fall 2026.
 | 2 | [Python leads technology mentions in Hacker News hiring posts](https://yipin-grena.github.io/aeds6400-blog/posts/web-scraping/) | [`posts/web-scraping/`](posts/web-scraping/README.md) |
 | 3 | [Did labor-force participation recover equally across age groups?](https://yipin-grena.github.io/aeds6400-blog/posts/cps-participation/) | [`posts/cps-participation/`](posts/cps-participation/README.md) |
 | 4 | [Inflation fell first, unemployment rose later: The U.S. experience through 2024](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/) | [`posts/inflation-unemployment/`](posts/inflation-unemployment/README.md) |
+| 5 | [A college county and the Poconos stand out for rent pressure](https://yipin-grena.github.io/aeds6400-blog/posts/pa-rent-burden/) | [`posts/pa-rent-burden/`](posts/pa-rent-burden/README.md) |
 
 ## Repository layout
 
@@ -34,20 +35,26 @@ aeds6400-blog/
     │   ├── R/analysis.R
     │   ├── data/raw/        local IPUMS extract, excluded from Git
     │   └── results/         aggregate tables and figures
-    └── inflation-unemployment/  Blog Post 4
-        ├── index.qmd
-        ├── README.md
-        ├── run.R
-        ├── verify.py
-        ├── R/               acquisition and analysis scripts
-        ├── data/raw/        saved FRED CSVs and provenance
-        └── results/         tables, sensitivity check and figures
+    ├── inflation-unemployment/  Blog Post 4
+    │   ├── index.qmd
+    │   ├── README.md
+    │   ├── run.R
+    │   ├── verify.py
+    │   ├── R/               acquisition and analysis scripts
+    │   ├── data/raw/        saved FRED CSVs and provenance
+    │   └── results/         tables, sensitivity check and figures
+    └── pa-rent-burden/      Blog Post 5
+        ├── run.py
+        ├── build_preview.py
+        ├── data/raw/        public Census downloads and provenance
+        └── results/
 ```
 
 ## Reproducing a post
 
-Clone the repository and open `aeds6400-blog.Rproj` in RStudio. All paths
-resolve through `here()`, so no `setwd()` is required.
+Clone the repository and open `aeds6400-blog.Rproj` in RStudio for the R posts.
+The following R examples resolve paths through `here()`, so no `setwd()` is required.
+Blog Post 5 uses Python and resolves paths relative to its script.
 
 ```r
 source(here::here("posts", "web-scraping", "R", "01_scrape.R"))
@@ -70,8 +77,12 @@ This regenerates the aggregate results and charts. Rendering uses the committed 
 
 For Blog Post 4, run `Rscript posts/inflation-unemployment/run.R` from the repository root to reproduce from the committed FRED snapshots. Add `--refresh` only to download revised data. See [its README](posts/inflation-unemployment/README.md) for definitions and dependencies.
 
-Render the site with `quarto render` from the repository root.
+For Blog Post 5, install the Python dependencies in [its README](posts/pa-rent-burden/README.md), then run `python posts/pa-rent-burden/run.py` from the repository root. It uses committed Census files without downloading them again. Its `build_preview.py` produces a standalone review copy.
+
+Render the site with `quarto render` from the repository root only when preparing a site build. Use each draft's `build_preview.py` for review without changing the published output.
 
 ## Environment
 
 R 4.5.1. Package versions are recorded separately in `posts/web-scraping/results/session-info.txt` and `posts/cps-participation/results/session-info.txt`. Blog Post 4 records its environment in `posts/inflation-unemployment/results/session-info.txt`. Each post README lists its dependencies and data requirements.
+
+Blog Post 5 records its Python and package versions in `posts/pa-rent-burden/results/environment.json` and pins its direct dependencies in `posts/pa-rent-burden/requirements.txt`.
