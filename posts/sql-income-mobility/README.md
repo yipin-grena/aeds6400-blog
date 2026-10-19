@@ -67,7 +67,7 @@ There are 4,000 independent families, 8,000 people and 100,000 annual income rec
 
 `family_id` is a stable family of origin identifier, not the household in which someone currently lives. Globally unique `person_id` values follow individuals across years. `links` explicitly names the parent and child; shared family membership alone does not establish the relationship. Composite foreign keys require both people to belong to the named family. The schema also enforces a unique person and year income record. `families` provides the family key registry; its rows are generated from the IDs.
 
-`match.sql` first aggregates each generation separately, grouping by family and person. Named parameters specify the inclusive age windows. `HAVING` requires the expected number of nonmissing annual incomes and distinct years. The final inner joins use both family and person IDs and produce one row per child. Generations are not joined on calendar year. Aggregation before matching avoids a many to many join of their annual records.
+`match.sql` first aggregates each generation separately, grouping by family and person. Named parameters specify the inclusive age windows. `HAVING` requires the expected number of nonmissing annual incomes and distinct years. The final inner joins use both family and person IDs and produce one row per child. Generations are not joined on calendar year. Aggregation before matching avoids a many-to-many join of their annual records.
 
 The analysis always uses one selected parent's individual income and the child's own adult income. It does not combine two parents' incomes or estimate household income mobility. All specifications use the same 4,000 pairs. Real panels can contain multiple parents and siblings, changing household IDs, attrition and incomplete windows. The relationship definition, income concept, inclusion rules and any clustered uncertainty calculation would need to be chosen for that dataset. This synthetic population is equally weighted; no survey weights apply.
 
@@ -90,9 +90,9 @@ age_level   = log(35000) + t * log(65000 / 35000)
 income      = exp(age_level + age_loading * (0.4 * P + E) + v - 0.45^2/2)
 ```
 
-Each v is independent normal noise with standard deviation 0.45. Subtracting half the shock variance makes the multiplicative annual shock have mean one. At age 40 and above the expected child income equals `exp(child_log)`. Before 40, the loading compresses income gaps associated with lasting status. A common age profile alone would only change the intercept; it is the changing loading on centered status that generates the life cycle bias here. The parameters and maturity age illustrate mechanisms and are not fitted to Haider and Solon or any U.S. data.
+Each v is independent normal noise with standard deviation 0.45. Subtracting half the shock variance makes the multiplicative annual shock have mean one. At age 40 and above the expected child income equals `exp(child_log)`. Before 40, the loading compresses income gaps associated with lasting status. A common age profile alone would only change the intercept; it is the changing loading on centered status that generates the life-cycle bias here. The parameters and maturity age illustrate mechanisms and are not fitted to Haider and Solon or any U.S. data.
 
-Every income is positive and each window is complete by construction. Real data would require a documented treatment of zero, negative and missing incomes. Restricting a real sample to complete positive income histories can change the population being studied. The tutorial does not silently apply such a restriction to a survey.
+Every income is positive and each window is complete by construction. Real data would require a documented treatment of zero, negative and missing incomes. Restricting a real sample to complete positive-income histories can change the population being studied. The tutorial does not silently apply such a restriction to a survey.
 
 ## What the comparisons identify in this model
 
@@ -102,7 +102,7 @@ All estimates use ordinary least squares with an intercept, taking the natural l
 * The child age curve always uses the parent's ages 40 through 44 average. Only the age of the child's single observation changes, holding families and the parent measure fixed.
 * Averaging the child's ages 25 through 29 leaves the early career loading below one. It reduces annual noise without solving the age mismatch.
 
-The figures report estimates from one fixed simulated sample, not confidence intervals or empirical causal estimates. The dashed value 0.4 is the population simulation parameter. Finite sample variation and residual income noise explain why a five year average does not land exactly on it.
+The figures report estimates from one fixed simulated sample, not confidence intervals or empirical causal estimates. The dashed value 0.4 is the population simulation parameter. Finite sample variation and residual income noise explain why a five-year average does not land exactly on it.
 
 ## Checks performed
 
@@ -112,13 +112,15 @@ The figures report estimates from one fixed simulated sample, not confidence int
 * A left join audit checks that each link finds both people, assigns their roles correctly and has the expected birth year gap. There are no unmatched links in this constructed panel.
 * Each of 23 specifications is independently reconstructed using pandas grouping and ID mapping. Its SQL means must agree within the numeric tolerance in the code, with the same 4,000 child IDs and complete observation counts.
 * Every regression slope is checked against the independent covariance divided by variance formula with an intercept.
-* A control without annual shocks verifies that multiplying centered child status by 0.45 multiplies the latent slope by 0.45. This isolates the life cycle mechanism from temporary income noise.
+* A control without annual shocks verifies that multiplying centered child status by 0.45 multiplies the latent slope by 0.45. This isolates the life-cycle mechanism from temporary income noise.
 
 The actual checks and their results are saved in `results/validation.json`. Code checks data construction and arithmetic; it does not validate the model as an account of actual mobility.
 
 ## References
 
 * Haider, Steven, and Gary Solon. 2006. [Life-Cycle Variation in the Association between Current and Lifetime Earnings](https://www.nber.org/papers/w11943). NBER Working Paper 11943; published in the American Economic Review 96(4), 1308 to 1320. [Published article DOI](https://doi.org/10.1257/aer.96.4.1308).
+* Mazumder, Bhashkar. 2005. [Fortunate Sons: New Estimates of Intergenerational Mobility in the United States Using Social Security Earnings Data](https://ideas.repec.org/a/tpr/restat/v87y2005i2p235-255.html). Review of Economics and Statistics 87(2), 235 to 255. Cited in the article for the downward bias from short averages of fathers' earnings.
+* Solon, Gary. 1992. [Intergenerational Income Mobility in the United States](https://ideas.repec.org/a/aea/aecrev/v82y1992i3p393-408.html). American Economic Review 82(3), 393 to 408. Cited in the article for the downward bias in earlier U.S. estimates.
 * [Python sqlite3 documentation](https://docs.python.org/3/library/sqlite3.html) for connections, foreign key enforcement through SQLite statements, and parameter binding.
 * [pandas read_sql_query documentation](https://pandas.pydata.org/docs/reference/api/pandas.read_sql_query.html) for retrieving query results as DataFrames.
 * AEDS 6400 Class 12, SQL for Economists, for the structure of the query and validation workflow.

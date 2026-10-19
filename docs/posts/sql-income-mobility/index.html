@@ -235,6 +235,7 @@ window.Quarto = {
 
 
 <p>Could income mobility look stronger simply because we measured people in the wrong year? A parent might receive an unusually large bonus, while their adult child is still building a career. Neither income necessarily reflects what that person usually earns. Mistaking these temporary differences for lasting ones could make economic opportunity appear more open than it is.</p>
+<p>This has happened in real research. <a href="https://ideas.repec.org/a/aea/aecrev/v82y1992i3p393-408.html">Solon (1992)</a> showed that earlier U.S. estimates were biased downward by measurement error, unrepresentative samples, or both; using the Panel Study of Income Dynamics, he found a long-run intergenerational correlation of at least 0.4, implying much less mobility than earlier work suggested. <a href="https://ideas.repec.org/a/tpr/restat/v87y2005i2p235-255.html">Mazumder (2005)</a> later used Social Security earnings histories and found that averaging fathers’ earnings over only a few years understated the elasticity by roughly 30% or more, putting it near 0.6. How income was measured changed what economists concluded about opportunity in the United States.</p>
 <p>To see why, I use SQL inside Python to match 4,000 <strong>simulated families</strong>, each with one parent and one child. Averaging several years reveals a stronger income connection than a single year does, even though the families are unchanged. These are teaching data with a known underlying relationship, not estimates for the United States.</p>
 <section id="match-the-people-before-comparing-their-incomes" class="level2">
 <h2 class="anchored" data-anchor-id="match-the-people-before-comparing-their-incomes">Match the people before comparing their incomes</h2>
@@ -270,8 +271,8 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p><code>family_id</code> follows the family of origin after the child moves out. The relationship table identifies the specific parent; sharing a household alone does not establish parenthood.</p>
-<p>The query in <code>sql/match.sql</code> summarizes each person’s income before joining the generations. Otherwise, two five year histories would produce 25 combinations. I match family and person identifiers, not calendar years: parents and children reach the same age in different years.</p>
+<p><code>family_id</code> follows the family of origin after the child moves out. The relationship table identifies the specific parent; sharing a household alone does not establish parenthood. Here that table is given, which keeps the tutorial focused on the query. In a real panel such as the Panel Study of Income Dynamics, building it is part of the work: links come from family and person identifiers combined with each person’s recorded relationship to the household head, and a study must decide how to handle two parents, siblings, and people who leave the survey.</p>
+<p>The query in <code>sql/match.sql</code> summarizes each person’s income before joining the generations. Otherwise, two five-year histories would produce 25 combinations. I match family and person identifiers, not calendar years: parents and children reach the same age in different years.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> parent_means <span class="kw">AS</span> (</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> p.family_id, p.person_id,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">AVG</span>(i.real_income) <span class="kw">AS</span> parent_income</span>
@@ -302,7 +303,52 @@ window.Quarto = {
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> child_means <span class="kw">AS</span> c</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> c.family_id <span class="op">=</span> l.family_id <span class="kw">AND</span> c.person_id <span class="op">=</span> l.child_id</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> l.child_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>SELECT</code> chooses columns, and <code>JOIN</code> connects matching identifiers. <code>WHERE</code> selects ages; <code>GROUP BY</code> gathers each person’s records; <code>AVG</code> turns them into one income measure. <code>HAVING</code> retains complete windows. The two <code>WITH</code> blocks create income summaries that the final joins attach to each relationship. The result has one row per child, with both generations’ incomes.</p>
+<p>The query works in four steps.</p>
+<ol type="1">
+<li><strong>Join each person to their yearly incomes.</strong> Each <code>WITH</code> block starts from <code>people</code> and uses <code>JOIN</code> to attach that person’s rows from <code>incomes</code> wherever the <code>person_id</code> values match. <code>SELECT</code> keeps only what later steps need: the two identifiers and the income measure.</li>
+<li><strong>Line the generations up by age, not by calendar year.</strong> The <code>incomes</code> table records years, but parents and children should be compared at the same point in life. <code>i.year - p.birth_year</code> turns each year into the person’s age, and <code>WHERE ... BETWEEN :p_start AND :p_end</code> keeps only the chosen ages. Names that begin with a colon are placeholders that Python fills in, so one query serves every comparison below.</li>
+<li><strong>Collapse each person’s years into one number.</strong> <code>GROUP BY p.family_id, p.person_id</code> gathers all of one person’s selected years, and the aggregate function <code>AVG(i.real_income)</code> turns them into a single income. <code>HAVING</code> then checks each finished group: <code>COUNT(DISTINCT i.year)</code> must equal the number of ages requested, so a person missing a year is dropped instead of being averaged over fewer years.</li>
+<li><strong>Attach both summaries to each relationship.</strong> The final <code>SELECT</code> starts from <code>links</code> and joins the parent summary and the child summary on both <code>family_id</code> and the person identifier. The result has one row per child, holding both generations’ incomes.</li>
+</ol>
+<p>With ages 40 through 44 for both generations, the first rows of the result look like this. Each income is a five-year average in constant dollars.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Family</th>
+<th style="text-align: right;">Parent ID</th>
+<th style="text-align: right;">Child ID</th>
+<th style="text-align: right;">Parent income</th>
+<th style="text-align: right;">Child income</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">100001</td>
+<td style="text-align: right;">200001</td>
+<td style="text-align: right;">$24,727</td>
+<td style="text-align: right;">$49,795</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">100002</td>
+<td style="text-align: right;">200002</td>
+<td style="text-align: right;">$131,607</td>
+<td style="text-align: right;">$47,144</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">100003</td>
+<td style="text-align: right;">200003</td>
+<td style="text-align: right;">$35,810</td>
+<td style="text-align: right;">$80,948</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The Python helper sends the age limits to this query and retrieves a pandas table. Changing those limits lets us compare income measures without changing the families.</p>
 <details>
 <summary>
@@ -365,10 +411,10 @@ Show the Python code that estimates and compares the slopes
 <p>Using age 40 alone gives 0.20; averaging ages 40 through 44 raises it to 0.31, closer to the model’s 0.40. The families did not become less mobile. Better measurement revealed more of the income connection already built into the simulation.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-averaging" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two bars comparing simulated elasticity estimates from one year and five year average incomes, with a dashed line at the model value of 0.4.">
+<div id="fig-averaging" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two bars comparing simulated elasticity estimates from one year and five-year average incomes, with a dashed line at the model value of 0.4.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-averaging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="results/figures/income-averages.png" class="img-fluid figure-img" alt="Two bars comparing simulated elasticity estimates from one year and five year average incomes, with a dashed line at the model value of 0.4.">
+<img src="results/figures/income-averages.png" class="img-fluid figure-img" alt="Two bars comparing simulated elasticity estimates from one year and five-year average incomes, with a dashed line at the model value of 0.4.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-averaging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Averaging several years reduces the distortion from temporary income fluctuations in this simulation.
@@ -381,7 +427,7 @@ Figure&nbsp;1: Averaging several years reduces the distortion from temporary inc
 </section>
 <section id="averaging-cannot-fix-measuring-children-too-young" class="level2">
 <h2 class="anchored" data-anchor-id="averaging-cannot-fix-measuring-children-too-young">Averaging cannot fix measuring children too young</h2>
-<p>But does averaging solve the whole problem? Holding parental income at its five year average, I change only the child’s measurement age. The slope rises from 0.14 at 25 to 0.32 at 40. Early incomes hide differences that emerge later.</p>
+<p>But does averaging solve the whole problem? Holding parental income at its five-year average, I change only the child’s measurement age. The slope rises from 0.14 at 25 to 0.32 at 40. Early incomes hide differences that emerge later. The small dips along the way, such as at ages 28 and 41, are sampling noise in this one simulated sample, not part of the pattern.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-child-age" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parent income always averaged over ages 40 through 44.">
@@ -396,8 +442,8 @@ Figure&nbsp;2: Changing the child’s measurement age changes the estimated pers
 </div>
 </div>
 </div>
-<p>This illustrates <strong>life cycle bias</strong>. Children with higher lasting incomes have steeper early income growth in the model. If everyone’s income grew by the same percentage, that alone would not change the slope. The age pattern is deliberately built in, not discovered in real data. <a href="https://www.nber.org/papers/w11943">Haider and Solon</a> explain why current earnings can represent lifetime earnings differently at different ages.</p>
-<p>Even averaging the child’s ages 25 through 29 gives only 0.16. More observations still describe an early career. Real data also require decisions about missing years and zero incomes, which this complete, positive income simulation avoids.</p>
+<p>This illustrates <strong>life-cycle bias</strong>. Children with higher lasting incomes have steeper early income growth in the model. If everyone’s income grew by the same percentage, that alone would not change the slope. The age pattern is deliberately built in, not discovered in real data. <a href="https://www.nber.org/papers/w11943">Haider and Solon</a> explain why current earnings can represent lifetime earnings differently at different ages.</p>
+<p>Even averaging the child’s ages 25 through 29 gives only 0.16. More observations still describe an early career. Real data also require decisions about missing years and zero incomes, which this complete, positive-income simulation avoids.</p>
 <p>The main takeaways are:</p>
 <ul>
 <li>Match explicit parent and child identities, then check that each pair appears once.</li>

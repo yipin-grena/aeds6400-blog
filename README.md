@@ -13,6 +13,7 @@ Blog posts by Yipin Zhang (grenaz@sas.upenn.edu), Fall 2026.
 | 3 | [Did labor-force participation recover equally across age groups?](https://yipin-grena.github.io/aeds6400-blog/posts/cps-participation/) | [`posts/cps-participation/`](posts/cps-participation/README.md) |
 | 4 | [Inflation fell first, unemployment rose later: The U.S. experience through 2024](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/) | [`posts/inflation-unemployment/`](posts/inflation-unemployment/README.md) |
 | 5 | [A college county and the Poconos stand out for rent pressure](https://yipin-grena.github.io/aeds6400-blog/posts/pa-rent-burden/) | [`posts/pa-rent-burden/`](posts/pa-rent-burden/README.md) |
+| 6 | [How one year of income can mislead a study of mobility](https://yipin-grena.github.io/aeds6400-blog/posts/sql-income-mobility/) | [`posts/sql-income-mobility/`](posts/sql-income-mobility/README.md) |
 
 ## Repository layout
 
@@ -43,10 +44,16 @@ aeds6400-blog/
     │   ├── R/               acquisition and analysis scripts
     │   ├── data/raw/        saved FRED CSVs and provenance
     │   └── results/         tables, sensitivity check and figures
-    └── pa-rent-burden/      Blog Post 5
-        ├── run.py
-        ├── build_preview.py
-        ├── data/raw/        public Census downloads and provenance
+    ├── pa-rent-burden/      Blog Post 5
+    │   ├── run.py
+    │   ├── build_preview.py
+    │   ├── data/raw/        public Census downloads and provenance
+    │   └── results/
+    └── sql-income-mobility/ Blog Post 6
+        ├── run.py           simulated panel, SQLite database, checks and figures
+        ├── tutorial.py      SQL matching and IGE estimates shown in the post
+        ├── sql/             schema and matching query
+        ├── data/            simulated people, links and incomes
         └── results/
 ```
 
@@ -79,10 +86,12 @@ For Blog Post 4, run `Rscript posts/inflation-unemployment/run.R` from the repos
 
 For Blog Post 5, install the Python dependencies in [its README](posts/pa-rent-burden/README.md), then run `python posts/pa-rent-burden/run.py` from the repository root. It uses committed Census files without downloading them again. Its `build_preview.py` produces a standalone review copy.
 
+For Blog Post 6, install the Python dependencies in [its README](posts/sql-income-mobility/README.md), then run `python posts/sql-income-mobility/run.py` and `python posts/sql-income-mobility/tutorial.py`. The data are simulated from a fixed seed, so no downloads or API keys are needed.
+
 Render the site with `quarto render` from the repository root only when preparing a site build. Use each draft's `build_preview.py` for review without changing the published output.
 
 ## Environment
 
 R 4.5.1. Package versions are recorded separately in `posts/web-scraping/results/session-info.txt` and `posts/cps-participation/results/session-info.txt`. Blog Post 4 records its environment in `posts/inflation-unemployment/results/session-info.txt`. Each post README lists its dependencies and data requirements.
 
-Blog Post 5 records its Python and package versions in `posts/pa-rent-burden/results/environment.json` and pins its direct dependencies in `posts/pa-rent-burden/requirements.txt`.
+Blog Post 5 records its Python and package versions in `posts/pa-rent-burden/results/environment.json` and pins its direct dependencies in `posts/pa-rent-burden/requirements.txt`. Blog Post 6 does the same in `posts/sql-income-mobility/results/environment.txt` and `posts/sql-income-mobility/requirements.txt`.
