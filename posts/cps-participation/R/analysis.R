@@ -67,12 +67,48 @@ analyze_cps <- function(raw) {
     summarise(n = n(), population = sum(WTFINL), labor_force = sum(WTFINL * in_labor_force), .groups = "drop") |>
     mutate(rate = labor_force / population) |> group_by(YEAR, MONTH) |>
     mutate(share = population / sum(population)) |> ungroup()
-  if (nrow(monthly) != 72L * 4L || any(!is.finite(monthly$rate))) stop("Missing age-group/month cells.")
-  stopifnot(all(monthly$rate >= 0 & monthly$rate <= 1))
+  summarize_monthly_cps(monthly, audit)
+}
+
+# The raw-data and aggregate-only routes use the same validated summaries.
+summarize_monthly_cps <- function(monthly, audit) {
+  required <- c("YEAR", "MONTH", "age_group", "n", "population", "labor_force", "rate", "share")
+  absent <- setdiff(required, names(monthly))
+  if (length(absent)) stop("Missing monthly columns: ", paste(absent, collapse = ", "))
+  monthly <- monthly |> mutate(age_group = factor(age_group, levels = age_levels))
+  if (nrow(monthly) != 72L * 4L ||
+      anyNA(monthly[c("YEAR", "MONTH", "age_group")]) ||
+      any(!monthly$YEAR %in% 2019:2024) || any(!monthly$MONTH %in% 1:12) ||
+      anyDuplicated(monthly[c("YEAR", "MONTH", "age_group")])) {
+    stop("Expected one cell for every age group in each of the 72 months.")
+  }
+  stopifnot(all(is.finite(monthly$population) & monthly$population > 0),
+            all(is.finite(monthly$n) & monthly$n > 0),
+            all(is.finite(monthly$rate) & monthly$rate >= 0 & monthly$rate <= 1),
+            all(is.finite(monthly$share) & monthly$share >= 0 & monthly$share <= 1),
+            all(is.finite(monthly$labor_force)),
+            all(abs(monthly$rate - monthly$labor_force / monthly$population) < 1e-10))
+  share_check <- monthly |> group_by(YEAR, MONTH) |>
+    mutate(expected_share = population / sum(population)) |> ungroup()
+  stopifnot(all(abs(share_check$share - share_check$expected_share) < 1e-10))
   # Each month receives equal weight in the annual mean of monthly rates.
   # Counts are person-month observations, not distinct people.
   annual <- monthly |> group_by(YEAR, age_group) |>
     summarise(rate = mean(rate), n_person_months = sum(n), .groups = "drop")
+  # Average the monthly weighted population shares, not raw sample counts or
+  # population totals pooled across months. These are distinct from rates.
+  annual_shares <- monthly |> group_by(YEAR, age_group) |>
+    summarise(share = mean(share), .groups = "drop")
+  annual_share_totals <- annual_shares |> group_by(YEAR) |>
+    summarise(total_share = sum(share), .groups = "drop")
+  stopifnot(nrow(annual_shares) == 6L * 4L,
+            all(is.finite(annual_shares$share)),
+            all(annual_shares$share >= 0 & annual_shares$share <= 1),
+            all(abs(annual_share_totals$total_share - 1) < 1e-10))
+  share_changes <- annual_shares |> filter(YEAR %in% c(2019, 2024)) |>
+    pivot_wider(names_from = YEAR, values_from = share, names_prefix = "share_") |>
+    mutate(change_pp = 100 * (share_2024 - share_2019))
+  stopifnot(nrow(share_changes) == 4L, abs(sum(share_changes$change_pp)) < 1e-10)
   changes <- annual |> filter(YEAR %in% c(2019, 2024)) |>
     select(YEAR, age_group, rate) |> pivot_wider(names_from = YEAR, values_from = rate, names_prefix = "rate_") |>
     mutate(change_pp = 100 * (rate_2024 - rate_2019))
@@ -85,7 +121,8 @@ analyze_cps <- function(raw) {
   overall <- overall_monthly |> group_by(YEAR) |>
     summarise(observed = mean(observed), standardized = mean(standardized), .groups = "drop")
   stopifnot(abs(overall$observed[overall$YEAR == 2019] - overall$standardized[overall$YEAR == 2019]) < 1e-10)
-  list(monthly = monthly, annual = annual, changes = changes, overall = overall, audit = audit)
+  list(monthly = monthly, annual = annual, annual_shares = annual_shares,
+       share_changes = share_changes, changes = changes, overall = overall, audit = audit)
 }
 
 make_figures <- function(a) {
@@ -102,11 +139,30 @@ make_figures <- function(a) {
     labs(title = "Prime-age participation recovered; 65+ did not",
       subtitle = "Change from each age group's 2019 participation rate",
       x = NULL, y = "Change (percentage points)", caption = caption) + common
-  p2 <- ggplot(a$changes, aes(change_pp, age_group, color = age_group)) +
-    geom_vline(xintercept = 0, linetype = "dashed", color = "grey55") +
-    geom_segment(aes(x = 0, xend = change_pp, yend = age_group), linewidth = 1) + geom_point(size = 3) +
-    scale_color_manual(values = palette, guide = "none") +
-    labs(title = "How far did participation move from its 2019 baseline?", subtitle = "2024 annual mean minus 2019 annual mean", x = "Change in participation (percentage points)", y = "Age group", caption = caption) + common
+  shares_plot <- a$share_changes |>
+    mutate(age_group = factor(as.character(age_group), levels = rev(age_levels)),
+           change_label = sprintf("%+.2f", change_pp),
+           share_label = sprintf("%.2f%% to %.2f%%", 100 * share_2019, 100 * share_2024),
+           label_x = change_pp + if_else(change_pp >= 0, 0.08, -0.08),
+           label_hjust = if_else(change_pp >= 0, 0, 1))
+  p2 <- ggplot(shares_plot, aes(change_pp, age_group, fill = age_group)) +
+    geom_vline(xintercept = 0, color = "grey55", linewidth = 0.5) +
+    geom_col(width = 0.55) +
+    geom_text(aes(x = label_x, label = change_label, hjust = label_hjust),
+              size = 3.9, show.legend = FALSE) +
+    geom_text(aes(x = 3.45, label = share_label), hjust = 1, size = 3.8,
+              color = "grey25", show.legend = FALSE) +
+    annotate("text", x = 3.45, y = 4.65, label = "2019 to 2024 shares", hjust = 1,
+             size = 3.8, fontface = "bold", color = "grey25") +
+    scale_fill_manual(values = palette, guide = "none") +
+    scale_x_continuous(limits = c(-1.5, 3.55), breaks = c(-1, 0, 1, 2), expand = c(0, 0)) +
+    scale_y_discrete(expand = expansion(add = c(0.55, 0.9))) +
+    labs(title = "Adults 65 and older became a larger share of the population",
+      subtitle = "Change in population shares from 2019 to 2024",
+      x = "Change in population share (percentage points)", y = "Age group",
+      caption = paste0("IPUMS CPS, Census Bureau and BLS. Eligible civilians age 16+; WTFINL weights.\n",
+                       "Each annual share is the average of 12 monthly weighted population shares.")) +
+    common + theme(panel.grid.major.y = element_blank())
   long <- a$overall |> pivot_longer(c(observed, standardized), names_to = "series", values_to = "rate") |>
     group_by(series) |> mutate(change_pp = 100 * (rate - rate[YEAR == 2019])) |> ungroup() |>
     mutate(series = recode(series, observed = "Observed age mix", standardized = "Fixed 2019 age mix"))
@@ -116,17 +172,26 @@ make_figures <- function(a) {
     scale_x_continuous(breaks = 2019:2024) +
     labs(title = "Separating participation from changes in the age mix", subtitle = "Change in overall participation from 2019", x = NULL, y = "Change (percentage points)", color = NULL, linetype = NULL,
       caption = paste0(caption, "\nStandardization fixes four age-group shares to the corresponding calendar month in 2019.")) + common
-  list(trends = p1, changes = p2, age_mix = p3)
+  list(trends = p1, age_shares = p2, age_mix = p3)
 }
 
-run_analysis <- function(root = ".") {
-  a <- analyze_cps(read_extract(file.path(root, "data/raw")))
+run_analysis <- function(root = ".", from_aggregates = FALSE) {
+  if (from_aggregates) {
+    monthly <- read_csv(file.path(root, "results/tables/monthly.csv"), show_col_types = FALSE)
+    audit <- read_csv(file.path(root, "results/tables/audit.csv"), show_col_types = FALSE)
+    a <- summarize_monthly_cps(monthly, audit)
+  } else {
+    a <- analyze_cps(read_extract(file.path(root, "data/raw")))
+  }
   dir.create(file.path(root, "results/tables"), recursive = TRUE, showWarnings = FALSE)
   dir.create(file.path(root, "results/figures"), recursive = TRUE, showWarnings = FALSE)
-  for (name in names(a)) write_csv(a[[name]], file.path(root, "results/tables", paste0(name, ".csv")))
+  # Preserve the input CSVs when reproducing from saved aggregates.
+  tables_to_write <- if (from_aggregates) setdiff(names(a), c("monthly", "audit")) else names(a)
+  for (name in tables_to_write) write_csv(a[[name]], file.path(root, "results/tables", paste0(name, ".csv")))
   plots <- make_figures(a)
   for (name in names(plots)) ggsave(file.path(root, "results/figures", paste0(name, ".png")), plots[[name]], width = 9, height = 6, dpi = 300)
   saveRDS(a, file.path(root, "results/analysis.rds"))
-  capture.output(sessionInfo(), file = file.path(root, "results/session-info.txt"))
+  writeLines(trimws(capture.output(sessionInfo()), which = "right"),
+             file.path(root, "results/session-info.txt"))
   invisible(a)
 }

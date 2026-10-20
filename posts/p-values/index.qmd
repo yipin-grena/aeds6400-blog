@@ -3,7 +3,7 @@ title: "What a p-value actually tells you"
 description: "Why a small p-value is evidence against a statistical model, not the probability that the model is false."
 author: "Yipin Zhang"
 date: "2026-09-14"
-date-modified: "2026-10-04"
+date-modified: "2026-10-20"
 categories: [statistics, inference]
 execute:
   freeze: false
@@ -12,7 +12,7 @@ execute:
 
 ## Does p = 0.03 mean a 97% chance of being right?
 
-Imagine reading a study that reports $p=0.03$. Does that mean its conclusion has a 97% probability of being correct? No. Understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: **what probability does a p-value actually measure, and what can we conclude from it?**
+Imagine reading a report about a training course that gives $p=0.03$ for an increase in participants' test scores. Does that mean its conclusion has a 97% probability of being correct? No. The difference matters to anyone who must act on the result, such as a company deciding whether to pay for the course for all of its staff. The question this post answers is: **what probability does a p-value actually measure, and what can we conclude from it?** Rather than stopping at the textbook definition, I build a world in which the course does nothing and count how often that world still produces a result this large.
 
 This distinction is important enough that the [American Statistical Association's statement on p-values](https://doi.org/10.1080/00031305.2016.1154108) explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar.
 
@@ -22,11 +22,11 @@ We often want to ask, “Given these results, how plausible is my hypothesis?”
 
 An analogy helps: knowing that a professional basketball player is likely to be tall does not tell us that a tall person is likely to be a professional basketball player. Reversing the condition changes the question. In statistics, a posterior probability such as $P(H_0\mid\text{data})$ requires a model for the alternatives and prior probabilities, not just a p-value.
 
-We can make that distinction concrete by constructing a world where the null hypothesis is true from the outset.
+To see the difference in numbers, the next section builds the world described at the start: one where the course does nothing on average.
 
 ## Build a simple null world
 
-Suppose we observe 30 independent measurements on a standardized outcome and want to test whether its population mean is positive. Our hypothetical observed sample mean is 0.34. Assume the observations are normally distributed with a **known** standard deviation of 1. These are teaching assumptions, not data from an actual study.
+Suppose 30 trainees take a test before and after a course, with an average score increase of 0.34 standardized units. We test whether the population's mean score change is positive. Assume these changes are independent and normally distributed with a **known** standard deviation of 1. These are teaching assumptions, not data from an actual study. A score increase alone would not establish that the course caused it.
 
 The null hypothesis is $H_0:\mu=0$, and the alternative is $H_1:\mu>0$. Because we specify a positive direction in advance, this is a one-sided test. Its p-value is
 
@@ -54,11 +54,13 @@ stopifnot(abs(p_sim - p_exact) < 5 * sqrt(p_exact * (1 - p_exact) / repetitions)
 
 `rnorm()` generates observations, `replicate()` repeats the experiment, and the final `mean()` of the comparison counts the fraction meeting our threshold. `pnorm()` calculates the exact normal tail probability for comparison; it does not simulate another set of experiments.
 
+The final `stopifnot()` checks that the simulated probability is close to the exact answer, allowing a margin of five simulation standard errors for random variation. This is a sanity check on the simulation, not the hypothesis test.
+
 ```{r}
 #| label: fig-null-dist
 #| echo: false
-#| fig-cap: "Simulated sample means under the null (histogram), with their exact normal density (blue). The orange area under the curve is the exact one-sided p-value beyond the observed mean of 0.34."
-#| fig-alt: "A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34."
+#| fig-cap: "Simulated average score changes under the null (histogram), with their exact normal density (blue). The orange area under the curve is the exact one-sided p-value beyond the observed mean of 0.34."
+#| fig-alt: "A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34, labelled about 3 in 100 under no average change."
 #| fig-width: 8
 #| fig-height: 4.8
 #| fig-path: results/figures/
@@ -66,26 +68,34 @@ par(mar = c(4.4, 4.2, 3, 1))
 hist(null_stats, breaks = 55, probability = TRUE,
      col = "gray92", border = "white", xlim = c(-0.75, 0.75),
      main = "How often does a zero-mean model produce a mean this large?",
-     xlab = "Sample mean across 30 observations", ylab = "Density", cex.main = 0.95)
+     xlab = "Average score change across 30 trainees", ylab = "Density", cex.main = 0.95)
 x <- seq(-0.75, 0.75, length.out = 1000)
 lines(x, dnorm(x, sd = 1 / sqrt(n)), col = "#0072B2", lwd = 2)
 tail_x <- seq(obs_stat, 0.75, length.out = 400)
 polygon(c(obs_stat, tail_x, 0.75), c(0, dnorm(tail_x, sd = 1 / sqrt(n)), 0),
         col = "#D55E0080", border = NA)
 abline(v = obs_stat, col = "#D55E00", lty = 2, lwd = 2)
+text(0.57, 1.1,
+     labels = sprintf("About %.0f in 100\nunder no average change", 100 * p_exact),
+     col = "#D55E00", cex = 0.8)
+arrows(0.56, 0.9, 0.43, 0.11, length = 0.08, col = "#D55E00", lwd = 1.4)
 legend("topleft", legend = c("Exact null density", "Observed mean = 0.34"),
        col = c("#0072B2", "#D55E00"), lty = c(1, 2), lwd = 2, bty = "n", cex = 0.85)
 ```
 
-The simulated fraction is `r sprintf("%.1f", 100 * p_sim)`%, close to the exact value of `r sprintf("%.2f", 100 * p_exact)`%. Thus, under our zero-mean model, about `r sprintf("%.1f", 100 * p_exact)` in every 100 repetitions would produce a mean at least this large. The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.
+The simulated fraction is `r sprintf("%.1f", 100 * p_sim)`%, close to the exact value of `r sprintf("%.2f", 100 * p_exact)`%. **We built a world with no average score change, yet about `r sprintf("%.0f", 100 * p_exact)` in every 100 repetitions still crossed the observed line.** The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.
 
 ## What should we conclude?
 
 The observed mean is unusual under the specified null model, providing evidence against it. But every simulated experiment assumed the null was true: we never generated a mixture of true and false hypotheses. The simulation therefore cannot tell us what fraction of hypotheses are true after a small p-value appears.
 
-Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.
+Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. For the company, $p=0.03$ is a reason to take the score gain seriously, not proof that the course works. It would still need to weigh the size of the gain against the course's cost, and without a comparison group it cannot tell whether the course caused the gain. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.
 
-The takeaway is to read a p-value as **a statement about results under a model**. Report what was estimated and how uncertain it is, and resist translating $p=0.03$ into “97% certain.” That translation answers a question the test never calculated.
+The main takeaways are:
+
+* A p-value describes how unusual the observed result is under a specified model.
+* A value of $p=0.03$ does not mean the conclusion is “97% certain.” That is a question the test never calculated.
+* Report the size and uncertainty of the score change, and consider the study design before deciding what it means.
 
 ## Reference
 

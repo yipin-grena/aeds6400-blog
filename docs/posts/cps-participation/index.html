@@ -29,41 +29,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -112,6 +77,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -184,6 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 20, 2026</p>
+      </div>
+    </div>
       
     </div>
     
@@ -206,16 +206,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="measuring-participation-consistently" class="level2">
 <h2 class="anchored" data-anchor-id="measuring-participation-consistently">Measuring participation consistently</h2>
-<p>Labor-market participation is measured in a consistent way. The analysis includes all 72 Basic Monthly CPS samples from January 2019 through December 2024. It includes civilians age 16 or older with a defined labor-force status and a positive sampling weight. It includes March Basic but excludes the separate ASEC supplement.</p>
-<p>For each month and age group, I divide the weighted number in the labor force by the weighted eligible population. I use <a href="https://cps.ipums.org/cps-action/variables/WTFINL">WTFINL</a>, the Basic Monthly person weight, so observations represent different numbers of people. <a href="https://cps.ipums.org/cps-action/variables/LABFORCE">LABFORCE</a> identifies participation. Each annual estimate then averages the twelve monthly rates equally. These are descriptive, unadjusted estimates. IPUMS recommends <a href="https://cps.ipums.org/cps-action/variables/COMPWT">COMPWT</a> for replicating published BLS labor-force estimates; WTFINL is appropriate for most Basic Monthly analyses, so these rates need not match BLS headline figures.</p>
+<p>The analysis covers civilians aged 16 and older across all 72 Basic Monthly CPS samples from January 2019 through December 2024. Each month’s rate is the share working or looking for work, using <a href="https://cps.ipums.org/cps-action/variables/WTFINL">WTFINL sampling weights</a> to represent the population. Annual estimates average the twelve monthly rates equally. The repository explains the sample selection and weighting in detail.</p>
 </section>
 <section id="first-compare-recovery-paths" class="level2">
 <h2 class="anchored" data-anchor-id="first-compare-recovery-paths">First, compare recovery paths</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"trends.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-trends" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels showing changes in participation from 2019 for four age groups, with a shared scale and a zero baseline.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -229,39 +224,40 @@ Figure&nbsp;1: Annual means of monthly weighted participation rates, expressed a
 </div>
 </div>
 </div>
-<p>Figure 1 shows changes from 2019 across four stages of working life. Among adults aged 25–54, participation was 82.7% in 2019 and 83.7% in 2024. For adults aged 65 and older, the corresponding estimates were 20.7% and 19.9%.</p>
-<p>All four groups declined between 2019 and 2020. Ages 16–24 had the deepest decline (-2.4 percentage points), possibly reflecting disruption to entry-level work; their participation rebounded above baseline in 2023 before falling back toward it in 2024. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The shared change scale makes the declines and recovery paths visible, but gives up a direct comparison of participation levels. Figure 2 focuses on the final year.</p>
+<p>Figure 1 shows changes from 2019 across four stages of working life. By 2024, participation among adults aged 25 to 54 was 1.0 percentage points above its baseline. Adults aged 55 to 64 gained 0.7 points, while those aged 16 to 24 were approximately unchanged, gaining 0.1 points. Adults aged 65 and older were the only group still below baseline, down 0.8 points.</p>
+<p>All four groups declined between 2019 and 2020. Adults aged 16 to 24 had the deepest drop, 2.4 percentage points, possibly reflecting disruption to entry-level work. Their participation rebounded above baseline in 2023 before falling back toward it in 2024. The contrasting outcomes for adults aged 55 to 64 and those aged 65 and older show why treating all older adults as one group would hide part of the recovery.</p>
 </section>
-<section id="next-compare-changes-against-the-same-baseline" class="level2">
-<h2 class="anchored" data-anchor-id="next-compare-changes-against-the-same-baseline">Next, compare changes against the same baseline</h2>
+<section id="next-look-at-who-makes-up-the-population" class="level2">
+<h2 class="anchored" data-anchor-id="next-look-at-who-makes-up-the-population">Next, look at who makes up the population</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"changes.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output-display">
-<div id="fig-changes" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dot plot comparing percentage-point participation changes from 2019 to 2024 across four age groups.">
+<div id="fig-age-shares" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Horizontal bars showing changes in age-group population shares from 2019 to 2024. The share aged 65 and older increased, while all three younger groups' shares decreased.">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="results/figures/changes.png" class="img-fluid figure-img" alt="Dot plot comparing percentage-point participation changes from 2019 to 2024 across four age groups.">
+<div aria-describedby="fig-age-shares-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/age_shares.png" class="img-fluid figure-img" alt="Horizontal bars showing changes in age-group population shares from 2019 to 2024. The share aged 65 and older increased, while all three younger groups' shares decreased.">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Participation in 2024 minus participation in 2019. Zero indicates a return to the baseline annual rate.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-age-shares-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Changes in each age group’s share of the civilian population aged 16 and older, using annual averages of monthly weighted shares.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 2 plots each group on a common change metric. Adults aged 25 to 54 recorded the highest rise, roughly 1.0 percentage points. The age group 55–64 saw an increase of 0.7 points, while those aged 16–24 were approximately unchanged, gaining just 0.1 points. Adults aged 65 and older were the only group below their 2019 value, down by 0.8 points.</p>
-<p>Thus, recovery was uneven. It would be inaccurate to say that all older adults had the same experience: for instance, the age group 55 to 64 exceeded its baseline while the group aged 65 and older did not. These comparisons describe outcomes, but they do not identify whether retirement, health, schooling, or care responsibilities caused the differences.</p>
+<p>Figure 2 introduces the other part of the story. Adults aged 65 and older grew from 20.4% to 22.2% of the population in this analysis. The shares of the three younger groups fell. This matters because participation in 2024 was 19.9% among adults aged 65 and older, compared with 83.7% among those aged 25 to 54. A growing share of people in a group with lower participation can pull down the overall rate even when participation improves within most groups.</p>
 </section>
 <section id="finally-hold-the-age-mix-fixed" class="level2">
 <h2 class="anchored" data-anchor-id="finally-hold-the-age-mix-fixed">Finally, hold the age mix fixed</h2>
+<p>To separate these two influences, I calculate each month’s overall rate twice. Let <span class="math inline">\(s_{g,y,m}\)</span> be age group <span class="math inline">\(g\)</span>’s population share and <span class="math inline">\(p_{g,y,m}\)</span> its participation rate in year <span class="math inline">\(y\)</span>, month <span class="math inline">\(m\)</span>.</p>
+<p><span class="math display">\[
+P_{y,m}=\sum_g s_{g,y,m}p_{g,y,m}
+\qquad\text{(observed)}
+\]</span></p>
+<p><span class="math display">\[
+P^{\mathrm{fixed}}_{y,m}=\sum_g s_{g,2019,m}p_{g,y,m}
+\qquad\text{(2019 age mix)}
+\]</span></p>
+<p>The second calculation keeps the same participation rates but substitutes the corresponding month’s 2019 population shares. For example, January 2024 uses January 2019 shares. I then average each set of twelve monthly rates. Only the shares differ, so the gap isolates the composition effect under this calculation.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">file.path</span>(POST_DIR, <span class="st">"results"</span>, <span class="st">"figures"</span>, <span class="st">"age_mix.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-age-mix" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two lines comparing observed changes in overall participation with changes after fixing the four age-group shares at their 2019 values.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -275,15 +271,19 @@ Figure&nbsp;3: Overall participation changes, observed and standardized to 2019 
 </div>
 </div>
 </div>
-<p>An overall rate combines each group’s participation rate with its population share. Figure 3 holds the four shares at their 2019 values for each calendar month while allowing participation within groups to change. Under that calculation, participation in 2024 was 0.4 percentage points higher than in 2019. The standardized 2024 level was 1.0 percentage point higher than the observed level.</p>
-<p>Thus, the observed shortfall becomes a modest increase when the broad age mix is held fixed. A shift in population shares toward groups with lower participation can pull down the overall rate even when most groups improve. The roughly 1.0-point gap quantifies that composition effect under this particular standardization. It does not estimate what a policy would accomplish. Changes within these broad age bands remain, and the survey does not follow a fixed cohort for this analysis.</p>
+<p>Figure 3 expresses both series as changes from their common 2019 baseline. With the age mix held fixed, participation in 2024 was 0.4 percentage points higher than in 2019. The observed shortfall becomes a modest increase.</p>
+<p>In levels, observed participation in 2024 was 62.86%, compared with 63.85% using the 2019 age mix. The gap was 0.99 percentage points. That difference describes the contribution of changing age shares under this standardization; it does not estimate what a policy would accomplish.</p>
 </section>
 <section id="takeaway-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway-and-limits">Takeaway and limits</h2>
-<p>By 2024, participation had surpassed its 2019 level for adults aged 25–64, approximately returned to it for younger adults, and remained lower for adults aged 65 and older. The aggregate shortfall therefore does not indicate a universal failure to recover. Population composition and age differences both matter.</p>
-<p>The CPS has a complex rotating design, and <a href="https://cps.ipums.org/cps/covid19.shtml">pandemic-era collection disruptions</a> complicate interpretation. I report descriptive differences without claiming causality or statistical significance. Annual averages also hide short-lived monthly changes.</p>
+<p>The CPS has a complex rotating design, and <a href="https://cps.ipums.org/cps/covid19.shtml">pandemic-era collection disruptions</a> complicate interpretation. These comparisons do not establish causes or statistical significance. Annual averages hide monthly changes, and broad age groups hide differences within them. This analysis does not follow a fixed cohort.</p>
+<ul>
+<li>Participation recovered differently across age groups, with adults aged 65 and older still below their 2019 rate.</li>
+<li>The population also shifted toward that older group, which has much lower participation.</li>
+<li>Holding the age mix fixed turns the overall shortfall into a modest increase. The aggregate rate alone misses this distinction.</li>
+</ul>
 <hr>
-<p><strong>Data:</strong> Flood et al.&nbsp;(2025), <a href="https://doi.org/10.18128/D030.V13.0">IPUMS CPS: Version 13.0</a>, University of Minnesota. Basic Monthly samples, January 2019–December 2024; extract created September 27, 2026. The analysis uses 6,146,546 eligible person-month observations, not unique individuals.</p>
+<p><strong>Data:</strong> Flood et al.&nbsp;(2025), <a href="https://doi.org/10.18128/D030.V13.0">IPUMS CPS: Version 13.0</a>, University of Minnesota. Basic Monthly samples, January 2019 through December 2024; extract created September 27, 2026. The analysis uses 6,146,546 eligible person-month observations, not unique individuals.</p>
 <p><strong>Code and replication:</strong> <a href="https://github.com/yipin-grena/aeds6400-blog">Blog repository</a>. The post folder contains the R analysis, aggregate results, figures, and replication instructions. Raw microdata are excluded from Git.</p>
 
 

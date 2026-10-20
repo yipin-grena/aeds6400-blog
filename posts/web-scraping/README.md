@@ -38,9 +38,6 @@ used here to satisfy the educational HTML-scraping exercise.
 - `results/figures/`: generated PNGs used by the article.
 - `index.qmd`: article, inline numbers and code that recreates its results.
 
-An older `output/` folder, if present, is unused legacy output. The current article
-reads only `results/`. Do not use an old CSV from `output/` to interpret this revision.
-
 ## Install dependencies
 
 Open the repository's `aeds6400-blog.Rproj` in RStudio. Install R, RStudio and
@@ -52,9 +49,9 @@ install.packages(c("dplyr", "tidyr", "stringr", "ggplot2", "readr",
                    "knitr", "here", "rvest", "httr", "robotstxt"))
 ```
 
-The original screenshot shows R 4.5.1. The replacement source has been inspected
-and its counts independently recalculated, but must be executed in R before
-submission. Each analysis run saves the actual environment to
+The saved session information records R 4.5.1 and the package versions used.
+Run the cleaning and analysis commands below to regenerate the tables and figures
+from the saved data. Each analysis run records its environment in
 `results/tables/session-info.txt`. For a fully pinned environment, optionally use
 `renv::init()` and `renv::snapshot()` at the project root after a successful run;
 commit the lockfile and let future users run `renv::restore()`.

@@ -841,28 +841,11 @@ Figure&nbsp;3: The arrows trace an early fall in inflation followed by a clearer
 </section>
 <section id="measuring-participation-consistently" class="level2">
 <h2 class="anchored" data-anchor-id="measuring-participation-consistently">Measuring participation consistently</h2>
-<p>Labor-market participation is measured in a consistent way. The analysis includes all 72 Basic Monthly CPS samples from January 2019 through December 2024. It includes civilians age 16 or older with a defined labor-force status and a positive sampling weight. It includes March Basic but excludes the separate ASEC supplement.</p>
-<p>For each month and age group, I divide the weighted number in the labor force by the weighted eligible population. I use <a href="https://cps.ipums.org/cps-action/variables/WTFINL">WTFINL</a>, the Basic Monthly person weight, so observations represent different numbers of people. <a href="https://cps.ipums.org/cps-action/variables/LABFORCE">LABFORCE</a> identifies participation. Each annual estimate then averages the twelve monthly rates equally. These are descriptive, unadjusted estimates. IPUMS recommends <a href="https://cps.ipums.org/cps-action/variables/COMPWT">COMPWT</a> for replicating published BLS labor-force estimates; WTFINL is appropriate for most Basic Monthly analyses, so these rates need not match BLS headline figures.</p>
+<p>The analysis covers civilians aged 16 and older across all 72 Basic Monthly CPS samples from January 2019 through December 2024. Each month’s rate is the share working or looking for work, using <a href="https://cps.ipums.org/cps-action/variables/WTFINL">WTFINL sampling weights</a> to represent the population. Annual estimates average the twelve monthly rates equally. The repository explains the sample selection and weighting in detail.</p>
 </section>
 <section id="first-compare-recovery-paths" class="level2">
 <h2 class="anchored" data-anchor-id="first-compare-recovery-paths">First, compare recovery paths</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">knitr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">include_graphics</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">file.path</span>(POST_DIR, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"results"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"figures"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"trends.png"</span>))</span></code></pre></div></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-trends" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels showing changes in participation from 2019 for four age groups, with a shared scale and a zero baseline.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -876,63 +859,34 @@ Figure&nbsp;1: Annual means of monthly weighted participation rates, expressed a
 </div>
 </div>
 </div>
-<p>Figure 1 shows changes from 2019 across four stages of working life. Among adults aged 25–54, participation was 82.7% in 2019 and 83.7% in 2024. For adults aged 65 and older, the corresponding estimates were 20.7% and 19.9%.</p>
-<p>All four groups declined between 2019 and 2020. Ages 16–24 had the deepest decline (-2.4 percentage points), possibly reflecting disruption to entry-level work; their participation rebounded above baseline in 2023 before falling back toward it in 2024. Their subsequent paths diverged: participation among adults aged 25–54 exceeded its baseline by 2023, while the rate for adults aged 65 and older remained below it throughout 2020–2024. The shared change scale makes the declines and recovery paths visible, but gives up a direct comparison of participation levels. Figure 2 focuses on the final year.</p>
+<p>Figure 1 shows changes from 2019 across four stages of working life. By 2024, participation among adults aged 25 to 54 was 1.0 percentage points above its baseline. Adults aged 55 to 64 gained 0.7 points, while those aged 16 to 24 were approximately unchanged, gaining 0.1 points. Adults aged 65 and older were the only group still below baseline, down 0.8 points.</p>
+<p>All four groups declined between 2019 and 2020. Adults aged 16 to 24 had the deepest drop, 2.4 percentage points, possibly reflecting disruption to entry-level work. Their participation rebounded above baseline in 2023 before falling back toward it in 2024. The contrasting outcomes for adults aged 55 to 64 and those aged 65 and older show why treating all older adults as one group would hide part of the recovery.</p>
 </section>
-<section id="next-compare-changes-against-the-same-baseline" class="level2">
-<h2 class="anchored" data-anchor-id="next-compare-changes-against-the-same-baseline">Next, compare changes against the same baseline</h2>
+<section id="next-look-at-who-makes-up-the-population" class="level2">
+<h2 class="anchored" data-anchor-id="next-look-at-who-makes-up-the-population">Next, look at who makes up the population</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">knitr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">include_graphics</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">file.path</span>(POST_DIR, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"results"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"figures"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"changes.png"</span>))</span></code></pre></div></div>
-</details>
 <div class="cell-output-display">
-<div id="fig-changes" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dot plot comparing percentage-point participation changes from 2019 to 2024 across four age groups.">
+<div id="fig-age-shares" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Horizontal bars showing changes in age-group population shares from 2019 to 2024. The share aged 65 and older increased, while all three younger groups' shares decreased.">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://yipin-grena.github.io/aeds6400-blog/posts/cps-participation/results/figures/changes.png" class="img-fluid figure-img" alt="Dot plot comparing percentage-point participation changes from 2019 to 2024 across four age groups.">
+<div aria-describedby="fig-age-shares-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://yipin-grena.github.io/aeds6400-blog/posts/cps-participation/results/figures/age_shares.png" class="img-fluid figure-img" alt="Horizontal bars showing changes in age-group population shares from 2019 to 2024. The share aged 65 and older increased, while all three younger groups' shares decreased.">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Participation in 2024 minus participation in 2019. Zero indicates a return to the baseline annual rate.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-age-shares-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Changes in each age group’s share of the civilian population aged 16 and older, using annual averages of monthly weighted shares.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 2 plots each group on a common change metric. Adults aged 25 to 54 recorded the highest rise, roughly 1.0 percentage points. The age group 55–64 saw an increase of 0.7 points, while those aged 16–24 were approximately unchanged, gaining just 0.1 points. Adults aged 65 and older were the only group below their 2019 value, down by 0.8 points.</p>
-<p>Thus, recovery was uneven. It would be inaccurate to say that all older adults had the same experience: for instance, the age group 55 to 64 exceeded its baseline while the group aged 65 and older did not. These comparisons describe outcomes, but they do not identify whether retirement, health, schooling, or care responsibilities caused the differences.</p>
+<p>Figure 2 introduces the other part of the story. Adults aged 65 and older grew from 20.4% to 22.2% of the population in this analysis. The shares of the three younger groups fell. This matters because participation in 2024 was 19.9% among adults aged 65 and older, compared with 83.7% among those aged 25 to 54. A growing share of people in a group with lower participation can pull down the overall rate even when participation improves within most groups.</p>
 </section>
 <section id="finally-hold-the-age-mix-fixed" class="level2">
 <h2 class="anchored" data-anchor-id="finally-hold-the-age-mix-fixed">Finally, hold the age mix fixed</h2>
+<p>To separate these two influences, I calculate each month’s overall rate twice. Let <img src="https://latex.codecogs.com/png.latex?s_%7Bg,y,m%7D"> be age group <img src="https://latex.codecogs.com/png.latex?g">’s population share and <img src="https://latex.codecogs.com/png.latex?p_%7Bg,y,m%7D"> its participation rate in year <img src="https://latex.codecogs.com/png.latex?y">, month <img src="https://latex.codecogs.com/png.latex?m">.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP_%7By,m%7D=%5Csum_g%20s_%7Bg,y,m%7Dp_%7Bg,y,m%7D%0A%5Cqquad%5Ctext%7B(observed)%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP%5E%7B%5Cmathrm%7Bfixed%7D%7D_%7By,m%7D=%5Csum_g%20s_%7Bg,2019,m%7Dp_%7Bg,y,m%7D%0A%5Cqquad%5Ctext%7B(2019%20age%20mix)%7D%0A"></p>
+<p>The second calculation keeps the same participation rates but substitutes the corresponding month’s 2019 population shares. For example, January 2024 uses January 2019 shares. I then average each set of twelve monthly rates. Only the shares differ, so the gap isolates the composition effect under this calculation.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">knitr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">include_graphics</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">file.path</span>(POST_DIR, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"results"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"figures"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"age_mix.png"</span>))</span></code></pre></div></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-age-mix" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two lines comparing observed changes in overall participation with changes after fixing the four age-group shares at their 2019 values.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -946,15 +900,19 @@ Figure&nbsp;3: Overall participation changes, observed and standardized to 2019 
 </div>
 </div>
 </div>
-<p>An overall rate combines each group’s participation rate with its population share. Figure 3 holds the four shares at their 2019 values for each calendar month while allowing participation within groups to change. Under that calculation, participation in 2024 was 0.4 percentage points higher than in 2019. The standardized 2024 level was 1.0 percentage point higher than the observed level.</p>
-<p>Thus, the observed shortfall becomes a modest increase when the broad age mix is held fixed. A shift in population shares toward groups with lower participation can pull down the overall rate even when most groups improve. The roughly 1.0-point gap quantifies that composition effect under this particular standardization. It does not estimate what a policy would accomplish. Changes within these broad age bands remain, and the survey does not follow a fixed cohort for this analysis.</p>
+<p>Figure 3 expresses both series as changes from their common 2019 baseline. With the age mix held fixed, participation in 2024 was 0.4 percentage points higher than in 2019. The observed shortfall becomes a modest increase.</p>
+<p>In levels, observed participation in 2024 was 62.86%, compared with 63.85% using the 2019 age mix. The gap was 0.99 percentage points. That difference describes the contribution of changing age shares under this standardization; it does not estimate what a policy would accomplish.</p>
 </section>
 <section id="takeaway-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway-and-limits">Takeaway and limits</h2>
-<p>By 2024, participation had surpassed its 2019 level for adults aged 25–64, approximately returned to it for younger adults, and remained lower for adults aged 65 and older. The aggregate shortfall therefore does not indicate a universal failure to recover. Population composition and age differences both matter.</p>
-<p>The CPS has a complex rotating design, and <a href="https://cps.ipums.org/cps/covid19.shtml">pandemic-era collection disruptions</a> complicate interpretation. I report descriptive differences without claiming causality or statistical significance. Annual averages also hide short-lived monthly changes.</p>
+<p>The CPS has a complex rotating design, and <a href="https://cps.ipums.org/cps/covid19.shtml">pandemic-era collection disruptions</a> complicate interpretation. These comparisons do not establish causes or statistical significance. Annual averages hide monthly changes, and broad age groups hide differences within them. This analysis does not follow a fixed cohort.</p>
+<ul>
+<li>Participation recovered differently across age groups, with adults aged 65 and older still below their 2019 rate.</li>
+<li>The population also shifted toward that older group, which has much lower participation.</li>
+<li>Holding the age mix fixed turns the overall shortfall into a modest increase. The aggregate rate alone misses this distinction.</li>
+</ul>
 <hr>
-<p><strong>Data:</strong> Flood et al.&nbsp;(2025), <a href="https://doi.org/10.18128/D030.V13.0">IPUMS CPS: Version 13.0</a>, University of Minnesota. Basic Monthly samples, January 2019–December 2024; extract created September 27, 2026. The analysis uses 6,146,546 eligible person-month observations, not unique individuals.</p>
+<p><strong>Data:</strong> Flood et al.&nbsp;(2025), <a href="https://doi.org/10.18128/D030.V13.0">IPUMS CPS: Version 13.0</a>, University of Minnesota. Basic Monthly samples, January 2019 through December 2024; extract created September 27, 2026. The analysis uses 6,146,546 eligible person-month observations, not unique individuals.</p>
 <p><strong>Code and replication:</strong> <a href="https://github.com/yipin-grena/aeds6400-blog">Blog repository</a>. The post folder contains the R analysis, aggregate results, figures, and replication instructions. Raw microdata are excluded from Git.</p>
 
 
@@ -1366,18 +1324,18 @@ Table&nbsp;1: Keyword mentions by year. Counts are hiring comments; percentages 
 
 <section id="does-p-0.03-mean-a-97-chance-of-being-right" class="level2">
 <h2 class="anchored" data-anchor-id="does-p-0.03-mean-a-97-chance-of-being-right">Does p = 0.03 mean a 97% chance of being right?</h2>
-<p>Imagine reading a study that reports <img src="https://latex.codecogs.com/png.latex?p=0.03">. Does that mean its conclusion has a 97% probability of being correct? No.&nbsp;Understanding why matters whenever we use statistical results to judge a policy, a business decision, or a scientific claim. The question this post answers is: <strong>what probability does a p-value actually measure, and what can we conclude from it?</strong></p>
+<p>Imagine reading a report about a training course that gives <img src="https://latex.codecogs.com/png.latex?p=0.03"> for an increase in participants’ test scores. Does that mean its conclusion has a 97% probability of being correct? No.&nbsp;The difference matters to anyone who must act on the result, such as a company deciding whether to pay for the course for all of its staff. The question this post answers is: <strong>what probability does a p-value actually measure, and what can we conclude from it?</strong> Rather than stopping at the textbook definition, I build a world in which the course does nothing and count how often that world still produces a result this large.</p>
 <p>This distinction is important enough that the <a href="https://doi.org/10.1080/00031305.2016.1154108">American Statistical Association’s statement on p-values</a> explicitly addresses it. A p-value does not give the probability that the tested hypothesis is true. To see what it does give, we need to separate two questions that sound similar.</p>
 </section>
 <section id="start-with-the-direction-of-the-question" class="level2">
 <h2 class="anchored" data-anchor-id="start-with-the-direction-of-the-question">Start with the direction of the question</h2>
 <p>We often want to ask, “Given these results, how plausible is my hypothesis?” A significance test instead asks, “If the null model were correct, how often would results this extreme or more extreme occur?” The first question concerns the hypothesis after seeing the data; the second concerns possible data under an assumed hypothesis.</p>
 <p>An analogy helps: knowing that a professional basketball player is likely to be tall does not tell us that a tall person is likely to be a professional basketball player. Reversing the condition changes the question. In statistics, a posterior probability such as <img src="https://latex.codecogs.com/png.latex?P(H_0%5Cmid%5Ctext%7Bdata%7D)"> requires a model for the alternatives and prior probabilities, not just a p-value.</p>
-<p>We can make that distinction concrete by constructing a world where the null hypothesis is true from the outset.</p>
+<p>To see the difference in numbers, the next section builds the world described at the start: one where the course does nothing on average.</p>
 </section>
 <section id="build-a-simple-null-world" class="level2">
 <h2 class="anchored" data-anchor-id="build-a-simple-null-world">Build a simple null world</h2>
-<p>Suppose we observe 30 independent measurements on a standardized outcome and want to test whether its population mean is positive. Our hypothetical observed sample mean is 0.34. Assume the observations are normally distributed with a <strong>known</strong> standard deviation of 1. These are teaching assumptions, not data from an actual study.</p>
+<p>Suppose 30 trainees take a test before and after a course, with an average score increase of 0.34 standardized units. We test whether the population’s mean score change is positive. Assume these changes are independent and normally distributed with a <strong>known</strong> standard deviation of 1. These are teaching assumptions, not data from an actual study. A score increase alone would not establish that the course caused it.</p>
 <p>The null hypothesis is <img src="https://latex.codecogs.com/png.latex?H_0:%5Cmu=0">, and the alternative is <img src="https://latex.codecogs.com/png.latex?H_1:%5Cmu%3E0">. Because we specify a positive direction in advance, this is a one-sided test. Its p-value is</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ap=P(%5Cbar%20X%5Cgeq%200.34%5Cmid%5Cmu=0,%5Ctext%7B%20assumed%20sampling%20model%7D).%0A"></p>
 <p>Here, <img src="https://latex.codecogs.com/png.latex?%5Cbar%20X"> is the sample mean. Under the null, it varies around zero with standard deviation <img src="https://latex.codecogs.com/png.latex?1/%5Csqrt%7B30%7D">. The p-value measures the right-tail probability beyond 0.34. It does not measure the probability of observing exactly 0.34 or the probability that <img src="https://latex.codecogs.com/png.latex?%5Cmu=0">.</p>
@@ -1478,27 +1436,33 @@ background-color: null;
 font-style: inherit;">/</span> repetitions))</span></code></pre></div></div>
 </div>
 <p><code>rnorm()</code> generates observations, <code>replicate()</code> repeats the experiment, and the final <code>mean()</code> of the comparison counts the fraction meeting our threshold. <code>pnorm()</code> calculates the exact normal tail probability for comparison; it does not simulate another set of experiments.</p>
+<p>The final <code>stopifnot()</code> checks that the simulated probability is close to the exact answer, allowing a margin of five simulation standard errors for random variation. This is a sanity check on the simulation, not the hypothesis test.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-null-dist" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34.">
+<div id="fig-null-dist" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34, labelled about 3 in 100 under no average change.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://yipin-grena.github.io/aeds6400-blog/posts/p-values/results/figures/fig-null-dist-1.png" class="img-fluid figure-img" alt="A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34." width="768">
+<img src="https://yipin-grena.github.io/aeds6400-blog/posts/p-values/results/figures/fig-null-dist-1.png" class="img-fluid figure-img" alt="A distribution centered on zero, with a small orange right tail beyond a dashed vertical line at 0.34, labelled about 3 in 100 under no average change." width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-null-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Simulated sample means under the null (histogram), with their exact normal density (blue). The orange area under the curve is the exact one-sided p-value beyond the observed mean of 0.34.
+Figure&nbsp;1: Simulated average score changes under the null (histogram), with their exact normal density (blue). The orange area under the curve is the exact one-sided p-value beyond the observed mean of 0.34.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The simulated fraction is 2.9%, close to the exact value of 3.13%. Thus, under our zero-mean model, about 3.1 in every 100 repetitions would produce a mean at least this large. The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.</p>
+<p>The simulated fraction is 2.9%, close to the exact value of 3.13%. <strong>We built a world with no average score change, yet about 3 in every 100 repetitions still crossed the observed line.</strong> The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.</p>
 </section>
 <section id="what-should-we-conclude" class="level2">
 <h2 class="anchored" data-anchor-id="what-should-we-conclude">What should we conclude?</h2>
 <p>The observed mean is unusual under the specified null model, providing evidence against it. But every simulated experiment assumed the null was true: we never generated a mixture of true and false hypotheses. The simulation therefore cannot tell us what fraction of hypotheses are true after a small p-value appears.</p>
-<p>Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.</p>
-<p>The takeaway is to read a p-value as <strong>a statement about results under a model</strong>. Report what was estimated and how uncertain it is, and resist translating <img src="https://latex.codecogs.com/png.latex?p=0.03"> into “97% certain.” That translation answers a question the test never calculated.</p>
+<p>Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. For the company, <img src="https://latex.codecogs.com/png.latex?p=0.03"> is a reason to take the score gain seriously, not proof that the course works. It would still need to weigh the size of the gain against the course’s cost, and without a comparison group it cannot tell whether the course caused the gain. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.</p>
+<p>The main takeaways are:</p>
+<ul>
+<li>A p-value describes how unusual the observed result is under a specified model.</li>
+<li>A value of <img src="https://latex.codecogs.com/png.latex?p=0.03"> does not mean the conclusion is “97% certain.” That is a question the test never calculated.</li>
+<li>Report the size and uncertainty of the score change, and consider the study design before deciding what it means.</li>
+</ul>
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>

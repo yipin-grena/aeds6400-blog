@@ -1,4 +1,6 @@
 here::i_am("posts/cps-participation/run.R")
 post_dir <- here::here("posts", "cps-participation")
 source(file.path(post_dir, "R", "analysis.R"))
-run_analysis(post_dir)
+args <- commandArgs(trailingOnly = TRUE)
+if (length(setdiff(args, "--from-aggregates"))) stop("Only --from-aggregates is supported.")
+run_analysis(post_dir, from_aggregates = "--from-aggregates" %in% args)
