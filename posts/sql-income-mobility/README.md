@@ -2,7 +2,7 @@
 
 ## How one year of income can mislead a study of mobility
 
-This tutorial matches parents and children with SQL inside Python and asks how income measurement changes the estimated intergenerational elasticity. It uses a fully simulated panel, laid out like the Panel Study of Income Dynamics (PSID), so the underlying relationship is known.
+This tutorial matches parents and children with SQL inside Python and asks how income measurement changes the estimated intergenerational elasticity. It uses a fully simulated panel with a simplified structure inspired by the Panel Study of Income Dynamics (PSID), so the underlying relationship is known.
 
 **Published post:** https://yipin-grena.github.io/aeds6400-blog/posts/sql-income-mobility/
 
@@ -62,19 +62,20 @@ python build_preview.py
 
 If Quarto is not on your path, supply `--quarto /path/to/quarto`. The script copies only this post's inputs into a temporary standalone project and writes `preview/Blog-Post-6.html`. It does not render the website or modify `docs/`; the published page is built with `quarto render` from the repository root. HTML uses the saved Python outputs; rerun `run.py` before rendering after changing the analysis. R only inserts generated values, figures and source code into the article. It performs no income analysis.
 
-## How the tables mirror the PSID
+## How the tables relate to the PSID
 
-The layout follows the PSID's public [FAQ](https://psidonline.isr.umich.edu/Guide/FAQ.aspx) and [FIMS documentation](https://simba.isr.umich.edu/FIMS/default.aspx). Every value is simulated.
+The simplified layout is inspired by the PSID's public [FAQ](https://psidonline.isr.umich.edu/Guide/FAQ.aspx) and [FIMS documentation](https://simba.isr.umich.edu/FIMS/default.aspx). It is not a reproduction of the actual PSID files, and every value is simulated.
 
 * **Person identifiers.** As in the PSID, the 1968 family ID (`id68`) and person number (`pn`) together identify an individual. The PSID FAQ suggests combining them as `id68 * 1000 + pn` when one number is needed. Every join here uses both columns.
 * **Parent links.** `parent_links` has one row per child and parent, with `parent_type` M (mother) or F (father), like a FIMS parent map. A child in a two-parent family therefore has two rows.
 * **Person numbers.** Parents are original sample members with person numbers 1 and 2. Children born into the sample start at 030, matching the PSID's born-in range of 030 to 169.
-* **Family income by year.** Income lives in `family_years`, keyed by `year` and `interview_number`. As the FAQ explains, a family's interview number is valid for that survey year only, so each person's yearly row in `individual_years` records that year's interview number.
+* **Family income by year.** This analysis uses family income, stored once per family and year in `family_years` and keyed by `year` and `interview_number`. As the FAQ explains, a family's interview number is valid for that survey year only, so each person's yearly row in `individual_years` records that year's interview number. The PSID also records individual income components, such as the labor income of the reference person, spouse and other family members; this tutorial does not use them.
 * **Reference person and spouse.** The query keeps years in which a person is the reference person or spouse, using both the sequence number (1 or 2) and the relationship. In the PSID, relationship is a numeric code: 10 for the reference person from 1983 onward, and 20 or 22 for a spouse or partner, according to the FAQ. This simulation stores the labels instead. Every adult here is a reference person or spouse, so the filter removes no rows; in real data it excludes people living in someone else's family and movers-out.
 
 Simplifications, compared with real PSID data:
 
 * annual waves throughout, although the PSID became biennial after 1997
+* income recorded for the survey year itself, although PSID income refers to the previous calendar year
 * no divorces, so co-resident parents share one family in every measured year
 * no spouses entering the sample, no attrition and no missing years
 * no survey weights
@@ -159,8 +160,15 @@ The same query structure applies to real PSID data, but those data cannot be pla
 * **Conditions of use.** The [PSID conditions of use](https://simba.isr.umich.edu/U/CondUse.aspx) forbid transferring public data or user-created extracts to third parties. They also prohibit using AI programs or large language models in conjunction with PSID data.
 * **What could be shared.** A real-data version would publish only code and aggregate results, never raw or person-level files.
 
+Two changes to the query would be needed before applying it to real data. These are limits on transferring the tutorial, not errors in the simulation.
+
+* **Available years.** The PSID interviewed families every year through 1997 and every two years from 1999 ([Gouskova, Andreski and Schoeni 2010](https://psidonline.isr.umich.edu/Publications/Papers/tsp/2010-01_comparing_estimates_of_fam.pdf)). The `HAVING COUNT(*) = :p_years` and `:c_years` checks assume one observation for every year in a window. After 1997 no five consecutive annual incomes exist, so these checks would drop everyone. Define each window by the income years actually available, for example by requiring a minimum number of observations within an age range.
+* **Income year versus interview year.** PSID income questions refer to the calendar year before the interview (Gouskova, Andreski and Schoeni 2010). The age calculation should therefore use the income year, the interview year minus one, rather than the interview year. Since 1999 the PSID has also asked summary questions about income two years before the interview ([Andreski, Stafford and Yeung 2008](https://psidonline.isr.umich.edu/Publications/Papers/tsp/2008-06_PSID_t-2_report.pdf)). Those "t-2" measures are less detailed than the main previous-year income questions. Family composition, sequence numbers and relationships describe the family at the interview, which may differ from the family during the income year.
+
 ## References
 
+* Andreski, Patricia, Frank Stafford, and Wei-Jun Yeung. 2008. [Assessing the PSID t-2 Income Data](https://psidonline.isr.umich.edu/Publications/Papers/tsp/2008-06_PSID_t-2_report.pdf). PSID Technical Series Paper 08-06, Institute for Social Research, University of Michigan.
+* Gouskova, Elena, Patricia Andreski, and Robert F. Schoeni. 2010. [Comparing Estimates of Family Income in the Panel Study of Income Dynamics and the March Current Population Survey, 1968-2007](https://psidonline.isr.umich.edu/Publications/Papers/tsp/2010-01_comparing_estimates_of_fam.pdf). PSID Technical Series Paper 10-01, Institute for Social Research, University of Michigan.
 * Haider, Steven, and Gary Solon. 2006. [Life-Cycle Variation in the Association between Current and Lifetime Earnings](https://www.nber.org/papers/w11943). NBER Working Paper 11943; published in the American Economic Review 96(4), 1308 to 1320. [Published article DOI](https://doi.org/10.1257/aer.96.4.1308).
 * Mazumder, Bhashkar. 2005. [Fortunate Sons: New Estimates of Intergenerational Mobility in the United States Using Social Security Earnings Data](https://ideas.repec.org/a/tpr/restat/v87y2005i2p235-255.html). Review of Economics and Statistics 87(2), 235 to 255. Cited in the article for the downward bias from short averages of fathers' earnings.
 * Panel Study of Income Dynamics. [Frequently Asked Questions](https://psidonline.isr.umich.edu/Guide/FAQ.aspx) and [Family Identification Mapping System](https://simba.isr.umich.edu/FIMS/default.aspx), Survey Research Center, Institute for Social Research, University of Michigan. Used only for the table layout; no PSID data were downloaded.
