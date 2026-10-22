@@ -1,0 +1,15 @@
+# Keep GitHub's language summary focused on the course analysis source.
+# These rules affect GitHub reporting, not execution or website content.
+
+# Published website output and Quarto's generated cache.
+docs/** linguist-generated=true
+_freeze/** linguist-generated=true
+
+# Downloaded research inputs contain third-party HTML, not project code.
+posts/web-scraping/data/raw/html/** linguist-vendored=true
+
+# Omit preview builders and an optional verification utility from the summary.
+# The substantive Python analyses remain classified and counted as Python.
+posts/pa-rent-burden/build_preview.py linguist-detectable=false
+posts/sql-income-mobility/build_preview.py linguist-detectable=false
+posts/inflation-unemployment/verify.py linguist-detectable=false
