@@ -1,30 +1,44 @@
-WITH parent_means AS (
-    SELECT p.family_id, p.person_id,
-           AVG(i.real_income) AS parent_income
-    FROM people AS p
-    JOIN incomes AS i ON i.person_id = p.person_id
-    WHERE p.generation = 'parent'
-      AND i.year - p.birth_year BETWEEN :p_start AND :p_end
-    GROUP BY p.family_id, p.person_id
-    HAVING COUNT(i.real_income) = :p_years
-       AND COUNT(DISTINCT i.year) = :p_years
+WITH parent_family_years AS (
+    -- One row per child and year: the income of the family in which the
+    -- child's parent was reference person or spouse. DISTINCT keeps one row
+    -- when the mother and father lived in the same family that year.
+    SELECT DISTINCT l.child_id68, l.child_pn, y.year, y.interview_number,
+           f.family_income
+    FROM parent_links AS l
+    JOIN individuals AS c
+      ON c.id68 = l.child_id68 AND c.pn = l.child_pn
+    JOIN individual_years AS y
+      ON y.id68 = l.parent_id68 AND y.pn = l.parent_pn
+    JOIN family_years AS f
+      ON f.year = y.year AND f.interview_number = y.interview_number
+    WHERE y.sequence_number IN (1, 2)
+      AND y.relation_to_rp IN ('reference person', 'spouse')
+      AND y.year - c.birth_year BETWEEN :p_start AND :p_end
 ),
-child_means AS (
-    SELECT p.family_id, p.person_id,
-           AVG(i.real_income) AS child_income
-    FROM people AS p
-    JOIN incomes AS i ON i.person_id = p.person_id
-    WHERE p.generation = 'child'
-      AND i.year - p.birth_year BETWEEN :c_start AND :c_end
-    GROUP BY p.family_id, p.person_id
-    HAVING COUNT(i.real_income) = :c_years
-       AND COUNT(DISTINCT i.year) = :c_years
+parent_income AS (
+    SELECT child_id68, child_pn, AVG(family_income) AS parent_income
+    FROM parent_family_years
+    GROUP BY child_id68, child_pn
+    HAVING COUNT(*) = :p_years
+       AND COUNT(DISTINCT year) = :p_years
+),
+child_income AS (
+    SELECT c.id68, c.pn, AVG(f.family_income) AS child_income
+    FROM individuals AS c
+    JOIN individual_years AS y
+      ON y.id68 = c.id68 AND y.pn = c.pn
+    JOIN family_years AS f
+      ON f.year = y.year AND f.interview_number = y.interview_number
+    WHERE y.sequence_number IN (1, 2)
+      AND y.relation_to_rp IN ('reference person', 'spouse')
+      AND y.year - c.birth_year BETWEEN :c_start AND :c_end
+    GROUP BY c.id68, c.pn
+    HAVING COUNT(*) = :c_years
+       AND COUNT(DISTINCT y.year) = :c_years
 )
-SELECT l.family_id, l.parent_id, l.child_id,
+SELECT p.child_id68 AS id68, p.child_pn AS pn,
        p.parent_income, c.child_income
-FROM links AS l
-JOIN parent_means AS p
-  ON p.family_id = l.family_id AND p.person_id = l.parent_id
-JOIN child_means AS c
-  ON c.family_id = l.family_id AND c.person_id = l.child_id
-ORDER BY l.child_id;
+FROM parent_income AS p
+JOIN child_income AS c
+  ON c.id68 = p.child_id68 AND c.pn = p.child_pn
+ORDER BY id68, pn;

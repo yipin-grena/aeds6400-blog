@@ -216,7 +216,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">October 18, 2026</p>
+        <p class="date-modified">October 21, 2026</p>
       </div>
     </div>
       
@@ -236,10 +236,10 @@ window.Quarto = {
 
 <p>Could income mobility look stronger simply because we measured people in the wrong year? A parent might receive an unusually large bonus, while their adult child is still building a career. Neither income necessarily reflects what that person usually earns. Mistaking these temporary differences for lasting ones could make economic opportunity appear more open than it is.</p>
 <p>This has happened in real research. <a href="https://ideas.repec.org/a/aea/aecrev/v82y1992i3p393-408.html">Solon (1992)</a> showed that earlier U.S. estimates were biased downward by measurement error, unrepresentative samples, or both; using the Panel Study of Income Dynamics, he found a long-run intergenerational correlation of at least 0.4, implying much less mobility than earlier work suggested. <a href="https://ideas.repec.org/a/tpr/restat/v87y2005i2p235-255.html">Mazumder (2005)</a> later used Social Security earnings histories and found that averaging fathers’ earnings over only a few years understated the elasticity by roughly 30% or more, putting it near 0.6. How income was measured changed what economists concluded about opportunity in the United States.</p>
-<p>To see why, I use SQL inside Python to match 4,000 <strong>simulated families</strong>, each with one parent and one child. Averaging several years reveals a stronger income connection than a single year does, even though the families are unchanged. These are teaching data with a known underlying relationship, not estimates for the United States.</p>
+<p>To see why, I use SQL inside Python to match 7,166 children from 4,000 <strong>simulated families</strong> to their parents. The database copies the structure of the Panel Study of Income Dynamics (PSID), but every value is simulated; no PSID data are used. Averaging several years reveals a stronger income connection than a single year does, even though the families are unchanged. These are teaching data with a known underlying relationship, not estimates for the United States.</p>
 <section id="match-the-people-before-comparing-their-incomes" class="level2">
 <h2 class="anchored" data-anchor-id="match-the-people-before-comparing-their-incomes">Match the people before comparing their incomes</h2>
-<p>Follow the <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility">README’s setup instructions</a>, then run <code>python run.py</code> and <code>python tutorial.py</code> from this post’s folder. The first builds the data and SQLite database; the second runs the matching and comparisons below. Three tables carry the analysis.</p>
+<p>Follow the <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility">README’s setup instructions</a>, then run <code>python run.py</code> and <code>python tutorial.py</code> from this post’s folder. The first builds the data and SQLite database; the second runs the matching and comparisons below. Four tables carry the analysis, each modeled on a PSID file described in its <a href="https://psidonline.isr.umich.edu/Guide/FAQ.aspx">public documentation</a>.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -255,95 +255,110 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>people</code></td>
+<td><code>individuals</code></td>
 <td>A person</td>
-<td><code>person_id</code>, <code>family_id</code>, <code>birth_year</code>, <code>generation</code></td>
+<td><code>id68</code>, <code>pn</code>, <code>birth_year</code>, <code>sex</code></td>
 </tr>
 <tr class="even">
-<td><code>links</code></td>
-<td>A known parent and child relationship</td>
-<td><code>family_id</code>, <code>parent_id</code>, <code>child_id</code></td>
+<td><code>parent_links</code></td>
+<td>A child and one parent</td>
+<td>child and parent <code>id68</code> and <code>pn</code>, <code>parent_type</code></td>
 </tr>
 <tr class="odd">
-<td><code>incomes</code></td>
-<td>A person in a calendar year</td>
-<td><code>person_id</code>, <code>year</code>, <code>real_income</code></td>
+<td><code>individual_years</code></td>
+<td>A person in a survey year</td>
+<td><code>id68</code>, <code>pn</code>, <code>year</code>, <code>interview_number</code>, <code>sequence_number</code></td>
+</tr>
+<tr class="even">
+<td><code>family_years</code></td>
+<td>A family in a survey year</td>
+<td><code>year</code>, <code>interview_number</code>, <code>family_income</code></td>
 </tr>
 </tbody>
 </table>
-<p><code>family_id</code> follows the family of origin after the child moves out. The relationship table identifies the specific parent; sharing a household alone does not establish parenthood. Here that table is given, which keeps the tutorial focused on the query. In a real panel such as the Panel Study of Income Dynamics, building it is part of the work: links come from family and person identifiers combined with each person’s recorded relationship to the household head, and a study must decide how to handle two parents, siblings, and people who leave the survey.</p>
-<p>The query in <code>sql/match.sql</code> summarizes each person’s income before joining the generations. Otherwise, two five-year histories would produce 25 combinations. I match family and person identifiers, not calendar years: parents and children reach the same age in different years.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> parent_means <span class="kw">AS</span> (</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> p.family_id, p.person_id,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">AVG</span>(i.real_income) <span class="kw">AS</span> parent_income</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> people <span class="kw">AS</span> p</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> incomes <span class="kw">AS</span> i <span class="kw">ON</span> i.person_id <span class="op">=</span> p.person_id</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> p.generation <span class="op">=</span> <span class="st">'parent'</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> i.<span class="dt">year</span> <span class="op">-</span> p.birth_year <span class="kw">BETWEEN</span> <span class="ch">:p_start</span> <span class="kw">AND</span> <span class="ch">:p_end</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> p.family_id, p.person_id</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">HAVING</span> <span class="fu">COUNT</span>(i.real_income) <span class="op">=</span> <span class="ch">:p_years</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> i.<span class="dt">year</span>) <span class="op">=</span> <span class="ch">:p_years</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>child_means <span class="kw">AS</span> (</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> p.family_id, p.person_id,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>           <span class="fu">AVG</span>(i.real_income) <span class="kw">AS</span> child_income</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> people <span class="kw">AS</span> p</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> incomes <span class="kw">AS</span> i <span class="kw">ON</span> i.person_id <span class="op">=</span> p.person_id</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> p.generation <span class="op">=</span> <span class="st">'child'</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> i.<span class="dt">year</span> <span class="op">-</span> p.birth_year <span class="kw">BETWEEN</span> <span class="ch">:c_start</span> <span class="kw">AND</span> <span class="ch">:c_end</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> p.family_id, p.person_id</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">HAVING</span> <span class="fu">COUNT</span>(i.real_income) <span class="op">=</span> <span class="ch">:c_years</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> i.<span class="dt">year</span>) <span class="op">=</span> <span class="ch">:c_years</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> l.family_id, l.parent_id, l.child_id,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>       p.parent_income, c.child_income</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> links <span class="kw">AS</span> l</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> parent_means <span class="kw">AS</span> p</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> p.family_id <span class="op">=</span> l.family_id <span class="kw">AND</span> p.person_id <span class="op">=</span> l.parent_id</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> child_means <span class="kw">AS</span> c</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> c.family_id <span class="op">=</span> l.family_id <span class="kw">AND</span> c.person_id <span class="op">=</span> l.child_id</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> l.child_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Three features of the real survey shape the query. First, no single column identifies a person: the 1968 family ID (<code>id68</code>) and the person number (<code>pn</code>) do so together, so every join uses both. Second, <code>parent_links</code> has one row per parent, like the PSID’s parent map, so a child with a mother and a father appears twice. Third, income belongs to families, not people. A family’s interview number is valid for one survey year only, so a person’s income comes from finding that year’s interview number in <code>individual_years</code> and then the matching row in <code>family_years</code>. Following the PSID’s guidance, I keep years in which the person was the reference person or spouse (sequence number 1 or 2). In the real PSID, the parent map comes from its <a href="https://simba.isr.umich.edu/FIMS/default.aspx">FIMS tool</a>, and a study must still decide how to treat parents who live apart, siblings, and people who leave the survey.</p>
+<p>Parents and children reach the same age in different calendar years, so I measure parental income by the child’s age: the years when the child was 15 to 19. The query in <code>sql/match.sql</code> also summarizes each person’s income before joining the generations; joining two five-year histories first would produce 25 combinations per pair.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> parent_family_years <span class="kw">AS</span> (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- One row per child and year: the income of the family in which the</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- child's parent was reference person or spouse. DISTINCT keeps one row</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- when the mother and father lived in the same family that year.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="kw">DISTINCT</span> l.child_id68, l.child_pn, y.<span class="dt">year</span>, y.interview_number,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>           f.family_income</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> parent_links <span class="kw">AS</span> l</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> individuals <span class="kw">AS</span> c</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">ON</span> c.id68 <span class="op">=</span> l.child_id68 <span class="kw">AND</span> c.pn <span class="op">=</span> l.child_pn</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> individual_years <span class="kw">AS</span> y</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="kw">ON</span> y.id68 <span class="op">=</span> l.parent_id68 <span class="kw">AND</span> y.pn <span class="op">=</span> l.parent_pn</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> family_years <span class="kw">AS</span> f</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">ON</span> f.<span class="dt">year</span> <span class="op">=</span> y.<span class="dt">year</span> <span class="kw">AND</span> f.interview_number <span class="op">=</span> y.interview_number</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> y.sequence_number <span class="kw">IN</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> y.relation_to_rp <span class="kw">IN</span> (<span class="st">'reference person'</span>, <span class="st">'spouse'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> y.<span class="dt">year</span> <span class="op">-</span> c.birth_year <span class="kw">BETWEEN</span> <span class="ch">:p_start</span> <span class="kw">AND</span> <span class="ch">:p_end</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>parent_income <span class="kw">AS</span> (</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> child_id68, child_pn, <span class="fu">AVG</span>(family_income) <span class="kw">AS</span> parent_income</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> parent_family_years</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> child_id68, child_pn</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">=</span> <span class="ch">:p_years</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> <span class="dt">year</span>) <span class="op">=</span> <span class="ch">:p_years</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>child_income <span class="kw">AS</span> (</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> c.id68, c.pn, <span class="fu">AVG</span>(f.family_income) <span class="kw">AS</span> child_income</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> individuals <span class="kw">AS</span> c</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> individual_years <span class="kw">AS</span> y</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>      <span class="kw">ON</span> y.id68 <span class="op">=</span> c.id68 <span class="kw">AND</span> y.pn <span class="op">=</span> c.pn</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> family_years <span class="kw">AS</span> f</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>      <span class="kw">ON</span> f.<span class="dt">year</span> <span class="op">=</span> y.<span class="dt">year</span> <span class="kw">AND</span> f.interview_number <span class="op">=</span> y.interview_number</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> y.sequence_number <span class="kw">IN</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> y.relation_to_rp <span class="kw">IN</span> (<span class="st">'reference person'</span>, <span class="st">'spouse'</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> y.<span class="dt">year</span> <span class="op">-</span> c.birth_year <span class="kw">BETWEEN</span> <span class="ch">:c_start</span> <span class="kw">AND</span> <span class="ch">:c_end</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> c.id68, c.pn</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">=</span> <span class="ch">:c_years</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> y.<span class="dt">year</span>) <span class="op">=</span> <span class="ch">:c_years</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> p.child_id68 <span class="kw">AS</span> id68, p.child_pn <span class="kw">AS</span> pn,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>       p.parent_income, c.child_income</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> parent_income <span class="kw">AS</span> p</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> child_income <span class="kw">AS</span> c</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> c.id68 <span class="op">=</span> p.child_id68 <span class="kw">AND</span> c.pn <span class="op">=</span> p.child_pn</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> id68, pn;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The query works in four steps.</p>
 <ol type="1">
-<li><strong>Join each person to their yearly incomes.</strong> Each <code>WITH</code> block starts from <code>people</code> and uses <code>JOIN</code> to attach that person’s rows from <code>incomes</code> wherever the <code>person_id</code> values match. <code>SELECT</code> keeps only what later steps need: the two identifiers and the income measure.</li>
-<li><strong>Line the generations up by age, not by calendar year.</strong> The <code>incomes</code> table records years, but parents and children should be compared at the same point in life. <code>i.year - p.birth_year</code> turns each year into the person’s age, and <code>WHERE ... BETWEEN :p_start AND :p_end</code> keeps only the chosen ages. Names that begin with a colon are placeholders that Python fills in, so one query serves every comparison below.</li>
-<li><strong>Collapse each person’s years into one number.</strong> <code>GROUP BY p.family_id, p.person_id</code> gathers all of one person’s selected years, and the aggregate function <code>AVG(i.real_income)</code> turns them into a single income. <code>HAVING</code> then checks each finished group: <code>COUNT(DISTINCT i.year)</code> must equal the number of ages requested, so a person missing a year is dropped instead of being averaged over fewer years.</li>
-<li><strong>Attach both summaries to each relationship.</strong> The final <code>SELECT</code> starts from <code>links</code> and joins the parent summary and the child summary on both <code>family_id</code> and the person identifier. The result has one row per child, holding both generations’ incomes.</li>
+<li><strong>Find each parent’s family in each year.</strong> The first <code>WITH</code> block starts from <code>parent_links</code> and uses <code>JOIN</code> to attach the parent’s rows in <code>individual_years</code>, matching both parts of the ID. A second join attaches that year’s family income from <code>family_years</code>, matching <code>year</code> and <code>interview_number</code>. <code>SELECT</code> keeps only what later steps need.</li>
+<li><strong>Line the generations up by the child’s age.</strong> <code>y.year - c.birth_year</code> turns each survey year into the child’s age, and <code>WHERE ... BETWEEN :p_start AND :p_end</code> keeps only the chosen ages. Names that begin with a colon are placeholders that Python fills in, so one query serves every comparison below.</li>
+<li><strong>Remove the duplicate from two parents, then average.</strong> When a mother and father live in the same family, both of their rows find the same family-year, so <code>SELECT DISTINCT</code> keeps one copy. <code>GROUP BY</code> then gathers each child’s years, the aggregate function <code>AVG(family_income)</code> turns them into one number, and <code>HAVING</code> requires exactly one family for every requested year. Without <code>DISTINCT</code>, the average would hide the problem, but each two-parent child would have ten rows instead of five, and the completeness check would silently drop 6,095 of the 7,166 children.</li>
+<li><strong>Repeat for the child, then join.</strong> The <code>child_income</code> block applies the same logic to the child’s own family in adulthood. The final <code>SELECT</code> joins the two summaries on the child’s <code>id68</code> and <code>pn</code>, producing one row per child with both generations’ incomes.</li>
 </ol>
-<p>With ages 40 through 44 for both generations, the first rows of the result look like this. Each income is a five-year average in constant dollars.</p>
+<p>With parental income over the child’s ages 15 to 19 and the child’s income over ages 40 to 44, the first rows of the result look like this. Each income is a five-year average of family income in constant dollars. The first two children were born in the same year, so they share a parental average; their sister was born five years later, so her parents’ income is measured over different years.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th style="text-align: right;">Family</th>
-<th style="text-align: right;">Parent ID</th>
-<th style="text-align: right;">Child ID</th>
+<th style="text-align: right;">1968 ID</th>
+<th style="text-align: right;">Person number</th>
 <th style="text-align: right;">Parent income</th>
 <th style="text-align: right;">Child income</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">100001</td>
-<td style="text-align: right;">200001</td>
-<td style="text-align: right;">$24,727</td>
-<td style="text-align: right;">$49,795</td>
+<td style="text-align: right;">1001</td>
+<td style="text-align: right;">030</td>
+<td style="text-align: right;">$36,307</td>
+<td style="text-align: right;">$63,255</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">100002</td>
-<td style="text-align: right;">200002</td>
-<td style="text-align: right;">$131,607</td>
-<td style="text-align: right;">$47,144</td>
+<td style="text-align: right;">1001</td>
+<td style="text-align: right;">031</td>
+<td style="text-align: right;">$36,307</td>
+<td style="text-align: right;">$23,552</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">100003</td>
-<td style="text-align: right;">200003</td>
-<td style="text-align: right;">$35,810</td>
-<td style="text-align: right;">$80,948</td>
+<td style="text-align: right;">1001</td>
+<td style="text-align: right;">032</td>
+<td style="text-align: right;">$19,040</td>
+<td style="text-align: right;">$41,703</td>
 </tr>
 </tbody>
 </table>
@@ -362,12 +377,17 @@ Show the Python helper that runs the SQL query
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>POST <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parent</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> (POST <span class="op">/</span> <span class="st">"sql/match.sql"</span>).read_text()</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match(conn, parent_ages, child_ages):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    p0, p1 <span class="op">=</span> parent_ages</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    c0, c1 <span class="op">=</span> child_ages</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> <span class="bu">dict</span>(p_start<span class="op">=</span>p0, p_end<span class="op">=</span>p1, p_years<span class="op">=</span>p1 <span class="op">-</span> p0 <span class="op">+</span> <span class="dv">1</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                  c_start<span class="op">=</span>c0, c_end<span class="op">=</span>c1, c_years<span class="op">=</span>c1 <span class="op">-</span> c0 <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.read_sql_query(query, conn, params<span class="op">=</span>params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match(conn, parent_window, child_ages):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Match children to parental and own family income.</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    parent_window: the child's ages when parental income is measured.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">    child_ages: the child's ages when the child's own income is measured.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    p0, p1 <span class="op">=</span> parent_window</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    c0, c1 <span class="op">=</span> child_ages</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> <span class="bu">dict</span>(p_start<span class="op">=</span>p0, p_end<span class="op">=</span>p1, p_years<span class="op">=</span>p1 <span class="op">-</span> p0 <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                  c_start<span class="op">=</span>c0, c_end<span class="op">=</span>c1, c_years<span class="op">=</span>c1 <span class="op">-</span> c0 <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.read_sql_query(query, conn, params<span class="op">=</span>params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </section>
 <section id="estimate-persistence-then-change-the-measurement-window" class="level2">
@@ -377,7 +397,7 @@ Show the Python helper that runs the SQL query
 <p><span class="math display">\[
 \log(\text{child income}) = \alpha + \beta\log(\text{parent income}) + \varepsilon.
 \]</span></p>
-<p>SQL averages annual income amounts in constant dollars <strong>before</strong> Python takes logarithms. In the code, <code>np.ones</code> supplies the intercept and <code>np.linalg.lstsq</code> fits the line. The checks keep each child once and the families identical across comparisons.</p>
+<p>SQL averages annual income amounts in constant dollars <strong>before</strong> Python takes logarithms. In the code, <code>np.ones</code> supplies the intercept and <code>np.linalg.lstsq</code> fits the line. The checks keep each child once and the children identical across comparisons.</p>
 <details>
 <summary>
 Show the Python code that estimates and compares the slopes
@@ -390,25 +410,26 @@ Show the Python code that estimates and compares the slopes
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">float</span>(slope)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare(conn):</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    single <span class="op">=</span> match(conn, (<span class="dv">40</span>, <span class="dv">40</span>), (<span class="dv">40</span>, <span class="dv">40</span>))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    averaged <span class="op">=</span> match(conn, (<span class="dv">40</span>, <span class="dv">44</span>), (<span class="dv">40</span>, <span class="dv">44</span>))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    young <span class="op">=</span> match(conn, (<span class="dv">40</span>, <span class="dv">44</span>), (<span class="dv">25</span>, <span class="dv">29</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    single <span class="op">=</span> match(conn, (<span class="dv">15</span>, <span class="dv">15</span>), (<span class="dv">40</span>, <span class="dv">40</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    averaged <span class="op">=</span> match(conn, (<span class="dv">15</span>, <span class="dv">19</span>), (<span class="dv">40</span>, <span class="dv">44</span>))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    young <span class="op">=</span> match(conn, (<span class="dv">15</span>, <span class="dv">19</span>), (<span class="dv">25</span>, <span class="dv">29</span>))</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pairs <span class="kw">in</span> (single, averaged, young):</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> pairs[<span class="st">"child_id"</span>].is_unique</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> pairs[<span class="st">"child_id"</span>].equals(single[<span class="st">"child_id"</span>])</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="kw">not</span> pairs.duplicated([<span class="st">"id68"</span>, <span class="st">"pn"</span>]).<span class="bu">any</span>()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> pairs[[<span class="st">"id68"</span>, <span class="st">"pn"</span>]].equals(single[[<span class="st">"id68"</span>, <span class="st">"pn"</span>]])</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> (pairs[[<span class="st">"parent_income"</span>, <span class="st">"child_income"</span>]] <span class="op">&gt;</span> <span class="dv">0</span>).<span class="bu">all</span>().<span class="bu">all</span>()</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame({</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"measure"</span>: [<span class="st">"Age 40 for both"</span>, <span class="st">"Ages 40 to 44 for both"</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Parent 40 to 44, child 25 to 29"</span>],</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pairs"</span>: [<span class="bu">len</span>(single), <span class="bu">len</span>(averaged), <span class="bu">len</span>(young)],</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ige"</span>: [ige(single), ige(averaged), ige(young)]</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> sqlite3.<span class="ex">connect</span>(POST <span class="op">/</span> <span class="st">"data/mobility.sqlite"</span>) <span class="im">as</span> conn:</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(compare(conn).to_string(index<span class="op">=</span><span class="va">False</span>, float_format<span class="op">=</span><span class="st">"</span><span class="sc">%.3f</span><span class="st">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"measure"</span>: [<span class="st">"One year for each generation"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Five-year averages for each generation"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Five-year averages, child aged 25 to 29"</span>],</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pairs"</span>: [<span class="bu">len</span>(single), <span class="bu">len</span>(averaged), <span class="bu">len</span>(young)],</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ige"</span>: [ige(single), ige(averaged), ige(young)]</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> sqlite3.<span class="ex">connect</span>(POST <span class="op">/</span> <span class="st">"data/mobility.sqlite"</span>) <span class="im">as</span> conn:</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(compare(conn).to_string(index<span class="op">=</span><span class="va">False</span>, float_format<span class="op">=</span><span class="st">"</span><span class="sc">%.3f</span><span class="st">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<p>Using age 40 alone gives 0.20; averaging ages 40 through 44 raises it to 0.31, closer to the model’s 0.40. The families did not become less mobile. Better measurement revealed more of the income connection already built into the simulation.</p>
+<p>Using one year for each generation, the parents’ family income when the child was 15 and the child’s at 40, gives 0.20. Averaging five years for each raises it to 0.30, closer to the model’s 0.40. The families did not become less mobile. Better measurement revealed more of the income connection already built into the simulation.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-averaging" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two bars comparing simulated elasticity estimates from one year and five-year average incomes, with a dashed line at the model value of 0.4.">
@@ -427,13 +448,13 @@ Figure&nbsp;1: Averaging several years reduces the distortion from temporary inc
 </section>
 <section id="averaging-cannot-fix-measuring-children-too-young" class="level2">
 <h2 class="anchored" data-anchor-id="averaging-cannot-fix-measuring-children-too-young">Averaging cannot fix measuring children too young</h2>
-<p>But does averaging solve the whole problem? Holding parental income at its five-year average, I change only the child’s measurement age. The slope rises from 0.14 at 25 to 0.32 at 40. Early incomes hide differences that emerge later. The small dips along the way, such as at ages 28 and 41, are sampling noise in this one simulated sample, not part of the pattern.</p>
+<p>But does averaging solve the whole problem? Holding parental income at its five-year average, I change only the child’s measurement age. The slope rises from 0.14 at 25 to 0.31 at 40. Early incomes hide differences that emerge later. The small dips along the way, such as at ages 31 and 36, are sampling noise in this one simulated sample, not part of the pattern.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-child-age" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parent income always averaged over ages 40 through 44.">
+<div id="fig-child-age" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parental income always averaged over the child's ages 15 to 19.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-child-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="results/figures/child-age.png" class="img-fluid figure-img" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parent income always averaged over ages 40 through 44.">
+<img src="results/figures/child-age.png" class="img-fluid figure-img" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parental income always averaged over the child's ages 15 to 19.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-child-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Changing the child’s measurement age changes the estimated persistence even with the same parents and families.
@@ -443,10 +464,10 @@ Figure&nbsp;2: Changing the child’s measurement age changes the estimated pers
 </div>
 </div>
 <p>This illustrates <strong>life-cycle bias</strong>. Children with higher lasting incomes have steeper early income growth in the model. If everyone’s income grew by the same percentage, that alone would not change the slope. The age pattern is deliberately built in, not discovered in real data. <a href="https://www.nber.org/papers/w11943">Haider and Solon</a> explain why current earnings can represent lifetime earnings differently at different ages.</p>
-<p>Even averaging the child’s ages 25 through 29 gives only 0.16. More observations still describe an early career. Real data also require decisions about missing years and zero incomes, which this complete, positive-income simulation avoids.</p>
+<p>Even averaging the child’s ages 25 through 29 gives only 0.17. More observations still describe an early career. Real data also require survey weights and decisions about missing years and zero incomes, which this complete, positive-income, equally weighted simulation avoids.</p>
 <p>The main takeaways are:</p>
 <ul>
-<li>Match explicit parent and child identities, then check that each pair appears once.</li>
+<li>Join on the full person ID, and remove duplicate family-years from two-parent links before counting or averaging.</li>
 <li>Average several years to reduce temporary fluctuations that can make mobility look stronger.</li>
 <li>Compare suitable ages too. Averaging early earnings does not make them representative of a whole career.</li>
 </ul>

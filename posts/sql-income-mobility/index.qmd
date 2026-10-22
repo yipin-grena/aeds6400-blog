@@ -3,7 +3,7 @@ title: "How one year of income can mislead a study of mobility"
 description: "The same simulated families can look more mobile when income is measured less carefully. A SQL and Python tutorial explains why."
 author: "Yipin Zhang"
 date: 2026-10-16
-date-modified: 2026-10-18
+date-modified: 2026-10-21
 categories: [SQL, Python, economic mobility]
 image: results/figures/income-averages.png
 execute:
@@ -31,21 +31,22 @@ Could income mobility look stronger simply because we measured people in the wro
 
 This has happened in real research. [Solon (1992)](https://ideas.repec.org/a/aea/aecrev/v82y1992i3p393-408.html) showed that earlier U.S. estimates were biased downward by measurement error, unrepresentative samples, or both; using the Panel Study of Income Dynamics, he found a long-run intergenerational correlation of at least 0.4, implying much less mobility than earlier work suggested. [Mazumder (2005)](https://ideas.repec.org/a/tpr/restat/v87y2005i2p235-255.html) later used Social Security earnings histories and found that averaging fathers' earnings over only a few years understated the elasticity by roughly 30% or more, putting it near 0.6. How income was measured changed what economists concluded about opportunity in the United States.
 
-To see why, I use SQL inside Python to match `r n(s$n)` **simulated families**, each with one parent and one child. Averaging several years reveals a stronger income connection than a single year does, even though the families are unchanged. These are teaching data with a known underlying relationship, not estimates for the United States.
+To see why, I use SQL inside Python to match `r n(s$children)` children from `r n(s$families)` **simulated families** to their parents. The database copies the structure of the Panel Study of Income Dynamics (PSID), but every value is simulated; no PSID data are used. Averaging several years reveals a stronger income connection than a single year does, even though the families are unchanged. These are teaching data with a known underlying relationship, not estimates for the United States.
 
 ## Match the people before comparing their incomes
 
-Follow the [README's setup instructions](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility), then run `python run.py` and `python tutorial.py` from this post's folder. The first builds the data and SQLite database; the second runs the matching and comparisons below. Three tables carry the analysis.
+Follow the [README's setup instructions](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility), then run `python run.py` and `python tutorial.py` from this post's folder. The first builds the data and SQLite database; the second runs the matching and comparisons below. Four tables carry the analysis, each modeled on a PSID file described in its [public documentation](https://psidonline.isr.umich.edu/Guide/FAQ.aspx).
 
 | Table | One row represents | Important columns |
 |---|---|---|
-| `people` | A person | `person_id`, `family_id`, `birth_year`, `generation` |
-| `links` | A known parent and child relationship | `family_id`, `parent_id`, `child_id` |
-| `incomes` | A person in a calendar year | `person_id`, `year`, `real_income` |
+| `individuals` | A person | `id68`, `pn`, `birth_year`, `sex` |
+| `parent_links` | A child and one parent | child and parent `id68` and `pn`, `parent_type` |
+| `individual_years` | A person in a survey year | `id68`, `pn`, `year`, `interview_number`, `sequence_number` |
+| `family_years` | A family in a survey year | `year`, `interview_number`, `family_income` |
 
-`family_id` follows the family of origin after the child moves out. The relationship table identifies the specific parent; sharing a household alone does not establish parenthood. Here that table is given, which keeps the tutorial focused on the query. In a real panel such as the Panel Study of Income Dynamics, building it is part of the work: links come from family and person identifiers combined with each person's recorded relationship to the household head, and a study must decide how to handle two parents, siblings, and people who leave the survey.
+Three features of the real survey shape the query. First, no single column identifies a person: the 1968 family ID (`id68`) and the person number (`pn`) do so together, so every join uses both. Second, `parent_links` has one row per parent, like the PSID's parent map, so a child with a mother and a father appears twice. Third, income belongs to families, not people. A family's interview number is valid for one survey year only, so a person's income comes from finding that year's interview number in `individual_years` and then the matching row in `family_years`. Following the PSID's guidance, I keep years in which the person was the reference person or spouse (sequence number 1 or 2). In the real PSID, the parent map comes from its [FIMS tool](https://simba.isr.umich.edu/FIMS/default.aspx), and a study must still decide how to treat parents who live apart, siblings, and people who leave the survey.
 
-The query in `sql/match.sql` summarizes each person's income before joining the generations. Otherwise, two five-year histories would produce 25 combinations. I match family and person identifiers, not calendar years: parents and children reach the same age in different years.
+Parents and children reach the same age in different calendar years, so I measure parental income by the child's age: the years when the child was 15 to 19. The query in `sql/match.sql` also summarizes each person's income before joining the generations; joining two five-year histories first would produce 25 combinations per pair.
 
 ```{r}
 #| echo: false
@@ -55,22 +56,23 @@ show_code("sql/match.sql", "sql")
 
 The query works in four steps.
 
-1. **Join each person to their yearly incomes.** Each `WITH` block starts from `people` and uses `JOIN` to attach that person's rows from `incomes` wherever the `person_id` values match. `SELECT` keeps only what later steps need: the two identifiers and the income measure.
-2. **Line the generations up by age, not by calendar year.** The `incomes` table records years, but parents and children should be compared at the same point in life. `i.year - p.birth_year` turns each year into the person's age, and `WHERE ... BETWEEN :p_start AND :p_end` keeps only the chosen ages. Names that begin with a colon are placeholders that Python fills in, so one query serves every comparison below.
-3. **Collapse each person's years into one number.** `GROUP BY p.family_id, p.person_id` gathers all of one person's selected years, and the aggregate function `AVG(i.real_income)` turns them into a single income. `HAVING` then checks each finished group: `COUNT(DISTINCT i.year)` must equal the number of ages requested, so a person missing a year is dropped instead of being averaged over fewer years.
-4. **Attach both summaries to each relationship.** The final `SELECT` starts from `links` and joins the parent summary and the child summary on both `family_id` and the person identifier. The result has one row per child, holding both generations' incomes.
+1. **Find each parent's family in each year.** The first `WITH` block starts from `parent_links` and uses `JOIN` to attach the parent's rows in `individual_years`, matching both parts of the ID. A second join attaches that year's family income from `family_years`, matching `year` and `interview_number`. `SELECT` keeps only what later steps need.
+2. **Line the generations up by the child's age.** `y.year - c.birth_year` turns each survey year into the child's age, and `WHERE ... BETWEEN :p_start AND :p_end` keeps only the chosen ages. Names that begin with a colon are placeholders that Python fills in, so one query serves every comparison below.
+3. **Remove the duplicate from two parents, then average.** When a mother and father live in the same family, both of their rows find the same family-year, so `SELECT DISTINCT` keeps one copy. `GROUP BY` then gathers each child's years, the aggregate function `AVG(family_income)` turns them into one number, and `HAVING` requires exactly one family for every requested year. Without `DISTINCT`, the average would hide the problem, but each two-parent child would have ten rows instead of five, and the completeness check would silently drop `r n(s$two_parent_children)` of the `r n(s$children)` children.
+4. **Repeat for the child, then join.** The `child_income` block applies the same logic to the child's own family in adulthood. The final `SELECT` joins the two summaries on the child's `id68` and `pn`, producing one row per child with both generations' incomes.
 
-With ages 40 through 44 for both generations, the first rows of the result look like this. Each income is a five-year average in constant dollars.
+With parental income over the child's ages 15 to 19 and the child's income over ages 40 to 44, the first rows of the result look like this. Each income is a five-year average of family income in constant dollars. The first two children were born in the same year, so they share a parental average; their sister was born five years later, so her parents' income is measured over different years.
 
 ```{r}
 #| echo: false
 pairs <- read.csv("results/tables/example-pairs.csv")
+pairs$pn <- sprintf("%03d", pairs$pn)
 pairs$parent_income <- paste0("$", n(round(pairs$parent_income)))
 pairs$child_income <- paste0("$", n(round(pairs$child_income)))
 knitr::kable(
   pairs,
-  col.names = c("Family", "Parent ID", "Child ID", "Parent income", "Child income"),
-  align = "rrrrr"
+  col.names = c("1968 ID", "Person number", "Parent income", "Child income"),
+  align = "rrrr"
 )
 ```
 
@@ -97,7 +99,7 @@ $$
 \log(\text{child income}) = \alpha + \beta\log(\text{parent income}) + \varepsilon.
 $$
 
-SQL averages annual income amounts in constant dollars **before** Python takes logarithms. In the code, `np.ones` supplies the intercept and `np.linalg.lstsq` fits the line. The checks keep each child once and the families identical across comparisons.
+SQL averages annual income amounts in constant dollars **before** Python takes logarithms. In the code, `np.ones` supplies the intercept and `np.linalg.lstsq` fits the line. The checks keep each child once and the children identical across comparisons.
 
 <details>
 <summary>Show the Python code that estimates and compares the slopes</summary>
@@ -110,7 +112,7 @@ show_code("tutorial.py", "python", "estimate")
 
 </details>
 
-Using age 40 alone gives `r f(s$single)`; averaging ages 40 through 44 raises it to `r f(s$averaged)`, closer to the model's `r f(s$true_ige)`. The families did not become less mobile. Better measurement revealed more of the income connection already built into the simulation.
+Using one year for each generation, the parents' family income when the child was 15 and the child's at 40, gives `r f(s$single)`. Averaging five years for each raises it to `r f(s$averaged)`, closer to the model's `r f(s$true_ige)`. The families did not become less mobile. Better measurement revealed more of the income connection already built into the simulation.
 
 ```{r}
 #| label: fig-averaging
@@ -124,23 +126,23 @@ Temporary swings in parental income blur its relationship with the child's incom
 
 ## Averaging cannot fix measuring children too young
 
-But does averaging solve the whole problem? Holding parental income at its five-year average, I change only the child's measurement age. The slope rises from `r f(s$child25)` at 25 to `r f(s$child40)` at 40. Early incomes hide differences that emerge later. The small dips along the way, such as at ages 28 and 41, are sampling noise in this one simulated sample, not part of the pattern.
+But does averaging solve the whole problem? Holding parental income at its five-year average, I change only the child's measurement age. The slope rises from `r f(s$child25)` at 25 to `r f(s$child40)` at 40. Early incomes hide differences that emerge later. The small dips along the way, such as at ages 31 and 36, are sampling noise in this one simulated sample, not part of the pattern.
 
 ```{r}
 #| label: fig-child-age
 #| echo: false
 #| fig-cap: "Changing the child's measurement age changes the estimated persistence even with the same parents and families."
-#| fig-alt: "Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parent income always averaged over ages 40 through 44."
+#| fig-alt: "Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parental income always averaged over the child's ages 15 to 19."
 knitr::include_graphics("results/figures/child-age.png")
 ```
 
 This illustrates **life-cycle bias**. Children with higher lasting incomes have steeper early income growth in the model. If everyone's income grew by the same percentage, that alone would not change the slope. The age pattern is deliberately built in, not discovered in real data. [Haider and Solon](https://www.nber.org/papers/w11943) explain why current earnings can represent lifetime earnings differently at different ages.
 
-Even averaging the child's ages 25 through 29 gives only `r f(s$young_average)`. More observations still describe an early career. Real data also require decisions about missing years and zero incomes, which this complete, positive-income simulation avoids.
+Even averaging the child's ages 25 through 29 gives only `r f(s$young_average)`. More observations still describe an early career. Real data also require survey weights and decisions about missing years and zero incomes, which this complete, positive-income, equally weighted simulation avoids.
 
 The main takeaways are:
 
-* Match explicit parent and child identities, then check that each pair appears once.
+* Join on the full person ID, and remove duplicate family-years from two-parent links before counting or averaging.
 * Average several years to reduce temporary fluctuations that can make mobility look stronger.
 * Compare suitable ages too. Averaging early earnings does not make them representative of a whole career.
 

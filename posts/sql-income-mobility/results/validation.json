@@ -1,12 +1,17 @@
 {
   "families": 4000,
-  "people": 8000,
-  "income_records": 100000,
-  "unmatched_links": 0,
+  "people": 14566,
+  "children": 7166,
+  "two_parent_children": 6095,
+  "parent_links": 13261,
+  "individual_years": 217320,
+  "family_years": 183320,
+  "rows_removed_by_sequence_filter": 0,
+  "children_kept_without_distinct": 1071,
   "specifications_checked": 23,
-  "max_relative_mean_error": 4.2122488741957837e-16,
+  "max_relative_mean_error": 4.4340025992932474e-16,
   "sql_means_match_pandas": true,
   "slopes_match_covariance_formula": true,
-  "same_pair_ids": true,
+  "same_children_in_every_comparison": true,
   "no_shock_lifecycle_control": true
 }

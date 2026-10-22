@@ -90,10 +90,10 @@ Figure&nbsp;2: Philadelphia has a lower share than Centre but far more household
 
 <p>Could income mobility look stronger simply because we measured people in the wrong year? A parent might receive an unusually large bonus, while their adult child is still building a career. Neither income necessarily reflects what that person usually earns. Mistaking these temporary differences for lasting ones could make economic opportunity appear more open than it is.</p>
 <p>This has happened in real research. <a href="https://ideas.repec.org/a/aea/aecrev/v82y1992i3p393-408.html">Solon (1992)</a> showed that earlier U.S. estimates were biased downward by measurement error, unrepresentative samples, or both; using the Panel Study of Income Dynamics, he found a long-run intergenerational correlation of at least 0.4, implying much less mobility than earlier work suggested. <a href="https://ideas.repec.org/a/tpr/restat/v87y2005i2p235-255.html">Mazumder (2005)</a> later used Social Security earnings histories and found that averaging fathers’ earnings over only a few years understated the elasticity by roughly 30% or more, putting it near 0.6. How income was measured changed what economists concluded about opportunity in the United States.</p>
-<p>To see why, I use SQL inside Python to match 4,000 <strong>simulated families</strong>, each with one parent and one child. Averaging several years reveals a stronger income connection than a single year does, even though the families are unchanged. These are teaching data with a known underlying relationship, not estimates for the United States.</p>
+<p>To see why, I use SQL inside Python to match 7,166 children from 4,000 <strong>simulated families</strong> to their parents. The database copies the structure of the Panel Study of Income Dynamics (PSID), but every value is simulated; no PSID data are used. Averaging several years reveals a stronger income connection than a single year does, even though the families are unchanged. These are teaching data with a known underlying relationship, not estimates for the United States.</p>
 <section id="match-the-people-before-comparing-their-incomes" class="level2">
 <h2 class="anchored" data-anchor-id="match-the-people-before-comparing-their-incomes">Match the people before comparing their incomes</h2>
-<p>Follow the <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility">README’s setup instructions</a>, then run <code>python run.py</code> and <code>python tutorial.py</code> from this post’s folder. The first builds the data and SQLite database; the second runs the matching and comparisons below. Three tables carry the analysis.</p>
+<p>Follow the <a href="https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility">README’s setup instructions</a>, then run <code>python run.py</code> and <code>python tutorial.py</code> from this post’s folder. The first builds the data and SQLite database; the second runs the matching and comparisons below. Four tables carry the analysis, each modeled on a PSID file described in its <a href="https://psidonline.isr.umich.edu/Guide/FAQ.aspx">public documentation</a>.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -109,76 +109,150 @@ Figure&nbsp;2: Philadelphia has a lower share than Centre but far more household
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>people</code></td>
+<td><code>individuals</code></td>
 <td>A person</td>
-<td><code>person_id</code>, <code>family_id</code>, <code>birth_year</code>, <code>generation</code></td>
+<td><code>id68</code>, <code>pn</code>, <code>birth_year</code>, <code>sex</code></td>
 </tr>
 <tr class="even">
-<td><code>links</code></td>
-<td>A known parent and child relationship</td>
-<td><code>family_id</code>, <code>parent_id</code>, <code>child_id</code></td>
+<td><code>parent_links</code></td>
+<td>A child and one parent</td>
+<td>child and parent <code>id68</code> and <code>pn</code>, <code>parent_type</code></td>
 </tr>
 <tr class="odd">
-<td><code>incomes</code></td>
-<td>A person in a calendar year</td>
-<td><code>person_id</code>, <code>year</code>, <code>real_income</code></td>
+<td><code>individual_years</code></td>
+<td>A person in a survey year</td>
+<td><code>id68</code>, <code>pn</code>, <code>year</code>, <code>interview_number</code>, <code>sequence_number</code></td>
+</tr>
+<tr class="even">
+<td><code>family_years</code></td>
+<td>A family in a survey year</td>
+<td><code>year</code>, <code>interview_number</code>, <code>family_income</code></td>
 </tr>
 </tbody>
 </table>
-<p><code>family_id</code> follows the family of origin after the child moves out. The relationship table identifies the specific parent; sharing a household alone does not establish parenthood. Here that table is given, which keeps the tutorial focused on the query. In a real panel such as the Panel Study of Income Dynamics, building it is part of the work: links come from family and person identifiers combined with each person’s recorded relationship to the household head, and a study must decide how to handle two parents, siblings, and people who leave the survey.</p>
-<p>The query in <code>sql/match.sql</code> summarizes each person’s income before joining the generations. Otherwise, two five-year histories would produce 25 combinations. I match family and person identifiers, not calendar years: parents and children reach the same age in different years.</p>
+<p>Three features of the real survey shape the query. First, no single column identifies a person: the 1968 family ID (<code>id68</code>) and the person number (<code>pn</code>) do so together, so every join uses both. Second, <code>parent_links</code> has one row per parent, like the PSID’s parent map, so a child with a mother and a father appears twice. Third, income belongs to families, not people. A family’s interview number is valid for one survey year only, so a person’s income comes from finding that year’s interview number in <code>individual_years</code> and then the matching row in <code>family_years</code>. Following the PSID’s guidance, I keep years in which the person was the reference person or spouse (sequence number 1 or 2). In the real PSID, the parent map comes from its <a href="https://simba.isr.umich.edu/FIMS/default.aspx">FIMS tool</a>, and a study must still decide how to treat parents who live apart, siblings, and people who leave the survey.</p>
+<p>Parents and children reach the same age in different calendar years, so I measure parental income by the child’s age: the years when the child was 15 to 19. The query in <code>sql/match.sql</code> also summarizes each person’s income before joining the generations; joining two five-year histories first would produce 25 combinations per pair.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">WITH</span> parent_means <span class="kw" style="color: #003B4F;
+font-style: inherit;">WITH</span> parent_family_years <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AS</span> (</span>
-<span id="cb1-2">    <span class="kw" style="color: #003B4F;
+<span id="cb1-2">    <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-weight: bold;
-font-style: inherit;">SELECT</span> p.family_id, p.person_id,</span>
-<span id="cb1-3">           <span class="fu" style="color: #4758AB;
+font-style: inherit;">-- One row per child and year: the income of the family in which the</span></span>
+<span id="cb1-3">    <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">AVG</span>(i.real_income) <span class="kw" style="color: #003B4F;
+font-style: inherit;">-- child's parent was reference person or spouse. DISTINCT keeps one row</span></span>
+<span id="cb1-4">    <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-weight: bold;
-font-style: inherit;">AS</span> parent_income</span>
-<span id="cb1-4">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">FROM</span> people <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">AS</span> p</span>
+font-style: inherit;">-- when the mother and father lived in the same family that year.</span></span>
 <span id="cb1-5">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">JOIN</span> incomes <span class="kw" style="color: #003B4F;
+font-style: inherit;">SELECT</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">AS</span> i <span class="kw" style="color: #003B4F;
+font-style: inherit;">DISTINCT</span> l.child_id68, l.child_pn, y.<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">year</span>, y.interview_number,</span>
+<span id="cb1-6">           f.family_income</span>
+<span id="cb1-7">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">ON</span> i.person_id <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> p.person_id</span>
-<span id="cb1-6">    <span class="kw" style="color: #003B4F;
+font-style: inherit;">FROM</span> parent_links <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">WHERE</span> p.generation <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'parent'</span></span>
-<span id="cb1-7">      <span class="kw" style="color: #003B4F;
+font-style: inherit;">AS</span> l</span>
+<span id="cb1-8">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">AND</span> i.<span class="dt" style="color: #AD0000;
+font-style: inherit;">JOIN</span> individuals <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AS</span> c</span>
+<span id="cb1-9">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">ON</span> c.id68 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> l.child_id68 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> c.pn <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> l.child_pn</span>
+<span id="cb1-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">JOIN</span> individual_years <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AS</span> y</span>
+<span id="cb1-11">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">ON</span> y.id68 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> l.parent_id68 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> y.pn <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> l.parent_pn</span>
+<span id="cb1-12">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">JOIN</span> family_years <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AS</span> f</span>
+<span id="cb1-13">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">ON</span> f.<span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">year</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-</span> p.birth_year <span class="kw" style="color: #003B4F;
+font-style: inherit;">=</span> y.<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">year</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> f.interview_number <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> y.interview_number</span>
+<span id="cb1-14">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">WHERE</span> y.sequence_number <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">IN</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-15">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> y.relation_to_rp <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">IN</span> (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'reference person'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'spouse'</span>)</span>
+<span id="cb1-16">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> y.<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">year</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> c.birth_year <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">BETWEEN</span> <span class="ch" style="color: #20794D;
@@ -189,24 +263,44 @@ font-weight: bold;
 font-style: inherit;">AND</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">:p_end</span></span>
-<span id="cb1-8">    <span class="kw" style="color: #003B4F;
+<span id="cb1-17">),</span>
+<span id="cb1-18">parent_income <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AS</span> (</span>
+<span id="cb1-19">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">SELECT</span> child_id68, child_pn, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">AVG</span>(family_income) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AS</span> parent_income</span>
+<span id="cb1-20">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">FROM</span> parent_family_years</span>
+<span id="cb1-21">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">GROUP</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">BY</span> p.family_id, p.person_id</span>
-<span id="cb1-9">    <span class="kw" style="color: #003B4F;
+font-style: inherit;">BY</span> child_id68, child_pn</span>
+<span id="cb1-22">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">HAVING</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">COUNT</span>(i.real_income) <span class="op" style="color: #5E5E5E;
+font-style: inherit;">COUNT</span>(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">:p_years</span></span>
-<span id="cb1-10">       <span class="kw" style="color: #003B4F;
+<span id="cb1-23">       <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AND</span> <span class="fu" style="color: #4758AB;
@@ -214,63 +308,104 @@ background-color: null;
 font-style: inherit;">COUNT</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">DISTINCT</span> i.<span class="dt" style="color: #AD0000;
+font-style: inherit;">DISTINCT</span> <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">year</span>) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">:p_years</span></span>
-<span id="cb1-11">),</span>
-<span id="cb1-12">child_means <span class="kw" style="color: #003B4F;
+<span id="cb1-24">),</span>
+<span id="cb1-25">child_income <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AS</span> (</span>
-<span id="cb1-13">    <span class="kw" style="color: #003B4F;
+<span id="cb1-26">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">SELECT</span> p.family_id, p.person_id,</span>
-<span id="cb1-14">           <span class="fu" style="color: #4758AB;
+font-style: inherit;">SELECT</span> c.id68, c.pn, <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">AVG</span>(i.real_income) <span class="kw" style="color: #003B4F;
+font-style: inherit;">AVG</span>(f.family_income) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AS</span> child_income</span>
-<span id="cb1-15">    <span class="kw" style="color: #003B4F;
+<span id="cb1-27">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">FROM</span> people <span class="kw" style="color: #003B4F;
+font-style: inherit;">FROM</span> individuals <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">AS</span> p</span>
-<span id="cb1-16">    <span class="kw" style="color: #003B4F;
+font-style: inherit;">AS</span> c</span>
+<span id="cb1-28">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">JOIN</span> incomes <span class="kw" style="color: #003B4F;
+font-style: inherit;">JOIN</span> individual_years <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">AS</span> i <span class="kw" style="color: #003B4F;
+font-style: inherit;">AS</span> y</span>
+<span id="cb1-29">      <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">ON</span> i.person_id <span class="op" style="color: #5E5E5E;
+font-style: inherit;">ON</span> y.id68 <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> p.person_id</span>
-<span id="cb1-17">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">WHERE</span> p.generation <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'child'</span></span>
-<span id="cb1-18">      <span class="kw" style="color: #003B4F;
+font-style: inherit;">=</span> c.id68 <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">AND</span> i.<span class="dt" style="color: #AD0000;
+font-style: inherit;">AND</span> y.pn <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> c.pn</span>
+<span id="cb1-30">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">JOIN</span> family_years <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AS</span> f</span>
+<span id="cb1-31">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">ON</span> f.<span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">year</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-</span> p.birth_year <span class="kw" style="color: #003B4F;
+font-style: inherit;">=</span> y.<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">year</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> f.interview_number <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> y.interview_number</span>
+<span id="cb1-32">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">WHERE</span> y.sequence_number <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">IN</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-33">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> y.relation_to_rp <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">IN</span> (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'reference person'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'spouse'</span>)</span>
+<span id="cb1-34">      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">AND</span> y.<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">year</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> c.birth_year <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">BETWEEN</span> <span class="ch" style="color: #20794D;
@@ -281,24 +416,26 @@ font-weight: bold;
 font-style: inherit;">AND</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">:c_end</span></span>
-<span id="cb1-19">    <span class="kw" style="color: #003B4F;
+<span id="cb1-35">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">GROUP</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">BY</span> p.family_id, p.person_id</span>
-<span id="cb1-20">    <span class="kw" style="color: #003B4F;
+font-style: inherit;">BY</span> c.id68, c.pn</span>
+<span id="cb1-36">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">HAVING</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">COUNT</span>(i.real_income) <span class="op" style="color: #5E5E5E;
+font-style: inherit;">COUNT</span>(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">:c_years</span></span>
-<span id="cb1-21">       <span class="kw" style="color: #003B4F;
+<span id="cb1-37">       <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AND</span> <span class="fu" style="color: #4758AB;
@@ -306,110 +443,94 @@ background-color: null;
 font-style: inherit;">COUNT</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">DISTINCT</span> i.<span class="dt" style="color: #AD0000;
+font-style: inherit;">DISTINCT</span> y.<span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">year</span>) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">:c_years</span></span>
-<span id="cb1-22">)</span>
-<span id="cb1-23"><span class="kw" style="color: #003B4F;
+<span id="cb1-38">)</span>
+<span id="cb1-39"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">SELECT</span> l.family_id, l.parent_id, l.child_id,</span>
-<span id="cb1-24">       p.parent_income, c.child_income</span>
-<span id="cb1-25"><span class="kw" style="color: #003B4F;
+font-style: inherit;">SELECT</span> p.child_id68 <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">FROM</span> links <span class="kw" style="color: #003B4F;
+font-style: inherit;">AS</span> id68, p.child_pn <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">AS</span> l</span>
-<span id="cb1-26"><span class="kw" style="color: #003B4F;
+font-style: inherit;">AS</span> pn,</span>
+<span id="cb1-40">       p.parent_income, c.child_income</span>
+<span id="cb1-41"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">JOIN</span> parent_means <span class="kw" style="color: #003B4F;
+font-style: inherit;">FROM</span> parent_income <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AS</span> p</span>
-<span id="cb1-27">  <span class="kw" style="color: #003B4F;
+<span id="cb1-42"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">ON</span> p.family_id <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> l.family_id <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">AND</span> p.person_id <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> l.parent_id</span>
-<span id="cb1-28"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">JOIN</span> child_means <span class="kw" style="color: #003B4F;
+font-style: inherit;">JOIN</span> child_income <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AS</span> c</span>
-<span id="cb1-29">  <span class="kw" style="color: #003B4F;
+<span id="cb1-43">  <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">ON</span> c.family_id <span class="op" style="color: #5E5E5E;
+font-style: inherit;">ON</span> c.id68 <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> l.family_id <span class="kw" style="color: #003B4F;
+font-style: inherit;">=</span> p.child_id68 <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">AND</span> c.person_id <span class="op" style="color: #5E5E5E;
+font-style: inherit;">AND</span> c.pn <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> l.child_id</span>
-<span id="cb1-30"><span class="kw" style="color: #003B4F;
+font-style: inherit;">=</span> p.child_pn</span>
+<span id="cb1-44"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">ORDER</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">BY</span> l.child_id;</span></code></pre></div></div>
+font-style: inherit;">BY</span> id68, pn;</span></code></pre></div></div>
 <p>The query works in four steps.</p>
 <ol type="1">
-<li><strong>Join each person to their yearly incomes.</strong> Each <code>WITH</code> block starts from <code>people</code> and uses <code>JOIN</code> to attach that person’s rows from <code>incomes</code> wherever the <code>person_id</code> values match. <code>SELECT</code> keeps only what later steps need: the two identifiers and the income measure.</li>
-<li><strong>Line the generations up by age, not by calendar year.</strong> The <code>incomes</code> table records years, but parents and children should be compared at the same point in life. <code>i.year - p.birth_year</code> turns each year into the person’s age, and <code>WHERE ... BETWEEN :p_start AND :p_end</code> keeps only the chosen ages. Names that begin with a colon are placeholders that Python fills in, so one query serves every comparison below.</li>
-<li><strong>Collapse each person’s years into one number.</strong> <code>GROUP BY p.family_id, p.person_id</code> gathers all of one person’s selected years, and the aggregate function <code>AVG(i.real_income)</code> turns them into a single income. <code>HAVING</code> then checks each finished group: <code>COUNT(DISTINCT i.year)</code> must equal the number of ages requested, so a person missing a year is dropped instead of being averaged over fewer years.</li>
-<li><strong>Attach both summaries to each relationship.</strong> The final <code>SELECT</code> starts from <code>links</code> and joins the parent summary and the child summary on both <code>family_id</code> and the person identifier. The result has one row per child, holding both generations’ incomes.</li>
+<li><strong>Find each parent’s family in each year.</strong> The first <code>WITH</code> block starts from <code>parent_links</code> and uses <code>JOIN</code> to attach the parent’s rows in <code>individual_years</code>, matching both parts of the ID. A second join attaches that year’s family income from <code>family_years</code>, matching <code>year</code> and <code>interview_number</code>. <code>SELECT</code> keeps only what later steps need.</li>
+<li><strong>Line the generations up by the child’s age.</strong> <code>y.year - c.birth_year</code> turns each survey year into the child’s age, and <code>WHERE ... BETWEEN :p_start AND :p_end</code> keeps only the chosen ages. Names that begin with a colon are placeholders that Python fills in, so one query serves every comparison below.</li>
+<li><strong>Remove the duplicate from two parents, then average.</strong> When a mother and father live in the same family, both of their rows find the same family-year, so <code>SELECT DISTINCT</code> keeps one copy. <code>GROUP BY</code> then gathers each child’s years, the aggregate function <code>AVG(family_income)</code> turns them into one number, and <code>HAVING</code> requires exactly one family for every requested year. Without <code>DISTINCT</code>, the average would hide the problem, but each two-parent child would have ten rows instead of five, and the completeness check would silently drop 6,095 of the 7,166 children.</li>
+<li><strong>Repeat for the child, then join.</strong> The <code>child_income</code> block applies the same logic to the child’s own family in adulthood. The final <code>SELECT</code> joins the two summaries on the child’s <code>id68</code> and <code>pn</code>, producing one row per child with both generations’ incomes.</li>
 </ol>
-<p>With ages 40 through 44 for both generations, the first rows of the result look like this. Each income is a five-year average in constant dollars.</p>
+<p>With parental income over the child’s ages 15 to 19 and the child’s income over ages 40 to 44, the first rows of the result look like this. Each income is a five-year average of family income in constant dollars. The first two children were born in the same year, so they share a parental average; their sister was born five years later, so her parents’ income is measured over different years.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th style="text-align: right;">Family</th>
-<th style="text-align: right;">Parent ID</th>
-<th style="text-align: right;">Child ID</th>
+<th style="text-align: right;">1968 ID</th>
+<th style="text-align: right;">Person number</th>
 <th style="text-align: right;">Parent income</th>
 <th style="text-align: right;">Child income</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">100001</td>
-<td style="text-align: right;">200001</td>
-<td style="text-align: right;">$24,727</td>
-<td style="text-align: right;">$49,795</td>
+<td style="text-align: right;">1001</td>
+<td style="text-align: right;">030</td>
+<td style="text-align: right;">$36,307</td>
+<td style="text-align: right;">$63,255</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">100002</td>
-<td style="text-align: right;">200002</td>
-<td style="text-align: right;">$131,607</td>
-<td style="text-align: right;">$47,144</td>
+<td style="text-align: right;">1001</td>
+<td style="text-align: right;">031</td>
+<td style="text-align: right;">$36,307</td>
+<td style="text-align: right;">$23,552</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">100003</td>
-<td style="text-align: right;">200003</td>
-<td style="text-align: right;">$35,810</td>
-<td style="text-align: right;">$80,948</td>
+<td style="text-align: right;">1001</td>
+<td style="text-align: right;">032</td>
+<td style="text-align: right;">$19,040</td>
+<td style="text-align: right;">$41,703</td>
 </tr>
 </tbody>
 </table>
@@ -455,14 +576,27 @@ font-style: inherit;">"sql/match.sql"</span>).read_text()</span>
 <span id="cb2-9"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">def</span> match(conn, parent_ages, child_ages):</span>
-<span id="cb2-10">    p0, p1 <span class="op" style="color: #5E5E5E;
+font-style: inherit;">def</span> match(conn, parent_window, child_ages):</span>
+<span id="cb2-10">    <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> parent_ages</span>
-<span id="cb2-11">    c0, c1 <span class="op" style="color: #5E5E5E;
+font-style: inherit;">"""Match children to parental and own family income.</span></span>
+<span id="cb2-11"></span>
+<span id="cb2-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    parent_window: the child's ages when parental income is measured.</span></span>
+<span id="cb2-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    child_ages: the child's ages when the child's own income is measured.</span></span>
+<span id="cb2-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    """</span></span>
+<span id="cb2-15">    p0, p1 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> parent_window</span>
+<span id="cb2-16">    c0, c1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> child_ages</span>
-<span id="cb2-12">    params <span class="op" style="color: #5E5E5E;
+<span id="cb2-17">    params <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="bu" style="color: null;
 background-color: null;
@@ -479,7 +613,7 @@ background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>,</span>
-<span id="cb2-13">                  c_start<span class="op" style="color: #5E5E5E;
+<span id="cb2-18">                  c_start<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>c0, c_end<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -492,7 +626,7 @@ background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb2-14">    <span class="cf" style="color: #003B4F;
+<span id="cb2-19">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">return</span> pd.read_sql_query(query, conn, params<span class="op" style="color: #5E5E5E;
@@ -505,7 +639,7 @@ font-style: inherit;">=</span>params)</span></code></pre></div></div>
 <p>How closely do the generations’ incomes move together? The intergenerational elasticity, or IGE, measures that connection. With the model’s IGE of 0.40, 10% higher parental income is associated with about 4% higher child income. A smaller value suggests less persistence and more mobility. It is an association, not a causal effect.</p>
 <p>To estimate it, fit a line to the natural logarithms of the matched incomes. The slope, <img src="https://latex.codecogs.com/png.latex?%5Cbeta">, is the IGE.</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Clog(%5Ctext%7Bchild%20income%7D)%20=%20%5Calpha%20+%20%5Cbeta%5Clog(%5Ctext%7Bparent%20income%7D)%20+%20%5Cvarepsilon.%0A"></p>
-<p>SQL averages annual income amounts in constant dollars <strong>before</strong> Python takes logarithms. In the code, <code>np.ones</code> supplies the intercept and <code>np.linalg.lstsq</code> fits the line. The checks keep each child once and the families identical across comparisons.</p>
+<p>SQL averages annual income amounts in constant dollars <strong>before</strong> Python takes logarithms. In the code, <code>np.ones</code> supplies the intercept and <code>np.linalg.lstsq</code> fits the line. The checks keep each child once and the children identical across comparisons.</p>
 <details>
 <summary>
 Show the Python code that estimates and compares the slopes
@@ -553,9 +687,9 @@ font-style: inherit;">def</span> compare(conn):</span>
 background-color: null;
 font-style: inherit;">=</span> match(conn, (<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">40</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">40</span>), (<span class="dv" style="color: #AD0000;
+font-style: inherit;">15</span>), (<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">40</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -564,9 +698,9 @@ font-style: inherit;">40</span>))</span>
 background-color: null;
 font-style: inherit;">=</span> match(conn, (<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">40</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">44</span>), (<span class="dv" style="color: #AD0000;
+font-style: inherit;">19</span>), (<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">40</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -575,9 +709,9 @@ font-style: inherit;">44</span>))</span>
 background-color: null;
 font-style: inherit;">=</span> match(conn, (<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">40</span>, <span class="dv" style="color: #AD0000;
+font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">44</span>), (<span class="dv" style="color: #AD0000;
+font-style: inherit;">19</span>), (<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">25</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -592,17 +726,28 @@ font-style: inherit;">in</span> (single, averaged, young):</span>
 <span id="cb3-13">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">assert</span> pairs[<span class="st" style="color: #20794D;
+font-style: inherit;">assert</span> <span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">"child_id"</span>].is_unique</span>
+font-weight: bold;
+font-style: inherit;">not</span> pairs.duplicated([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id68"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pn"</span>]).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">any</span>()</span>
 <span id="cb3-14">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">assert</span> pairs[<span class="st" style="color: #20794D;
+font-style: inherit;">assert</span> pairs[[<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"child_id"</span>].equals(single[<span class="st" style="color: #20794D;
+font-style: inherit;">"id68"</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"child_id"</span>])</span>
+font-style: inherit;">"pn"</span>]].equals(single[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id68"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pn"</span>]])</span>
 <span id="cb3-15">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -627,13 +772,14 @@ font-style: inherit;">return</span> pd.DataFrame({</span>
 background-color: null;
 font-style: inherit;">"measure"</span>: [<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Age 40 for both"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Ages 40 to 44 for both"</span>,</span>
+font-style: inherit;">"One year for each generation"</span>,</span>
 <span id="cb3-18">                    <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Parent 40 to 44, child 25 to 29"</span>],</span>
-<span id="cb3-19">        <span class="st" style="color: #20794D;
+font-style: inherit;">"Five-year averages for each generation"</span>,</span>
+<span id="cb3-19">                    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Five-year averages, child aged 25 to 29"</span>],</span>
+<span id="cb3-20">        <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"pairs"</span>: [<span class="bu" style="color: null;
 background-color: null;
@@ -642,12 +788,12 @@ background-color: null;
 font-style: inherit;">len</span>(averaged), <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">len</span>(young)],</span>
-<span id="cb3-20">        <span class="st" style="color: #20794D;
+<span id="cb3-21">        <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"ige"</span>: [ige(single), ige(averaged), ige(young)]</span>
-<span id="cb3-21">    })</span>
-<span id="cb3-22"></span>
-<span id="cb3-23"><span class="cf" style="color: #003B4F;
+<span id="cb3-22">    })</span>
+<span id="cb3-23"></span>
+<span id="cb3-24"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> <span class="va" style="color: #111111;
@@ -657,7 +803,7 @@ background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"__main__"</span>:</span>
-<span id="cb3-24">    <span class="cf" style="color: #003B4F;
+<span id="cb3-25">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">with</span> sqlite3.<span class="ex" style="color: null;
@@ -669,7 +815,7 @@ background-color: null;
 font-style: inherit;">"data/mobility.sqlite"</span>) <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> conn:</span>
-<span id="cb3-25">        <span class="bu" style="color: null;
+<span id="cb3-26">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(compare(conn).to_string(index<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -685,7 +831,7 @@ font-style: inherit;">%.3f</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>))</span></code></pre></div></div>
 </details>
-<p>Using age 40 alone gives 0.20; averaging ages 40 through 44 raises it to 0.31, closer to the model’s 0.40. The families did not become less mobile. Better measurement revealed more of the income connection already built into the simulation.</p>
+<p>Using one year for each generation, the parents’ family income when the child was 15 and the child’s at 40, gives 0.20. Averaging five years for each raises it to 0.30, closer to the model’s 0.40. The families did not become less mobile. Better measurement revealed more of the income connection already built into the simulation.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-averaging" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two bars comparing simulated elasticity estimates from one year and five-year average incomes, with a dashed line at the model value of 0.4.">
@@ -704,13 +850,13 @@ Figure&nbsp;1: Averaging several years reduces the distortion from temporary inc
 </section>
 <section id="averaging-cannot-fix-measuring-children-too-young" class="level2">
 <h2 class="anchored" data-anchor-id="averaging-cannot-fix-measuring-children-too-young">Averaging cannot fix measuring children too young</h2>
-<p>But does averaging solve the whole problem? Holding parental income at its five-year average, I change only the child’s measurement age. The slope rises from 0.14 at 25 to 0.32 at 40. Early incomes hide differences that emerge later. The small dips along the way, such as at ages 28 and 41, are sampling noise in this one simulated sample, not part of the pattern.</p>
+<p>But does averaging solve the whole problem? Holding parental income at its five-year average, I change only the child’s measurement age. The slope rises from 0.14 at 25 to 0.31 at 40. Early incomes hide differences that emerge later. The small dips along the way, such as at ages 31 and 36, are sampling noise in this one simulated sample, not part of the pattern.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-child-age" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parent income always averaged over ages 40 through 44.">
+<div id="fig-child-age" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parental income always averaged over the child's ages 15 to 19.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-child-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://yipin-grena.github.io/aeds6400-blog/posts/sql-income-mobility/results/figures/child-age.png" class="img-fluid figure-img" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parent income always averaged over ages 40 through 44.">
+<img src="https://yipin-grena.github.io/aeds6400-blog/posts/sql-income-mobility/results/figures/child-age.png" class="img-fluid figure-img" alt="Line chart of simulated elasticity by child age, generally rising from age 25 to age 40 and then leveling off, with parental income always averaged over the child's ages 15 to 19.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-child-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Changing the child’s measurement age changes the estimated persistence even with the same parents and families.
@@ -720,10 +866,10 @@ Figure&nbsp;2: Changing the child’s measurement age changes the estimated pers
 </div>
 </div>
 <p>This illustrates <strong>life-cycle bias</strong>. Children with higher lasting incomes have steeper early income growth in the model. If everyone’s income grew by the same percentage, that alone would not change the slope. The age pattern is deliberately built in, not discovered in real data. <a href="https://www.nber.org/papers/w11943">Haider and Solon</a> explain why current earnings can represent lifetime earnings differently at different ages.</p>
-<p>Even averaging the child’s ages 25 through 29 gives only 0.16. More observations still describe an early career. Real data also require decisions about missing years and zero incomes, which this complete, positive-income simulation avoids.</p>
+<p>Even averaging the child’s ages 25 through 29 gives only 0.17. More observations still describe an early career. Real data also require survey weights and decisions about missing years and zero incomes, which this complete, positive-income, equally weighted simulation avoids.</p>
 <p>The main takeaways are:</p>
 <ul>
-<li>Match explicit parent and child identities, then check that each pair appears once.</li>
+<li>Join on the full person ID, and remove duplicate family-years from two-parent links before counting or averaging.</li>
 <li>Average several years to reduce temporary fluctuations that can make mobility look stronger.</li>
 <li>Compare suitable ages too. Averaging early earnings does not make them representative of a whole career.</li>
 </ul>
