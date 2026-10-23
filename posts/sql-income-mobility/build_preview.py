@@ -1,4 +1,4 @@
-"""Render this unpublished tutorial as a standalone local review copy."""
+"""Render the tutorial as a standalone review copy using aggregate files."""
 import argparse
 import re
 from pathlib import Path
@@ -15,14 +15,12 @@ def main():
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="aeds6400-blog6-") as directory:
         work = Path(directory)
-        for folder in ("results", "sql"):
-            shutil.copytree(POST / folder, work / folder)
-        for name in ("tutorial.py", "README.md"):
+        shutil.copytree(POST / "results/real", work / "results/real")
+        shutil.copytree(POST / "sql", work / "sql")
+        for name in ("real_analysis.py", "README.md"):
             shutil.copy2(POST / name, work / name)
         source = (POST / "index.qmd").read_text().replace("draft: true", "draft: false")
         source = re.sub(r"^date: .*\n", "", source, flags=re.MULTILINE)
-        source = source.replace("Could income mobility look stronger",
-            '<div class="draft-note">Unpublished draft for review</div>\n\nCould income mobility look stronger', 1)
         source = source.replace("](" + "README.md)", "](../README.md)")
         (work / "index.qmd").write_text(source)
         (work / "_quarto.yml").write_text('''project:

@@ -50,11 +50,13 @@ aeds6400-blog/
     │   ├── data/raw/        public Census downloads and provenance
     │   └── results/
     └── sql-income-mobility/ Blog Post 6
-        ├── run.py           simulated panel, SQLite database, checks and figures
-        ├── tutorial.py      SQL matching and IGE estimates shown in the post
-        ├── sql/             schema and matching query
-        ├── data/            simulated people, links and incomes
-        └── results/
+        ├── real_analysis.py pandas preparation, SQLite matching and IGE estimates
+        ├── README-real.md   exact variables and matching other years
+        ├── config/          PSID wave and income-code mapping
+        ├── sql/             real-data schema/query and optional simulation SQL
+        ├── data/raw/        local PSID/FIMS extracts, excluded from Git
+        ├── data/public/     public BLS/FRED CPI observations
+        └── results/real/    aggregate estimates, checks and figures
 ```
 
 ## Reproducing a post
@@ -86,7 +88,7 @@ For Blog Post 4, run `Rscript posts/inflation-unemployment/run.R` from the repos
 
 For Blog Post 5, install the Python dependencies in [its README](posts/pa-rent-burden/README.md), then run `python posts/pa-rent-burden/run.py` from the repository root. It uses committed Census files without downloading them again. Its `build_preview.py` produces a standalone review copy.
 
-For Blog Post 6, install the Python dependencies in [its README](posts/sql-income-mobility/README.md), then run `python posts/sql-income-mobility/run.py` and `python posts/sql-income-mobility/tutorial.py`. The data are simulated from a fixed seed, so no downloads or API keys are needed.
+For Blog Post 6, obtain the private PSID/FIMS extracts described in [its README](posts/sql-income-mobility/README.md), install `requirements-real.txt`, then run `python posts/sql-income-mobility/real_analysis.py` from the repository root. The pipeline saves aggregate results only. Rendering uses the committed aggregate files, so it does not require the extracts. The old simulation remains an optional teaching example.
 
 Render the site with `quarto render` from the repository root only when preparing a site build. Use each draft's `build_preview.py` for review without changing the published output.
 
@@ -94,4 +96,4 @@ Render the site with `quarto render` from the repository root only when preparin
 
 R 4.5.1. Package versions are recorded separately in `posts/web-scraping/results/session-info.txt` and `posts/cps-participation/results/session-info.txt`. Blog Post 4 records its environment in `posts/inflation-unemployment/results/session-info.txt`. Each post README lists its dependencies and data requirements.
 
-Blog Post 5 records its Python and package versions in `posts/pa-rent-burden/results/environment.json` and pins its direct dependencies in `posts/pa-rent-burden/requirements.txt`. Blog Post 6 does the same in `posts/sql-income-mobility/results/environment.txt` and `posts/sql-income-mobility/requirements.txt`.
+Blog Post 5 records its Python and package versions in `posts/pa-rent-burden/results/environment.json` and pins its direct dependencies in `posts/pa-rent-burden/requirements.txt`. Blog Post 6 records the real analysis environment in `posts/sql-income-mobility/results/real/validation.json` and pins its dependencies in `posts/sql-income-mobility/requirements-real.txt`.

@@ -1,0 +1,7 @@
+restriction,measure,children,origin_family_clusters,ige,cluster_se
+Implied birth-year spread at most two years,one_year_each,1476,938,0.4519299333482504,0.03704191622971188
+Implied birth-year spread at most two years,averaged_parent_one_year_child,1476,938,0.5363697898250024,0.0388935177936034
+Implied birth-year spread at most two years,averaged_each_age40_44,1476,938,0.5280827089626359,0.03538600137185512
+Implied birth-year spread at most two years,averaged_each_age25_29,1476,938,0.4528414850973575,0.032794358487786605
+Implied birth-year spread at most two years,averaged_each_age30_34,1476,938,0.4928108261132972,0.034482795726926085
+Implied birth-year spread at most two years,averaged_each_age35_39,1476,938,0.5176711912848018,0.034695041534047066

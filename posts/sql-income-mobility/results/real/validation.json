@@ -1,0 +1,67 @@
+{
+  "data_kind": "real PSID public-use extract and FIMS biological parent map",
+  "source_files": {
+    "J366591.xlsx": "4153e926101f317d31cce21cfc3b622bc322ea4d709d188e02db19afb664adf7",
+    "fim16227_gid_BO_2_BAL.xlsx": "6762c45cf51068bda5ca5be159dce67c471c94bd489131c18903d9b8c75cde06"
+  },
+  "cpi_sha256": "a1e7474c152a225ba4fb6f39edb3f68394fbe6825fb6e2fd0b0bd538c07974e4",
+  "cpi_series": "CPIAUCNS",
+  "birth_year_proxy_min": 1960,
+  "birth_year_proxy_max": 1978,
+  "parent_income_ages": [
+    15,
+    19
+  ],
+  "parent_min_observations": 3,
+  "child_min_observations": 2,
+  "age_windows": [
+    [
+      25,
+      29
+    ],
+    [
+      30,
+      34
+    ],
+    [
+      35,
+      39
+    ],
+    [
+      40,
+      44
+    ]
+  ],
+  "dollar_base_year": 2022,
+  "weighting": "unweighted; no survey weight supplied",
+  "bootstrap_repetitions": 1000,
+  "bootstrap_seed": 6400,
+  "cluster": "child 1968 family identifier",
+  "validation": {
+    "extract_people": 85536,
+    "fims_rows": 113450,
+    "clean_unique_fims_links": 113450,
+    "fims_links_child_present": 93304,
+    "fims_links_both_people_present": 71057,
+    "children_with_parent_link": 44077,
+    "people_with_birth_proxy_spread_over_two_years": 1776,
+    "family_income_conflicts": 0,
+    "duplicate_person_years": 0,
+    "duplicate_family_years": 0,
+    "people_rows": 85536,
+    "parent_links_rows": 71057,
+    "person_years_rows": 790085,
+    "family_years_rows": 285847
+  },
+  "python": "3.12.14",
+  "pandas": "2.2.3",
+  "numpy": "2.3.5",
+  "sqlite": "3.53.1",
+  "checks": {
+    "common_sample_across_specifications": true,
+    "positive_finite_regression_inputs": true,
+    "simple_ols_independently_verified": true,
+    "foreign_keys_valid": true,
+    "respondent_level_outputs_saved": false
+  }
+}

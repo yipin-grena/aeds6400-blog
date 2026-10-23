@@ -1,4 +1,20 @@
 .venv/
 __pycache__/
 preview/
+.DS_Store
 data/*.sqlite
+
+# PSID data must never be committed. The PSID conditions of use forbid
+# transferring public data or user-created extracts to third parties.
+data/raw/
+data/*.csv
+data/*.xlsx
+data/*.xls
+data/*.zip
+*.xlsx
+*.xls
+*.zip
+
+# Person-level results built from PSID data are extracts too.
+results/tables/matched-pairs.csv
+results/tables/example-pairs.csv
