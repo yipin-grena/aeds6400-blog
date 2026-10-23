@@ -13,3 +13,11 @@ posts/web-scraping/data/raw/html/** linguist-vendored=true
 posts/pa-rent-burden/build_preview.py linguist-detectable=false
 posts/sql-income-mobility/build_preview.py linguist-detectable=false
 posts/inflation-unemployment/verify.py linguist-detectable=false
+
+# Report languages used for the current analyses. These support files remain
+# available in GitHub, but are omitted from the language percentage summary.
+posts/sql-income-mobility/tests/** linguist-detectable=false
+# The previous simulated teaching example is retained separately from the
+# current real-data analysis, whose Python source is still counted.
+posts/sql-income-mobility/run.py linguist-detectable=false
+posts/sql-income-mobility/tutorial.py linguist-detectable=false

@@ -51,6 +51,8 @@ aeds6400-blog/
     │   └── results/
     └── sql-income-mobility/ Blog Post 6
         ├── real_analysis.py pandas preparation, SQLite matching and IGE estimates
+        ├── tutorial_real.py complete runnable Python example
+        ├── R/               aggregate validation, figures and report
         ├── README-real.md   exact variables and matching other years
         ├── config/          PSID wave and income-code mapping
         ├── sql/             real-data schema/query and optional simulation SQL
@@ -88,7 +90,7 @@ For Blog Post 4, run `Rscript posts/inflation-unemployment/run.R` from the repos
 
 For Blog Post 5, install the Python dependencies in [its README](posts/pa-rent-burden/README.md), then run `python posts/pa-rent-burden/run.py` from the repository root. It uses committed Census files without downloading them again. Its `build_preview.py` produces a standalone review copy.
 
-For Blog Post 6, obtain the private PSID/FIMS extracts described in [its README](posts/sql-income-mobility/README.md), install `requirements-real.txt`, then run `python posts/sql-income-mobility/real_analysis.py` from the repository root. The pipeline saves aggregate results only. Rendering uses the committed aggregate files, so it does not require the extracts. The old simulation remains an optional teaching example.
+For Blog Post 6, obtain the private PSID/FIMS extracts described in [its README](posts/sql-income-mobility/README.md), install `requirements-real.txt` and R with `jsonlite`, then run `python posts/sql-income-mobility/real_analysis.py` from the repository root. The pipeline saves aggregate results only and calls R for checks, figures and the report. Rendering uses committed aggregates, so it does not require the extracts. The old simulation remains an optional teaching example.
 
 Render the site with `quarto render` from the repository root only when preparing a site build. Use each draft's `build_preview.py` for review without changing the published output.
 
@@ -96,4 +98,4 @@ Render the site with `quarto render` from the repository root only when preparin
 
 R 4.5.1. Package versions are recorded separately in `posts/web-scraping/results/session-info.txt` and `posts/cps-participation/results/session-info.txt`. Blog Post 4 records its environment in `posts/inflation-unemployment/results/session-info.txt`. Each post README lists its dependencies and data requirements.
 
-Blog Post 5 records its Python and package versions in `posts/pa-rent-burden/results/environment.json` and pins its direct dependencies in `posts/pa-rent-burden/requirements.txt`. Blog Post 6 records the real analysis environment in `posts/sql-income-mobility/results/real/validation.json` and pins its dependencies in `posts/sql-income-mobility/requirements-real.txt`.
+Blog Post 5 records its Python and package versions in `posts/pa-rent-burden/results/environment.json` and pins its direct dependencies in `posts/pa-rent-burden/requirements.txt`. Blog Post 6 records its Python environment in `posts/sql-income-mobility/results/real/validation.json`, its R presentation environment in `posts/sql-income-mobility/results/real/r-environment.txt`, and Python dependencies in `posts/sql-income-mobility/requirements-real.txt`. GitHub language percentages focus on current analysis code, excluding rendered output, tests, preview utilities and the older optional simulation; substantive Python analyses remain classified as Python.

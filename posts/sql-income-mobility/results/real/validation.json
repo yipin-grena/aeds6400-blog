@@ -53,6 +53,35 @@
     "person_years_rows": 790085,
     "family_years_rows": 285847
   },
+  "lifecycle": {
+    "base_children": 1522,
+    "children": 1504,
+    "excluded_single_incomes": 18,
+    "origin_family_clusters": 949,
+    "covariates": {
+      "children": 1504,
+      "birth_year_proxy_nonmissing": 1504,
+      "sex_known": 1504,
+      "sex_missing": 0,
+      "female_children": 865
+    }
+  },
+  "covariates": {
+    "main": {
+      "children": 1522,
+      "birth_year_proxy_nonmissing": 1522,
+      "sex_known": 1522,
+      "sex_missing": 0,
+      "female_children": 879
+    },
+    "lifecycle": {
+      "children": 1504,
+      "birth_year_proxy_nonmissing": 1504,
+      "sex_known": 1504,
+      "sex_missing": 0,
+      "female_children": 865
+    }
+  },
   "python": "3.12.14",
   "pandas": "2.2.3",
   "numpy": "2.3.5",

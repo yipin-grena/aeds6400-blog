@@ -19,7 +19,12 @@ value <- function(key) e$ige[match(key, e$measure)]
 single <- value("one_year_each")
 parent_only <- value("averaged_parent_one_year_child")
 averaged <- value("averaged_each_age40_44")
-young <- value("averaged_each_age25_29")
+lc <- read.csv("results/real/lifecycle-estimates.csv", stringsAsFactors = FALSE)
+lc_diff <- read.csv("results/real/lifecycle-contrasts.csv", stringsAsFactors = FALSE)
+life_value <- function(key) lc$ige[match(key, lc$measure)]
+life_early <- life_value("child_single_age25_29")
+life_late <- life_value("child_single_age40_44")
+life_difference <- lc_diff[lc_diff$comparison == "child_single_age40_44 minus child_single_age25_29", ]
 coverage <- read.csv("results/real/coverage.csv", stringsAsFactors = FALSE)
 obs <- function(key) coverage$median_observations[match(key, coverage$measure)]
 show_code <- function(path, language, function_name = NULL) {
@@ -37,11 +42,11 @@ show_code <- function(path, language, function_name = NULL) {
 
 Could a single year's income make economic opportunity look more open than it is? A bonus, a layoff or the start of a career may say little about a family's usual resources. Mistaking temporary differences for lasting ones could weaken the measured connection between parents and children.
 
-I match real [Panel Study of Income Dynamics](https://psidonline.isr.umich.edu/) records using SQL inside Python. For the same `r n(e$children[1])` adult children, averaging income raises the estimated connection between generations. The tutorial shows how the match works and why measurement choices matter.
+I match real [Panel Study of Income Dynamics](https://psidonline.isr.umich.edu/) records using SQL inside Python. The averaging comparison uses `r n(e$children[1])` adult children. A second comparison changes the child's measurement age while keeping parental income fixed.
 
 ## Build the match
 
-The [replication guide](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility) lists the variables and setup. `real_analysis.py` reads the two Excel extracts with pandas and creates four tables in memory.
+The [replication guide](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility) lists the variables and setup. Python reads the Excel extracts and creates four tables in memory. R checks the aggregate outputs and draws the figures.
 
 | Table | One row represents | Key |
 |---|---|---|
@@ -50,12 +55,12 @@ The [replication guide](https://github.com/yipin-grena/aeds6400-blog/tree/main/p
 | `person_years` | One current family member in a wave | Person ID and survey year |
 | `family_years` | One family's income in a wave | Survey year and interview number |
 
-The [FIMS parent map](https://simba.isr.umich.edu/FIMS/FIMS_UG.pdf) supplies both parts of each parent's ID. The 1968 family identifier, `id68`, and person number, `pn`, identify someone together. A family's interview number identifies it only within a survey year.
+The [FIMS parent map](https://simba.isr.umich.edu/FIMS/FIMS_UG.pdf) supplies each parent's ID. The 1968 family identifier, `id68`, and person number, `pn`, identify someone together. A family's interview number identifies it only within a survey year.
 
-1. **Join the people.** `JOIN` connects each child's parent links to both people's yearly records, using complete person IDs. Requiring the same survey year and interview number identifies a co-resident parent who is a reference person or spouse/partner.
-2. **Find the income.** Another `JOIN` attaches family income using survey year and interview number. `SELECT` keeps the needed columns. Income covers the previous calendar year, so interview age minus one approximates age during that income year.
-3. **Count each household once.** Two linked parents can supply the same household income. `SELECT DISTINCT` removes that duplicate. `GROUP BY` gathers a child's observations, and `AVG` calculates the parental income measure. `HAVING` requires at least three observations around ages 15 to 19.
-4. **Repeat for adulthood.** The query averages the child's own family income while they are a reference person or spouse/partner, requiring at least two observations per age window. The final join produces one row per child.
+1. **Join the people.** `JOIN` connects parent links to yearly records using complete person IDs. Matching survey year and interview number identifies a co-resident parent who is a reference person or spouse/partner.
+2. **Find the income.** Another `JOIN` attaches family income using survey year and interview number. `SELECT` keeps needed columns. Income covers the previous calendar year, so interview age minus one approximates income age.
+3. **Count each household once.** Two parents can supply the same income. `SELECT DISTINCT` removes that duplicate. `GROUP BY` gathers observations, and `AVG` calculates parental income. `HAVING` requires at least three observations around child ages 15 to 19.
+4. **Repeat for adulthood.** The query averages the child's family income as a reference person or spouse/partner, requiring two observations per age window. The final join produces one row per child.
 
 <details>
 <summary>Show the complete matching SQL</summary>
@@ -68,16 +73,17 @@ show_code("sql/match_real.sql", "sql")
 
 </details>
 
-The PSID became biennial in 1999. These are averages of available observations, not five annual incomes. The median is `r obs("parent_15_19")` parental observations and `r obs("child_40_44")` mature adult observations. For a single observation, SQL chooses the year closest to the age-window midpoint, breaking ties toward the earlier year.
+With biennial interviews from 1999, these averages contain a median of `r obs("parent_15_19")` parental observations and `r obs("child_40_44")` mature adult observations. SQL also selects one observation nearest each age-window midpoint, breaking ties toward the earlier year.
 
-Python passes the age limits as parameters through `pd.read_sql_query`. The full script builds the database and keeps the same children across comparisons. Changing years requires updating the variable map and income-year coverage described in the guide.
+Python passes age limits through `pd.read_sql_query`. Run `python tutorial_real.py` for a complete example with imports, database setup and comparison calls. The guide explains how to match other years.
 
 <details>
-<summary>Show the Python function that runs the SQL</summary>
+<summary>Show the complete Python setup and comparison example</summary>
 
 ```{r}
 #| echo: false
 #| results: asis
+show_code("tutorial_real.py", "python")
 show_code("real_analysis.py", "python", "query_pairs")
 ```
 
@@ -91,7 +97,7 @@ $$
 \log(\text{adult child family income}) = \alpha + \beta\log(\text{parental family income}) + \varepsilon.
 $$
 
-At the averaged estimate, 10% higher parental income is associated with about `r sprintf("%.1f", 100 * (1.1^averaged - 1))`% higher adult child family income. Higher IGE means greater persistence. SQL averages amounts in 2022 dollars before Python takes logarithms. `np.linalg.lstsq` fits the line; the function also checks its arithmetic and accounts for related children when calculating uncertainty.
+At the averaged estimate, 10% higher parental income is associated with about `r sprintf("%.1f", 100 * (1.1^averaged - 1))`% higher adult child family income. Higher IGE means greater persistence. Income is averaged in 2022 dollars before taking logarithms. `np.linalg.lstsq` fits the line; uncertainty calculations account for related children.
 
 <details>
 <summary>Show the Python regression and uncertainty calculation</summary>
@@ -104,7 +110,7 @@ show_code("real_analysis.py", "python", "slope_and_cluster_se")
 
 </details>
 
-Figure 1 gives `r f(single)` using one observation per generation and `r f(averaged)` using averages. Averaging only parental income gives `r f(parent_only)`. Thus, changing the parental measure strengthens the estimated relationship; averaging adult income does not raise it further. Several observations can reduce the influence of an unusual year, but averaging does not guarantee a higher estimate.
+Figure 1 gives `r f(single)` using one observation per generation and `r f(averaged)` using averages. Averaging parental income alone gives `r f(parent_only)`; averaging adult income does not raise the point estimate further. Multiple observations can reduce an unusual year's influence, but need not increase the estimate.
 
 ```{r}
 #| label: fig-averaging
@@ -116,24 +122,24 @@ knitr::include_graphics("results/real/income-averages.png")
 
 ## Check the child's career stage
 
-Holding parental income fixed, Figure 2 compares adult age windows. The estimate rises from `r f(young)` at ages 25 to 29 to `r f(averaged)` at 40 to 44. Even an average can describe only an early career.
+Figure 2 uses one child income observation near ages 27, 32, 37 and 42, with parental income fixed. Requiring positive selected incomes at every stage leaves `r n(lc$children[1])` children, held constant across ages. The youngest and oldest estimates are `r f(life_early)` and `r f(life_late)`. Their difference has a 95% interval from `r f(life_difference$ci_lower)` to `r f(life_difference$ci_upper)`, including zero, so the age evidence is inconclusive.
 
 ```{r}
 #| label: fig-child-age
 #| echo: false
-#| fig-cap: "The estimated connection grows across career stages for the same children, with parental income held fixed. Lines show 95% family bootstrap intervals."
-#| fig-alt: "Real PSID family income elasticity estimates rise across adult age windows from 25 to 29 through 40 to 44, with parental income held fixed and family bootstrap intervals shown."
+#| fig-cap: "One income observation at each career stage gives different point estimates but no steady age gradient. Lines show 95% family bootstrap intervals."
+#| fig-alt: "Four PSID estimates use one selected child income observation near ages 27, 32, 37 and 42 on the same sample. Estimates are not monotonic and their family bootstrap intervals overlap."
 knitr::include_graphics("results/real/child-age.png")
 ```
 
-This illustrates the concern behind **life-cycle bias**. A snapshot can misrepresent lifetime resources when income gaps change as careers develop. [Haider and Solon (2006)](https://doi.org/10.1257/aer.96.4.1308) explain this mechanism. Here, age windows also differ in calendar periods and observation counts, so the comparison cannot isolate its size.
+**Life-cycle bias** remains a concern. Hypothetically, if early-career log-income gaps are half their lifetime size, the estimated slope would be halved too. [Haider and Solon (2006)](https://doi.org/10.1257/aer.96.4.1308) explain why career snapshots can misrepresent lasting income. Averaging several early years may still miss later differences.
 
-These unweighted results describe selected, repeatedly observed families, not a national population IGE. Family income includes partners' resources; household membership is observed at interview. The regressions establish associations, and the true lifetime relationship remains unknown.
+These unweighted results describe selected families. Calendar periods and family circumstances change with age. Family income includes partners' resources, and membership is observed at interview. The true lifetime IGE remains unknown; these associations establish no causal effect.
 
 The main takeaways are:
 
 * Match full person IDs and the correct family-year, then remove duplicate household incomes.
 * Averaging parental income reveals a stronger connection here; its effect differs across generations.
-* Career stage matters too. A short early-career average may poorly represent lifetime resources.
+* One career snapshot need not represent lifetime resources; this sample's age comparison remains inconclusive.
 
 [Data sources, code and replication instructions](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/sql-income-mobility).

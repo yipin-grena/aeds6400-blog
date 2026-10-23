@@ -42,6 +42,8 @@ parent_measures AS (
            AVG(income_age) AS parent_mean_age,
            MAX(CASE WHEN midpoint_rank = 1 THEN income_age END)
                AS parent_single_age,
+           MAX(CASE WHEN midpoint_rank = 1 THEN income_year END)
+               AS parent_single_year,
            MIN(income_year) AS parent_first_year,
            MAX(income_year) AS parent_last_year
     FROM parent_ranked
@@ -79,6 +81,8 @@ child_measures AS (
            AVG(income_age) AS child_mean_age,
            MAX(CASE WHEN midpoint_rank = 1 THEN income_age END)
                AS child_single_age,
+           MAX(CASE WHEN midpoint_rank = 1 THEN income_year END)
+               AS child_single_year,
            MIN(income_year) AS child_first_year,
            MAX(income_year) AS child_last_year
     FROM child_ranked
@@ -88,9 +92,9 @@ child_measures AS (
 )
 SELECT c.id68, c.pn, c.birth_year_proxy,
        p.parent_income, p.parent_single, p.parent_n, p.parent_mean_age,
-       p.parent_single_age, p.parent_first_year, p.parent_last_year,
+       p.parent_single_age, p.parent_single_year, p.parent_first_year, p.parent_last_year,
        a.child_income, a.child_single, a.child_n, a.child_mean_age,
-       a.child_single_age, a.child_first_year, a.child_last_year
+       a.child_single_age, a.child_single_year, a.child_first_year, a.child_last_year
 FROM eligible_children AS c
 JOIN parent_measures AS p ON p.id68 = c.id68 AND p.pn = c.pn
 JOIN child_measures AS a ON a.id68 = c.id68 AND a.pn = c.pn

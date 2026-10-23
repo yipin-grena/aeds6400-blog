@@ -17,7 +17,7 @@ def main():
         work = Path(directory)
         shutil.copytree(POST / "results/real", work / "results/real")
         shutil.copytree(POST / "sql", work / "sql")
-        for name in ("real_analysis.py", "README.md"):
+        for name in ("real_analysis.py", "tutorial_real.py", "README.md"):
             shutil.copy2(POST / name, work / name)
         source = (POST / "index.qmd").read_text().replace("draft: true", "draft: false")
         source = re.sub(r"^date: .*\n", "", source, flags=re.MULTILINE)

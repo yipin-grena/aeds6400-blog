@@ -86,8 +86,10 @@ class RealMatchingTests(unittest.TestCase):
         self.assertEqual(row["parent_n"], 2)
         self.assertEqual(row["parent_mean_age"], 16)
         self.assertEqual(row["parent_single"], 300)
+        self.assertEqual(row["parent_single_year"], 1987)
         self.assertEqual(row["child_income"], 600)
         self.assertEqual(row["child_n"], 2)
+        self.assertEqual(row["child_single_year"], 2012)
 
     def test_separate_parent_family_is_not_added_to_child_resources(self):
         self.basic_panel()
@@ -149,8 +151,10 @@ class RealMatchingTests(unittest.TestCase):
         row, = self.matched()
         self.assertEqual(row["parent_single"], 100)
         self.assertEqual(row["parent_single_age"], 15)
+        self.assertEqual(row["parent_single_year"], 1985)
         self.assertEqual(row["child_single"], 400)
         self.assertEqual(row["child_single_age"], 40)
+        self.assertEqual(row["child_single_year"], 2010)
 
     def test_birth_cohort_is_applied_to_children(self):
         self.basic_panel()
@@ -181,9 +185,9 @@ class RealMatchingTests(unittest.TestCase):
         row, = self.matched()
         self.assertEqual(row.keys(), [
             "id68", "pn", "birth_year_proxy", "parent_income", "parent_single",
-            "parent_n", "parent_mean_age", "parent_single_age", "parent_first_year",
+            "parent_n", "parent_mean_age", "parent_single_age", "parent_single_year", "parent_first_year",
             "parent_last_year", "child_income", "child_single", "child_n",
-            "child_mean_age", "child_single_age", "child_first_year", "child_last_year",
+            "child_mean_age", "child_single_age", "child_single_year", "child_first_year", "child_last_year",
         ])
         tables = {r[0] for r in self.conn.execute(
             "SELECT name FROM sqlite_master WHERE type = 'table'"

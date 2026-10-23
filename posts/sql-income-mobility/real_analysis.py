@@ -13,7 +13,9 @@ import json
 from pathlib import Path
 import platform
 import re
+import shutil
 import sqlite3
+import subprocess
 import zipfile
 
 import numpy as np
@@ -251,6 +253,100 @@ def bootstrap_slopes(models, groups, repetitions, seed=6400):
     return draws
 
 
+def covariate_counts(metadata):
+    """Save sample composition as counts without person-level output."""
+    return {"children": len(metadata),
+            "birth_year_proxy_nonmissing": int(metadata.birth_year_proxy.notna().sum()),
+            "sex_known": int(metadata.sex.isin([1, 2]).sum()),
+            "sex_missing": int(metadata.sex.isna().sum()),
+            "female_children": int(metadata.sex.eq(2).sum())}
+
+
+def model_controls(metadata):
+    controls = np.column_stack([metadata.birth_year_proxy.to_numpy(dtype=float) - 1969,
+                                metadata.sex.eq(2).to_numpy(dtype=float)])
+    if metadata.sex.isna().any():
+        controls = np.column_stack([controls, metadata.sex.isna().to_numpy(dtype=float)])
+    return controls
+
+
+def lifecycle_outputs(selected, metadata, repetitions):
+    """Compare one observation near each midpoint on identical positive cases.
+
+    The earlier averaged-window comparison is retained as a sensitivity on
+    this exact sample. All eight models share the same origin-family draws.
+    """
+    check(not metadata.index.duplicated().any(), "Duplicate lifecycle metadata keys.")
+    aligned = {}
+    valid = pd.Series(True, index=metadata.index)
+    parent_reference = None
+    for ages in AGE_WINDOWS:
+        pairs = selected[ages]
+        check(not pairs.index.duplicated().any(), "Duplicate lifecycle child keys.")
+        check(metadata.index.isin(pairs.index).all(), "Lifecycle window lacks a common child.")
+        pairs = pairs.loc[metadata.index]
+        aligned[ages] = pairs
+        if parent_reference is None:
+            parent_reference = pairs.parent_income
+        else:
+            check(np.allclose(pairs.parent_income, parent_reference),
+                  "Lifecycle windows use different parental income.")
+        valid &= pairs.child_single.gt(0) & np.isfinite(pairs.child_single)
+    common = metadata.index[valid]
+    check(len(common) >= 100, "Fewer than 100 common children have positive single observations at every age.")
+    people = metadata.loc[common]
+    groups = common.get_level_values("id68").to_numpy()
+    parent = aligned[(40, 44)].loc[common].parent_income.to_numpy()
+    check(np.isfinite(parent).all() and (parent > 0).all(), "Invalid lifecycle parental averages.")
+    models = {}
+    for kind, column in [("single", "child_single"), ("average", "child_income")]:
+        for ages in AGE_WINDOWS:
+            child = aligned[ages].loc[common, column].to_numpy()
+            check(np.isfinite(child).all() and (child > 0).all(), "Invalid lifecycle regression inputs.")
+            models[f"child_{kind}_age{ages[0]}_{ages[1]}"] = (parent, child)
+    draws = bootstrap_slopes(models, groups, repetitions)
+    controls = model_controls(people)
+    rows = []
+    for j, (label, (x, y)) in enumerate(models.items()):
+        slope, se, clusters = slope_and_cluster_se(x, y, groups)
+        adjusted, adjusted_se, _ = slope_and_cluster_se(x, y, groups, controls)
+        low, high = np.quantile(draws[:, j], [0.025, 0.975])
+        rows.append({"measure": label, "children": len(common), "origin_family_clusters": clusters,
+                     "ige": slope, "cluster_se": se, "ci_lower": low, "ci_upper": high,
+                     "cohort_sex_adjusted_ige": adjusted, "cohort_sex_adjusted_cluster_se": adjusted_se})
+    all_estimates = pd.DataFrame(rows)
+    labels = list(models)
+    comparisons = [("child_single_age40_44", "child_single_age25_29"),
+                   ("child_average_age40_44", "child_average_age25_29")]
+    comparisons.extend((f"child_average_age{a}_{b}", f"child_single_age{a}_{b}")
+                       for a, b in AGE_WINDOWS)
+    contrasts = []
+    for after, before in comparisons:
+        i, j = labels.index(after), labels.index(before)
+        low, high = np.quantile(draws[:, i] - draws[:, j], [0.025, 0.975])
+        contrasts.append({"comparison": f"{after} minus {before}",
+                          "ige_difference": rows[i]["ige"] - rows[j]["ige"],
+                          "ci_lower": low, "ci_upper": high})
+    coverage = []
+    for (start, end), frame in aligned.items():
+        pairs = frame.loc[common]
+        coverage.append({"age_start": start, "age_end": end, "children": len(common),
+                         "min_selected_age": int(pairs.child_single_age.min()),
+                         "mean_selected_age": float(pairs.child_single_age.mean()),
+                         "max_selected_age": int(pairs.child_single_age.max()),
+                         "first_income_year": int(pairs.child_single_year.min()),
+                         "last_income_year": int(pairs.child_single_year.max())})
+    frames = {"lifecycle-estimates": all_estimates.iloc[:4].reset_index(drop=True),
+              "lifecycle-averages": all_estimates.iloc[4:].reset_index(drop=True),
+              "lifecycle-contrasts": pd.DataFrame(contrasts),
+              "lifecycle-coverage": pd.DataFrame(coverage)}
+    audit = {"base_children": len(metadata), "children": len(common),
+             "excluded_single_incomes": int((~valid).sum()),
+             "origin_family_clusters": int(pd.Index(groups).nunique()),
+             "covariates": covariate_counts(people)}
+    return frames, audit
+
+
 def analyze(conn, tables, args):
     matches = {ages: query_pairs(conn, ages, args) for ages in AGE_WINDOWS}
     counts = [{"stage": f"Matched positive averages, child ages {a} to {b}", "children": len(v)}
@@ -291,10 +387,7 @@ def analyze(conn, tables, args):
     counts.append({"stage": "Common sample with implied birth years no more than two years apart",
                    "children": int(stable_ages.sum())})
     # Explicit missing-sex indicator keeps the sensitivity on exactly the same people.
-    controls = np.column_stack([metadata.birth_year_proxy.to_numpy(dtype=float) - 1969,
-                                metadata.sex.eq(2).to_numpy(dtype=float)])
-    if metadata.sex.isna().any():
-        controls = np.column_stack([controls, metadata.sex.isna().to_numpy(dtype=float)])
+    controls = model_controls(metadata)
     rows, sensitivity = [], []
     for j, (label, (parent, child)) in enumerate(models.items()):
         slope, se, clusters = slope_and_cluster_se(parent, child, groups)
@@ -333,42 +426,15 @@ def analyze(conn, tables, args):
                              "mean_single_measurement_age": float(pairs[f"{prefix}_single_age"].mean()),
                              "earliest_income_year": int(pairs[f"{prefix}_first_year"].min()),
                              "latest_income_year": int(pairs[f"{prefix}_last_year"].max())})
+    lifecycle_frames, lifecycle_audit = lifecycle_outputs(selected, metadata, args.bootstrap)
+    counts.append({"stage": "Positive single child income in all four age windows",
+                   "children": lifecycle_audit["children"]})
     return (pd.DataFrame(rows), pd.DataFrame(contrasts), pd.DataFrame(counts),
             pd.DataFrame(coverage), pd.DataFrame(sensitivity, columns=[
-                "restriction", "measure", "children", "origin_family_clusters", "ige", "cluster_se"]))
+                "restriction", "measure", "children", "origin_family_clusters", "ige", "cluster_se"]),
+            lifecycle_frames, lifecycle_audit, covariate_counts(metadata))
 
 
-def make_figures(estimates, output):
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    values = estimates.set_index("measure")
-    specifications = [
-        ("income-averages.png", ["one_year_each", "averaged_parent_one_year_child", "averaged_each_age40_44"],
-         ["One year\neach", "Average parents,\none child year", "Average both\ngenerations"],
-         "How income averaging changes the estimate"),
-        ("child-age.png", [f"averaged_each_age{a}_{b}" for a,b in AGE_WINDOWS],
-         [f"{a} to {b}" for a,b in AGE_WINDOWS], "The estimate changes with the child's age")]
-    for filename, keys, labels, title in specifications:
-        data = values.loc[keys]
-        fig, ax = plt.subplots(figsize=(8, 4.8), layout="constrained")
-        pos = np.arange(len(data))
-        ax.vlines(pos, data.ci_lower, data.ci_upper, color="#28718c", lw=2)
-        ax.scatter(pos, data.ige, color="#14506a", s=65, zorder=3)
-        for x, value in zip(pos, data.ige):
-            ax.annotate(f"{value:.3f}", (x, value), xytext=(8, 5), textcoords="offset points", fontsize=11)
-        ax.set_xticks(pos, labels)
-        ax.set_xlim(-0.5, len(data)-0.5)
-        ax.set_ylim(min(0, data.ci_lower.min()-0.04), data.ci_upper.max()+0.08)
-        ax.set_ylabel("Intergenerational family income elasticity")
-        ax.set_title(title, loc="left", pad=16)
-        ax.grid(axis="y", alpha=.2); ax.set_axisbelow(True)
-        for side in ["top", "right"]: ax.spines[side].set_visible(False)
-        fig.text(.02, -.045,
-                 f"Same {int(data.children.iloc[0]):,} children in every estimate. Unweighted PSID sample.\n"
-                 "Lines show 95% intervals from resampling families of origin.", fontsize=9, color="#444444")
-        fig.savefig(output / filename, dpi=180, bbox_inches="tight")
-        plt.close(fig)
 
 
 def sha256(path):
@@ -379,64 +445,6 @@ def sha256(path):
     return h.hexdigest()
 
 
-def write_report(output, include_figures=True):
-    """Make the readable summary entirely from saved aggregate results."""
-    estimates = pd.read_csv(output / "estimates.csv").set_index("measure")
-    contrasts = pd.read_csv(output / "contrasts.csv").set_index("comparison")
-    sensitivity = pd.read_csv(output / "age-quality-sensitivity.csv").set_index("measure")
-    single = estimates.loc["one_year_each"]
-    averaged = estimates.loc["averaged_each_age40_44"]
-    parent_only = estimates.loc["averaged_parent_one_year_child"]
-    young = estimates.loc["averaged_each_age25_29"]
-    labels = {
-        "one_year_each": "One observation for each generation, mature adult child",
-        "averaged_parent_one_year_child": "Average parental income, one mature adult child observation",
-        "averaged_each_age40_44": "Average both, adult child ages 40 to 44",
-        "averaged_each_age25_29": "Average both, adult child ages 25 to 29",
-        "averaged_each_age30_34": "Average both, adult child ages 30 to 34",
-        "averaged_each_age35_39": "Average both, adult child ages 35 to 39",
-    }
-    table = "\n".join(f"| {labels[key]} | {row.ige:.3f} | {row.ci_lower:.3f} to {row.ci_upper:.3f} |"
-                      for key, row in estimates.iterrows())
-    difference = contrasts.loc["averaged_each_age40_44 minus one_year_each"]
-    figures = ("![Income averaging comparison](income-averages.png)\n\n"
-               "![Comparison across adult child ages](child-age.png)") if include_figures else ""
-    if not sensitivity.empty:
-        sensitivity_text = (
-            f"With the linear cohort and sex adjustment, the one-year and averaged estimates are "
-            f"{single.cohort_sex_adjusted_ige:.3f} and {averaged.cohort_sex_adjusted_ige:.3f}. "
-            f"After excluding inconsistent age histories, the retained sample has {int(sensitivity.loc['one_year_each', 'children']):,} "
-            f"children; the one-year and averaged estimates are {sensitivity.loc['one_year_each', 'ige']:.3f} "
-            f"and {sensitivity.loc['averaged_each_age40_44', 'ige']:.3f}.")
-    else:
-        sensitivity_text = "Fewer than 100 children met the age-quality restriction, so that sensitivity was not estimated."
-    text = f"""# Real PSID results for Blog Post 6
-
-The analysis uses the same **{int(single.children):,} adult children** in every comparison, from **{int(single.origin_family_clusters):,} families of origin**. These are real PSID and FIMS records. The estimates are unweighted and describe the retained sample.
-
-| Income measure | Estimated IGE | 95% family bootstrap interval |
-| --- | --- | --- |
-{table}
-
-A higher IGE means a stronger association between parental and adult child family income. It is not the causal effect of giving parents more money.
-
-Using averages for both generations changes the estimate from {single.ige:.3f} to {averaged.ige:.3f}. The paired difference is {difference.ige_difference:.3f}, with a bootstrap interval from {difference.ci_lower:.3f} to {difference.ci_upper:.3f}. Averaging only parental income gives {parent_only.ige:.3f}. Averaging adult child income too produces a {'lower' if averaged.ige < parent_only.ige else 'higher'} point estimate than that intermediate specification, so the effect of averaging differs across the two generations.
-
-Holding the parental average fixed, the estimate is {young.ige:.3f} when adult children are 25 to 29 and {averaged.ige:.3f} at 40 to 44. This is evidence of sensitivity to measurement age. It does not identify a true lifetime IGE or isolate lifecycle bias from calendar-period and observation-count differences.
-
-{figures}
-
-## Checks and limitations
-
-The program verifies compound identifiers, household income consistency, foreign keys, distinct children and identical samples. It checks the simple OLS estimate against an independent covariance formula. SQL and normalization tests use invented records, including negative incomes and missing years.
-
-Income is converted to 2022 dollars before averaging. Parental income is measured in the child's co-resident family at approximate ages 15 to 19. Adult income requires reference person or spouse/partner status. Survey weights were not supplied. The sample requires linked parents and repeated observations, so it does not represent all US children. The income measure is family income, not personal earnings. Family membership is observed at interview, while income covers the previous calendar year.
-
-{sensitivity_text}
-
-Only aggregate results and figures are included here. The normalized tables and matched records stayed in memory. [Replication details](../../README-real.md).
-"""
-    (output / "REPORT.md").write_text(text)
 
 
 def main():
@@ -447,13 +455,16 @@ def main():
     parser.add_argument("--birth-max", type=int, default=1978)
     parser.add_argument("--bootstrap", type=int, default=1000)
     parser.add_argument("--output", type=Path, default=POST / "results/real")
-    parser.add_argument("--no-figures", action="store_true", help="Save aggregate tables without plotting.")
+    parser.add_argument("--no-figures", action="store_true", help="Save aggregate tables and report without plotting.")
+    parser.add_argument("--rscript", default="Rscript", help="Rscript executable for aggregate figures and report.")
     args = parser.parse_args()
     check(args.birth_min <= args.birth_max, "Invalid cohort range.")
     check(args.bootstrap >= 200, "Use at least 200 bootstrap repetitions.")
-    if not args.no_figures:
-        # Check this small optional dependency before the large workbook read.
-        import matplotlib  # noqa: F401
+    rscript = shutil.which(args.rscript)
+    if rscript is None and args.rscript == "Rscript":
+        candidate = Path("/usr/local/bin/Rscript")
+        rscript = str(candidate) if candidate.is_file() else None
+    check(rscript is not None, "Rscript was not found; install R or supply --rscript /path/to/Rscript.")
     waves = read_waves(POST / "config/psid_waves.csv")
     cpi_path = POST / "data/public/CPIAUCNS.csv"
     cpi = annual_cpi(cpi_path)
@@ -466,17 +477,18 @@ def main():
     print("Matching with SQL and estimating on the common sample.", flush=True)
     conn = load_memory_database(tables)
     try:
-        estimates, contrasts, sample_flow, coverage, sensitivity = analyze(conn, tables, args)
+        (estimates, contrasts, sample_flow, coverage, sensitivity,
+         lifecycle_frames, lifecycle_audit, main_covariates) = analyze(conn, tables, args)
     finally:
         conn.close()
     for name, frame in tables.items(): audit[f"{name}_rows"] = len(frame)
     del tables
     args.output.mkdir(parents=True, exist_ok=True)
-    for name, frame in {"estimates": estimates, "contrasts": contrasts, "sample-flow": sample_flow,
-                        "coverage": coverage, "wave-validation": wave_flow, "age-quality-sensitivity": sensitivity}.items():
+    frames = {"estimates": estimates, "contrasts": contrasts, "sample-flow": sample_flow,
+              "coverage": coverage, "wave-validation": wave_flow, "age-quality-sensitivity": sensitivity,
+              **lifecycle_frames}
+    for name, frame in frames.items():
         frame.to_csv(args.output / f"{name}.csv", index=False)
-    if not args.no_figures:
-        make_figures(estimates, args.output)
     report = {"data_kind": "real PSID public-use extract and FIMS biological parent map",
               "source_files": {args.extract.name: sha256(args.extract), args.fims.name: sha256(args.fims)},
               "cpi_sha256": sha256(cpi_path), "cpi_series": "CPIAUCNS",
@@ -486,6 +498,8 @@ def main():
               "dollar_base_year": 2022, "weighting": "unweighted; no survey weight supplied",
               "bootstrap_repetitions": args.bootstrap, "bootstrap_seed": 6400,
               "cluster": "child 1968 family identifier", "validation": audit,
+              "lifecycle": lifecycle_audit,
+              "covariates": {"main": main_covariates, "lifecycle": lifecycle_audit["covariates"]},
               "python": platform.python_version(), "pandas": pd.__version__, "numpy": np.__version__,
               "sqlite": sqlite3.sqlite_version,
               "checks": {"common_sample_across_specifications": True,
@@ -494,8 +508,13 @@ def main():
                          "foreign_keys_valid": True,
                          "respondent_level_outputs_saved": False}}
     (args.output / "validation.json").write_text(json.dumps(report, indent=2) + "\n")
-    write_report(args.output, include_figures=not args.no_figures)
+    command = [rscript, str(POST / "R/render-results.R"), "--output", str(args.output.resolve())]
+    if args.no_figures:
+        command.append("--no-figures")
+    subprocess.run(command, check=True)
     print(estimates[["measure", "children", "ige", "ci_lower", "ci_upper"]].to_string(index=False), flush=True)
+    print(lifecycle_frames["lifecycle-estimates"][["measure", "children", "ige", "ci_lower", "ci_upper"]]
+          .to_string(index=False), flush=True)
     print(f"Aggregate results saved to {args.output}. No website was rendered or published.", flush=True)
 
 

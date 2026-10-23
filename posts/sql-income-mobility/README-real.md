@@ -1,19 +1,21 @@
 # Real PSID analysis for Blog Post 6
 
-`real_analysis.py` reads the locally supplied PSID and FIMS workbooks with pandas, constructs four tables, matches generations in SQLite, and estimates the relationship between parental and adult child family income. Only aggregate results are written to `results/real/`. The workbooks, normalized tables and matched children are not exported. SQLite runs in memory.
+`real_analysis.py` reads the locally supplied PSID and FIMS workbooks with pandas, constructs four tables, matches generations in SQLite, and estimates the relationship between parental and adult child family income. Only aggregate results are written to `results/real/`. The workbooks, normalized tables and matched children are not exported. SQLite runs in memory. Python estimates the regressions and bootstrap intervals; R independently checks the saved aggregate tables and generates the figures and report.
 
 The published article uses this real-data analysis. The original simulation in `run.py` and `tutorial.py` is an optional separate example documented in `README-simulation.md`. Running the analysis does not render or publish the website; rendering uses the saved aggregate results.
 
 ## Run locally
 
-Use Python 3.12 and install the analysis dependencies in an isolated environment.
+Use Python 3.12 and R with the `jsonlite` package. Install the Python dependencies in an isolated environment.
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements-real.txt
+Rscript -e 'install.packages("jsonlite", repos="https://cloud.r-project.org")'
 python real_analysis.py
-python -m unittest discover -s tests -p 'test_real*.py'
+python -m unittest discover -s tests -p 'test_*.py'
+Rscript R/validate-results.R
 ```
 
 The default input paths, relative to this post, are
@@ -23,7 +25,9 @@ The default input paths, relative to this post, are
 
 Both workbooks contain a `Data` sheet. Use `--extract` and `--fims` to supply different local paths. The program never modifies either workbook. Some exports contain invalid worksheet display attributes named `synchVertical` or `synchHorizontal`. If the Excel reader rejects those attributes, the program removes only those attributes from an in-memory copy and reads that copy. It does not alter cell values or write a replacement workbook.
 
-Use `--no-figures` to run without matplotlib. The default run uses 1,000 bootstrap repetitions and seed 6400. `--bootstrap` changes that count and `--output` changes the aggregate output folder.
+Use `--no-figures` to omit the PNGs while still producing aggregate tables and the report. R remains required. Supply `--rscript /path/to/Rscript` when needed. The default run uses 1,000 bootstrap repetitions and seed 6400. `--bootstrap` changes that count and `--output` changes the aggregate output folder.
+
+`python tutorial_real.py` runs the complete main comparison example shown in the article and prints only aggregate estimates. The setup, imports and function calls are included in that script. `Rscript R/render-results.R` rebuilds both figures and the report from committed aggregates without reopening the respondent records; `Rscript R/validate-results.R` checks those tables independently.
 
 PSID's [Conditions of Use](https://simba.isr.umich.edu/U/CondUse.aspx) apply. They restrict redistribution and explicitly prohibit AI use with PSID data. Keeping records local and saving aggregates does not establish an exemption. The source workbooks and any respondent-level derivatives must not be committed or uploaded to GitHub.
 
@@ -53,7 +57,8 @@ The demonstration selects approximate birth cohorts 1960 through 1978. These coh
 * Parental income is measured when the child was approximately 15 through 19, with at least three valid income years. A linked parent must be a reference person or spouse/partner living in the same family as the child at interview. When both parents qualify in that family, `SELECT DISTINCT` counts the family income once. Income from a separate parental household is not added.
 * Adult child income is measured when the child is a reference person or spouse/partner. Each age window, 25 through 29, 30 through 34, 35 through 39, and 40 through 44, requires at least two valid income years.
 * A single observation is chosen nearest the midpoint of the relevant window, with ties resolved toward the earlier income year. This makes the single observation comparable in age to the average. It is not necessarily the same calendar year for everyone.
-* Every headline estimate uses the intersection of children observed in all four adult windows, with positive parental and mature child single-year incomes. Window averages must also be positive for logarithms. Changing sample composition therefore cannot explain differences between these specifications.
+* The main averaging comparison uses the intersection of children observed in all four adult windows, with positive parental and mature child single-year incomes. Window averages must also be positive for logarithms. Its sample remains fixed at 1,522 children across those specifications.
+* The career-stage comparison additionally requires a positive finite selected child income in every age window. Its 1,504 children are held fixed at all four stages; parental average income is also held fixed. Each regression uses just one selected child observation near age 27, 32, 37 or 42. `lifecycle-averages.csv` saves the averaged child-income sensitivity on this identical narrower sample. The chosen income year and actual reported-age approximation are documented in `lifecycle-coverage.csv`.
 
 The PSID's main interviews are biennial from 1999. These are averages over available observations within age windows, not five consecutive annual observations. Reported age inconsistencies and interview timing can also create more observations than the nominal width of an age range. `coverage.csv` reports the actual counts, ages and income-year coverage. A separate sensitivity excludes children whose implied birth years differ by more than two years across their observed waves.
 
@@ -81,7 +86,7 @@ Standard errors cluster on the child's 1968 family identifier. The 95% intervals
 
 The extract contains no survey weights. These are unweighted associations for the retained sample, not estimates of a national population IGE. `ER32006` indicates sample membership and is not a weight. Family income includes other household members' resources and therefore differs from individual earnings. Household membership at interview can differ from membership during the previous income year. Attrition, missing parental links, co-residence restrictions and observed income requirements all select the sample. Topcoding and imputation remain features of the source data.
 
-Differences across adult age windows also reflect different calendar periods and observation counts. They show sensitivity to measurement age, not an independently identified amount of lifecycle bias. There is no known true IGE in these real data, and the simulation's 0.4 benchmark is not used.
+The new career-stage series holds the number of selected child observations at one per stage. The oldest-versus-youngest paired difference has an interval including zero, so the post does not claim a clear empirical age gradient. Different calendar periods and family circumstances remain inseparable from age here. The averaged age-window sensitivity also differs in observation counts. None of these comparisons identifies the true lifetime IGE or the amount of lifecycle bias. An explicitly hypothetical example in the article explains that if early-career log-income gaps are half their lifetime size, a slope using that snapshot is halved too. This is an algebraic illustration, not an estimated PSID fact. The simulation's 0.4 benchmark is not used.
 
 ## Matching other years
 
@@ -93,12 +98,18 @@ Differences across adult age windows also reflect different calendar periods and
 ## Aggregate outputs and verification
 
 * `estimates.csv` contains slopes, clustered standard errors, bootstrap intervals and the cohort/sex sensitivity.
-* `contrasts.csv` contains paired differences and bootstrap intervals.
+* `contrasts.csv` contains paired differences and bootstrap intervals for the main sample.
+* `lifecycle-estimates.csv` contains the four single-observation age estimates on the fixed positive single-income sample.
+* `lifecycle-averages.csv` contains the four averaged child-income sensitivity estimates on that same sample.
+* `lifecycle-contrasts.csv` contains joint-bootstrap age and averaging differences; `lifecycle-coverage.csv` records actual selected ages and income years.
 * `sample-flow.csv`, `coverage.csv` and `wave-validation.csv` document exclusions, observation coverage and normalization checks.
 * `age-quality-sensitivity.csv` repeats the comparisons after restricting age inconsistency.
 * `validation.json` records input checksums, software versions, settings and aggregate validation counts.
 * Two PNG figures visualize aggregate estimates only.
+* `r-environment.txt` records the R presentation environment.
 
-The tests use invented data only. They check separate households, repeated interview numbers in different years, duplicate parent links to the same family, incomplete and biennial histories, valid negative amounts, deflation, missing codes, fixed keys, regression arithmetic and paired bootstrap resampling. Runtime checks additionally verify foreign keys, unique records, income consistency, common samples and finite positive regression inputs. The simple OLS slope is checked independently against its covariance formula.
+`R/validate-results.R` independently checks expected measure keys, sample sizes, finite values, interval ordering, exact paired slope differences, actual age/year coverage and matching totals before rendering. It also checks the aggregate covariate counts recorded by Python. `R/render-results.R` draws the figures and generates `REPORT.md` from those validated tables.
+
+The 34 Python tests use invented data only. They check separate households, repeated interview numbers in different years, duplicate parent links to the same family, incomplete and biennial histories, valid negative amounts, deflation, missing codes, fixed keys, regression arithmetic and paired bootstrap resampling. Runtime checks additionally verify foreign keys, unique records, income consistency, common samples and finite positive regression inputs. The simple OLS slope is checked independently against its covariance formula.
 
 PSID data citation. Panel Study of Income Dynamics, public use dataset. Produced and distributed by the Survey Research Center, Institute for Social Research, University of Michigan, Ann Arbor, MI (2026).

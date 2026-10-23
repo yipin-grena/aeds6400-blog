@@ -1,32 +1,59 @@
 # Real PSID results for Blog Post 6
 
-The analysis uses the same **1,522 adult children** in every comparison, from **952 families of origin**. These are real PSID and FIMS records. The estimates are unweighted and describe the retained sample.
+The income averaging comparison uses the same **1,522 adult children** from **952 families of origin** in every specification. The career-stage comparison uses its own common sample of **1,504 adult children** from **949 families of origin**, with positive single-observation income at every stage. Estimates are unweighted and describe the retained PSID sample.
+
+## Income averaging
+
+Adult child income is measured at ages 40 to 44 in all three specifications.
 
 | Income measure | Estimated IGE | 95% family bootstrap interval |
 | --- | --- | --- |
-| One observation for each generation, mature adult child | 0.434 | 0.365 to 0.505 |
-| Average parental income, one mature adult child observation | 0.517 | 0.445 to 0.592 |
-| Average both, adult child ages 40 to 44 | 0.508 | 0.441 to 0.575 |
-| Average both, adult child ages 25 to 29 | 0.445 | 0.387 to 0.506 |
-| Average both, adult child ages 30 to 34 | 0.490 | 0.425 to 0.556 |
-| Average both, adult child ages 35 to 39 | 0.504 | 0.439 to 0.569 |
+| One observation for each generation | 0.434 | 0.365 to 0.505 |
+| Average parental income, one child observation | 0.517 | 0.445 to 0.592 |
+| Average both generations | 0.508 | 0.441 to 0.575 |
 
-A higher IGE means a stronger association between parental and adult child family income. It is not the causal effect of giving parents more money.
+Averaging income for both generations changes the IGE from 0.434 to 0.508. The paired difference is 0.074, with a 95% family bootstrap interval of 0.030 to 0.126. Averaging parental income alone gives 0.517. Averaging adult child income as well gives a lower point estimate than that intermediate specification.
 
-Using averages for both generations changes the estimate from 0.434 to 0.508. The paired difference is 0.074, with a bootstrap interval from 0.030 to 0.126. Averaging only parental income gives 0.517. Averaging adult child income too produces a lower point estimate than that intermediate specification, so the effect of averaging differs across the two generations.
-
-Holding the parental average fixed, the estimate is 0.445 when adult children are 25 to 29 and 0.508 at 40 to 44. This is evidence of sensitivity to measurement age. It does not identify a true lifetime IGE or isolate lifecycle bias from calendar-period and observation-count differences.
+Parental averages contain 3 to 7 observations per child (median 4). Mature adult child averages contain 2 to 3 observations (median 2).
 
 ![Income averaging comparison](income-averages.png)
 
-![Comparison across adult child ages](child-age.png)
+## One observation at each career stage
+
+Each estimate uses one selected adult child income observation from its age window and the same parental income average. Selection is nearest the midpoint of the age window, with the earlier income year breaking ties. The child sample is held fixed across all four windows. The final column also averages child income within each window on this same career-stage sample, so the one-observation and average columns can be compared within a window.
+
+| Adult child age window | One child observation: IGE | 95% family bootstrap interval | Average child income: IGE |
+| --- | --- | --- | --- |
+| 25 to 29 | 0.468 | 0.397 to 0.536 | 0.431 |
+| 30 to 34 | 0.513 | 0.440 to 0.596 | 0.472 |
+| 35 to 39 | 0.501 | 0.434 to 0.578 | 0.493 |
+| 40 to 44 | 0.511 | 0.438 to 0.584 | 0.501 |
+
+Holding the parental income average fixed, the one-observation IGE is 0.468 at ages 25 to 29 and 0.511 at ages 40 to 44. The paired difference is 0.044, with a 95% family bootstrap interval of -0.023 to 0.122. The interval includes zero, so this comparison does not clearly distinguish the endpoint difference from zero. The sequence is not monotonic across these age windows.
+
+![One adult child income observation at each career stage](child-age.png)
+
+| Adult child age window | Mean selected age | Income years |
+| --- | --- | --- |
+| 25 to 29 | 26.77 | 1985 to 2006 |
+| 30 to 34 | 31.67 | 1990 to 2010 |
+| 35 to 39 | 36.54 | 1996 to 2016 |
+| 40 to 44 | 41.58 | 2000 to 2020 |
+
+The comparison holds the number of selected child observations at one per stage. Calendar period and family circumstances still change with age. It does not identify a true lifetime IGE or the amount of lifecycle bias.
 
 ## Checks and limitations
 
-The program verifies compound identifiers, household income consistency, foreign keys, distinct children and identical samples. It checks the simple OLS estimate against an independent covariance formula. SQL and normalization tests use invented records, including negative incomes and missing years.
+A higher IGE means a stronger association between parental and adult child family income. It is not the causal effect of giving parents more money.
 
-Income is converted to 2022 dollars before averaging. Parental income is measured in the child's co-resident family at approximate ages 15 to 19. Adult income requires reference person or spouse/partner status. Survey weights were not supplied. The sample requires linked parents and repeated observations, so it does not represent all US children. The income measure is family income, not personal earnings. Family membership is observed at interview, while income covers the previous calendar year.
+Confidence intervals use 1,000 paired bootstrap draws that resample families of origin. The same draw is used across specifications within each comparison. Separate family-cluster standard errors are saved in the aggregate tables.
 
-With the linear cohort and sex adjustment, the one-year and averaged estimates are 0.423 and 0.497. After excluding inconsistent age histories, the retained sample has 1,476 children; the one-year and averaged estimates are 0.452 and 0.528.
+Income is converted to 2022 dollars before averaging. Parental income is measured in the child's co-resident family at approximate ages 15 to 19. Adult child income requires reference person or spouse/partner status. Family membership is observed at interview, while income covers the previous calendar year.
 
-Only aggregate results and figures are included here. The normalized tables and matched records stayed in memory. [Replication details](../../README-real.md).
+Survey weights were not supplied. The sample requires linked parents and repeated observations, so it does not represent all US children. The income measure is family income, rather than personal earnings.
+
+With the linear cohort and sex adjustment on the same main sample, the one-observation and averaged estimates are 0.423 and 0.497. Restricting to consistent age histories retains 1,476 children; those two estimates are 0.452 and 0.528.
+
+The source analysis checks compound identifiers, household income consistency, foreign keys, identical samples and positive finite regression inputs. It also verifies the simple OLS slope against an independent covariance calculation. The R aggregate check independently verifies measure keys, counts, finite estimates and intervals, paired differences, age coverage and wave totals before rendering this report.
+
+Only aggregate results and figures are saved. The normalized tables and matched records stay in memory. [Replication details](../../README-real.md).
