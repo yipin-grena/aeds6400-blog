@@ -118,8 +118,10 @@ async function assertPresentation(plot, metric, viewportName) {
     Math.min(a.bottom, b.bottom) - Math.max(a.y, b.y) > 1;
   for (const [label, r] of elements) {
     assert(r?.visible, `${name}: ${label} is not visible.`);
+    // SVG font ascent places the visible title slightly above the chart box.
+    const topAllowance = label === 'title' ? 8 : 2;
     assert(r.x >= geometry.plot.x - 2 && r.right <= geometry.plot.right + 2 &&
-      r.y >= geometry.plot.y - 2 && r.bottom <= geometry.plot.bottom + 2,
+      r.y >= geometry.plot.y - topAllowance && r.bottom <= geometry.plot.bottom + 2,
     `${name}: ${label} is clipped outside the chart.`);
   }
   for (let i = 0; i < elements.length; i++) {

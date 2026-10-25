@@ -1,28 +1,513 @@
 {
   "status": "passed",
-  "browser": "155.0.8059.86",
-  "desktop_viewport": {
-    "width": 1200,
-    "height": 900
+  "tested_at_utc": "2026-10-25T21:49:42.944Z",
+  "method": "Codex in-app browser UI actions and read-only rendered-DOM inspection",
+  "target": {
+    "mode": "published_https",
+    "url": "https://yipin-grena.github.io/aeds6400-blog/posts/everyday-prices/",
+    "source_commit": "af11035dbfe931ad3dedb81b0c266add3093935f"
   },
-  "mobile_viewport": {
-    "viewport": 390,
-    "document": 390,
-    "plot": 354
+  "chart_version": "price-explorer-v2",
+  "requested_viewports": {
+    "desktop": {
+      "width": 1200,
+      "height": 900
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
   },
-  "offline_request_policy": "All HTTP and HTTPS requests blocked",
   "checks": [
-    "All six initial trace endpoints match the saved cumulative estimates.",
-    "The actual selector updates every annual series and axis label while preserving hidden categories.",
-    "Double-click isolates the selected grocery series.",
-    "Mouse hover displays the correct month and both cumulative and annual grocery values.",
-    "Drag zoom changes the date range and Reset dates restores the full window.",
-    "Switching back restores cumulative values and the legend can restore all categories.",
-    "At 390px the page fits the viewport and the metric selector remains functional.",
-    "Self-contained HTML loads offline without page JavaScript errors or unresolved inline R."
+    "Both finding titles and six endpoint values appear in the deployed chart.",
+    "All 24 displayed endpoint labels across both metrics and both viewports match computed one-decimal values.",
+    "Both metrics fit desktop and phone widths without horizontal overflow or title/control/label overlap.",
+    "Hiding Groceries removes its line and label; switching metrics preserves the hidden pair.",
+    "Restoring Groceries brings back all twelve rendered trace groups; double-clicking isolates its line and label."
   ],
-  "page_errors": [],
+  "presentation_checks": [
+    {
+      "metric": "cumulative",
+      "viewport": 1185,
+      "document": 1185,
+      "labels": [
+        {
+          "bottom": 1377.1600341796875,
+          "height": 12,
+          "right": 978.484375,
+          "text": "Overall CPI 22.8%",
+          "width": 90.484375,
+          "x": 888,
+          "y": 1365.1600341796875
+        },
+        {
+          "bottom": 1339.5400390625,
+          "height": 12,
+          "right": 969.9375,
+          "text": "Groceries 27.6%",
+          "width": 81.9375,
+          "x": 888,
+          "y": 1327.5400390625
+        },
+        {
+          "bottom": 1358.3499755859375,
+          "height": 12,
+          "right": 945.484375,
+          "text": "Rent 27.1%",
+          "width": 57.484375,
+          "x": 888,
+          "y": 1346.3499755859375
+        },
+        {
+          "bottom": 1321.044921875,
+          "height": 12.31494140625,
+          "right": 969.3125,
+          "text": "Electricity 31.9%",
+          "width": 81.3125,
+          "x": 888,
+          "y": 1308.72998046875
+        },
+        {
+          "bottom": 1395.969970703125,
+          "height": 12,
+          "right": 965.671875,
+          "text": "Gasoline 18.3%",
+          "width": 77.671875,
+          "x": 888,
+          "y": 1383.969970703125
+        },
+        {
+          "bottom": 1415.094970703125,
+          "height": 12.31494140625,
+          "right": 956.5,
+          "text": "Clothing 6.9%",
+          "width": 68.5,
+          "x": 888,
+          "y": 1402.780029296875
+        }
+      ],
+      "menu": {
+        "bottom": 1078,
+        "height": 33,
+        "right": 390,
+        "text": "Since Dec 2019",
+        "width": 132,
+        "x": 258,
+        "y": 1045
+      },
+      "plot": {
+        "bottom": 1638,
+        "height": 650,
+        "right": 992,
+        "text": "Overall CPI 22.8%Groceries 27.6%Rent 27.1%Electricity 31.9%Gasoline 18.3%Clothing 6.9%20202021202220232024\u221220%0%20%40%60%80%Overall CPIGroceriesRentElectricityGasolineClothingReset datesElectricity rose most since Dec 2019;groceries and rent were nextPrice change since Dec 2019U.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.Since Dec 2019\u25bc",
+        "width": 799,
+        "x": 193,
+        "y": 988
+      },
+      "reset": {
+        "bottom": 1068.9000244140625,
+        "height": 19.9000244140625,
+        "right": 967.375,
+        "text": "Reset dates",
+        "width": 79.375,
+        "x": 888,
+        "y": 1049
+      },
+      "subtitle": {
+        "bottom": 1138.300048828125,
+        "height": 26.300048828125,
+        "right": 439.390625,
+        "text": "U.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.",
+        "width": 180.390625,
+        "x": 259,
+        "y": 1112
+      },
+      "title": {
+        "bottom": 1021.9171752929688,
+        "height": 38.16717529296875,
+        "right": 471.3081817626953,
+        "text": "Electricity rose most since Dec 2019;groceries and rent were next",
+        "width": 262.32818603515625,
+        "x": 208.97999572753903,
+        "y": 983.75
+      },
+      "six_labels_match_saved_results": true,
+      "controls_title_and_labels_fit_without_overlap": true
+    },
+    {
+      "metric": "annual",
+      "viewport": 1185,
+      "document": 1185,
+      "labels": [
+        {
+          "bottom": 744.4000244140625,
+          "height": 12,
+          "right": 972.375,
+          "text": "Overall CPI 2.9%",
+          "width": 84.375,
+          "x": 888,
+          "y": 732.4000244140625
+        },
+        {
+          "bottom": 782.02001953125,
+          "height": 12,
+          "right": 963.8125,
+          "text": "Groceries 1.8%",
+          "width": 75.8125,
+          "x": 888,
+          "y": 770.02001953125
+        },
+        {
+          "bottom": 725.5899658203125,
+          "height": 12,
+          "right": 939.375,
+          "text": "Rent 4.3%",
+          "width": 51.375,
+          "x": 888,
+          "y": 713.5899658203125
+        },
+        {
+          "bottom": 763.5249633789062,
+          "height": 12.31494140625,
+          "right": 963.203125,
+          "text": "Electricity 2.8%",
+          "width": 75.203125,
+          "x": 888,
+          "y": 751.2100219726562
+        },
+        {
+          "bottom": 819.6400146484375,
+          "height": 12,
+          "right": 963.21875,
+          "text": "Gasoline -3.4%",
+          "width": 75.21875,
+          "x": 888,
+          "y": 807.6400146484375
+        },
+        {
+          "bottom": 801.1448974609375,
+          "height": 12.31494140625,
+          "right": 956.5,
+          "text": "Clothing 1.2%",
+          "width": 68.5,
+          "x": 888,
+          "y": 788.8299560546875
+        }
+      ],
+      "menu": {
+        "bottom": 466,
+        "height": 33,
+        "right": 390,
+        "text": "Year-over-year",
+        "width": 132,
+        "x": 258,
+        "y": 433
+      },
+      "plot": {
+        "bottom": 1026,
+        "height": 650,
+        "right": 992,
+        "text": "Overall CPI 2.9%Groceries 1.8%Rent 4.3%Electricity 2.8%Gasoline -3.4%Clothing 1.2%20202021202220232024\u221220%0%20%40%60%Overall CPIGroceriesRentElectricityGasolineClothingReset datesOverall annual inflation fell from9.1% (Jun 2022) to 2.9% (Dec 2024)Price change from 12 months earlierU.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.Year-over-year\u25bc",
+        "width": 799,
+        "x": 193,
+        "y": 376
+      },
+      "reset": {
+        "bottom": 456.8999938964844,
+        "height": 19.899993896484375,
+        "right": 967.375,
+        "text": "Reset dates",
+        "width": 79.375,
+        "x": 888,
+        "y": 437
+      },
+      "subtitle": {
+        "bottom": 526.2999877929688,
+        "height": 26.29998779296875,
+        "right": 439.390625,
+        "text": "U.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.",
+        "width": 180.390625,
+        "x": 259,
+        "y": 500
+      },
+      "title": {
+        "bottom": 409.9171752929687,
+        "height": 38.16717529296875,
+        "right": 468.68312072753906,
+        "text": "Overall annual inflation fell from9.1% (Jun 2022) to 2.9% (Dec 2024)",
+        "width": 259.703125,
+        "x": 208.97999572753903,
+        "y": 371.75
+      },
+      "six_labels_match_saved_results": true,
+      "controls_title_and_labels_fit_without_overlap": true
+    },
+    {
+      "metric": "cumulative",
+      "viewport": 375,
+      "document": 375,
+      "labels": [
+        {
+          "bottom": 688.8399658203125,
+          "height": 12,
+          "right": 335.984375,
+          "text": "Overall CPI 22.8%",
+          "width": 90.484375,
+          "x": 245.5,
+          "y": 676.8399658203125
+        },
+        {
+          "bottom": 663.5999755859375,
+          "height": 12,
+          "right": 327.4375,
+          "text": "Groceries 27.6%",
+          "width": 81.9375,
+          "x": 245.5,
+          "y": 651.5999755859375
+        },
+        {
+          "bottom": 676.219970703125,
+          "height": 12,
+          "right": 302.984375,
+          "text": "Rent 27.1%",
+          "width": 57.484375,
+          "x": 245.5,
+          "y": 664.219970703125
+        },
+        {
+          "bottom": 651.284912109375,
+          "height": 12.31494140625,
+          "right": 326.8125,
+          "text": "Electricity 31.9%",
+          "width": 81.3125,
+          "x": 245.5,
+          "y": 638.969970703125
+        },
+        {
+          "bottom": 701.4600219726562,
+          "height": 12,
+          "right": 323.171875,
+          "text": "Gasoline 18.3%",
+          "width": 77.671875,
+          "x": 245.5,
+          "y": 689.4600219726562
+        },
+        {
+          "bottom": 714.4049072265625,
+          "height": 12.31494140625,
+          "right": 314,
+          "text": "Clothing 6.9%",
+          "width": 68.5,
+          "x": 245.5,
+          "y": 702.0899658203125
+        }
+      ],
+      "menu": {
+        "bottom": 463.5,
+        "height": 33,
+        "right": 222.5,
+        "text": "Since Dec 2019",
+        "width": 132,
+        "x": 90.5,
+        "y": 430.5
+      },
+      "plot": {
+        "bottom": 1023.5,
+        "height": 650,
+        "right": 349.5,
+        "text": "Overall CPI 22.8%Groceries 27.6%Rent 27.1%Electricity 31.9%Gasoline 18.3%Clothing 6.9%202020222024\u221220%0%20%40%60%80%Overall CPIGroceriesRentElectricityGasolineClothingReset datesElectricity rose most since Dec 2019;groceries and rent were nextPrice change since Dec 2019U.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.Since Dec 2019\u25bc",
+        "width": 324,
+        "x": 25.5,
+        "y": 373.5
+      },
+      "reset": {
+        "bottom": 487.3999938964844,
+        "height": 19.899993896484375,
+        "right": 324.875,
+        "text": "Reset dates",
+        "width": 79.375,
+        "x": 245.5,
+        "y": 467.5
+      },
+      "subtitle": {
+        "bottom": 526.7999877929688,
+        "height": 26.29998779296875,
+        "right": 271.890625,
+        "text": "U.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.",
+        "width": 180.390625,
+        "x": 91.5,
+        "y": 500.5
+      },
+      "title": {
+        "bottom": 407.4171752929687,
+        "height": 38.16717529296875,
+        "right": 294.3081817626953,
+        "text": "Electricity rose most since Dec 2019;groceries and rent were next",
+        "width": 262.32818603515625,
+        "x": 31.979995727539062,
+        "y": 369.25
+      },
+      "six_labels_match_saved_results": true,
+      "controls_title_and_labels_fit_without_overlap": true
+    },
+    {
+      "metric": "annual",
+      "viewport": 375,
+      "document": 375,
+      "labels": [
+        {
+          "bottom": 649.9100341796875,
+          "height": 12,
+          "right": 329.875,
+          "text": "Overall CPI 2.9%",
+          "width": 84.375,
+          "x": 245.5,
+          "y": 637.9100341796875
+        },
+        {
+          "bottom": 675.1500244140625,
+          "height": 12,
+          "right": 321.3125,
+          "text": "Groceries 1.8%",
+          "width": 75.8125,
+          "x": 245.5,
+          "y": 663.1500244140625
+        },
+        {
+          "bottom": 637.2900390625,
+          "height": 12.00006103515625,
+          "right": 296.875,
+          "text": "Rent 4.3%",
+          "width": 51.375,
+          "x": 245.5,
+          "y": 625.2899780273438
+        },
+        {
+          "bottom": 662.844970703125,
+          "height": 12.31494140625,
+          "right": 320.703125,
+          "text": "Electricity 2.8%",
+          "width": 75.203125,
+          "x": 245.5,
+          "y": 650.530029296875
+        },
+        {
+          "bottom": 700.4000244140625,
+          "height": 12,
+          "right": 320.71875,
+          "text": "Gasoline -3.4%",
+          "width": 75.21875,
+          "x": 245.5,
+          "y": 688.4000244140625
+        },
+        {
+          "bottom": 688.094970703125,
+          "height": 12.31494140625,
+          "right": 314,
+          "text": "Clothing 1.2%",
+          "width": 68.5,
+          "x": 245.5,
+          "y": 675.780029296875
+        }
+      ],
+      "menu": {
+        "bottom": 472.5,
+        "height": 33,
+        "right": 222.5,
+        "text": "Year-over-year",
+        "width": 132,
+        "x": 90.5,
+        "y": 439.5
+      },
+      "plot": {
+        "bottom": 998.5,
+        "height": 650,
+        "right": 349.5,
+        "text": "Overall CPI 2.9%Groceries 1.8%Rent 4.3%Electricity 2.8%Gasoline -3.4%Clothing 1.2%202020222024\u221220%0%20%40%60%Overall CPIGroceriesRentElectricityGasolineClothingReset datesOverall annual inflation fell from9.1% (Jun 2022) to 2.9% (Dec 2024)Price change from 12 months earlierU.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.Year-over-year\u25bc",
+        "width": 324,
+        "x": 25.5,
+        "y": 348.5
+      },
+      "reset": {
+        "bottom": 462.3999938964844,
+        "height": 19.899993896484375,
+        "right": 324.875,
+        "text": "Reset dates",
+        "width": 79.375,
+        "x": 245.5,
+        "y": 442.5
+      },
+      "subtitle": {
+        "bottom": 501.7999877929687,
+        "height": 26.29998779296875,
+        "right": 271.890625,
+        "text": "U.S. CPI-U, Dec 2019 to Dec 2024.Labels show December 2024 values.",
+        "width": 180.390625,
+        "x": 91.5,
+        "y": 475.5
+      },
+      "title": {
+        "bottom": 382.4171752929687,
+        "height": 38.16717529296875,
+        "right": 291.68312072753906,
+        "text": "Overall annual inflation fell from9.1% (Jun 2022) to 2.9% (Dec 2024)",
+        "width": 259.703125,
+        "x": 31.979995727539062,
+        "y": 344.25
+      },
+      "six_labels_match_saved_results": true,
+      "controls_title_and_labels_fit_without_overlap": true
+    }
+  ],
+  "interaction_checks": [
+    {
+      "action": "Hide Groceries in annual view",
+      "visible_end_labels": [
+        "Overall CPI 2.9%",
+        "Rent 4.3%",
+        "Electricity 2.8%",
+        "Gasoline -3.4%",
+        "Clothing 1.2%"
+      ],
+      "rendered_trace_groups": 10,
+      "groceries_legend_style": "opacity: 0.5;"
+    },
+    {
+      "action": "Switch to cumulative with Groceries hidden",
+      "visible_end_labels": [
+        "Overall CPI 22.8%",
+        "Rent 27.1%",
+        "Electricity 31.9%",
+        "Gasoline 18.3%",
+        "Clothing 6.9%"
+      ],
+      "rendered_trace_groups": 10,
+      "groceries_legend_style": "opacity: 0.5;"
+    },
+    {
+      "action": "Restore Groceries",
+      "visible_end_labels": [
+        "Overall CPI 22.8%",
+        "Groceries 27.6%",
+        "Rent 27.1%",
+        "Electricity 31.9%",
+        "Gasoline 18.3%",
+        "Clothing 6.9%"
+      ],
+      "rendered_trace_groups": 12
+    },
+    {
+      "action": "Double-click to isolate Groceries",
+      "visible_end_labels": [
+        "Groceries 27.6%"
+      ],
+      "rendered_trace_groups": 2
+    }
+  ],
   "limits": [
-    "Mouse controls tested; no touchscreen device or screen-reader audit performed."
+    "checks/browser.mjs was updated and syntax-checked, but its Playwright runner was not executed in this review.",
+    "This record verifies the deployed HTTPS page; it does not claim offline loading.",
+    "Hover and drag-zoom/reset interactions were not repeated in this review.",
+    "Viewport resizing uses desktop browser input; no physical touchscreen or screen-reader audit was performed."
   ]
 }
