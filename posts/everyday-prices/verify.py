@@ -199,7 +199,8 @@ def main():
     require(len(payloads) == 1, "Expected exactly one saved Plotly widget payload")
     widget = json.loads(payloads[0])["x"]
     traces = widget["data"]
-    require(len(traces) == 6, "Expected six displayed Plotly traces")
+    # Six data lines, then six end-of-line label traces in the same order.
+    require(len(traces) == 12, "Expected six Plotly lines and six end labels")
     menus = widget["layout"]["updatemenus"]
     require(len(menus) == 1, "Expected one measure selector")
     buttons = menus[0]["buttons"]
@@ -209,7 +210,7 @@ def main():
     )
     for button in buttons:
         require(button["method"] == "update", "Unexpected Plotly selector method")
-        require(len(button["args"][0]["y"]) == 6, "Selector trace count differs")
+        require(len(button["args"][0]["y"]) == 12, "Selector trace count differs")
         require(button["args"][1]["yaxis"]["ticksuffix"] == "%", "Selector axis lacks percent units")
     for i, cfg in enumerate(series):
         sid, label = cfg["series_id"], cfg["label"]
@@ -238,6 +239,20 @@ def main():
             all(template == "%{text}<extra></extra>" for template in templates),
             f"Hover template does not use the checked payload: {sid}",
         )
+        # Switching views must keep the line's hover text and relabel its endpoint.
+        end = computed[(sid, DISPLAYED_DATES[-1])]
+        label_trace = traces[6 + i]
+        require(label_trace.get("legendgroup") == label == trace.get("legendgroup"),
+                f"End label is not grouped with its line: {sid}")
+        close(label_trace["y"][0], end["cumulative_pct"], f"End label anchor {sid}")
+        require(label_trace["text"][1] == f"{label} {end['cumulative_pct']:.1f}%",
+                f"Initial end label differs: {sid}")
+        for button, field in zip(buttons, ["cumulative_pct", "annual_pct"]):
+            data_update = button["args"][0]
+            require(data_update["text"][i] == trace["text"], f"Selector replaces hover text: {sid}")
+            close(data_update["y"][6 + i][0], end[field], f"Selector end label anchor {sid} {field}")
+            require(data_update["text"][6 + i][1] == f"{label} {end[field]:.1f}%",
+                    f"Selector end label differs: {sid} {field}")
     report = {
         "status": "passed", "raw_files_checked": len(series),
         "raw_rows_checked": raw_rows, "displayed_rows_checked": len(monthly),
@@ -248,7 +263,7 @@ def main():
             "All displayed indexes, baseline indexes, cumulative changes and exact 12-month changes",
             "Endpoint summaries, category ranks, peak dates and rates, and 2023/2024 sensitivity tables",
             "Gasoline peak decline, grocery post-peak change, audit counts and saved validation claims",
-            "Saved Plotly lines, both selector value arrays, and numeric/date hover text",
+            "Saved Plotly lines, both selector value arrays, numeric/date hover text, and end labels",
         ],
         "limits": [
             "This verifies arithmetic and internal consistency, not the original BLS collection process.",
