@@ -1,0 +1,10 @@
+{
+  "source_files": 6,
+  "raw_months_per_series": 73,
+  "displayed_rows": 366,
+  "missing_displayed_values": 0,
+  "unique_series_month_keys": true,
+  "complete_monthly_calendars": true,
+  "twelve_month_matches_verified": true,
+  "snapshot_md5_verified": true
+}

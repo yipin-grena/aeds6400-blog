@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "raw_files_checked": 6,
+  "raw_rows_checked": 438,
+  "displayed_rows_checked": 366,
+  "numeric_comparisons": 2675,
+  "plotly_traces_checked": 6,
+  "plotly_hover_rows_checked": 366,
+  "checks": [
+    "Raw schemas, labels, IDs, checksums, positive finite indexes and complete monthly calendars",
+    "All displayed indexes, baseline indexes, cumulative changes and exact 12-month changes",
+    "Endpoint summaries, category ranks, peak dates and rates, and 2023/2024 sensitivity tables",
+    "Gasoline peak decline, grocery post-peak change, audit counts and saved validation claims",
+    "Saved Plotly lines, both selector value arrays, and numeric/date hover text"
+  ],
+  "limits": [
+    "This verifies arithmetic and internal consistency, not the original BLS collection process.",
+    "This script does not test browser controls, article prose, or empirical uncertainty."
+  ]
+}

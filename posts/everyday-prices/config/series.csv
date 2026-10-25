@@ -1,0 +1,7 @@
+series_id,label,color,dash,role
+CPIAUCNS,Overall CPI,#222222,dash,benchmark
+CUUR0000SAF11,Groceries,#0072B2,solid,category
+CUUR0000SEHA,Rent,#009E73,solid,category
+CUUR0000SEHF01,Electricity,#D55E00,solid,category
+CUUR0000SETB01,Gasoline,#CC79A7,solid,category
+CPIAPPNS,Clothing,#6A51A3,solid,category

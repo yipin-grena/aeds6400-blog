@@ -1,0 +1,98 @@
+{
+  "baseline": "2019-12-01",
+  "endpoint": "2024-12-01",
+  "categories": 5,
+  "months_per_series": 61,
+  "series": [
+    {
+      "series_id": "CPIAUCNS",
+      "label": "Overall CPI",
+      "cumulative_pct": 22.815926903111,
+      "annual_pct": 2.88805721998
+    },
+    {
+      "series_id": "CUUR0000SAF11",
+      "label": "Groceries",
+      "cumulative_pct": 27.561530506722,
+      "annual_pct": 1.773898120493,
+      "category_rank": 2
+    },
+    {
+      "series_id": "CUUR0000SEHA",
+      "label": "Rent",
+      "cumulative_pct": 27.127370549513,
+      "annual_pct": 4.272952660214,
+      "category_rank": 3
+    },
+    {
+      "series_id": "CUUR0000SEHF01",
+      "label": "Electricity",
+      "cumulative_pct": 31.934676361902,
+      "annual_pct": 2.797488575993,
+      "category_rank": 1
+    },
+    {
+      "series_id": "CUUR0000SETB01",
+      "label": "Gasoline",
+      "cumulative_pct": 18.269050105524,
+      "annual_pct": -3.432885343342,
+      "category_rank": 4
+    },
+    {
+      "series_id": "CPIAPPNS",
+      "label": "Clothing",
+      "cumulative_pct": 6.920435560108,
+      "annual_pct": 1.240122740353,
+      "category_rank": 5
+    }
+  ],
+  "gas_peak_date": "2022-06-01",
+  "gas_fall_from_peak_pct": -37.07496594148,
+  "grocery_peak_inflation_date": "2022-08-01",
+  "grocery_peak_inflation_pct": 13.540652362167,
+  "grocery_change_after_peak_inflation_pct": 4.533112773595,
+  "peak_annual_inflation": [
+    {
+      "series_id": "CPIAPPNS",
+      "label": "Clothing",
+      "peak_date": "2022-03-01",
+      "peak_annual_pct": 6.768754244447,
+      "_row": "CPIAPPNS"
+    },
+    {
+      "series_id": "CPIAUCNS",
+      "label": "Overall CPI",
+      "peak_date": "2022-06-01",
+      "peak_annual_pct": 9.059757964784,
+      "_row": "CPIAUCNS"
+    },
+    {
+      "series_id": "CUUR0000SAF11",
+      "label": "Groceries",
+      "peak_date": "2022-08-01",
+      "peak_annual_pct": 13.540652362167,
+      "_row": "CUUR0000SAF11"
+    },
+    {
+      "series_id": "CUUR0000SEHA",
+      "label": "Rent",
+      "peak_date": "2023-03-01",
+      "peak_annual_pct": 8.814316929903,
+      "_row": "CUUR0000SEHA"
+    },
+    {
+      "series_id": "CUUR0000SEHF01",
+      "label": "Electricity",
+      "peak_date": "2022-08-01",
+      "peak_annual_pct": 15.759446151697,
+      "_row": "CUUR0000SEHF01"
+    },
+    {
+      "series_id": "CUUR0000SETB01",
+      "label": "Gasoline",
+      "peak_date": "2022-06-01",
+      "peak_annual_pct": 59.916573412794,
+      "_row": "CUUR0000SETB01"
+    }
+  ]
+}

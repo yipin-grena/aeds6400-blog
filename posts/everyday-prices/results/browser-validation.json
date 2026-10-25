@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "browser": "155.0.8059.86",
+  "desktop_viewport": {
+    "width": 1200,
+    "height": 900
+  },
+  "mobile_viewport": {
+    "viewport": 390,
+    "document": 390,
+    "plot": 354
+  },
+  "offline_request_policy": "All HTTP and HTTPS requests blocked",
+  "checks": [
+    "All six initial trace endpoints match the saved cumulative estimates.",
+    "The actual selector updates every annual series and axis label while preserving hidden categories.",
+    "Double-click isolates the selected grocery series.",
+    "Mouse hover displays the correct month and both cumulative and annual grocery values.",
+    "Drag zoom changes the date range and Reset dates restores the full window.",
+    "Switching back restores cumulative values and the legend can restore all categories.",
+    "At 390px the page fits the viewport and the metric selector remains functional.",
+    "Self-contained HTML loads offline without page JavaScript errors or unresolved inline R."
+  ],
+  "page_errors": [],
+  "limits": [
+    "Mouse controls tested; no touchscreen device or screen-reader audit performed."
+  ]
+}

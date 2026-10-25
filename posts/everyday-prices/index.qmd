@@ -1,0 +1,85 @@
+---
+title: "Slower inflation did not bring everyday prices back to 2019"
+description: "An interactive comparison of groceries, rent, electricity, gasoline, and clothing through the end of 2024."
+author: "Yipin Zhang"
+date: 2026-10-24
+draft: false
+categories: [inflation, interactive visualization, Plotly]
+format:
+  html:
+    code-fold: true
+    code-summary: "Show code"
+execute:
+  echo: false
+  warning: true
+  message: false
+  freeze: false
+  cache: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(plotly)
+s <- jsonlite::fromJSON("results/summary.json")
+monthly <- read.csv("results/tables/monthly.csv", stringsAsFactors = FALSE)
+monthly$date <- as.Date(monthly$date)
+series <- read.csv("config/series.csv", stringsAsFactors = FALSE)
+source("R/figure.R")
+f <- function(x) sprintf("%.1f", x)
+value <- function(label, column = "cumulative_pct") {
+  result <- s$series[[column]][s$series$label == label]
+  stopifnot(length(result) == 1L, is.finite(result))
+  result
+}
+```
+
+A smaller annual price increase does not erase the increases that came before it. For someone planning a grocery budget or comparing household bills, the difference matters. A price can be rising slowly today while remaining far above what someone remembers paying a few years earlier.
+
+This post asks a concrete historical question: **which of five everyday spending categories was furthest above its pre-pandemic price level by December 2024?** I compare groceries, rent, electricity, gasoline, and clothing with December 2019. They are selected examples, not a complete household budget. The overall Consumer Price Index, or CPI, provides a benchmark.
+
+The answer depends on which change we look at. Overall prices were `r f(value("Overall CPI"))`% above December 2019, even though inflation over the final twelve months was `r f(value("Overall CPI", "annual_pct"))`%. Both figures describe the same December 2024 price index. They simply answer questions over different time spans.
+
+## Explore the difference
+
+The chart opens with each category's percentage change since December 2019. Zero means its price index is back at that starting level. Use the menu to switch to **Year-over-year**, which compares each month with the same month one year earlier.
+
+Click a category in the legend to hide or restore it. Double-click to isolate it. Hover over a line to see both measures for that month, and drag across dates to zoom. **Reset dates** restores the full period. For a useful comparison, isolate groceries, switch views, and inspect 2022 and 2024. Then repeat with gasoline.
+
+```{r}
+#| label: fig-price-explorer
+#| fig-cap: "One chart, two comparisons: cumulative price increases since December 2019 and changes from twelve months earlier. Monthly U.S. CPI-U indexes, not seasonally adjusted, through December 2024. Source: BLS via FRED."
+#| fig-alt: "Interactive lines for five selected spending categories and overall CPI, with a cumulative-change or annual-inflation selector and category legend controls."
+#| out-width: "100%"
+make_price_figure(monthly, series)
+```
+
+## The largest increase was electricity
+
+By December 2024, electricity's index was `r f(value("Electricity"))`% above its December 2019 level, the largest increase among these five categories. Groceries followed at `r f(value("Groceries"))`%, with rent close behind at `r f(value("Rent"))`%. Each had risen more than the overall CPI benchmark.
+
+Gasoline was up `r f(value("Gasoline"))`%, while clothing was up `r f(value("Clothing"))`%. The spread matters because households buy different combinations of these goods and services. It also shows why one overall number cannot describe every part of a budget. These indexes measure price changes, however, not the dollar increase in a particular family's spending.
+
+The ranking is tied to the dates. Electricity also had the largest increase at the end of 2023, but gasoline then ranked above rent. By the end of 2024, those two had switched places. Moving the endpoint can change the comparison, which is one reason to explore the path instead of reading only the final values.
+
+## A slower rate can still leave a higher price
+
+Groceries make the distinction especially clear. Their annual inflation rate reached `r f(s$grocery_peak_inflation_pct)`% in `r format(as.Date(s$grocery_peak_inflation_date), "%B %Y")` within this window. By December 2024, it was `r f(value("Groceries", "annual_pct"))`%. Yet the grocery index rose another `r f(s$grocery_change_after_peak_inflation_pct)`% between those dates. The rate slowed sharply while the price level continued upward.
+
+Gasoline illustrates a different outcome. In December 2024, its index was `r f(abs(value("Gasoline", "annual_pct")))`% below December 2023. Prices had actually fallen over that year. Switch back to the cumulative view, though, and gasoline remained `r f(value("Gasoline"))`% above December 2019. A recent decline did not reverse the full earlier increase.
+
+This is what the interaction adds: the reader can compare two statements about the same category and date without mistaking a lower inflation rate for a return to old prices.
+
+## What this comparison can tell us
+
+The [Bureau of Labor Statistics](https://www.bls.gov/cpi/questions-and-answers.htm) measures price changes for urban consumers. These national indexes do not describe a particular store, city, or shopping list. The [rent index](https://www.bls.gov/cpi/factsheets/owners-equivalent-rent-and-rent.htm) covers rents paid for occupied homes, including continuing tenants, rather than only newly advertised apartments. The data are not seasonally adjusted; December-to-December comparisons keep the endpoint months consistent, while shorter movements can reflect seasonal patterns.
+
+This is a historical price comparison, not a report on today's prices. It contains no earnings data, so it cannot establish whether households became better or worse off. Nor can the lines identify which policies or market forces caused the changes.
+
+The main takeaways are:
+
+* Electricity, groceries, and rent rose more than overall CPI in this five-year comparison.
+* Slower grocery inflation left the earlier price increase largely intact.
+* Gasoline fell during 2024 but remained above its 2019 starting point. Always specify the comparison dates.
+
+**Data and replication:** BLS CPI-U series distributed by [FRED](https://fred.stlouisfed.org/). Exact series, sources, limitations, and instructions are in the [GitHub repository](https://github.com/yipin-grena/aeds6400-blog/tree/main/posts/everyday-prices).

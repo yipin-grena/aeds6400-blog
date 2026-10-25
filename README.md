@@ -14,6 +14,7 @@ Blog posts by Yipin Zhang (grenaz@sas.upenn.edu), Fall 2026.
 | 4 | [Inflation fell first, unemployment rose later: The U.S. experience through 2024](https://yipin-grena.github.io/aeds6400-blog/posts/inflation-unemployment/) | [`posts/inflation-unemployment/`](posts/inflation-unemployment/README.md) |
 | 5 | [A college county and the Poconos stand out for rent pressure](https://yipin-grena.github.io/aeds6400-blog/posts/pa-rent-burden/) | [`posts/pa-rent-burden/`](posts/pa-rent-burden/README.md) |
 | 6 | [How one year of income can mislead a study of mobility](https://yipin-grena.github.io/aeds6400-blog/posts/sql-income-mobility/) | [`posts/sql-income-mobility/`](posts/sql-income-mobility/README.md) |
+| 7 | [Slower inflation did not bring everyday prices back to 2019](https://yipin-grena.github.io/aeds6400-blog/posts/everyday-prices/) | [`posts/everyday-prices/`](posts/everyday-prices/README.md) |
 
 ## Repository layout
 
@@ -49,16 +50,22 @@ aeds6400-blog/
     │   ├── build_preview.py
     │   ├── data/raw/        public Census downloads and provenance
     │   └── results/
-    └── sql-income-mobility/ Blog Post 6
-        ├── real_analysis.py pandas preparation, SQLite matching and IGE estimates
-        ├── tutorial_real.py complete runnable Python example
-        ├── R/               aggregate validation, figures and report
-        ├── README-real.md   exact variables and matching other years
-        ├── config/          PSID wave and income-code mapping
-        ├── sql/             real-data schema/query and optional simulation SQL
-        ├── data/raw/        local PSID/FIMS extracts, excluded from Git
-        ├── data/public/     public BLS/FRED CPI observations
-        └── results/real/    aggregate estimates, checks and figures
+    ├── sql-income-mobility/ Blog Post 6
+    │   ├── real_analysis.py pandas preparation, SQLite matching and IGE estimates
+    │   ├── tutorial_real.py complete runnable Python example
+    │   ├── R/               aggregate validation, figures and report
+    │   ├── README-real.md   exact variables and matching other years
+    │   ├── config/          PSID wave and income-code mapping
+    │   ├── sql/             real-data schema/query and optional simulation SQL
+    │   ├── data/raw/        local PSID/FIMS extracts, excluded from Git
+    │   ├── data/public/     public BLS/FRED CPI observations
+    │   └── results/real/    aggregate estimates, checks and figures
+    └── everyday-prices/     Blog Post 7
+        ├── index.qmd        article with interactive Plotly visualization
+        ├── run.R            offline R analysis and figure generation
+        ├── R/               acquisition, transformations and Plotly figure
+        ├── data/raw/        public BLS/FRED snapshots and provenance
+        └── results/         aggregate tables and standalone interactive figure
 ```
 
 ## Reproducing a post
@@ -91,6 +98,8 @@ For Blog Post 4, run `Rscript posts/inflation-unemployment/run.R` from the repos
 For Blog Post 5, install the Python dependencies in [its README](posts/pa-rent-burden/README.md), then run `python posts/pa-rent-burden/run.py` from the repository root. It uses committed Census files without downloading them again. Its `build_preview.py` produces a standalone review copy.
 
 For Blog Post 6, obtain the private PSID/FIMS extracts described in [its README](posts/sql-income-mobility/README.md), install `requirements-real.txt` and R with `jsonlite`, then run `python posts/sql-income-mobility/real_analysis.py` from the repository root. The pipeline saves aggregate results only and calls R for checks, figures and the report. Rendering uses committed aggregates, so it does not require the extracts. The old simulation remains an optional teaching example.
+
+For Blog Post 7, install the R dependencies in [its README](posts/everyday-prices/README.md), including `plotly`, then run `Rscript posts/everyday-prices/run.R` and `python3 posts/everyday-prices/verify.py` from the repository root. The analysis uses committed public CPI snapshots without network requests. The optional preview builder creates a separate local review copy.
 
 Render the site with `quarto render` from the repository root only when preparing a site build. Use each draft's `build_preview.py` for review without changing the published output.
 

@@ -1,0 +1,7 @@
+"series_id","raw_rows","duplicate_dates","missing_values","displayed_months","checksum_match","baseline_cumulative_pct"
+"CPIAUCNS",73,0,0,61,TRUE,0
+"CUUR0000SAF11",73,0,0,61,TRUE,0
+"CUUR0000SEHA",73,0,0,61,TRUE,0
+"CUUR0000SEHF01",73,0,0,61,TRUE,0
+"CUUR0000SETB01",73,0,0,61,TRUE,0
+"CPIAPPNS",73,0,0,61,TRUE,0

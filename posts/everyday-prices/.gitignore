@@ -1,0 +1,6 @@
+# Local review artifacts are intentionally excluded from publication.
+/preview/
+/.quarto/
+/*_files/
+/*.knit.md
+/*.utf8.md

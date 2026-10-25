@@ -1,0 +1,62 @@
+{
+  "source": "U.S. Bureau of Labor Statistics via FRED",
+  "frequency": "monthly",
+  "seasonal_adjustment": "not seasonally adjusted",
+  "original_units": "Index 1982-1984 = 100",
+  "files": [
+    {
+      "series_id": "CPIAUCNS",
+      "label": "Overall CPI",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCNS&cosd=2018-12-01&coed=2024-12-01",
+      "retrieved_utc": "2026-10-24T18:10:58Z",
+      "file": "CPIAUCNS.csv",
+      "md5": "9d4b606fbed8ea971d27b4b75345a6c1",
+      "rows": 73
+    },
+    {
+      "series_id": "CUUR0000SAF11",
+      "label": "Groceries",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CUUR0000SAF11&cosd=2018-12-01&coed=2024-12-01",
+      "retrieved_utc": "2026-10-24T18:10:59Z",
+      "file": "CUUR0000SAF11.csv",
+      "md5": "7883df2cba0456ff46b820bff0b0792c",
+      "rows": 73
+    },
+    {
+      "series_id": "CUUR0000SEHA",
+      "label": "Rent",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CUUR0000SEHA&cosd=2018-12-01&coed=2024-12-01",
+      "retrieved_utc": "2026-10-24T18:10:59Z",
+      "file": "CUUR0000SEHA.csv",
+      "md5": "cfaa3fe4675021ec7766cf29ad8354f7",
+      "rows": 73
+    },
+    {
+      "series_id": "CUUR0000SEHF01",
+      "label": "Electricity",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CUUR0000SEHF01&cosd=2018-12-01&coed=2024-12-01",
+      "retrieved_utc": "2026-10-24T18:10:59Z",
+      "file": "CUUR0000SEHF01.csv",
+      "md5": "dfc28bf99c3f7162e829abf8c0735f19",
+      "rows": 73
+    },
+    {
+      "series_id": "CUUR0000SETB01",
+      "label": "Gasoline",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CUUR0000SETB01&cosd=2018-12-01&coed=2024-12-01",
+      "retrieved_utc": "2026-10-24T18:11:00Z",
+      "file": "CUUR0000SETB01.csv",
+      "md5": "c08765969c8142193730bafbf5f45222",
+      "rows": 73
+    },
+    {
+      "series_id": "CPIAPPNS",
+      "label": "Clothing",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAPPNS&cosd=2018-12-01&coed=2024-12-01",
+      "retrieved_utc": "2026-10-24T18:11:01Z",
+      "file": "CPIAPPNS.csv",
+      "md5": "e338bce5ed80160a58a8e44a6fbf3061",
+      "rows": 73
+    }
+  ]
+}
