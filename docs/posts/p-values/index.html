@@ -246,7 +246,7 @@ window.Quarto = {
 </section>
 <section id="build-a-simple-null-world" class="level2">
 <h2 class="anchored" data-anchor-id="build-a-simple-null-world">Build a simple null world</h2>
-<p>Suppose 30 trainees take a test before and after a course, with an average score increase of 0.34 standardized units. We test whether the population’s mean score change is positive. Assume these changes are independent and normally distributed with a <strong>known</strong> standard deviation of 1. These are teaching assumptions, not data from an actual study. A score increase alone would not establish that the course caused it.</p>
+<p>Suppose 30 trainees take a test before and after a course, with an average score increase of 0.34 standardized units. We test whether the population’s mean score change is positive. Assume these changes are independent and normally distributed with a <strong>known</strong> standard deviation of 1. These are teaching assumptions, not data from an actual study.</p>
 <p>The null hypothesis is <span class="math inline">\(H_0:\mu=0\)</span>, and the alternative is <span class="math inline">\(H_1:\mu&gt;0\)</span>. Because we specify a positive direction in advance, this is a one-sided test. Its p-value is</p>
 <p><span class="math display">\[
 p=P(\bar X\geq 0.34\mid\mu=0,\text{ assumed sampling model}).
@@ -255,7 +255,7 @@ p=P(\bar X\geq 0.34\mid\mu=0,\text{ assumed sampling model}).
 </section>
 <section id="use-simulation-to-make-the-probability-visible" class="level2">
 <h2 class="anchored" data-anchor-id="use-simulation-to-make-the-probability-visible">Use simulation to make the probability visible</h2>
-<p>The R code below repeats this hypothetical experiment 10,000 times. Each repetition draws 30 observations from the null model and records their mean. Counting the means at least as large as 0.34 approximates the probability in the equation. Simulation is useful here because it turns an abstract conditional probability into a fraction of repeated experiments.</p>
+<p>The R code below repeats this hypothetical experiment 10,000 times. Each repetition draws 30 observations from the null model and records their mean. Counting the means at least as large as 0.34 approximates the probability in the equation.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)                 <span class="co"># Make the simulation reproducible.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
@@ -282,12 +282,12 @@ Figure&nbsp;1: Simulated average score changes under the null (histogram), with 
 </div>
 </div>
 </div>
-<p>The simulated fraction is 2.9%, close to the exact value of 3.13%. <strong>We built a world with no average score change, yet about 3 in every 100 repetitions still crossed the observed line.</strong> The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.</p>
+<p>The simulated fraction is 2.9%, close to the exact value of 3.13%. <strong>We built a world with no average score change, yet about 3 in every 100 repetitions still crossed the observed line.</strong> The small difference between simulation and calculation is Monte Carlo variation.</p>
 </section>
 <section id="what-should-we-conclude" class="level2">
 <h2 class="anchored" data-anchor-id="what-should-we-conclude">What should we conclude?</h2>
 <p>The observed mean is unusual under the specified null model, providing evidence against it. But every simulated experiment assumed the null was true: we never generated a mixture of true and false hypotheses. The simulation therefore cannot tell us what fraction of hypotheses are true after a small p-value appears.</p>
-<p>Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. For the company, <span class="math inline">\(p=0.03\)</span> is a reason to take the score gain seriously, not proof that the course works. It would still need to weigh the size of the gain against the course’s cost, and without a comparison group it cannot tell whether the course caused the gain. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.</p>
+<p>Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. For the company, <span class="math inline">\(p=0.03\)</span> is a reason to take the score gain seriously, not proof that the course works. It would still need to weigh the size of the gain against the course’s cost, and without a comparison group it cannot tell whether the course caused the gain. A large p-value, conversely, would not prove that the mean is zero.</p>
 <p>The main takeaways are:</p>
 <ul>
 <li>A p-value describes how unusual the observed result is under a specified model.</li>

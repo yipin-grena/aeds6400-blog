@@ -26,7 +26,7 @@ To see the difference in numbers, the next section builds the world described at
 
 ## Build a simple null world
 
-Suppose 30 trainees take a test before and after a course, with an average score increase of 0.34 standardized units. We test whether the population's mean score change is positive. Assume these changes are independent and normally distributed with a **known** standard deviation of 1. These are teaching assumptions, not data from an actual study. A score increase alone would not establish that the course caused it.
+Suppose 30 trainees take a test before and after a course, with an average score increase of 0.34 standardized units. We test whether the population's mean score change is positive. Assume these changes are independent and normally distributed with a **known** standard deviation of 1. These are teaching assumptions, not data from an actual study.
 
 The null hypothesis is $H_0:\mu=0$, and the alternative is $H_1:\mu>0$. Because we specify a positive direction in advance, this is a one-sided test. Its p-value is
 
@@ -38,7 +38,7 @@ Here, $\bar X$ is the sample mean. Under the null, it varies around zero with st
 
 ## Use simulation to make the probability visible
 
-The R code below repeats this hypothetical experiment 10,000 times. Each repetition draws 30 observations from the null model and records their mean. Counting the means at least as large as 0.34 approximates the probability in the equation. Simulation is useful here because it turns an abstract conditional probability into a fraction of repeated experiments.
+The R code below repeats this hypothetical experiment 10,000 times. Each repetition draws 30 observations from the null model and records their mean. Counting the means at least as large as 0.34 approximates the probability in the equation.
 
 ```{r}
 #| label: simulate-null
@@ -83,13 +83,13 @@ legend("topleft", legend = c("Exact null density", "Observed mean = 0.34"),
        col = c("#0072B2", "#D55E00"), lty = c(1, 2), lwd = 2, bty = "n", cex = 0.85)
 ```
 
-The simulated fraction is `r sprintf("%.1f", 100 * p_sim)`%, close to the exact value of `r sprintf("%.2f", 100 * p_exact)`%. **We built a world with no average score change, yet about `r sprintf("%.0f", 100 * p_exact)` in every 100 repetitions still crossed the observed line.** The small difference between simulation and calculation is Monte Carlo variation. A two-sided test would also count equally extreme negative means and answer a different question.
+The simulated fraction is `r sprintf("%.1f", 100 * p_sim)`%, close to the exact value of `r sprintf("%.2f", 100 * p_exact)`%. **We built a world with no average score change, yet about `r sprintf("%.0f", 100 * p_exact)` in every 100 repetitions still crossed the observed line.** The small difference between simulation and calculation is Monte Carlo variation.
 
 ## What should we conclude?
 
 The observed mean is unusual under the specified null model, providing evidence against it. But every simulated experiment assumed the null was true: we never generated a mixture of true and false hypotheses. The simulation therefore cannot tell us what fraction of hypotheses are true after a small p-value appears.
 
-Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. For the company, $p=0.03$ is a reason to take the score gain seriously, not proof that the course works. It would still need to weigh the size of the gain against the course's cost, and without a comparison group it cannot tell whether the course caused the gain. Assumptions, uncertainty, study design, and whether the test was chosen before looking at the data also matter. A large p-value, conversely, would not prove that the mean is zero.
+Nor does a small p-value establish that an effect is economically important. Here, the estimated mean is 0.34 standardized units; its practical meaning depends on the outcome and context. For the company, $p=0.03$ is a reason to take the score gain seriously, not proof that the course works. It would still need to weigh the size of the gain against the course's cost, and without a comparison group it cannot tell whether the course caused the gain. A large p-value, conversely, would not prove that the mean is zero.
 
 The main takeaways are:
 

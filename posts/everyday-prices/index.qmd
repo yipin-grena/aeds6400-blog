@@ -34,7 +34,7 @@ value <- function(label, column = "cumulative_pct") {
 }
 ```
 
-A smaller annual price increase does not erase the increases that came before it. For someone planning a grocery budget or comparing household bills, the difference matters. A price can be rising slowly today while remaining far above what someone remembers paying a few years earlier.
+In December 2024, the grocery price index was `r f(value("Groceries"))`% above December 2019. Applying that average increase to a \$100 grocery bill gives about \$`r sprintf("%.0f", 100 + value("Groceries"))`. Yet grocery inflation over the final twelve months was only `r f(value("Groceries", "annual_pct"))`%. A slower rate did not bring prices back to their earlier level.
 
 This post asks a concrete historical question: **which of five everyday spending categories was furthest above its pre-pandemic price level by December 2024?** I compare groceries, rent, electricity, gasoline, and clothing with December 2019. They are selected examples, not a complete household budget. The overall Consumer Price Index, or CPI, provides a benchmark.
 
@@ -44,7 +44,7 @@ The answer depends on which change we look at. Overall prices were `r f(value("O
 
 The chart opens with each category's percentage change since December 2019. Zero means its price index is back at that starting level. Use the menu to switch to **Year-over-year**, which compares each month with the same month one year earlier.
 
-Click a category in the legend to hide or restore it. Double-click to isolate it. Hover over a line to see both measures for that month, and drag across dates to zoom. **Reset dates** restores the full period. For a useful comparison, isolate groceries, switch views, and inspect 2022 and 2024. Then repeat with gasoline.
+Try one comparison: double-click **Groceries** in the legend to isolate it, then switch views and hover over August 2022 and December 2024. Double-click its legend entry again to restore the other categories.
 
 ```{r}
 #| label: fig-price-explorer
@@ -58,17 +58,15 @@ make_price_figure(monthly, series)
 
 By December 2024, electricity's index was `r f(value("Electricity"))`% above its December 2019 level, the largest increase among these five categories. Groceries followed at `r f(value("Groceries"))`%, with rent close behind at `r f(value("Rent"))`%. Each had risen more than the overall CPI benchmark.
 
-Gasoline was up `r f(value("Gasoline"))`%, while clothing was up `r f(value("Clothing"))`%. The spread matters because households buy different combinations of these goods and services. It also shows why one overall number cannot describe every part of a budget. These indexes measure price changes, however, not the dollar increase in a particular family's spending.
+Gasoline was up `r f(value("Gasoline"))`%, while clothing was up `r f(value("Clothing"))`%. A budget concentrated in electricity and groceries, with little spent on clothing, could have risen faster than the `r f(value("Overall CPI"))`% overall figure. A household's actual increase depends on its full spending mix; these indexes do not measure a particular family's bills.
 
 The ranking is tied to the dates. Electricity also had the largest increase at the end of 2023, but gasoline then ranked above rent. By the end of 2024, those two had switched places. Moving the endpoint can change the comparison, which is one reason to explore the path instead of reading only the final values.
 
 ## A slower rate can still leave a higher price
 
-Groceries make the distinction especially clear. Their annual inflation rate reached `r f(s$grocery_peak_inflation_pct)`% in `r format(as.Date(s$grocery_peak_inflation_date), "%B %Y")` within this window. By December 2024, it was `r f(value("Groceries", "annual_pct"))`%. Yet the grocery index rose another `r f(s$grocery_change_after_peak_inflation_pct)`% between those dates. The rate slowed sharply while the price level continued upward.
+With groceries isolated, switch between views for `r format(as.Date(s$grocery_peak_inflation_date), "%B %Y")` and December 2024. Their annual inflation rate fell from `r f(s$grocery_peak_inflation_pct)`% to `r f(value("Groceries", "annual_pct"))`%, yet the grocery price index rose another `r f(s$grocery_change_after_peak_inflation_pct)`% between those dates. Switching views shows how a falling inflation rate can coexist with a rising price level.
 
 Gasoline illustrates a different outcome. In December 2024, its index was `r f(abs(value("Gasoline", "annual_pct")))`% below December 2023. Prices had actually fallen over that year. Switch back to the cumulative view, though, and gasoline remained `r f(value("Gasoline"))`% above December 2019. A recent decline did not reverse the full earlier increase.
-
-This is what the interaction adds: the reader can compare two statements about the same category and date without mistaking a lower inflation rate for a return to old prices.
 
 ## What this comparison can tell us
 

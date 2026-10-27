@@ -201,12 +201,8 @@ window.Quarto = {
 
 <section id="what-does-a-labor-market-recovery-mean" class="level2">
 <h2 class="anchored" data-anchor-id="what-does-a-labor-market-recovery-mean">What does a labor-market recovery mean?</h2>
-<p>A low unemployment rate does not tell us whether people are participating in the labor market. Someone who stops looking for work generally leaves the unemployment-rate denominator. Labor-force participation asks a different question: what share of the population is working or looking for work? That distinction matters when comparing younger adults, people in their main working years, and older adults.</p>
-<p>I analyze IPUMS CPS microdata in order to determine participation levels in 2024 relative to the levels in 2019. The overall annual participation rate decreased from 63.4% to 62.9%, which means that participation in 2024 was 0.5 percentage points lower than in 2019. The figures below present how that aggregate comparison relates to participation within age groups and changes in the population’s age mix.</p>
-</section>
-<section id="measuring-participation-consistently" class="level2">
-<h2 class="anchored" data-anchor-id="measuring-participation-consistently">Measuring participation consistently</h2>
-<p>The analysis covers civilians aged 16 and older across all 72 Basic Monthly CPS samples from January 2019 through December 2024. Each month’s rate is the share working or looking for work, using <a href="https://cps.ipums.org/cps-action/variables/WTFINL">WTFINL sampling weights</a> to represent the population. Annual estimates average the twelve monthly rates equally. The repository explains the sample selection and weighting in detail.</p>
+<p>Overall labor-force participation in 2024 was 62.9%, 0.5 percentage points lower than its 2019 rate of 63.4%. Yet participation among adults aged 25 to 54 was 1.0 percentage points above its 2019 level. <strong>Did participation fall within age groups, or did the population’s age mix change?</strong> The answer changes how we interpret the apparent shortfall in the labor-market recovery.</p>
+<p>Unlike unemployment, which counts jobseekers as a share of the labor force, participation counts workers and jobseekers as a share of the population. I use monthly IPUMS CPS microdata for civilians aged 16 and older from 2019 through 2024, apply <a href="https://cps.ipums.org/cps-action/variables/WTFINL">WTFINL sampling weights</a> to represent the population, and average the twelve monthly rates for each annual estimate.</p>
 </section>
 <section id="first-compare-recovery-paths" class="level2">
 <h2 class="anchored" data-anchor-id="first-compare-recovery-paths">First, compare recovery paths</h2>
@@ -225,7 +221,7 @@ Figure&nbsp;1: Annual means of monthly weighted participation rates, expressed a
 </div>
 </div>
 <p>Figure 1 shows changes from 2019 across four stages of working life. By 2024, participation among adults aged 25 to 54 was 1.0 percentage points above its baseline. Adults aged 55 to 64 gained 0.7 points, while those aged 16 to 24 were approximately unchanged, gaining 0.1 points. Adults aged 65 and older were the only group still below baseline, down 0.8 points.</p>
-<p>All four groups declined between 2019 and 2020. Adults aged 16 to 24 had the deepest drop, 2.4 percentage points, possibly reflecting disruption to entry-level work. Their participation rebounded above baseline in 2023 before falling back toward it in 2024. The contrasting outcomes for adults aged 55 to 64 and those aged 65 and older show why treating all older adults as one group would hide part of the recovery.</p>
+<p>All four groups declined between 2019 and 2020. Adults aged 16 to 24 had the deepest drop, 2.4 percentage points. Their participation rebounded above baseline in 2023 before falling back toward it in 2024. The contrasting outcomes for adults aged 55 to 64 and those aged 65 and older show why treating all older adults as one group would hide part of the recovery.</p>
 </section>
 <section id="next-look-at-who-makes-up-the-population" class="level2">
 <h2 class="anchored" data-anchor-id="next-look-at-who-makes-up-the-population">Next, look at who makes up the population</h2>
@@ -272,7 +268,7 @@ Figure&nbsp;3: Overall participation changes, observed and standardized to 2019 
 </div>
 </div>
 <p>Figure 3 expresses both series as changes from their common 2019 baseline. With the age mix held fixed, participation in 2024 was 0.4 percentage points higher than in 2019. The observed shortfall becomes a modest increase.</p>
-<p>In levels, observed participation in 2024 was 62.86%, compared with 63.85% using the 2019 age mix. The gap was 0.99 percentage points. That difference describes the contribution of changing age shares under this standardization; it does not estimate what a policy would accomplish.</p>
+<p>In levels, observed participation in 2024 was 62.86%, compared with 63.85% using the 2019 age mix. The gap was 0.99 percentage points. That difference describes the contribution of changing age shares under this standardization.</p>
 </section>
 <section id="takeaway-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway-and-limits">Takeaway and limits</h2>
@@ -280,7 +276,7 @@ Figure&nbsp;3: Overall participation changes, observed and standardized to 2019 
 <ul>
 <li>Participation recovered differently across age groups, with adults aged 65 and older still below their 2019 rate.</li>
 <li>The population also shifted toward that older group, which has much lower participation.</li>
-<li>Holding the age mix fixed turns the overall shortfall into a modest increase. The aggregate rate alone misses this distinction.</li>
+<li>With the 2019 age mix held fixed, 2024 participation was 0.4 percentage points higher than in 2019, instead of 0.5 percentage points lower. Under this standardization, the shift toward older age groups more than accounts for the overall shortfall.</li>
 </ul>
 <hr>
 <p><strong>Data:</strong> Flood et al.&nbsp;(2025), <a href="https://doi.org/10.18128/D030.V13.0">IPUMS CPS: Version 13.0</a>, University of Minnesota. Basic Monthly samples, January 2019 through December 2024; extract created September 27, 2026. The analysis uses 6,146,546 eligible person-month observations, not unique individuals.</p>
