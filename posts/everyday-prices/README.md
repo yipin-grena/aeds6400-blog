@@ -4,7 +4,7 @@
 
 ## Question and scope
 
-Which of five selected everyday categories was furthest above its December 2019 price level by December 2024, and how does that differ from annual inflation? One Plotly figure switches between cumulative percentage changes and year-over-year changes; category controls and date zoom let readers explore different paths. No universal three-figure minimum applies to Post 7.
+Which of five selected everyday categories was furthest above its December 2019 price level by December 2024, and how does that differ from annual inflation? One Plotly figure switches between cumulative percentage changes and year-over-year changes; category controls and date zoom let readers explore different paths.
 
 The endpoint is deliberately historical. This is not an assessment of current prices or affordability. The five categories illustrate different spending areas and are not an exhaustive household budget or a ranking of every CPI category.
 

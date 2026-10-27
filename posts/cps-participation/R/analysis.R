@@ -166,11 +166,15 @@ make_figures <- function(a) {
   long <- a$overall |> pivot_longer(c(observed, standardized), names_to = "series", values_to = "rate") |>
     group_by(series) |> mutate(change_pp = 100 * (rate - rate[YEAR == 2019])) |> ungroup() |>
     mutate(series = recode(series, observed = "Observed age mix", standardized = "Fixed 2019 age mix"))
+  # The title states a finding, so stop if the data no longer support it.
+  start <- a$overall[a$overall$YEAR == 2019, ]
+  end <- a$overall[a$overall$YEAR == 2024, ]
+  stopifnot(end$observed < start$observed, end$standardized > start$standardized)
   p3 <- ggplot(long, aes(YEAR, change_pp, color = series, linetype = series)) +
     geom_hline(yintercept = 0, color = "grey70") + geom_line(linewidth = 1) + geom_point(size = 2.3) +
     scale_color_manual(values = c("Observed age mix" = "#0072B2", "Fixed 2019 age mix" = "#D55E00")) +
     scale_x_continuous(breaks = 2019:2024) +
-    labs(title = "Separating participation from changes in the age mix", subtitle = "Change in overall participation from 2019", x = NULL, y = "Change (percentage points)", color = NULL, linetype = NULL,
+    labs(title = "Holding the 2019 age mix fixed turns the shortfall into a gain", subtitle = "Change in overall participation from 2019", x = NULL, y = "Change (percentage points)", color = NULL, linetype = NULL,
       caption = paste0(caption, "\nStandardization fixes four age-group shares to the corresponding calendar month in 2019.")) + common
   list(trends = p1, age_shares = p2, age_mix = p3)
 }

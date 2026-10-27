@@ -207,7 +207,7 @@
     "href": "posts/p-values/index.html#reference",
     "title": "What a p-value actually tells you",
     "section": "Reference",
-    "text": "Reference\nWasserstein, R. L., and Lazar, N. A. (2016). The ASA’s Statement on p-Values: Context, Process, and Purpose. The American Statistician, 70(2), pages 129 to 133."
+    "text": "Reference\nWasserstein, R. L., and Lazar, N. A. (2016). The ASA’s Statement on p-Values: Context, Process, and Purpose. The American Statistician, 70(2), pages 129 to 133.\n\nCode and replication: GitHub repository."
   },
   {
     "objectID": "posts/sql-income-mobility/index.html",
