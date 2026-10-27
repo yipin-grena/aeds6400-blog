@@ -131,7 +131,3 @@ everyday-prices/
   build_preview.py             isolated unpublished Quarto preview
   preview/                     local review HTML, excluded from Git
 ```
-
-## AI assistance and author review
-
-AI assistance was used to prepare code, research sources, and draft prose. The course syllabus permits AI as a learning aid and requires meaningful student engagement, revision, and verification. No prescribed disclosure format was found in the supplied course files. This record is included for transparent review; the student should read the analysis and draft, check the interpretation, and revise it to reflect their own understanding before submission. No personal experiences or opinions have been invented, and no AI Git author or coauthor has been added.

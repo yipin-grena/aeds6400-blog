@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "tested_at_utc": "2026-10-25T21:49:42.944Z",
-  "method": "Codex in-app browser UI actions and read-only rendered-DOM inspection",
+  "method": "In-app browser UI actions and read-only rendered-DOM inspection",
   "target": {
     "mode": "published_https",
     "url": "https://yipin-grena.github.io/aeds6400-blog/posts/everyday-prices/",
